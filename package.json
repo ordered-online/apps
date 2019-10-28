@@ -14,12 +14,8 @@
   "homepage": "https://www.ordered.online",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "scripts:start": "react-scripts start", 
-    "scripts:build": "react-scripts build",
-    "scripts:test": "react-scripts test",
-    "scripts:eject": "react-scripts eject",
-    "expo:start": "expo start",
-    "expo:eject": "expo eject",
+    "start": "expo start",
+    "eject": "expo eject",
     "web": "expo start --web",
     "ios": "expo start --ios",
     "android": "expo start --android",
@@ -27,7 +23,6 @@
     "build:ios": "expo build:ios",
     "build:android": "expo build:android",
     "format": "prettier --write \"**/*.+(js,jsx,ts,tsx,json,css,scss,md)\""
-
   },
   "dependencies": {
     "expo": "^35.0.0",
@@ -39,7 +34,6 @@
     "react-router-dom": "^5.1.2",
     "react-router-native": "^5.1.2",
     "react-router-redux": "^4.0.8",
-    "react-scripts": "^3.2.0",
     "redux": "^4.0.4",
     "redux-form": "^8.2.6",
     "redux-logger": "^3.0.6",
@@ -47,6 +41,7 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.6.4",
     "babel-preset-expo": "^7.1.0",
     "husky": "^3.0.9",
     "lint-staged": "^9.4.2",
@@ -74,6 +69,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "resolutions": {
+    "mem": "^4.0.0"
   },
   "private": true
 }

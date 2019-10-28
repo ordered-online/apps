@@ -88,13 +88,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: 'bold',
-    fontSize:  Platform.OS === 'web' ? '1.5rem' : 15,
+    fontSize: Platform.OS === 'web' ? '1.5rem' : 15,
     marginVertical: '1em',
     textAlign: 'center',
   },
   text: {
-    lineHeight: Platform.OS === 'web' ?  '1.5em' : 1.5,
-    fontSize: Platform.OS === 'web' ?  '1.125rem' : 15,
+    lineHeight: Platform.OS === 'web' ? '1.5em' : 1.5,
+    fontSize: Platform.OS === 'web' ? '1.125rem' : 15,
     marginVertical: '1em',
     textAlign: 'center',
   },
@@ -113,7 +113,7 @@ const mapStateToProps = state => {
 
   // Redux Store --> Component
   return {
-    loggedIn: state.authentification.loggedIn,
+    loggedIn: state.authentication.loggedIn,
   };
 };
 

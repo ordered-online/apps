@@ -3,7 +3,7 @@ import {
   verifyUser,
   loginUser,
   logoutUser,
-} from './authentification';
+} from './authentication';
 import {
   createLocation,
   editLocation,

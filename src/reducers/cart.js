@@ -1,5 +1,5 @@
-export const FETCH_CART_START = 'CART/FETCH_MENU_START';
-export const FETCH_CART_END = 'CART/FETCH_MENU_END';
+export const FETCH_CART_START = 'CART/FETCH_CART_START';
+export const FETCH_CART_END = 'CART/FETCH_CART_END';
 
 const initialState = {
   fetching: false,
