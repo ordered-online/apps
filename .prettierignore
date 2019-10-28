@@ -1,0 +1,7 @@
+**/node_modules/**
+**/*min.css
+**/*min.js
+build/
+package-lock.json
+yarn.lock
+package.json

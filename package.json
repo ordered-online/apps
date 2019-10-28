@@ -1,0 +1,79 @@
+{
+  "name": "ordered.online",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ordered-online/client"
+  },
+  "author": "Felix Kästner <hello@felix-kaestner.com>",
+  "bugs": {
+    "url": "https://github.com/ordered-online/client/issues"
+  },
+  "homepage": "https://www.ordered.online",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "scripts:start": "react-scripts start", 
+    "scripts:build": "react-scripts build",
+    "scripts:test": "react-scripts test",
+    "scripts:eject": "react-scripts eject",
+    "expo:start": "expo start",
+    "expo:eject": "expo eject",
+    "web": "expo start --web",
+    "ios": "expo start --ios",
+    "android": "expo start --android",
+    "build:web": "expo build:web",
+    "build:ios": "expo build:ios",
+    "build:android": "expo build:android",
+    "format": "prettier --write \"**/*.+(js,jsx,ts,tsx,json,css,scss,md)\""
+
+  },
+  "dependencies": {
+    "expo": "^35.0.0",
+    "react": "16.8.3",
+    "react-dom": "16.8.3",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
+    "react-native-web": "^0.11.7",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.1.2",
+    "react-router-native": "^5.1.2",
+    "react-router-redux": "^4.0.8",
+    "react-scripts": "^3.2.0",
+    "redux": "^4.0.4",
+    "redux-form": "^8.2.6",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-preset-expo": "^7.1.0",
+    "husky": "^3.0.9",
+    "lint-staged": "^9.4.2",
+    "prettier": "^1.18.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "private": true
+}

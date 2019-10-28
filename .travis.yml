@@ -1,0 +1,9 @@
+git:
+  submodules: false
+
+before_install:
+  - 
+
+jobs:
+  include:
+    - script: ./build-documentation.sh
