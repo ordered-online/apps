@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { View, TextInput, Button, StyleSheet, Text } from 'react-native';
-import { Link } from '../../routing';
+import { View, TextInput, Button, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { relative } from 'path';
 
 export class Login extends Component {
   constructor(props) {
@@ -16,14 +14,6 @@ export class Login extends Component {
   render() {
     return (
       <View style={styles.wrapper}>
-        <View style={{ position: 'absolute', top: 20, left: 20 }}>
-          <Text style={{ fontSize: 20, textAlign: 'center' }}>
-            <Link to="/" style={{ textDecorationLine: 'none' }}>
-              <Text>Home</Text>
-            </Link>
-          </Text>
-        </View>
-
         <View style={styles.container}>
           <TextInput
             editable
@@ -59,7 +49,7 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 'auto',
     maxWidth: 400,
-    position: relative,
+    position: 'relative',
   },
   textInput: {
     marginVertical: 20,

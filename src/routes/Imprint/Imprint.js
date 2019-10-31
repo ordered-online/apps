@@ -1,20 +1,10 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, View, Button, Linking } from 'react-native';
-import Anchor from '../../components/Anchor';
-import { Link } from '../../routing';
 
 export default class Imprint extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{ position: 'absolute', top: 20, left: 20 }}>
-          <Text style={{ fontSize: 20, textAlign: 'center' }}>
-            <Link to="/" style={{ textDecorationLine: 'none' }}>
-              <Text>Home</Text>
-            </Link>
-          </Text>
-        </View>
-
         <View>
           <Text style={styles.baseText}>
             The ordered.online© platform was developed by

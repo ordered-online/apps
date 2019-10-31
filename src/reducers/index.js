@@ -1,6 +1,4 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
-import { routerReducer } from 'react-router-redux';
 
 import cart from './cart';
 import checkout from './checkout';
@@ -12,8 +10,6 @@ const rootReducer = combineReducers({
   checkout,
   payment,
   authentication,
-  router: routerReducer,
-  form: formReducer,
 });
 
 export default rootReducer;

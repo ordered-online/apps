@@ -6,7 +6,7 @@
     "slug": "ordered-online",
     "privacy": "public",
     "sdkVersion": "35.0.0",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "githubUrl": "https://github.com/ordered-online/",
     "orientation": "portrait",
     "platforms": [
@@ -46,7 +46,7 @@
     },
     "ios": {
       "bundleIdentifier": "ordered.online",
-      "buildNumber": "0.0.1",
+      "buildNumber": "0.0.3",
       "icon": "./assets/icon.png",
       "appStoreUrl": "",
       "supportsTablet": "true",
@@ -66,7 +66,7 @@
     },
     "android": {
       "package": "ordered.online",
-      "versionCode": "0.0.1",
+      "versionCode": "0.0.3",
       "icon": "./assets/icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
