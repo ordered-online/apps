@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+import StyledTextInput from '../../components/StyledTextInput';
+import StyledButton from '../../components/StyledButton';
 
 export class Login extends Component {
   constructor(props) {
@@ -15,25 +17,32 @@ export class Login extends Component {
     return (
       <View style={styles.wrapper}>
         <View style={styles.container}>
-          <TextInput
+          <StyledTextInput
             editable
             maxLength={40}
             placeholder="username"
             textContentType="username"
             onChangeText={username => this.setState({ username })}
-            style={styles.textInput}
+            style={{ textAlign: 'center' }}
           />
 
-          <TextInput
+          <StyledTextInput
             editable
             maxLength={40}
             placeholder="password"
             textContentType="password"
             onChangeText={password => this.setState({ password })}
-            style={styles.textInput}
           />
 
-          <Button title="Login" style={{ marginHorizontal: 15 }} />
+          <StyledButton
+            title="Login"
+            onPress={() => console.warn('Login is not implemented yet')}
+          />
+
+          <StyledButton
+            title="Go to Home"
+            onPress={() => this.props.navigation.navigate('home')}
+          />
         </View>
       </View>
     );
@@ -50,12 +59,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 'auto',
     maxWidth: 400,
     position: 'relative',
-  },
-  textInput: {
-    marginVertical: 20,
-    backgroundColor: '#ffffff',
-    borderRadius: 10,
-    padding: 15,
   },
 });
 

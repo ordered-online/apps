@@ -2,30 +2,22 @@ import React, { Component } from 'react';
 import { Text, StyleSheet, View, Button, Linking } from 'react-native';
 import StyledButton from '../../components/StyledButton';
 
-export default class Imprint extends Component {
+export default class PrivacyPolicy extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          The ordered.online© platform was developed by
+          We proudly capture all of your data and sell it to satan.
           {'\n'}
           {'\n'}
-          Philipp Matthes
           {'\n'}
           {'\n'}
-          and
           {'\n'}
           {'\n'}
-          Felix Kästner
           {'\n'}
           {'\n'}
-          For more information please
           {'\n'}
-          {'\n'}
-          <StyledButton
-            title="contact us"
-            onPress={() => Linking.openURL('mailto:contact@ordered.online')}
-          />
+          At least we get a got deal ...{'\n'}
           {'\n'}
           {'\n'}
           <StyledButton

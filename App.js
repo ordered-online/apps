@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { store, persistor } from './src/store';
-import RoutingContainer from './src/routing' 
+import { RoutingContainer } from './src/routing' 
 
 
 export default class App extends Component {
@@ -20,7 +20,6 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#57c75e',
     flex: 1,
     display: "flex",
     justifyContent: "center",

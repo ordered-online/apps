@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Text, StyleSheet, View, Button, Linking } from 'react-native';
 import StyledButton from '../../components/StyledButton';
 
-export default class Imprint extends Component {
+export default class TermsOfUse extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          The ordered.online© platform was developed by
+          All rights reserved from
           {'\n'}
           {'\n'}
           Philipp Matthes

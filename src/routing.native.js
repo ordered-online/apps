@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import { createAppContainer, SafeAreaView } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import Home from './src/routes/Home';
-import Imprint from './src/routes/Imprint';
-import Login from './src/routes/Login';
+import Home from './routes/Home';
+import Imprint from './routes/Imprint';
+import Login from './routes/Login';
+import PrivacyPolicy from './routes/PrivacyPolicy';
+import TermsOfUse from './routes/TermsOfUse';
 
 const AppNavigator = createStackNavigator(
   {
-    Home: Home,
-    Imprint: Imprint,
-    Login: Login,
+    home: Home,
+    login: Login,
+    imprint: Imprint,
+    privacy: PrivacyPolicy,
+    terms: TermsOfUse,
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'home',
   }
 );
 
