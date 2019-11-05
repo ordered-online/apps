@@ -1,18 +1,18 @@
 const ENV = {
  development: {
-   apiUrl: localhost,
+  API_URL: localhost,
  },
  production: {
-   apiUrl: "ordered.online",
+  API_URL: "ordered.online",
  }
 };
 
 const getEnvVars = () => {
  // __DEV__ is true when run locally in Dev mode, but false when published.
  if (__DEV__) {
-   return ENV.development;
+   return process.env.API_URL || ENV.development;
  } else {
-   return ENV.production;
+   return process.env.API_URL || ENV.production;
  }
 };
 
