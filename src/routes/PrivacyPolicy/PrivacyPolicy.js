@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, Button, Linking } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 import Button from '../../components/Button';
 
 export default class PrivacyPolicy extends Component {

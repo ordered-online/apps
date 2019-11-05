@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Router, Switch, Route, Redirect } from './routing';
+import { Dimensions, StyleSheet, View, Text } from 'react-native';
+import { Router, Switch, Route, Redirect, Link } from './routing';
 import { createBrowserHistory } from 'history';
 import Home from './routes/Home';
 import Imprint from './routes/Imprint';
@@ -16,11 +17,67 @@ const navigationProp = {
 };
 
 export default class AppContainer extends Component {
+  renderDesktopNavigation() {
+    return (
+      <View style={styles.nav}>
+        <Link to="/home">
+          <Text>Home</Text>
+        </Link>
+        <Link to="/login">
+          <Text>Login</Text>
+        </Link>
+        <Link to="/imprint">
+          <Text>Imprint</Text>
+        </Link>
+        <Link to="/privacy">
+          <Text>Privacy Policy</Text>
+        </Link>
+        <Link to="/terms">
+          <Text>Terms of Use</Text>
+        </Link>
+      </View>
+    );
+  }
+
+  renderMobileNavigation() {
+    return (
+      <View style={styles.nav}>
+        <Link to="/home">
+          <Text>Home</Text>
+        </Link>
+        <Link to="/login">
+          <Text>Login</Text>
+        </Link>
+        <Link to="/imprint">
+          <Text>Imprint</Text>
+        </Link>
+        <Link to="/privacy">
+          <Text>Privacy Policy</Text>
+        </Link>
+        <Link to="/terms">
+          <Text>Terms of Use</Text>
+        </Link>
+      </View>
+    );
+  }
+
   render() {
+    const { width } = Dimensions.get('window');
+
+    const navigation =
+      width > 996
+        ? this.renderDesktopNavigation()
+        : this.renderMobileNavigation();
+
     return (
       <Router history={history}>
+        {navigation}
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/home" />} />
+          <Route
+            exact
+            path="/"
+            render={() => <Home navigation={navigationProp} />}
+          />
           <Route
             exact
             path="/home"
@@ -51,3 +108,10 @@ export default class AppContainer extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  nav: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+});

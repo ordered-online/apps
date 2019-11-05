@@ -3,7 +3,7 @@ import { StyleSheet, SafeAreaView } from 'react-native';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { store, persistor } from './src/store';
-import { AppContainer } from './src/AppContainer';
+import AppContainer from './src/AppContainer';
 
 export default class App extends Component {
   render() {
