@@ -19,3 +19,16 @@ export default (state = initialState, action) => {
       return { ...state };
   }
 };
+
+export const submitPayment = () => ({
+  type: SUBMIT_PAYMENT,
+});
+
+export const completePayment = () => ({
+  type: COMPLETE_PAYMENT,
+});
+
+export const handlePayment = () => (dispatch, getState) => {
+  dispatch(submitPayment());
+  setTimeout(dispatch(completePayment()), 1000);
+};

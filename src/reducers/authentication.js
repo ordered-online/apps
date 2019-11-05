@@ -1,104 +1,144 @@
+import api from '../api';
+
 // Action Types
-const LOGIN = 'AUTHENTICATION/LOGIN';
-const REGISTER = 'AUTHENTICATION/REGISTER';
-const LOGOUT = 'AUTHENTICATION/LOGOUT';
-const LOADING = 'AUTHENTICATION/LOADING';
-const ERROR = 'AUTHENTICATION/ERROR';
+const LOGIN_REQUEST = 'AUTHENTICATION/LOGIN_REQUEST';
+const LOGIN_SUCCESS = 'AUTHENTICATION/LOGIN_SUCCESS';
+const LOGIN_FAILURE = 'AUTHENTICATION/LOGIN_FAILURE';
+const REGISTER_REQUEST = 'AUTHENTICATION/REGISTER_REQUEST';
+const REGISTER_SUCCESS = 'AUTHENTICATION/REGISTER_SUCCESS';
+const REGISTER_FAILURE = 'AUTHENTICATION/REGISTER_FAILURE';
+const LOGOUT_REQUEST = 'AUTHENTICATION/LOGOUT_REQUEST';
+const LOGOUT_SUCCESS = 'AUTHENTICATION/LOGOUT_SUCCESS';
+const LOGOUT_FAILURE = 'AUTHENTICATION/LOGOUT_FAILURE';
 
 // Initial State
 const initialState = {
-  isLoading: false,
+  fetching: false,
   loggedIn: false,
   userId: null,
-  token: null,
+  sessionKey: null,
   error: null,
 };
 
 // Reducers (Modifies The State And Returns A New State)
 const authentication = (state = initialState, action) => {
   switch (action.type) {
-    case ERROR:
+    case LOGIN_REQUEST:
+    case REGISTER_REQUEST:
+    case LOGOUT_REQUEST:
       return {
         ...state,
-        isLoading: false,
+        fetching: true,
+      };
+
+    case LOGIN_SUCCESS:
+    case REGISTER_SUCCESS:
+      const { sessionKey, userId } = action.payload;
+      return {
+        fetching: false,
+        loggedIn: true,
+        userId,
+        sessionKey,
+      };
+
+    case LOGOUT_SUCCESS:
+      return initialState;
+
+    case LOGIN_FAILURE:
+    case REGISTER_FAILURE:
+    case LOGOUT_FAILURE:
+      return {
+        ...state,
+        fetching: false,
         error: action.payload,
       };
 
-    case LOADING:
-      return {
-        ...state,
-        isLoading: true,
-      };
-
-    case LOGIN:
-    case REGISTER:
-      const { userId, token } = action.payload;
-      return {
-        isLoading: false,
-        loggedIn: true,
-        userId,
-        token,
-      };
-
-    case LOGOUT:
-      return initialState;
-
     // Default
-    default: {
+    default:
       return state;
-    }
   }
 };
 
 // Actions
-const setLoading = state => ({
-  type: LOADING,
+const loginRequest = state => ({
+  type: LOGIN_REQUEST,
 });
 
-const setLogin = auth => ({
-  type: LOGIN,
-  payload: auth,
+const loginSuccess = (sessionKey, userId) => ({
+  type: LOGIN_SUCCESS,
+  payload: { sessionKey, userId },
 });
 
-const setRegistration = auth => ({
-  type: REGISTER,
-  payload: auth,
+const loginFailure = error => ({
+  type: LOGIN_FAILURE,
+  payload: error,
 });
 
-const setLogout = auth => ({
-  type: LOGOUT,
+const registerRequest = () => ({
+  type: REGISTER_REQUEST,
 });
 
-const setError = error => ({
-  type: ERROR,
+const registerSuccess = (sessionKey, userId) => ({
+  type: REGISTER_SUCCESS,
+  payload: { sessionKey, userId },
+});
+
+const registerFailure = error => ({
+  type: REGISTER_FAILURE,
+  payload: error,
+});
+
+const logoutRequest = () => ({
+  type: LOGOUT_REQUEST,
+});
+
+const logoutSuccess = () => ({
+  type: LOGOUT_SUCCESS,
+});
+
+const logoutFailure = error => ({
+  type: LOGOUT_FAILURE,
+  payload: error,
 });
 
 // Exports
-export const Login = (username, password) => (dispatch, getState, api) => {
-  dispatch(setLoading());
+export const Login = (username, password) => (dispatch, getState) => {
+  dispatch(loginRequest());
 
   return api
     .loginUser(username, password)
-    .then(auth => dispatch(setLogin(auth)))
-    .catch(error => dispatch(setError(error)));
+    .then(response => {
+      if (response.error) {
+        throw response.error;
+      }
+      const { sessionKey, userId } = response;
+      dispatch(loginSuccess(sessionKey, userId));
+    })
+    .catch(error => dispatch(loginFailure(error)));
 };
 
-export const Register = credentials => (dispatch, getState, api) => {
-  dispatch(setLoading());
+export const Register = credentials => (dispatch, getState) => {
+  dispatch(registerRequest());
 
   return api
     .registerUser(credentials)
-    .then(auth => dispatch(setRegistration(auth)))
-    .catch(error => dispatch(setError(error)));
+    .then(response => {
+      if (response.error) {
+        throw response.error;
+      }
+      const { sessionKey, userId } = response;
+      dispatch(registerSuccess(sessionKey, userId));
+    })
+    .catch(error => dispatch(registerFailure(error)));
 };
 
-export const Logout = () => (dispatch, getState, api) => {
-  dispatch(setLoading());
-
+export const Logout = () => (dispatch, getState) => {
+  dispatch(logoutRequest());
+  const { sessionKey, userId } = getState().authentication;
   return api
-    .logoutUser(logoutUser)
-    .then(() => dispatch(setLogout()))
-    .catch(error => dispatch(setError(error)));
+    .logoutUser(sessionKey, userId)
+    .then(() => dispatch(logoutSuccess()))
+    .catch(error => dispatch(logoutFailure(error)));
 };
 
 export default authentication;

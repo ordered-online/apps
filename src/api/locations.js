@@ -1,3 +1,4 @@
+import { API_URL } from '../../environment';
 const ENDPOINT_CREATE_LOCATION = '/locations/create/';
 const ENDPOINT_EDIT_LOCATION = '/locations/edit/';
 const ENDPOINT_GET_LOCATION = '/locations/get/';

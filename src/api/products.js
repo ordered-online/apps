@@ -1,3 +1,4 @@
+import { API_URL } from '../../environment';
 const ENDPOINT_CREATE_PRODUCT = '/products/create/';
 const ENDPOINT_EDIT_PRODUCT = '/products/edit/';
 const ENDPOINT_GET_PRODUCT = '/products/get/';

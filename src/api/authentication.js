@@ -1,3 +1,4 @@
+import { API_URL } from '../../environment';
 const ENDPOINT_REGISTER = '/verification/register/';
 const ENDPOINT_VERIFICATION = '/verification/verify/';
 const ENDPOINT_LOGIN = '/verification/login/';

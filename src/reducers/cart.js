@@ -1,5 +1,6 @@
-export const FETCH_CART_START = 'CART/FETCH_CART_START';
-export const FETCH_CART_END = 'CART/FETCH_CART_END';
+export const FETCH_CART_REQUEST = 'CART/FETCH_CART_REQUEST';
+export const FETCH_CART_SUCCESS = 'CART/FETCH_CART_SUCCESS';
+export const FETCH_CART_FAILURE = 'CART/FETCH_CART_FAILURE';
 
 const initialState = {
   fetching: false,
@@ -9,14 +10,20 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_CART_START:
+    case FETCH_CART_REQUEST:
       return { ...state, fetching: true };
 
-    case FETCH_CART_END:
+    case FETCH_CART_SUCCESS:
       return {
         ...state,
         fetching: false,
         cart: action.payload,
+      };
+
+    case FETCH_CART_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
       };
 
     default:
@@ -24,17 +31,22 @@ export default (state = initialState, action) => {
   }
 };
 
-export const fetchCartStart = () => ({
-  type: FETCH_CART_START,
+export const fetchCartRequest = () => ({
+  type: FETCH_CART_REQUEST,
 });
 
-export const fetchCartEnd = cart => ({
-  type: FETCH_CART_END,
+export const fetchCartSuccess = cart => ({
+  type: FETCH_CART_SUCCESS,
   payload: cart,
 });
 
-export const GetCart = () => (dispatch, getState, api) => {
-  dispatch(fetchCartStart());
+export const fetchCartFailure = error => ({
+  type: FETCH_CART_FAILURE,
+  payload: error,
+});
 
-  return api.GetCart().then(cart => dispatch(fetchCartEnd(cart)));
+export const GetCart = () => (dispatch, getState) => {
+  dispatch(fetchCartRequest());
+  // TODO: implement Cart via websocket
+  dispatch(fetchCartSuccess({}));
 };
