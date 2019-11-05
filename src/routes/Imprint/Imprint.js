@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, View, Button, Linking } from 'react-native';
-import StyledButton from '../../components/StyledButton';
+import Button from '../../components/Button';
 
 export default class Imprint extends Component {
   render() {
@@ -22,13 +22,13 @@ export default class Imprint extends Component {
           For more information please
           {'\n'}
           {'\n'}
-          <StyledButton
+          <Button
             title="contact us"
             onPress={() => Linking.openURL('mailto:contact@ordered.online')}
           />
           {'\n'}
           {'\n'}
-          <StyledButton
+          <Button
             title="Go to Home"
             onPress={() => this.props.navigation.navigate('home')}
           />

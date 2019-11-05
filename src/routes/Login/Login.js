@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import StyledTextInput from '../../components/StyledTextInput';
-import StyledButton from '../../components/StyledButton';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 export class Login extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ export class Login extends Component {
     return (
       <View style={styles.wrapper}>
         <View style={styles.container}>
-          <StyledTextInput
+          <Input
             editable
             maxLength={40}
             placeholder="username"
@@ -26,7 +26,7 @@ export class Login extends Component {
             style={{ textAlign: 'center' }}
           />
 
-          <StyledTextInput
+          <Input
             editable
             maxLength={40}
             placeholder="password"
@@ -34,12 +34,12 @@ export class Login extends Component {
             onChangeText={password => this.setState({ password })}
           />
 
-          <StyledButton
+          <Button
             title="Login"
             onPress={() => console.warn('Login is not implemented yet')}
           />
 
-          <StyledButton
+          <Button
             title="Go to Home"
             onPress={() => this.props.navigation.navigate('home')}
           />

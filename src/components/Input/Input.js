@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TextInput, StyleSheet, View } from 'react-native';
 
-export default class StyledTextInput extends Component {
+export class Input extends Component {
   render() {
     return (
       <View>
@@ -25,3 +25,5 @@ const styles = StyleSheet.create({
     borderColor: '#57c75e',
   },
 });
+
+export default Input;

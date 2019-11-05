@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, View, Button, Linking } from 'react-native';
-import StyledButton from '../../components/StyledButton';
+import Button from '../../components/Button';
 
 export default class PrivacyPolicy extends Component {
   render() {
@@ -20,7 +20,7 @@ export default class PrivacyPolicy extends Component {
           At least we get a got deal ...{'\n'}
           {'\n'}
           {'\n'}
-          <StyledButton
+          <Button
             title="Go to Home"
             onPress={() => this.props.navigation.navigate('home')}
           />
