@@ -1,32 +1,44 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Button from '../../components/Button';
+import LocationFinder from '../../components/LocationFinder';
+import QRCodeScanner from '../../components/QRCodeScanner';
 
 class Home extends Component {
+  state = {
+    scanning: null,
+    scannedCode: null,
+  };
+
+  _handleBarCodeScanned = data => {
+    this.setState({ scanning: false, scannedCode: data });
+  };
+
   render() {
+    let { scanning, scannedCode } = this.state;
+    let ScannerComponent = <View />;
+    if (scanning === null) {
+      ScannerComponent = (
+        <Button
+          title="Press to scan QR Code"
+          style={{ width: 80 }}
+          onPress={() => this.setState({ scanning: true })}
+        />
+      );
+    }
+    if (scanning === false) {
+      ScannerComponent = <Text>Scanned QR Code {scannedCode}</Text>;
+    }
+    if (scanning === true) {
+      ScannerComponent = (
+        <QRCodeScanner onBarCodeScanned={this._handleBarCodeScanned} />
+      );
+    }
+
     return (
       <View style={styles.container}>
-        <Text>Home Screen</Text>
-        <Button
-          title="Go to Login"
-          onPress={() => this.props.navigation.navigate('login')}
-        />
-        <Button
-          title="Go to Register"
-          onPress={() => this.props.navigation.navigate('login')}
-        />
-        <Button
-          title="Go to Imprint"
-          onPress={() => this.props.navigation.navigate('imprint')}
-        />
-        <Button
-          title="Go to Privacy Policy"
-          onPress={() => this.props.navigation.navigate('privacy')}
-        />
-        <Button
-          title="Go to Terms of Use"
-          onPress={() => this.props.navigation.navigate('terms')}
-        />
+        <QRCodeScanner />
+        <LocationFinder />
       </View>
     );
   }

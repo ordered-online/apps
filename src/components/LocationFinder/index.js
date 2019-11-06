@@ -1,1 +1,2 @@
-export * from './LocationFinder';
+import LocationFinder from './LocationFinder';
+export default LocationFinder;

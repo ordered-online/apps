@@ -35,14 +35,28 @@ export class QRCodeScanner extends Component {
     }
   };
 
+  _handleBarCodeScanned = ({ type, data }) => {
+    this.setState({ scanned: true });
+    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    this.props.onBarCodeScanned && this.props.onBarCodeScanned(data);
+  };
+
   render() {
     const { hasCameraPermission, scanned } = this.state;
 
     if (hasCameraPermission === null) {
-      return <Text>Requesting for camera permission</Text>;
+      return (
+        <View>
+          <Text>Requesting for camera permission</Text>
+        </View>
+      );
     }
     if (hasCameraPermission === false) {
-      return <Text>No access to camera</Text>;
+      return (
+        <View>
+          <Text>No access to camera</Text>
+        </View>
+      );
     }
     return (
       <View
@@ -65,11 +79,6 @@ export class QRCodeScanner extends Component {
       </View>
     );
   }
-
-  _handleBarCodeScanned = ({ type, data }) => {
-    this.setState({ scanned: true });
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-  };
 }
 
 export default QRCodeScanner;

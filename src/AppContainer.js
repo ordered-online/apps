@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dimensions, StyleSheet, View, Text } from 'react-native';
+import { Dimensions, StyleSheet, View, Text, Platform } from 'react-native';
 import { Router, Switch, Route, Redirect, Link } from './routing';
 import { createBrowserHistory } from 'history';
 import Home from './routes/Home';
@@ -8,7 +8,9 @@ import Login from './routes/Login';
 import PrivacyPolicy from './routes/PrivacyPolicy';
 import TermsOfUse from './routes/TermsOfUse';
 
-export const history = createBrowserHistory();
+const isWeb = Platform.OS == 'web';
+
+export const history = isWeb ? createBrowserHistory() : '';
 
 const navigationProp = {
   navigate: function(route) {

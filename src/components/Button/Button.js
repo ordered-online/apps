@@ -86,6 +86,7 @@ export class Button extends Component {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
+    alignItems: 'center',
   },
   button: Platform.select({
     ios: {},
