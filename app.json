@@ -6,7 +6,7 @@
     "slug": "ordered-online",
     "privacy": "public",
     "sdkVersion": "35.0.0",
-    "version": "0.0.3",
+    "version": "1.0.0",
     "githubUrl": "https://github.com/ordered-online/",
     "orientation": "portrait",
     "platforms": [
@@ -28,34 +28,33 @@
       "backgroundColor": "#ffffff"
     },
     "androidNavigationBar":{
-      "visible": "false",
+      "visible": false,
       "barStyle": "dark-content",
       "backgroundColor": "#ffffff"
     },
     "notification": {
       "icon": "./assets/icon.png",
       "color": "#ffffff",
-      "iosDisplayInForeground": "true",
+      "iosDisplayInForeground": true,
       "androidMode": "collapse",
       "androidCollapsedTitle": "ordered.online"
     },
     "updates": {
-      "enabled": "true",
+      "enabled": true,
       "checkAutomatically": "ON_LOAD",
       "fallbackToCacheTimeout": 0
     },
     "ios": {
       "bundleIdentifier": "ordered.online",
-      "buildNumber": "0.0.3",
+      "buildNumber": "1.0.0",
       "icon": "./assets/icon.png",
-      "appStoreUrl": "",
-      "supportsTablet": "true",
-      "requireFullScreen": "true",
-      "isTabletOnly": "false",
+      "supportsTablet": true,
+      "requireFullScreen": true,
+      "isTabletOnly": false,
       "infoPlist": {},
       "associatedDomains": ["ordered.online"],
-      "usesIcloudStorage": "false",
-      "usesAppleSignIn": "false",
+      "usesIcloudStorage": false,
+      "usesAppleSignIn": false,
       "splash": {
         "backgroundColor": "#ffffff",
         "resizeMode": "contain",
@@ -66,14 +65,12 @@
     },
     "android": {
       "package": "ordered.online",
-      "versionCode": "0.0.3",
+      "versionCode": 1,
       "icon": "./assets/icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#ffffff",
-        "backgroundImage": "./assets/splash.png"
+        "backgroundColor": "#ffffff"
       },
-      "playStoreUrl": "",
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",

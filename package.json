@@ -16,6 +16,9 @@
   "scripts": {
     "start": "expo start",
     "eject": "expo eject",
+    "test": "jest --coverage",
+    "test:develop": "jest -o --watch --coverage=false --changedSince=origin/master",
+    "updateSnapshots": "jest -u --coverage=false",
     "web": "expo start --web",
     "ios": "expo start --ios",
     "android": "expo start --android",
@@ -26,9 +29,13 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.6",
+    "@react-navigation/core": "^3.5.1",
+    "@react-navigation/web": "^1.0.0-alpha.9",
     "expo": "^35.0.0",
+    "expo-asset": "^7.0.0",
     "expo-barcode-scanner": "~7.0.0",
     "expo-constants": "~7.0.0",
+    "expo-font": "^7.0.0",
     "expo-location": "~7.0.0",
     "expo-permissions": "~7.0.0",
     "react": "16.8.3",
@@ -38,9 +45,10 @@
     "react-native-reanimated": "~1.2.0",
     "react-native-screens": "~1.0.0-alpha.23",
     "react-native-web": "^0.11.7",
+    "react-navigation": "^4.0.10",
+    "react-navigation-stack": "^1.10.3",
+    "react-navigation-tabs": "^2.5.6",
     "react-redux": "^7.1.1",
-    "react-router-dom": "^5.1.2",
-    "react-router-native": "^5.1.2",
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
@@ -50,13 +58,19 @@
     "@babel/core": "^7.6.4",
     "@expo/webpack-config": "^0.8.1",
     "babel-preset-expo": "^7.1.0",
+    "coveralls": "^3.0.7",
     "husky": "^3.0.9",
+    "jest-expo": "^35.0.0",
     "lint-staged": "^9.4.2",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "react-test-renderer": "16.8.3"
+  },
+  "jest": {
+    "preset": "jest-expo"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "yarn updateSnapshots && lint-staged"
     }
   },
   "lint-staged": {
