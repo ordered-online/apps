@@ -1,33 +1,30 @@
 language: node_js
 
-node_js: 
-- "lts/*"
+node_js:
+  - 'lts/*'
 
 branches:
   only:
-  - master
+    - master
 
 cache:
   directories:
-  - node_modules
+    - node_modules
 
 before_install:
-- npm update
+  - npm update
 
 install:
-- npm install
+  - npm install
 
 git:
   submodules: false
 
 jobs:
   include:
-    - stage: Test
-      name: "Coverage and Unit Testing"
-      script: npm test
     - stage: Documentation
-      name: "Build Documentation"
+      name: 'Build Documentation'
       script: ./build-documentation.sh
     - stage: Submodule
-      name: "Update Submodule"
+      name: 'Update Submodule'
       script: ./update-submodule.sh

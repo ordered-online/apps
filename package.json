@@ -34,7 +34,6 @@
     "lint": "lerna run lint",
     "format": "lerna run format",
     "changed": "lerna changed",
-    "version": "lerna version --conventional-commits --yes",
     "test": "jest --detectOpenHandles",
     "test:coverage": "jest --coverage --detectOpenHandles",
     "test:develop": "jest -o --watch --coverage=false --changedSince=origin/master --detectOpenHandles",
@@ -92,5 +91,5 @@
   "resolutions": {
     "mem": "^4.0.0"
   },
-  "version": "0.0.1"
+  "version": "0.0.2"
 }
