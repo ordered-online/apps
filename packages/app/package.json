@@ -1,6 +1,6 @@
 {
   "name": "@ordered.online/app",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "keywords": [],
   "repository": {
@@ -38,8 +38,8 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.6",
-    "@ordered.online/api": "^0.0.1",
-    "@ordered.online/components": "^0.0.1",
+    "@ordered.online/api": "^0.0.2",
+    "@ordered.online/components": "^0.0.2",
     "@react-navigation/core": "^3.5.1",
     "@react-navigation/web": "^1.0.0-alpha.9",
     "expo": "^35.0.0",
