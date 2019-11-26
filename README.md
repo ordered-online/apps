@@ -11,7 +11,7 @@
 </h3>
 
 <p align="center">
-    <a href="https://travis-ci.org/ordered-online/client.svg?branch=master"><img alt="Travis Status" src="https://img.shields.io/travis/ordered-online/client"></a>
+    <a href="https://travis-ci.org/ordered-online/apps"><img alt="Travis Status" src="https://travis-ci.org/ordered-online/apps.svg?branch=master"></a>
     <a href="https://github.com/ordered-online/apps"><img alt="Github Issues" src="https://img.shields.io/github/issues/ordered-online/client"></a>
     <a href="https://github.com/ordered-online/apps"><img alt="Github Forks" src="https://img.shields.io/github/forks/ordered-online/client"></a>
     <a href="https://github.com/ordered-online/apps"><img alt="Github Followers" src="https://img.shields.io/github/followers/ordered-online?label=Follow"></a>
