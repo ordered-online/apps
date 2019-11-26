@@ -67,13 +67,12 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "yarn test:updateSnapshots && yarn build && git add -A && lint-staged"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
     "packages/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "browserslist": {
