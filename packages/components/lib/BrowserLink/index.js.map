@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/BrowserLink/index.js"],"names":["BrowserLink"],"mappings":"mKAAA,kE,aACeA,oB","sourcesContent":["import BrowserLink from './BrowserLink';\nexport default BrowserLink;\n"],"file":"index.js"}

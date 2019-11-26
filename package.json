@@ -1,0 +1,96 @@
+{
+  "name": "ordered.online",
+  "private": true,
+  "keywords": [
+    "lerna",
+    "monorepo",
+    "multi-package",
+    "react-native",
+    "yarn",
+    "workspaces",
+    "expo"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ordered-online/apps"
+  },
+  "author": "Felix Kästner <hello@felix-kaestner.com>",
+  "bugs": {
+    "url": "https://github.com/ordered-online/apps/issues"
+  },
+  "homepage": "https://www.ordered.online",
+  "scripts": {
+    "bootstrap": "lerna bootstrap --use-workspaces",
+    "clean": "lerna run clean",
+    "compile": "lerna run compile",
+    "start": "lerna run start --parallel",
+    "start:app": "lerna run --scope=@ordered.online/app start",
+    "start:manager": "lerna run --scope=@ordered.online/manager start",
+    "web:app": "lerna run --scope=@ordered.online/app web",
+    "web:manager": "lerna run --scope=@ordered.online/manager web",
+    "build": "lerna run build",
+    "build:api": "lerna run --scope=@ordered.online/api build",
+    "build:components": "lerna run --scope=@ordered.online/components build",
+    "lint": "lerna run lint",
+    "format": "lerna run format",
+    "changed": "lerna changed",
+    "version": "lerna version --conventional-commits --yes",
+    "test": "jest --detectOpenHandles",
+    "test:coverage": "jest --coverage --detectOpenHandles",
+    "test:develop": "jest -o --watch --coverage=false --changedSince=origin/master --detectOpenHandles",
+    "test:updateSnapshots": "jest -u --coverage=false --detectOpenHandles"
+  },
+  "dependencies": {
+    "expo": "^35.0.0",
+    "react": "16.8.3",
+    "react-dom": "16.8.3",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
+    "react-native-web": "^0.11.7"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@expo/webpack-config": "^0.8.1",
+    "babel-loader": "^8.0.6",
+    "babel-preset-expo": "^7.1.0",
+    "husky": "^3.0.9",
+    "jest-expo": "^35.0.0",
+    "lerna": "^3.19.0",
+    "lint-staged": "^9.4.2",
+    "prettier": "^1.19.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn test:updateSnapshots && yarn build && git add -A && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "packages/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "resolutions": {
+    "mem": "^4.0.0"
+  },
+  "version": "0.0.1"
+}

@@ -1,0 +1,82 @@
+{
+  "name": "@ordered.online/components",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ordered-online/apps"
+  },
+  "author": "Felix Kästner <hello@felix-kaestner.com>",
+  "bugs": {
+    "url": "https://github.com/ordered-online/apps/issues"
+  },
+  "homepage": "https://www.ordered.online",
+  "main": "lib/index.js",
+  "module": "src/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__",
+    "src": "src"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "private"
+  },
+  "scripts": {
+    "start": "nodemon --watch src --exec babel src --root-mode upward --out-dir lib --copy-files --source-maps",
+    "build": "babel src --root-mode upward --out-dir lib --copy-files --source-maps",
+    "test": "jest --detectOpenHandles",
+    "test:coverage": "jest --coverage --detectOpenHandles",
+    "test:develop": "jest -o --watch --coverage=false --changedSince=origin/master --detectOpenHandles",
+    "test:updateSnapshots": "jest -u --coverage=false --detectOpenHandles",
+    "postinstall": "expo-yarn-workspaces postinstall",
+    "format": "prettier \"./**/*.{js,jsx,json,md}\" --write"
+  },
+  "dependencies": {
+    "expo": "^35.0.0",
+    "expo-barcode-scanner": "~7.0.0",
+    "expo-constants": "~7.0.0",
+    "expo-location": "~7.0.0",
+    "expo-permissions": "~7.0.0",
+    "prop-types": "^15.7.2",
+    "react": "16.8.3",
+    "react-dom": "16.8.3",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
+    "react-native-web": "^0.11.7"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@expo/webpack-config": "^0.8.1",
+    "babel-loader": "^8.0.6",
+    "babel-preset-expo": "^7.1.0",
+    "expo-yarn-workspaces": "^1.2.1",
+    "jest-expo": "^35.0.0",
+    "nodemon": "^2.0.1",
+    "prettier": "^1.19.1",
+    "react-test-renderer": "16.8.3",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "resolutions": {
+    "mem": "^4.0.0"
+  },
+  "private": true
+}

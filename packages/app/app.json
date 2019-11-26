@@ -1,0 +1,94 @@
+{
+  "expo": {
+    "name": "ordered.online",
+    "description": "A modern platform for ordering online.",
+    "owner": "Philipp Matthes and Felix Kästner",
+    "slug": "ordered-online",
+    "privacy": "public",
+    "sdkVersion": "35.0.0",
+    "packagerOpts": {
+      "config": "metro.config.js"
+    },
+    "version": "0.0.1",
+    "githubUrl": "https://github.com/ordered-online/",
+    "orientation": "portrait",
+    "platforms": ["ios", "android", "web"],
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "androidStatusBar": {
+      "barStyle": "dark-content",
+      "backgroundColor": "#ffffff"
+    },
+    "androidNavigationBar": {
+      "visible": false,
+      "barStyle": "dark-content",
+      "backgroundColor": "#ffffff"
+    },
+    "notification": {
+      "icon": "./assets/icon.png",
+      "color": "#ffffff",
+      "iosDisplayInForeground": true,
+      "androidMode": "collapse",
+      "androidCollapsedTitle": "ordered.online"
+    },
+    "updates": {
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD",
+      "fallbackToCacheTimeout": 0
+    },
+    "ios": {
+      "bundleIdentifier": "ordered.online",
+      "buildNumber": "0.0.1",
+      "icon": "./assets/icon.png",
+      "supportsTablet": true,
+      "requireFullScreen": true,
+      "isTabletOnly": false,
+      "infoPlist": {},
+      "associatedDomains": ["ordered.online"],
+      "usesIcloudStorage": false,
+      "usesAppleSignIn": false,
+      "splash": {
+        "backgroundColor": "#ffffff",
+        "resizeMode": "contain",
+        "image": "./assets/icon.png",
+        "tabletImage": "./assets/icon.png",
+        "userInterfaceStyle": "automatic"
+      }
+    },
+    "android": {
+      "package": "ordered.online",
+      "versionCode": 1,
+      "icon": "./assets/icon.png",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "CAMERA",
+        "VIBRATE",
+        "com.anddoes.launcher.permission.UPDATE_COUNT",
+        "com.android.launcher.permission.INSTALL_SHORTCUT",
+        "com.google.android.c2dm.permission.RECEIVE",
+        "com.google.android.gms.permission.ACTIVITY_RECOGNITION",
+        "com.google.android.providers.gsf.permission.READ_GSERVICES",
+        "com.htc.launcher.permission.READ_SETTINGS",
+        "com.htc.launcher.permission.UPDATE_SHORTCUT",
+        "com.majeur.launcher.permission.UPDATE_BADGE",
+        "com.sec.android.provider.badge.permission.READ",
+        "com.sec.android.provider.badge.permission.WRITE",
+        "com.sonyericsson.home.permission.BROADCAST_BADGE"
+      ],
+      "splash": {
+        "backgroundColor": "#ffffff",
+        "resizeMode": "native"
+      }
+    }
+  }
+}

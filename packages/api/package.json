@@ -1,0 +1,52 @@
+{
+  "name": "@ordered.online/api",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ordered-online/apps"
+  },
+  "author": "Felix Kästner <hello@felix-kaestner.com>",
+  "bugs": {
+    "url": "https://github.com/ordered-online/apps/issues"
+  },
+  "homepage": "https://www.ordered.online",
+  "main": "lib/index.js",
+  "module": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --color",
+    "web": "webpack-dev-server --mode development --color",
+    "build": "webpack --mode production",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:develop": "jest -o --watch --coverage=false --changedSince=origin/master --detectOpenHandles",
+    "format": "prettier \"./**/*.{js,jsx,json,md}\" --write"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "babel-loader": "^8.0.6",
+    "jest-expo": "^35.0.0",
+    "prettier": "^1.19.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "resolutions": {
+    "mem": "^4.0.0"
+  },
+  "private": true
+}
