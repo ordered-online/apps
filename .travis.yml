@@ -8,20 +8,21 @@ branches:
     - master
 
 cache:
+  yarn: true
   directories:
     - node_modules
 
-before_install:
-  - npm update
-
 install:
-  - npm install
+  - yarn
 
 git:
   submodules: false
 
 jobs:
   include:
+    - stage: Test
+      name: Testing
+      script: yarn test
     - stage: Documentation
       name: 'Build Documentation'
       script: ./build-documentation.sh
