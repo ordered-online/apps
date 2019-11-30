@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { Route, Redirect } from './routing';
 import { connect } from 'react-redux';
 
-function PrivateRoute({ component: Component, loggedIn, ...rest }) {
+function PrivateRoute({ component: Component, loggedIn, navigation, ...rest }) {
   return (
     <Route
       {...rest}
       render={props =>
         loggedIn ? (
-          <Component {...props} />
+          <Component {...props} navigation={navigation} />
         ) : (
           <Redirect
             to={{
