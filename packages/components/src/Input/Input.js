@@ -3,7 +3,12 @@ import { TextInput, StyleSheet } from 'react-native';
 
 export class Input extends Component {
   render() {
-    return <TextInput {...this.props} style={styles.textInput} />;
+    return (
+      <TextInput
+        {...this.props}
+        style={StyleSheet.flatten([styles.textInput, this.props.style])}
+      />
+    );
   }
 }
 
