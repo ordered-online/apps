@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, StyleSheet } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Platform,
+  TouchableOpacity,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { Link } from './routing';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
+import { Ionicons } from '@expo/vector-icons';
 
 const protectedRoutes = [
   {
@@ -33,7 +40,7 @@ export class Navbar extends Component {
   };
 
   render() {
-    const { loggedIn } = this.props;
+    const { loggedIn, onIconPress } = this.props;
     const { isSmallDevice } = Layout;
     const { primaryColor } = Colors;
 
@@ -46,27 +53,44 @@ export class Navbar extends Component {
 
     const navbarStyles = [styles.navbar];
     if (!isSmallDevice) {
-      navbarStyles.push({ justifyContent: 'flex-end' });
+      navbarStyles.push({ justifyContent: 'space-between' });
     }
     const navLinkStyles = [styles.navLink];
     navLinkStyles.push({ backgroundColor: primaryColor });
 
     return (
       <View style={navbarStyles}>
-        <View style={styles.navbarWrapper}>
-          {routes.map((route, i) => (
-            <View key={i} style={navLinkStyles}>
-              <Link
-                to={route.path}
-                style={{
-                  textDecoration: 'none',
-                  display: 'flex',
-                  justifyContent: 'center',
-                }}>
-                <Text style={styles.navItem}>{route.title}</Text>
-              </Link>
-            </View>
-          ))}
+        <View style={styles.iconWrapper}>
+          <TouchableOpacity onPress={() => onIconPress && onIconPress()}>
+            <Ionicons
+              name={
+                Platform.OS === 'ios'
+                  ? 'ios-arrow-round-back'
+                  : 'md-arrow-round-back'
+              }
+              size={30}
+              style={styles.icon}
+              color="black"
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.navigationWrapper}>
+          <View style={styles.navigation}>
+            {routes.map((route, i) => (
+              <View key={i} style={navLinkStyles}>
+                <Link
+                  to={route.path}
+                  style={{
+                    textDecoration: 'none',
+                    display: 'flex',
+                    justifyContent: 'center',
+                  }}>
+                  <Text style={styles.navItem}>{route.title}</Text>
+                </Link>
+              </View>
+            ))}
+          </View>
         </View>
       </View>
     );
@@ -84,7 +108,23 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 1,
   },
-  navbarWrapper: {
+  iconWrapper: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  icon: {
+    marginLeft: 30,
+  },
+  navigationWrapper: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  navigation: {
     maxWidth: 375,
     display: 'flex',
     flexDirection: 'row',
