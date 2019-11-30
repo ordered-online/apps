@@ -8,8 +8,12 @@ import Layout from '../constants/Layout';
 
 const protectedRoutes = [
   {
-    path: '/create/location',
-    title: 'Create Location',
+    path: '/overview',
+    title: 'Overview',
+  },
+  {
+    path: '/logout',
+    title: 'Logout',
   },
 ];
 const publicRoutes = [
@@ -45,9 +49,6 @@ export class Navbar extends Component {
       navbarStyles.push({ justifyContent: 'flex-end' });
     }
     const navLinkStyles = [styles.navLink];
-
-    const navItemStyles = [styles.navItem];
-
     navLinkStyles.push({ backgroundColor: primaryColor });
 
     return (
@@ -62,7 +63,7 @@ export class Navbar extends Component {
                   display: 'flex',
                   justifyContent: 'center',
                 }}>
-                <Text style={navItemStyles}>{route.title}</Text>
+                <Text style={styles.navItem}>{route.title}</Text>
               </Link>
             </View>
           ))}
@@ -95,7 +96,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     display: 'flex',
     justifyContent: 'center',
-    borderRadius: 50,
   },
   navItem: {
     textAlign: 'center',

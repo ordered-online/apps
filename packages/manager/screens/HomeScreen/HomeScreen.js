@@ -1,7 +1,29 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 
 class HomeScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.checkLoggedIn = this.checkLoggedIn.bind(this);
+  }
+
+  componentDidMount() {
+    this.checkLoggedIn();
+  }
+
+  componentDidUpdate() {
+    this.checkLoggedIn();
+  }
+
+  // Fetch the token from storage then navigate to our appropriate place if we are already logged in
+  checkLoggedIn() {
+    const { loggedIn } = this.props;
+    if (loggedIn) {
+      this.props.navigation.navigate('overview');
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -19,4 +41,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+const mapStateToProps = state => ({
+  loggedIn: state.authentication.loggedIn,
+});
+
+export default connect(mapStateToProps, null)(HomeScreen);
