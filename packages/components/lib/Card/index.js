@@ -3,8 +3,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 Object.defineProperty(exports, 'default', {
   enumerable: true,
   get: function get() {
-    return _Anchor.default;
+    return _Card.default;
   },
 });
-var _Anchor = _interopRequireDefault(require('./Anchor'));
+var _Card = _interopRequireDefault(require('./Card'));
 //# sourceMappingURL=index.js.map

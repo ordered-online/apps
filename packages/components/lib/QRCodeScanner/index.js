@@ -1,2 +1,10 @@
-var _interopRequireDefault=require("@babel/runtime/helpers/interopRequireDefault");Object.defineProperty(exports,"__esModule",{value:true});exports.default=void 0;var _QRCodeScanner=_interopRequireDefault(require("./QRCodeScanner"));var _default=_QRCodeScanner.default;exports.default=_default;
+var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault');
+Object.defineProperty(exports, '__esModule', { value: true });
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _QRCodeScanner.default;
+  },
+});
+var _QRCodeScanner = _interopRequireDefault(require('./QRCodeScanner'));
 //# sourceMappingURL=index.js.map

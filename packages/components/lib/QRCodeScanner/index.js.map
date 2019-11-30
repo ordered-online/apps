@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../src/QRCodeScanner/index.js"],"names":["QRCodeScanner"],"mappings":"mKAAA,sE,aACeA,sB","sourcesContent":["import QRCodeScanner from './QRCodeScanner';\nexport default QRCodeScanner;\n"],"file":"index.js"}
+{"version":3,"sources":["../../src/QRCodeScanner/index.js"],"names":[],"mappings":"0PAAA","sourcesContent":["export { default } from './QRCodeScanner';\n"],"file":"index.js"}

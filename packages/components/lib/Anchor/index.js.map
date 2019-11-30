@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../src/Anchor/index.js"],"names":["Anchor"],"mappings":"mKAAA,wD,aACeA,e","sourcesContent":["import Anchor from './Anchor';\nexport default Anchor;\n"],"file":"index.js"}
+{"version":3,"sources":["../../src/Anchor/index.js"],"names":[],"mappings":"mPAAA","sourcesContent":["export { default } from './Anchor';\n"],"file":"index.js"}

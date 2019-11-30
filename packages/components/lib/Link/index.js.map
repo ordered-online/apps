@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../src/Link/index.js"],"names":["Link"],"mappings":"mKAAA,oD,aACeA,a","sourcesContent":["import Link from './Link';\nexport default Link;\n"],"file":"index.js"}
+{"version":3,"sources":["../../src/Link/index.js"],"names":[],"mappings":"iPAAA","sourcesContent":["export { default } from './Link';\n"],"file":"index.js"}

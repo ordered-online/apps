@@ -1,2 +1,10 @@
-var _interopRequireDefault=require("@babel/runtime/helpers/interopRequireDefault");Object.defineProperty(exports,"__esModule",{value:true});exports.default=void 0;var _BrowserLink=_interopRequireDefault(require("./BrowserLink"));var _default=_BrowserLink.default;exports.default=_default;
+var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault');
+Object.defineProperty(exports, '__esModule', { value: true });
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _BrowserLink.default;
+  },
+});
+var _BrowserLink = _interopRequireDefault(require('./BrowserLink'));
 //# sourceMappingURL=index.js.map

@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../src/LocationFinder/index.js"],"names":["LocationFinder"],"mappings":"mKAAA,wE,aACeA,uB","sourcesContent":["import LocationFinder from './LocationFinder';\nexport default LocationFinder;\n"],"file":"index.js"}
+{"version":3,"sources":["../../src/LocationFinder/index.js"],"names":[],"mappings":"2PAAA","sourcesContent":["export { default } from './LocationFinder';\n"],"file":"index.js"}
