@@ -82,7 +82,10 @@ export class LocationsScreen extends Component {
           columnWrapperStyle={styles.row} // space them out evenly
           data={Object.keys(locations)}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => console.log('')}>
+            <TouchableOpacity
+              onPress={() =>
+                this.props.navigation.navigate(`location/${item}`)
+              }>
               <View style={styles.itemWrapper}>
                 <Item location={locations[item]} />
               </View>

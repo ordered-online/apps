@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Platform } from 'react-native';
 import { Router, Switch, Route, Redirect, Link } from './routing';
-import { createBrowserHistory } from 'history';
+import { createBrowserHistory, createMemoryHistory } from 'history';
 import PrivateRoute from './PrivateRoute';
 
 import Navbar from './Navbar';
@@ -13,6 +13,7 @@ import RegisterScreen from '../screens/RegisterScreen';
 
 import OverviewScreen from '../screens/OverviewScreen';
 import LocationsScreen from '../screens/LocationsScreen';
+import LocationsDetailScreen from '../screens/LocationDetailScreen';
 import CreateLocationScreen from '../screens/CreateLocationScreen';
 import OdersScreen from '../screens/OrdersScreen';
 import LogoutScreen from '../screens/LogoutScreen';
@@ -22,7 +23,7 @@ import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
 import TermsOfUseScreen from '../screens/TermsOfUseScreen';
 
 const isWeb = Platform.OS == 'web';
-export const history = isWeb ? createBrowserHistory() : '';
+export const history = isWeb ? createBrowserHistory() : createMemoryHistory();
 
 export const navigationProp = {
   navigate: function(route) {
@@ -34,7 +35,7 @@ export class AppNavigator extends Component {
   render() {
     return (
       <Router history={history}>
-        <Navbar />
+        <Navbar onIconPress={() => history.goBack()} />
         <Switch>
           <Route
             exact
@@ -73,6 +74,13 @@ export class AppNavigator extends Component {
 
           <PrivateRoute
             exact
+            path="/location/:id"
+            component={LocationsDetailScreen}
+            navigation={navigationProp}
+          />
+
+          <PrivateRoute
+            exact
             path="/locations/create"
             component={CreateLocationScreen}
             navigation={navigationProp}
@@ -80,7 +88,7 @@ export class AppNavigator extends Component {
 
           <PrivateRoute
             exact
-            path="/oders/"
+            path="/orders/"
             component={OdersScreen}
             navigation={navigationProp}
           />
