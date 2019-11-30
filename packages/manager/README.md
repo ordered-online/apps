@@ -92,3 +92,12 @@ We can build a standalone app following the [Expo Documentation for Building Sta
 Simply run `$ yarn run build:ios` OR `$ npm run build:ios`
 
 This will produce a iOS Application which we can deploy the App Store by following the [Expo Documentation on Deploying to App Stores](https://docs.expo.io/versions/latest/distribution/app-stores/). To get a summary of the deployment process, we refer to the [Expo Documentation on Publishing](https://docs.expo.io/versions/latest/workflow/publishing/)
+
+To simulate a login without having to start the whole application from the [infrastructure repo](https://github.com/ordered-online/infrastructure) open the react developer tools and click on the `dispatcher` in the bottom of the tab. Then enter the following:
+
+```javascript
+{
+type: "AUTHENTICATION/LOGIN_SUCCESS",
+payload: { "sessionKey": "abc", "userId": 1 }
+}
+```
