@@ -1,2 +1,1 @@
-import ImprintScreen from './ImprintScreen';
-export default ImprintScreen;
+export { default } from './ImprintScreen';

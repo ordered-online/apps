@@ -1,2 +1,1 @@
-import TermsOfUseScreen from './TermsOfUseScreen';
-export default TermsOfUseScreen;
+export { default } from './TermsOfUseScreen';

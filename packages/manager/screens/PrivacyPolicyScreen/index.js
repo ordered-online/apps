@@ -1,2 +1,1 @@
-import PrivacyPolicyScreen from './PrivacyPolicyScreen';
-export default PrivacyPolicyScreen;
+export { default } from './PrivacyPolicyScreen';

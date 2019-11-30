@@ -1,2 +1,1 @@
-import RegisterScreen from './RegisterScreen';
-export default RegisterScreen;
+export { default } from './RegisterScreen';
