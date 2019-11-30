@@ -14,21 +14,28 @@ class LoginScreen extends Component {
       username: '',
       password: '',
     };
+
+    this.checkLoggedIn = this.checkLoggedIn.bind(this);
+    this.handleRegistration = this.handleRegistration.bind(this);
   }
 
   componentDidMount() {
-    this._checkLoggedIn();
+    this.checkLoggedIn();
+  }
+
+  componentDidUpdate() {
+    this.checkLoggedIn();
   }
 
   // Fetch the token from storage then navigate to our appropriate place if we are already logged in
-  _checkLoggedIn = () => {
+  checkLoggedIn() {
     const { loggedIn } = this.props;
     if (loggedIn) {
-      this.props.navigation.navigate('create/location');
+      this.props.navigation.navigate('overview');
     }
-  };
+  }
 
-  _handleRegistration = () => {
+  handleRegistration() {
     const { username, password } = this.state;
 
     // TODO: implement a simple validation schema
@@ -37,7 +44,7 @@ class LoginScreen extends Component {
       username,
       password,
     });
-  };
+  }
 
   render() {
     return (

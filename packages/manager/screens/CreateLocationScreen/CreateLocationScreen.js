@@ -17,9 +17,11 @@ export class CreateLocationScreen extends Component {
       categories: [],
       tags: [],
     };
+
+    this.createLocation = this.createLocation.bind(this);
   }
 
-  _createLocation = () => {};
+  createLocation() {}
 
   render() {
     return (

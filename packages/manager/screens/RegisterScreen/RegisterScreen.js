@@ -17,20 +17,23 @@ class RegisterScreen extends Component {
       first_name: '',
       last_name: '',
     };
+
+    this.checkLoggedIn = this.checkLoggedIn.bind(this);
+    this.handleRegistration = this.handleRegistration.bind(this);
   }
 
   componentDidMount() {
-    this._checkLoggedIn();
+    this.checkLoggedIn();
   }
 
-  _checkLoggedIn = () => {
+  checkLoggedIn() {
     const { loggedIn } = this.props;
     if (loggedIn) {
-      this.props.navigation.navigate('create/location');
+      this.props.navigation.navigate('overview');
     }
-  };
+  }
 
-  _handleRegistration = () => {
+  handleRegistration() {
     const { username, password, email, first_name, last_name } = this.state;
 
     this.props.registerUser({
@@ -40,7 +43,7 @@ class RegisterScreen extends Component {
       first_name,
       last_name,
     });
-  };
+  }
 
   render() {
     return (
