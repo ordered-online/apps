@@ -1,2 +1,1 @@
-import BrowserLink from './BrowserLink';
-export default BrowserLink;
+export { default } from './BrowserLink';

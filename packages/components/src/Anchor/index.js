@@ -1,2 +1,1 @@
-import Anchor from './Anchor';
-export default Anchor;
+export { default } from './Anchor';
