@@ -14,9 +14,9 @@ const LOGOUT_FAILURE = 'AUTHENTICATION/LOGOUT_FAILURE';
 // Initial State
 const initialState = {
   fetching: false,
-  loggedIn: false,
-  userId: null,
-  sessionKey: null,
+  loggedIn: true,
+  userId: 1,
+  sessionKey: 'lyp1u0ld51p42mnv1jcw8qqqe5iijt3p',
   error: null,
 };
 

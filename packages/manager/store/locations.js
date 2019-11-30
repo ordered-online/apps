@@ -8,7 +8,36 @@ export const FETCH_LOCATION_FAILURE = 'LOCATION/FETCH_LOCATION_FAILURE';
 // Initial State
 const initialState = {
   fetching: false,
-  locations: null,
+  locations: {
+    1: {
+      id: 1,
+      name: 'Studentencaf\u00e9 Ascii',
+      description:
+        'Gem\u00fctliches Caf\u00e9 in der Fak. Informatik der TU Dresden.',
+      address: 'N\u00f6thnitzer Str. 46, 01187 Dresden',
+      user_id: 1,
+      latitude: '51.02508690',
+      longitude: '13.72100050',
+      website: null,
+      telephone: null,
+      categories: [
+        {
+          name: 'Cafe',
+        },
+      ],
+      tags: [
+        {
+          name: 'calm',
+        },
+        {
+          name: 'inexpensive',
+        },
+        {
+          name: 'insider',
+        },
+      ],
+    },
+  },
   error: null,
 };
 
@@ -60,11 +89,13 @@ const fetchLocationFailure = error => ({
  * @param {array} locations
  */
 const reformatLocations = locations => {
-  return locations.map(location => {
-    let obj = {};
-    obj[location.id] = location;
-    return obj;
-  });
+  const initialValue = {};
+  return locations.reduce((obj, item) => {
+    return {
+      ...obj,
+      [item['id']]: item,
+    };
+  }, initialValue);
 };
 
 // Exports
