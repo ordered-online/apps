@@ -28,7 +28,6 @@
   },
   "scripts": {
     "start": "nodemon --watch src --exec babel src --root-mode upward --out-dir lib --copy-files --source-maps --ignore '**/__tests__'",
-    "web": "nodemon --watch src --exec babel src --root-mode upward --out-dir lib --copy-files --source-maps --ignore '**/__tests__'",
     "build": "babel src --root-mode upward --out-dir lib --copy-files --source-maps --ignore '**/__tests__'",
     "test": "jest --detectOpenHandles",
     "test:coverage": "jest --coverage --detectOpenHandles",

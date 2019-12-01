@@ -21,7 +21,7 @@
     "access": "private"
   },
   "scripts": {
-    "start": "expo start --clear",
+    "start": "expo start --clear --web",
     "eject": "expo eject",
     "test": "jest --detectOpenHandles",
     "test:coverage": "jest --coverage --detectOpenHandles",
@@ -30,7 +30,8 @@
     "postinstall": "expo-yarn-workspaces postinstall",
     "web": "expo start --clear --web",
     "ios": "expo start --clear --ios",
-    "android": "expo start --android",
+    "android": "expo start --clear  --android",
+    "build": "expo build:web $PWD",
     "build:web": "expo build:web",
     "build:ios": "expo build:ios",
     "build:android": "expo build:android",

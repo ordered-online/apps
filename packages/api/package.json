@@ -16,7 +16,6 @@
   "module": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --color",
-    "web": "webpack-dev-server --mode development --color",
     "build": "webpack --mode production",
     "test": "jest",
     "test:coverage": "jest --coverage",
