@@ -1,8 +1,5 @@
 import * as qs from 'qs';
-
-import { getEnvironment } from './environment';
-const environment = getEnvironment();
-const API_URL = environment.API_URL;
+const API_URL = process.env.API_URL;
 
 const ENDPOINT_CREATE_LOCATION = '/locations/create/';
 const ENDPOINT_EDIT_LOCATION = '/locations/edit/';

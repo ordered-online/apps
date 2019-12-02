@@ -1,6 +1,4 @@
-import { getEnvironment } from './environment';
-const environment = getEnvironment();
-const API_URL = environment.API_URL;
+const API_URL = process.env.API_URL;
 
 const ENDPOINT_CREATE_PRODUCT = '/products/create/';
 const ENDPOINT_EDIT_PRODUCT = '/products/edit/';

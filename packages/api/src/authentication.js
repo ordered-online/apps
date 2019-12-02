@@ -1,6 +1,4 @@
-import { getEnvironment } from './environment';
-const environment = getEnvironment();
-const API_URL = environment.API_URL;
+const API_URL = process.env.API_URL;
 
 const ENDPOINT_REGISTER = '/verification/register/';
 const ENDPOINT_VERIFICATION = '/verification/verify/';
