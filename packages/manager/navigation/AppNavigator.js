@@ -31,7 +31,7 @@ export const navigationProp = {
   },
 };
 
-export class AppNavigator extends Component {
+class AppNavigator extends Component {
   render() {
     return (
       <Router history={history}>

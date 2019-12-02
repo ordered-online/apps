@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  View,
-  ViewPropTypes,
-  Text,
-  TextPropTypes,
-  Image,
-  StyleSheet,
-} from 'react-native';
+import { View, ViewPropTypes, Text, Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
 export class Card extends Component {
@@ -19,11 +12,11 @@ export class Card extends Component {
     wrapperStyle: ViewPropTypes.style,
     overlayStyle: ViewPropTypes.style,
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-    titleStyle: TextPropTypes.style,
+    titleStyle: Text.propTypes.style,
     featuredTitle: PropTypes.string,
-    featuredTitleStyle: TextPropTypes.style,
+    featuredTitleStyle: Text.propTypes.style,
     featuredSubtitle: PropTypes.string,
-    featuredSubtitleStyle: TextPropTypes.style,
+    featuredSubtitleStyle: Text.propTypes.style,
     dividerStyle: ViewPropTypes.style,
     image: Image.propTypes.source,
     imageStyle: ViewPropTypes.style,

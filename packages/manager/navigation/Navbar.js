@@ -34,7 +34,7 @@ const publicRoutes = [
   },
 ];
 
-export class Navbar extends Component {
+class Navbar extends Component {
   static propTypes = {
     loggedIn: PropTypes.bool.isRequired,
   };
@@ -44,11 +44,9 @@ export class Navbar extends Component {
     const { isSmallDevice } = Layout;
     const { primaryColor } = Colors;
 
-    let routes;
+    let routes = publicRoutes;
     if (loggedIn) {
       routes = protectedRoutes;
-    } else {
-      routes = publicRoutes;
     }
 
     const navbarStyles = [styles.navbar];
@@ -57,6 +55,22 @@ export class Navbar extends Component {
     }
     const navLinkStyles = [styles.navLink];
     navLinkStyles.push({ backgroundColor: primaryColor });
+
+    const navbarLinks = routes.map((screen, i) => {
+      return (
+        <View key={i} style={navLinkStyles}>
+          <Link
+            to={screen.path}
+            style={{
+              textDecoration: 'none',
+              display: 'flex',
+              justifyContent: 'center',
+            }}>
+            <Text style={styles.navItem}>{screen.title}</Text>
+          </Link>
+        </View>
+      );
+    });
 
     return (
       <View style={navbarStyles}>
@@ -76,21 +90,7 @@ export class Navbar extends Component {
         </View>
 
         <View style={styles.navigationWrapper}>
-          <View style={styles.navigation}>
-            {routes.map((route, i) => (
-              <View key={i} style={navLinkStyles}>
-                <Link
-                  to={route.path}
-                  style={{
-                    textDecoration: 'none',
-                    display: 'flex',
-                    justifyContent: 'center',
-                  }}>
-                  <Text style={styles.navItem}>{route.title}</Text>
-                </Link>
-              </View>
-            ))}
-          </View>
+          <View style={styles.navigation}>{navbarLinks}</View>
         </View>
       </View>
     );

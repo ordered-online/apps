@@ -1,4 +1,5 @@
 import { AppLoading } from 'expo';
+import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import React, { Component } from 'react';
 import { Platform, StatusBar, StyleSheet, SafeAreaView } from 'react-native';
@@ -14,17 +15,13 @@ export default class App extends Component {
     isLoadingComplete: false,
   };
 
-  componentDidMount() {
-    console.log(process.env.NODE_ENV);
-  }
-
   render() {
     const { isLoadingComplete } = this.state;
-    if (!isLoadingComplete) {
+    if (!isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
         <AppLoading
           startAsync={loadResourcesAsync}
-          onError={error => console.warn(error)}
+          onError={handleLoadingError}
           onFinish={() => this.setState({ isLoadingComplete: true })}
         />
       );
@@ -50,6 +47,12 @@ async function loadResourcesAsync() {
       ...Ionicons.font,
     }),
   ]);
+}
+
+function handleLoadingError(error) {
+  // In this case, you might want to report the error to your error reporting
+  // service, for example Sentry
+  console.warn(error);
 }
 
 const styles = StyleSheet.create({

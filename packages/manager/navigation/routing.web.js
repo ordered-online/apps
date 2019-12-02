@@ -1,5 +1,6 @@
 export {
-  NavLink as Link,
+  Link,
+  NavLink,
   generatePath,
   Prompt,
   MemoryRouter,

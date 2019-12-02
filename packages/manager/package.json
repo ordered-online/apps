@@ -23,10 +23,10 @@
   "scripts": {
     "start": "expo start --clear --web",
     "eject": "expo eject",
-    "test": "jest --detectOpenHandles",
-    "test:coverage": "jest --coverage --detectOpenHandles",
-    "test:develop": "jest -o --watch --coverage=false --changedSince=origin/master --detectOpenHandles",
-    "test:updateSnapshots": "jest -u --coverage=false --detectOpenHandles",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:develop": "jest -o --watch --coverage=false --changedSince=origin/master",
+    "test:updateSnapshots": "jest -u --coverage=false",
     "postinstall": "expo-yarn-workspaces postinstall",
     "web": "expo start --clear --web",
     "ios": "expo start --clear --ios",
@@ -52,7 +52,9 @@
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "react-router-dom": "^5.1.2",
+    "react-router-native": "^5.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",
@@ -61,8 +63,6 @@
     "expo-yarn-workspaces": "^1.2.1",
     "jest-expo": "^35.0.0",
     "prettier": "^1.19.1",
-    "react-router-dom": "^5.1.2",
-    "react-router-native": "^5.1.2",
     "react-test-renderer": "16.8.3"
   },
   "browserslist": {
