@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/BrowserLink/index.js"],"names":[],"mappings":"wPAAA","sourcesContent":["export { default } from './BrowserLink';\n"],"file":"index.js"}

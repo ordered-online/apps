@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/Link/index.js"],"names":[],"mappings":"iPAAA","sourcesContent":["export { default } from './Link';\n"],"file":"index.js"}

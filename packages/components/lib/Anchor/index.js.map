@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/Anchor/index.js"],"names":[],"mappings":"mPAAA","sourcesContent":["export { default } from './Anchor';\n"],"file":"index.js"}

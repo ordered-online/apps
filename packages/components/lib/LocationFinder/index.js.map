@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/LocationFinder/index.js"],"names":[],"mappings":"2PAAA","sourcesContent":["export { default } from './LocationFinder';\n"],"file":"index.js"}
