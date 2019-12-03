@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://ordered.online/">
-    <img alt="ordered.online" src="logo.png" width="980">
+    <img alt="ordered.online" src="https://raw.githubusercontent.com/ordered-online/apps/master/logo.png" width="980">
   </a>
 </p>
 
