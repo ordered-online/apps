@@ -28,7 +28,7 @@
   },
   "scripts": {
     "start": "nodemon --watch src --exec babel src --root-mode upward --out-dir lib --source-maps --ignore '**/__tests__'",
-    "build": "babel src --root-mode upward --out-dir lib --source-maps --ignore '**/__tests__'",
+    "build": "babel src --out-dir lib --source-maps --ignore '**/__tests__'",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:develop": "jest -o --watch --changedSince=origin/master",

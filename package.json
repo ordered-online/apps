@@ -34,10 +34,10 @@
     "lint": "lerna run lint",
     "format": "lerna run format",
     "changed": "lerna changed",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
-    "test:develop": "jest -o --watch --changedSince=origin/master",
-    "test:updateSnapshots": "jest -u"
+    "test": "jest --detectOpenHandles",
+    "test:coverage": "jest --coverage --detectOpenHandles",
+    "test:develop": "jest -o --watch --changedSince=origin/master --detectOpenHandles",
+    "test:updateSnapshots": "jest -u --detectOpenHandles"
   },
   "dependencies": {
     "expo": "^35.0.0",
