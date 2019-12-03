@@ -69,6 +69,7 @@ export class CreateLocationScreen extends Component {
           style={{ textAlign: 'center' }}
         />
         <Button
+          color="#57c75e"
           title="Create"
           onPress={() => console.warn('Create Location is not implemented yet')}
         />

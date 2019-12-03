@@ -33,6 +33,7 @@ class SearchLocationsScreen extends Component {
         />
 
         <Button
+          color="#57c75e"
           title="Search"
           onPress={() => console.warn('Search is not implemented yet')}
         />

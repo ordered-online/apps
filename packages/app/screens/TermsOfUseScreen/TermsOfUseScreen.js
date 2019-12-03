@@ -24,6 +24,7 @@ class TermsOfUseScreen extends Component {
           {'\n'}
         </Text>
         <Button
+          color="#57c75e"
           title="Contact Us"
           onPress={() => Linking.openURL('mailto:contact@ordered.online')}
         />

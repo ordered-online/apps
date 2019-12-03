@@ -72,6 +72,7 @@ export class QRCodeScanner extends Component {
 
         {scanned && (
           <Button
+            color="#57c75e"
             title={'Tap to Scan Again'}
             onPress={() => this.setState({ scanned: false })}
           />

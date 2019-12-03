@@ -7,6 +7,7 @@ export class OverviewScreen extends Component {
     return (
       <View style={styles.container}>
         <Button
+          color="#57c75e"
           title="Manage your Locations"
           onPress={() => this.props.navigation.navigate('locations')}
         />
