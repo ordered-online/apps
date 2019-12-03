@@ -14,9 +14,9 @@ const LOGOUT_FAILURE = 'AUTHENTICATION/LOGOUT_FAILURE';
 // Initial State
 const initialState = {
   fetching: false,
-  loggedIn: true,
-  userId: 1,
-  sessionKey: 'lyp1u0ld51p42mnv1jcw8qqqe5iijt3p',
+  loggedIn: false,
+  userId: null,
+  sessionKey: null,
   error: null,
 };
 
@@ -123,6 +123,13 @@ export const Register = credentials => (dispatch, getState) => {
 
   // These are the credentials needed for registration
   const { username, password, email, first_name, last_name } = credentials;
+
+  if (__DEV__) {
+    console.log(
+      'Register with credentials: ' +
+        { username, password, email, first_name, last_name }
+    );
+  }
 
   return api
     .registerUser({ username, password, email, first_name, last_name })
