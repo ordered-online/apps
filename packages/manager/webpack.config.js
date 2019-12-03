@@ -55,5 +55,20 @@ module.exports = async function(env, argv) {
     });
   });
 
+  if (expoConfig.mode === 'development') {
+    expoConfig.devServer.proxy = {
+      '/**': {
+        target: {
+          host: 'localhost',
+          protocol: 'http:',
+          port: 80,
+        },
+        secure: false,
+        changeOrigin: true,
+        logLevel: 'info',
+      },
+    };
+  }
+
   return expoConfig;
 };
