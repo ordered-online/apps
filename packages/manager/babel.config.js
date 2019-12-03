@@ -1,6 +1,6 @@
+const baseConfig = require('../../babel.config');
+
 module.exports = function(api) {
-  api.cache(true);
-  return {
-    presets: ['babel-preset-expo'],
-  };
+  const config = baseConfig(api);
+  return config;
 };
