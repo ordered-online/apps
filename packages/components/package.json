@@ -31,8 +31,8 @@
     "build": "babel src --root-mode upward --out-dir lib --source-maps --ignore '**/__tests__'",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:develop": "jest -o --watch --coverage=false --changedSince=origin/master",
-    "test:updateSnapshots": "jest -u --coverage=false",
+    "test:develop": "jest -o --watch --changedSince=origin/master",
+    "test:updateSnapshots": "jest -u",
     "postinstall": "expo-yarn-workspaces postinstall",
     "format": "prettier \"./**/*.{js,jsx,json,md}\" --write"
   },

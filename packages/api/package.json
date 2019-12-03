@@ -19,7 +19,7 @@
     "build": "webpack --mode production",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:develop": "jest -o --watch --coverage=false --changedSince=origin/master",
+    "test:develop": "jest -o --watch --changedSince=origin/master",
     "format": "prettier \"./**/*.{js,jsx,json,md}\" --write"
   },
   "devDependencies": {
