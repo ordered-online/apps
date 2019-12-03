@@ -25,6 +25,7 @@ module.exports = {
         process.env.NODE_ENV || 'development'
       ),
       'process.env.API_URL': JSON.stringify(process.env.API_URL || 'localhost'),
+      REST_API_URL: JSON.stringify(process.env.API_URL || 'http://localhost'),
     }),
   ],
 };

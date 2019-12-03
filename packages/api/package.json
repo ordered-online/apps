@@ -15,7 +15,7 @@
   "main": "lib/index.js",
   "module": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --color",
+    "start": "API_URL='http://localhost' webpack-dev-server --mode development --color",
     "build": "webpack --mode production",
     "test": "jest",
     "test:coverage": "jest --coverage",
