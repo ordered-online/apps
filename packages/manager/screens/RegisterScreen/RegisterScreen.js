@@ -88,14 +88,16 @@ class RegisterScreen extends Component {
           <Input
             editable
             maxLength={40}
+            secureTextEntry={true}
             placeholder="password"
             textContentType="password"
             onChangeText={password => this.setState({ password })}
           />
 
           <Button
+            color="#57c75e"
             title="Register"
-            onPress={() => console.warn('Register is not implemented yet')}
+            onPress={() => this.handleRegistration()}
           />
 
           <Link

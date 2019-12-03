@@ -11,6 +11,7 @@ class LogoutScreen extends Component {
   }
 
   render() {
+    this.props.logoutUser();
     return <View />;
   }
 }

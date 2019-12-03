@@ -40,7 +40,7 @@ class LoginScreen extends Component {
 
     // TODO: implement a simple validation schema
 
-    this.props.registerUser({
+    this.props.loginUser({
       username,
       password,
     });
@@ -68,6 +68,7 @@ class LoginScreen extends Component {
           />
 
           <Button
+            color="#57c75e"
             title="Login"
             onPress={() => console.warn('Login is not implemented yet')}
           />
