@@ -1,16 +1,12 @@
+import { API_URL } from './environment';
+
 const ENDPOINT_REGISTER = '/verification/register/';
 const ENDPOINT_VERIFICATION = '/verification/verify/';
 const ENDPOINT_LOGIN = '/verification/login/';
 const ENDPOINT_LOGOUT = '/verification/logout/';
 
-const API_URL =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost'
-    : process.env.API_URL;
-
 export const registerUser = credentials => {
   const url = API_URL + ENDPOINT_REGISTER;
-  console.log(API_URL);
   return fetch(url, {
     method: 'post',
     body: JSON.stringify(credentials),
@@ -19,6 +15,7 @@ export const registerUser = credentials => {
 
 export const verifyUser = (sessionKey, userId) => {
   const url = API_URL + ENDPOINT_VERIFICATION;
+  console.log(url);
   return fetch(url, {
     method: 'post',
     body: JSON.stringify({ sessionKey, userId }),

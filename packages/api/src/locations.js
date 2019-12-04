@@ -1,15 +1,10 @@
 import * as qs from 'qs';
-
+import { API_URL } from './environment';
 const ENDPOINT_CREATE_LOCATION = '/locations/create/';
 const ENDPOINT_EDIT_LOCATION = '/locations/edit/';
 const ENDPOINT_GET_LOCATION = '/locations/get/';
 const ENDPOINT_FIND_LOCATION = '/locations/find/';
 const ENDPOINT_NEARBY_LOCATION = '/locations/nearby/';
-
-const API_URL =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost'
-    : process.env.API_URL;
 
 export const createLocation = data => {
   const url = API_URL + ENDPOINT_CREATE_LOCATION;

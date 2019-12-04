@@ -1,12 +1,9 @@
+import { API_URL } from './environment';
+
 const ENDPOINT_CREATE_PRODUCT = '/products/create/';
 const ENDPOINT_EDIT_PRODUCT = '/products/edit/';
 const ENDPOINT_GET_PRODUCT = '/products/get/';
 const ENDPOINT_FIND_PRODUCT = '/products/find/';
-
-const API_URL =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost'
-    : process.env.API_URL;
 
 export const createProduct = data => {
   const url = API_URL + ENDPOINT_CREATE_PRODUCT;
