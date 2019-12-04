@@ -1,4 +1,4 @@
-import * as api from '@ordered.online/api';
+import api from '@ordered.online/api';
 
 // Action Types
 const LOGIN_REQUEST = 'AUTHENTICATION/LOGIN_REQUEST';
@@ -45,9 +45,14 @@ const authentication = (state = initialState, action) => {
     case LOGOUT_SUCCESS:
       return initialState;
 
+    case LOGOUT_FAILURE:
+      return {
+        ...initialState,
+        error: action.payload,
+      };
+
     case LOGIN_FAILURE:
     case REGISTER_FAILURE:
-    case LOGOUT_FAILURE:
       return {
         ...state,
         fetching: false,
@@ -109,10 +114,12 @@ export const Login = (username, password) => (dispatch, getState) => {
   return api
     .loginUser(username, password)
     .then(response => {
-      if (response.error) {
-        throw response.error;
+      if (__DEV__) {
+        console.log(response);
       }
-      const { sessionKey, userId } = response;
+      const { session_key, session_data } = response;
+      const sessionKey = session_key;
+      const userId = session_data.user_id;
       dispatch(loginSuccess(sessionKey, userId));
     })
     .catch(error => dispatch(loginFailure(error)));
@@ -124,20 +131,15 @@ export const Register = credentials => (dispatch, getState) => {
   // These are the credentials needed for registration
   const { username, password, email, first_name, last_name } = credentials;
 
-  if (__DEV__) {
-    console.log(
-      'Register with credentials: ' +
-        { username, password, email, first_name, last_name }
-    );
-  }
-
   return api
     .registerUser({ username, password, email, first_name, last_name })
     .then(response => {
-      if (response.error) {
-        throw response.error;
+      if (__DEV__) {
+        console.log(response);
       }
-      const { sessionKey, userId } = response;
+      const { session_key, session_data } = response;
+      const sessionKey = session_key;
+      const userId = session_data.user_id;
       dispatch(registerSuccess(sessionKey, userId));
     })
     .catch(error => dispatch(registerFailure(error)));
@@ -148,7 +150,12 @@ export const Logout = () => (dispatch, getState) => {
   const { sessionKey, userId } = getState().authentication;
   return api
     .logoutUser(sessionKey, userId)
-    .then(() => dispatch(logoutSuccess()))
+    .then(response => {
+      if (__DEV__) {
+        console.log(response);
+      }
+      dispatch(logoutSuccess());
+    })
     .catch(error => dispatch(logoutFailure(error)));
 };
 

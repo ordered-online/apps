@@ -1,4 +1,4 @@
-import * as api from '@ordered.online/api';
+import api from '@ordered.online/api';
 
 // Action Types
 export const FETCH_LOCATION_REQUEST = 'LOCATION/FETCH_LOCATION_REQUEST';
@@ -104,34 +104,13 @@ export const GetLocation = locationId => (dispatch, getState) => {
 
   return api
     .getLocation(locationId)
+    .then(response => {
+      if (__DEV__) {
+        console.log(response);
+      }
+    })
     .then(location => reformatLocations(Array.of(location)))
     .then(location => dispatch(fetchLocationSuccess(location)))
-    .catch(error => dispatch(fetchLocationFailure(error)));
-};
-
-export const FindLocation = query => (dispatch, getState) => {
-  dispatch(fetchLocationRequest());
-
-  return api
-    .findLocation(query)
-    .then(locations => reformatLocations(locations))
-    .then(locations => dispatch(fetchLocationSuccess(locations)))
-    .catch(error => dispatch(fetchLocationFailure(error)));
-};
-
-export const FindLocationNearby = query => (dispatch, getState) => {
-  dispatch(fetchLocationRequest());
-
-  return api
-    .getNearbyLocation(query)
-    .then(locations =>
-      reformatLocations(
-        Array.from(locations, obj =>
-          Object.defineProperty(obj.location, distance, obj.distance)
-        )
-      )
-    )
-    .then(locations => dispatch(fetchLocationSuccess(locations)))
     .catch(error => dispatch(fetchLocationFailure(error)));
 };
 

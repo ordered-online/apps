@@ -1,4 +1,4 @@
-import * as api from '@ordered.online/api';
+import api from '@ordered.online/api';
 
 // Action Types
 export const FETCH_CART_REQUEST = 'CART/FETCH_CART_REQUEST';

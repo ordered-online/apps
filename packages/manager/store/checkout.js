@@ -1,4 +1,4 @@
-import * as api from '@ordered.online/api';
+import api from '@ordered.online/api';
 
 // Action Types
 export const SUBMIT_CHECKOUT_FORM = 'CHECKOUT/SUBMIT_CHECKOUT_FORM';
