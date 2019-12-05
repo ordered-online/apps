@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+import api from '@ordered.online/api';
 
 class HomeScreen extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class HomeScreen extends Component {
 
   componentDidMount() {
     this.checkLoggedIn();
+    console.log(api);
   }
 
   componentDidUpdate() {

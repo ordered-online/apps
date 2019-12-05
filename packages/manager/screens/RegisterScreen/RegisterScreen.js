@@ -26,10 +26,14 @@ class RegisterScreen extends Component {
     this.checkLoggedIn();
   }
 
+  componentDidUpdate() {
+    this.checkLoggedIn();
+  }
+
   checkLoggedIn() {
-    const { loggedIn } = this.props;
+    const { loggedIn, navigation } = this.props;
     if (loggedIn) {
-      this.props.navigation.navigate('overview');
+      navigation.navigate('overview');
     }
   }
 
@@ -125,6 +129,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   loggedIn: state.authentication.loggedIn,
+  error: state.authentication.error,
 });
 
 const mapDispatchToProps = dispatch =>

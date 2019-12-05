@@ -13,6 +13,7 @@ export class OverviewScreen extends Component {
         />
         <Text>{'\n'}</Text>
         <Button
+          color="#57c75e"
           title="View Orders"
           onPress={() => this.props.navigation.navigate('orders')}
         />

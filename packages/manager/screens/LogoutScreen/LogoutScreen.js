@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Redirect } from '../../navigation/routing';
 
 import { Logout } from '../../store/authentication';
 
@@ -11,8 +12,7 @@ class LogoutScreen extends Component {
   }
 
   render() {
-    this.props.logoutUser();
-    return <View />;
+    return <Redirect to="/login" />;
   }
 }
 

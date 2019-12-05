@@ -29,9 +29,9 @@ class LoginScreen extends Component {
 
   // Fetch the token from storage then navigate to our appropriate place if we are already logged in
   checkLoggedIn() {
-    const { loggedIn } = this.props;
+    const { loggedIn, navigation } = this.props;
     if (loggedIn) {
-      this.props.navigation.navigate('overview');
+      navigation.navigate('overview');
     }
   }
 
@@ -62,6 +62,7 @@ class LoginScreen extends Component {
           <Input
             editable
             maxLength={40}
+            secureTextEntry={true}
             placeholder="password"
             textContentType="password"
             onChangeText={password => this.setState({ password })}
@@ -70,7 +71,7 @@ class LoginScreen extends Component {
           <Button
             color="#57c75e"
             title="Login"
-            onPress={() => console.warn('Login is not implemented yet')}
+            onPress={() => this.handleRegistration()}
           />
 
           <Link
@@ -108,4 +109,4 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connect(mapStateToProps, null)(LoginScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Text, View, ActivityIndicator, StyleSheet } from 'react-native';
 import { Button, Input } from '@ordered.online/components';
-import { FindLocation } from '../../store/locations';
+import { GetLocation } from '../../store/locations';
 
 export class CreateLocationScreen extends Component {
   constructor(props) {
@@ -71,7 +71,7 @@ export class CreateLocationScreen extends Component {
         <Button
           color="#57c75e"
           title="Create"
-          onPress={() => console.warn('Create Location is not implemented yet')}
+          onPress={() => this.createLocation()}
         />
       </View>
     );
@@ -94,7 +94,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getLocations: FindLocation,
+      getLocations: GetLocation,
     },
     dispatch
   );

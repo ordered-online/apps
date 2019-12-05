@@ -108,8 +108,13 @@ const logoutFailure = error => ({
 });
 
 // Exports
-export const Login = (username, password) => (dispatch, getState) => {
+export const Login = ({ username, password }) => (dispatch, getState) => {
   dispatch(loginRequest());
+
+  if (__DEV__) {
+    console.log('username: ' + username);
+    console.log('password: ' + password);
+  }
 
   return api
     .loginUser(username, password)
