@@ -9,16 +9,18 @@ export const registerUser = credentials => {
   const url = API_URL + ENDPOINT_REGISTER;
   return fetch(url, {
     method: 'post',
+    credentials: 'include',
     body: JSON.stringify(credentials),
   }).then(response => response.json());
 };
 
-export const verifyUser = (sessionKey, userId) => {
+export const verifyUser = (session_key, user_id) => {
   const url = API_URL + ENDPOINT_VERIFICATION;
   console.log(url);
   return fetch(url, {
     method: 'post',
-    body: JSON.stringify({ sessionKey, userId }),
+    credentials: 'include',
+    body: JSON.stringify({ session_key, user_id }),
   }).then(response => response.json());
 };
 
@@ -30,10 +32,11 @@ export const loginUser = (username, password) => {
   }).then(response => response.json());
 };
 
-export const logoutUser = (sessionKey, userId) => {
+export const logoutUser = (session_key, user_id) => {
   const url = API_URL + ENDPOINT_LOGOUT;
   return fetch(url, {
     method: 'post',
-    body: JSON.stringify({ sessionKey, userId }),
+    credentials: 'include',
+    body: JSON.stringify({ session_key, user_id }),
   }).then(response => response.json());
 };
