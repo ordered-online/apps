@@ -9,6 +9,7 @@ export const registerUser = credentials => {
   const url = API_URL + ENDPOINT_REGISTER;
   return fetch(url, {
     method: 'post',
+    mode: 'cors',
     credentials: 'include',
     body: JSON.stringify(credentials),
   }).then(response => response.json());
@@ -19,6 +20,7 @@ export const verifyUser = (session_key, user_id) => {
   console.log(url);
   return fetch(url, {
     method: 'post',
+    mode: 'cors',
     credentials: 'include',
     body: JSON.stringify({ session_key, user_id }),
   }).then(response => response.json());
@@ -28,6 +30,8 @@ export const loginUser = (username, password) => {
   const url = API_URL + ENDPOINT_LOGIN;
   return fetch(url, {
     method: 'post',
+    mode: 'cors',
+    credentials: 'include',
     body: JSON.stringify({ username, password }),
   }).then(response => response.json());
 };
@@ -36,6 +40,7 @@ export const logoutUser = (session_key, user_id) => {
   const url = API_URL + ENDPOINT_LOGOUT;
   return fetch(url, {
     method: 'post',
+    mode: 'cors',
     credentials: 'include',
     body: JSON.stringify({ session_key, user_id }),
   }).then(response => response.json());

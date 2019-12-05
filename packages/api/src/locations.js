@@ -10,6 +10,7 @@ export const createLocation = data => {
   const url = API_URL + ENDPOINT_CREATE_LOCATION;
   return fetch(url, {
     method: 'post',
+    mode: 'cors',
     credentials: 'include',
     body: JSON.stringify(data),
   }).then(response => response.json());
@@ -19,6 +20,7 @@ export const editLocation = (location_id, data) => {
   const url = API_URL + ENDPOINT_EDIT_LOCATION + location_id;
   return fetch(url, {
     method: 'post',
+    mode: 'cors',
     credentials: 'include',
     body: JSON.stringify(data),
   }).then(response => response.json());
@@ -28,6 +30,7 @@ export const getLocation = location_id => {
   const url = API_URL + ENDPOINT_GET_LOCATION + location_id;
   return fetch(url, {
     method: 'post',
+    mode: 'cors',
     credentials: 'include',
   }).then(response => response.json());
 };
@@ -39,6 +42,7 @@ export const findLocation = query => {
     qs.stringify(query, { addQueryPrefix: true });
   return fetch(url, {
     method: 'post',
+    mode: 'cors',
     credentials: 'include',
   }).then(response => response.json());
 };
@@ -50,6 +54,7 @@ export const getNearbyLocation = query => {
     qs.stringify(query, { addQueryPrefix: true });
   return fetch(url, {
     method: 'post',
+    mode: 'cors',
     credentials: 'include',
   }).then(response => response.json());
 };
