@@ -68,7 +68,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && jest -u && git add packages/**/__tests__/__snapshots__"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
