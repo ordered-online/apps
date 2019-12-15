@@ -41,12 +41,12 @@
     "@expo/vector-icons": "^10.0.6",
     "@ordered.online/api": "^0.0.2",
     "@ordered.online/components": "^0.0.2",
-    "expo": "^35.0.0",
-    "expo-font": "^7.0.0",
+    "expo": "^36.0.0",
+    "expo-font": "~8.0.0",
     "prop-types": "^15.7.2",
-    "react": "16.8.3",
-    "react-dom": "16.8.3",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
     "react-native-web": "^0.11.7",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
@@ -58,13 +58,15 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",
-    "@expo/webpack-config": "^0.8.1",
-    "babel-preset-expo": "^7.1.0",
+    "@expo/webpack-config": "^0.10.6",
+    "babel-preset-expo": "^8.0.0",
     "expo-cli": "^3.11.1",
     "expo-yarn-workspaces": "^1.2.1",
-    "jest-expo": "^35.0.0",
+    "jest-expo": "^36.0.0",
     "prettier": "^1.19.1",
-    "react-test-renderer": "16.8.3"
+    "react-test-renderer": "16.9.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   },
   "browserslist": {
     "production": [
@@ -77,9 +79,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "resolutions": {
-    "mem": "^4.0.0"
   },
   "private": true
 }
