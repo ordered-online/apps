@@ -14,9 +14,8 @@
   "homepage": "https://www.ordered.online",
   "main": "lib/index.js",
   "scripts": {
-    "serve": "API_URL='http://localhost:80' webpack-dev-server --mode development --color",
-    "start": "nodemon --watch src --exec webpack --mode production",
-    "build": "webpack --mode production",
+    "start": "webpack --mode development --color --watch",
+    "build": "webpack --mode production --color",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:develop": "jest -o --watch --changedSince=origin/master",
@@ -27,11 +26,9 @@
     "@babel/preset-env": "^7.7.1",
     "babel-loader": "^8.0.6",
     "jest-expo": "^35.0.0",
-    "nodemon": "^2.0.1",
     "prettier": "^1.19.1",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0"
+    "webpack-cli": "^3.3.10"
   },
   "browserslist": {
     "production": [

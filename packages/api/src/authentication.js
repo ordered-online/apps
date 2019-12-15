@@ -17,7 +17,6 @@ export const registerUser = credentials => {
 
 export const verifyUser = (session_key, user_id) => {
   const url = API_URL + ENDPOINT_VERIFICATION;
-  console.log(url);
   return fetch(url, {
     method: 'post',
     mode: 'cors',

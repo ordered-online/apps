@@ -27,7 +27,7 @@
     "access": "private"
   },
   "scripts": {
-    "start": "nodemon --watch src --exec babel src --root-mode upward --out-dir lib --source-maps --ignore '**/__tests__'",
+    "start": "nodemon --watch src --exec yarn build",
     "build": "babel src --out-dir lib --source-maps --ignore '**/__tests__'",
     "test": "jest",
     "test:coverage": "jest --coverage",
@@ -58,10 +58,7 @@
     "jest-expo": "^35.0.0",
     "nodemon": "^2.0.1",
     "prettier": "^1.19.1",
-    "react-test-renderer": "16.8.3",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0"
+    "react-test-renderer": "16.8.3"
   },
   "browserslist": {
     "production": [
