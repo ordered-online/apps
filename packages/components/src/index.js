@@ -1,8 +1,39 @@
 export { default as Anchor } from './Anchor';
 export { default as BrowserLink } from './BrowserLink';
-export { default as Button } from './Button';
-export { default as Card } from './Card';
-export { default as Input } from './Input';
-export { default as Link } from './Link';
+
 export { default as LocationFinder } from './LocationFinder';
 export { default as QRCodeScanner } from './QRCodeScanner';
+
+export {
+  Badge,
+  Button,
+  ButtonGroup,
+  Card,
+  Input,
+  ListItem,
+  PricingCard,
+  Tooltip,
+  SocialIcon,
+  Text,
+  Divider,
+  CheckBox,
+  SearchBar,
+  Icon,
+  colors,
+  getIconType,
+  registerCustomIconType,
+  normalize,
+  Tile,
+  Slider,
+  Avatar,
+  Rating,
+  AirbnbRating,
+  Header,
+  Overlay,
+  ThemeProvider,
+  ThemeConsumer,
+  ThemeContext,
+  withBadge,
+  withTheme,
+  Image,
+} from 'react-native-elements';
