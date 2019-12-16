@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link, Button, Input } from '@ordered.online/components';
+import { Button, Input } from '@ordered.online/components';
 import { FindLocation } from '../../store/locations';
 
 class SearchLocationsScreen extends Component {
@@ -18,7 +18,7 @@ class SearchLocationsScreen extends Component {
   render() {
     return (
       <View>
-        <Link
+        <Button
           title="Find Locations Nearby"
           onPress={() => this.props.navigation.navigate('FindNearby')}
         />
@@ -42,10 +42,6 @@ class SearchLocationsScreen extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  loggedIn: state.authentication.loggedIn,
-});
-
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
@@ -54,7 +50,4 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SearchLocationsScreen);
+export default connect(null, mapDispatchToProps)(SearchLocationsScreen);

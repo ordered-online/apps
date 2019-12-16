@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Text } from '@ordered.online/components';
 
 export class OrdersScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text> Overview over all Orders: </Text>
+        <Text h1> Overview over all Orders: </Text>
       </View>
     );
   }

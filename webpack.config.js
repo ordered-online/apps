@@ -68,6 +68,7 @@ module.exports = async function(env, argv) {
         logLevel: 'info',
       },
     };
+    config.devServer.historyApiFallback = true;
   }
 
   return config;

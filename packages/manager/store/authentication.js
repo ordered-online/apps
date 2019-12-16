@@ -4,9 +4,11 @@ import api from '@ordered.online/api';
 const LOGIN_REQUEST = 'AUTHENTICATION/LOGIN_REQUEST';
 const LOGIN_SUCCESS = 'AUTHENTICATION/LOGIN_SUCCESS';
 const LOGIN_FAILURE = 'AUTHENTICATION/LOGIN_FAILURE';
+
 const REGISTER_REQUEST = 'AUTHENTICATION/REGISTER_REQUEST';
 const REGISTER_SUCCESS = 'AUTHENTICATION/REGISTER_SUCCESS';
 const REGISTER_FAILURE = 'AUTHENTICATION/REGISTER_FAILURE';
+
 const LOGOUT_REQUEST = 'AUTHENTICATION/LOGOUT_REQUEST';
 const LOGOUT_SUCCESS = 'AUTHENTICATION/LOGOUT_SUCCESS';
 const LOGOUT_FAILURE = 'AUTHENTICATION/LOGOUT_FAILURE';
@@ -14,9 +16,9 @@ const LOGOUT_FAILURE = 'AUTHENTICATION/LOGOUT_FAILURE';
 // Initial State
 const initialState = {
   fetching: false,
-  loggedIn: false,
-  userId: null,
-  sessionKey: null,
+  authenticated: false,
+  user_id: null,
+  session_key: null,
   error: null,
 };
 
@@ -33,13 +35,13 @@ const authentication = (state = initialState, action) => {
 
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
-      const { sessionKey, userId } = action.payload;
+      const { session_key, user_id } = action.payload;
       return {
         ...state,
         fetching: false,
-        loggedIn: true,
-        userId,
-        sessionKey,
+        authenticated: true,
+        user_id,
+        session_key,
       };
 
     case LOGOUT_SUCCESS:
@@ -66,13 +68,13 @@ const authentication = (state = initialState, action) => {
 };
 
 // Actions
-const loginRequest = state => ({
+const loginRequest = () => ({
   type: LOGIN_REQUEST,
 });
 
-const loginSuccess = (sessionKey, userId) => ({
+const loginSuccess = (session_key, user_id) => ({
   type: LOGIN_SUCCESS,
-  payload: { sessionKey, userId },
+  payload: { session_key, user_id },
 });
 
 const loginFailure = error => ({
@@ -84,9 +86,9 @@ const registerRequest = () => ({
   type: REGISTER_REQUEST,
 });
 
-const registerSuccess = (sessionKey, userId) => ({
+const registerSuccess = (session_key, user_id) => ({
   type: REGISTER_SUCCESS,
-  payload: { sessionKey, userId },
+  payload: { session_key, user_id },
 });
 
 const registerFailure = error => ({
@@ -123,9 +125,8 @@ export const Login = ({ username, password }) => (dispatch, getState) => {
         console.log(response);
       }
       const { session_key, session_data } = response;
-      const sessionKey = session_key;
-      const userId = session_data.user_id;
-      dispatch(loginSuccess(sessionKey, userId));
+      const { user_id } = session_data;
+      dispatch(loginSuccess(session_key, user_id));
     })
     .catch(error => dispatch(loginFailure(error)));
 };
@@ -143,18 +144,17 @@ export const Register = credentials => (dispatch, getState) => {
         console.log(response);
       }
       const { session_key, session_data } = response;
-      const sessionKey = session_key;
-      const userId = session_data.user_id;
-      dispatch(registerSuccess(sessionKey, userId));
+      const { user_id } = session_data;
+      dispatch(registerSuccess(session_key, user_id));
     })
     .catch(error => dispatch(registerFailure(error)));
 };
 
 export const Logout = () => (dispatch, getState) => {
   dispatch(logoutRequest());
-  const { sessionKey, userId } = getState().authentication;
+  const { session_key, user_id } = getState().authentication;
   return api
-    .logoutUser(sessionKey, userId)
+    .logoutUser(session_key, user_id)
     .then(response => {
       if (__DEV__) {
         console.log(response);

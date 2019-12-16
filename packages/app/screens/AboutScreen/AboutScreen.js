@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import { Link } from '@ordered.online/components';
+import { Button } from '@ordered.online/components';
 
 export class AboutScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Link
+        <Button
           title="Imprint"
           onPress={() => this.props.navigation.navigate('Imprint')}
         />
-        <Link
+        <Button
           title="Privacy Policy "
           onPress={() => this.props.navigation.navigate('Privacy')}
         />
-        <Link
+        <Button
           title="Terms of Use "
           onPress={() => this.props.navigation.navigate('Terms')}
         />

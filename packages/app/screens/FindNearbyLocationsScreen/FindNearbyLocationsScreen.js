@@ -15,10 +15,6 @@ export class FindNearbyLocationsScreen extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  loggedIn: state.authentication.loggedIn,
-});
-
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
@@ -27,7 +23,4 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FindNearbyLocationsScreen);
+export default connect(null, mapDispatchToProps)(FindNearbyLocationsScreen);

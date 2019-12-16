@@ -1,27 +1,28 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import api from '@ordered.online/api';
+import { Text } from '@ordered.online/components';
 
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
-    this.checkLoggedIn = this.checkLoggedIn.bind(this);
+    this.checkauthenticated = this.checkauthenticated.bind(this);
   }
 
   componentDidMount() {
-    this.checkLoggedIn();
+    this.checkauthenticated();
     console.log(api);
   }
 
   componentDidUpdate() {
-    this.checkLoggedIn();
+    this.checkauthenticated();
   }
 
   // Fetch the token from storage then navigate to our appropriate place if we are already logged in
-  checkLoggedIn() {
-    const { loggedIn } = this.props;
-    if (loggedIn) {
+  checkauthenticated() {
+    const { authenticated } = this.props;
+    if (authenticated) {
       this.props.navigation.navigate('overview');
     }
   }
@@ -29,7 +30,7 @@ class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Welcome to the ordered.online manager</Text>
+        <Text h1>Welcome to the ordered.online manager</Text>
       </View>
     );
   }
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  loggedIn: state.authentication.loggedIn,
+  authenticated: state.authentication.authenticated,
 });
 
 export default connect(mapStateToProps, null)(HomeScreen);

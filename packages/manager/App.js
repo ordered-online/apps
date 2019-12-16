@@ -6,7 +6,7 @@ import { Platform, StatusBar, StyleSheet, SafeAreaView } from 'react-native';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { store, persistor } from './store';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, AntDesign } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
 
@@ -47,6 +47,7 @@ async function loadResourcesAsync() {
     Asset.loadAsync([require('./assets/icon.png')]),
     Font.loadAsync({
       ...Ionicons.font,
+      ...AntDesign.font,
     }),
   ]);
 }

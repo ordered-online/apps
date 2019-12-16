@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Text, View, ActivityIndicator, StyleSheet } from 'react-native';
-import { Button, Input } from '@ordered.online/components';
+import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { Button, Input, Text } from '@ordered.online/components';
 import { GetLocation } from '../../store/locations';
+import { AntDesign } from '@expo/vector-icons';
 
 export class CreateLocationScreen extends Component {
   constructor(props) {
@@ -27,14 +28,21 @@ export class CreateLocationScreen extends Component {
     return (
       <View style={styles.container}>
         {this.props.fetching && <ActivityIndicator />}
-        <Text>Please provide details for your location.</Text>
+        <Text h4>Please provide details for your location.</Text>
         <Input
           editable
           maxLength={40}
           placeholder="Name"
           textContentType="organizationName"
           onChangeText={name => this.setState({ name })}
-          style={{ textAlign: 'center' }}
+          leftIcon={
+            <AntDesign
+              name="trademark"
+              size={24}
+              color="black"
+              style={{ marginRight: 10 }}
+            />
+          }
         />
         <Input
           editable
@@ -42,7 +50,14 @@ export class CreateLocationScreen extends Component {
           placeholder="Description"
           textContentType="none"
           onChangeText={description => this.setState({ description })}
-          style={{ textAlign: 'center' }}
+          leftIcon={
+            <AntDesign
+              name="edit"
+              size={24}
+              color="black"
+              style={{ marginRight: 10 }}
+            />
+          }
         />
         <Input
           editable
@@ -50,7 +65,14 @@ export class CreateLocationScreen extends Component {
           placeholder="Address"
           textContentType="fullStreetAddress"
           onChangeText={address => this.setState({ address })}
-          style={{ textAlign: 'center' }}
+          leftIcon={
+            <AntDesign
+              name="enviromento"
+              size={24}
+              color="black"
+              style={{ marginRight: 10 }}
+            />
+          }
         />
         <Input
           editable
@@ -58,7 +80,14 @@ export class CreateLocationScreen extends Component {
           placeholder="Website"
           textContentType="url"
           onChangeText={website => this.setState({ website })}
-          style={{ textAlign: 'center' }}
+          leftIcon={
+            <AntDesign
+              name="cloudo"
+              size={24}
+              color="black"
+              style={{ marginRight: 10 }}
+            />
+          }
         />
         <Input
           editable
@@ -66,13 +95,16 @@ export class CreateLocationScreen extends Component {
           placeholder="Telephone"
           textContentType="telephoneNumber"
           onChangeText={telephone => this.setState({ telephone })}
-          style={{ textAlign: 'center' }}
+          leftIcon={
+            <AntDesign
+              name="customerservice"
+              size={24}
+              color="black"
+              style={{ marginRight: 10 }}
+            />
+          }
         />
-        <Button
-          color="#57c75e"
-          title="Create"
-          onPress={() => this.createLocation()}
-        />
+        <Button title="Create" onPress={() => this.createLocation()} />
       </View>
     );
   }

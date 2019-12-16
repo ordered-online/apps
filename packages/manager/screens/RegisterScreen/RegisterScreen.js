@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { AntDesign } from '@expo/vector-icons';
 
-import { Link, Button, Input } from '@ordered.online/components';
+import { Button, Input } from '@ordered.online/components';
 
 import { Register } from '../../store/authentication';
 
@@ -11,28 +12,28 @@ class RegisterScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
-      email: '',
-      first_name: '',
-      last_name: '',
+      username: 'fkasy',
+      password: '12345678',
+      email: 'hello@felix-kaestner.com',
+      first_name: 'Felix',
+      last_name: 'Kaestner',
     };
 
-    this.checkLoggedIn = this.checkLoggedIn.bind(this);
+    this.checkauthenticated = this.checkauthenticated.bind(this);
     this.handleRegistration = this.handleRegistration.bind(this);
   }
 
   componentDidMount() {
-    this.checkLoggedIn();
+    this.checkauthenticated();
   }
 
   componentDidUpdate() {
-    this.checkLoggedIn();
+    this.checkauthenticated();
   }
 
-  checkLoggedIn() {
-    const { loggedIn, navigation } = this.props;
-    if (loggedIn) {
+  checkauthenticated() {
+    const { authenticated, navigation } = this.props;
+    if (authenticated) {
       navigation.navigate('overview');
     }
   }
@@ -58,8 +59,16 @@ class RegisterScreen extends Component {
             maxLength={40}
             placeholder="username"
             textContentType="username"
+            value={this.state.username}
             onChangeText={username => this.setState({ username })}
-            style={{ textAlign: 'center' }}
+            leftIcon={
+              <AntDesign
+                name="user"
+                size={24}
+                color="black"
+                style={{ marginRight: 10 }}
+              />
+            }
           />
 
           <Input
@@ -67,8 +76,16 @@ class RegisterScreen extends Component {
             maxLength={40}
             placeholder="email"
             textContentType="emailAddress"
+            value={this.state.email}
             onChangeText={email => this.setState({ email })}
-            style={{ textAlign: 'center' }}
+            leftIcon={
+              <AntDesign
+                name="mail"
+                size={24}
+                color="black"
+                style={{ marginRight: 10 }}
+              />
+            }
           />
 
           <Input
@@ -76,8 +93,16 @@ class RegisterScreen extends Component {
             maxLength={40}
             placeholder="firstname"
             textContentType="givenName"
+            value={this.state.first_name}
             onChangeText={first_name => this.setState({ first_name })}
-            style={{ textAlign: 'center' }}
+            leftIcon={
+              <AntDesign
+                name="smileo"
+                size={24}
+                color="black"
+                style={{ marginRight: 10 }}
+              />
+            }
           />
 
           <Input
@@ -85,8 +110,16 @@ class RegisterScreen extends Component {
             maxLength={40}
             placeholder="lastname"
             textContentType="familyName"
+            value={this.state.last_name}
             onChangeText={last_name => this.setState({ last_name })}
-            style={{ textAlign: 'center' }}
+            leftIcon={
+              <AntDesign
+                name="smileo"
+                size={24}
+                color="black"
+                style={{ marginRight: 10 }}
+              />
+            }
           />
 
           <Input
@@ -95,16 +128,26 @@ class RegisterScreen extends Component {
             secureTextEntry={true}
             placeholder="password"
             textContentType="password"
+            value={this.state.password}
             onChangeText={password => this.setState({ password })}
+            leftIcon={
+              <AntDesign
+                name="lock"
+                size={24}
+                color="black"
+                style={{ marginRight: 10 }}
+              />
+            }
           />
 
           <Button
-            color="#57c75e"
+            containerStyle={{ marginVertical: 20 }}
             title="Register"
             onPress={() => this.handleRegistration()}
           />
 
-          <Link
+          <Button
+            type="clear"
             title="Already have an account ? Click here to login."
             onPress={() => this.props.navigation.navigate('login')}
           />
@@ -128,7 +171,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  loggedIn: state.authentication.loggedIn,
+  authenticated: state.authentication.authenticated,
   error: state.authentication.error,
 });
 

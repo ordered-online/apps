@@ -14,7 +14,7 @@ const LOGOUT_FAILURE = 'AUTHENTICATION/LOGOUT_FAILURE';
 // Initial State
 const initialState = {
   fetching: false,
-  loggedIn: false,
+  authenticated: false,
   userId: null,
   sessionKey: null,
   error: null,
@@ -36,7 +36,7 @@ const authentication = (state = initialState, action) => {
       const { sessionKey, userId } = action.payload;
       return {
         fetching: false,
-        loggedIn: true,
+        authenticated: true,
         userId,
         sessionKey,
       };

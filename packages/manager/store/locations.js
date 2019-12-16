@@ -5,6 +5,10 @@ export const FETCH_LOCATION_REQUEST = 'LOCATION/FETCH_LOCATION_REQUEST';
 export const FETCH_LOCATION_SUCCESS = 'LOCATION/FETCH_LOCATION_SUCCESS';
 export const FETCH_LOCATION_FAILURE = 'LOCATION/FETCH_LOCATION_FAILURE';
 
+export const CREATE_LOCATION_REQUEST = 'LOCATION/CREATE_LOCATION_REQUEST';
+export const CREATE_LOCATION_SUCCESS = 'LOCATION/CREATE_LOCATION_SUCCESS';
+export const CREATE_LOCATION_FAILURE = 'LOCATION/CREATE_LOCATION_FAILURE';
+
 // Initial State
 const initialState = {
   fetching: false,
@@ -80,6 +84,20 @@ const fetchLocationFailure = error => ({
   payload: error,
 });
 
+const createLocationRequest = () => ({
+  type: CREATE_LOCATION_REQUEST,
+});
+
+const createLocationSuccess = location => ({
+  type: CREATE_LOCATION_SUCCESS,
+  payload: location,
+});
+
+const createLocationFailure = error => ({
+  type: CREATE_LOCATION_FAILURE,
+  payload: error,
+});
+
 /**
  * Take an array of locations from the REST API
  * and transform them into a object where
@@ -104,6 +122,40 @@ export const GetLocation = locationId => (dispatch, getState) => {
 
   return api
     .getLocation(locationId)
+    .then(response => {
+      if (__DEV__) {
+        console.log(response);
+      }
+    })
+    .then(location => reformatLocations(Array.of(location)))
+    .then(location => dispatch(fetchLocationSuccess(location)))
+    .catch(error => dispatch(fetchLocationFailure(error)));
+};
+
+export const GreateLocation = location => (dispatch, getState) => {
+  dispatch(createLocationRequest());
+
+  if (__DEV__) {
+    console.log(location);
+  }
+
+  const { session_key, user_id } = getState().authentication;
+  if (__DEV__) {
+    console.log({
+      session_key,
+      user_id,
+    });
+  }
+
+  // see: https://github.com/ordered-online/locations#create-a-location-with-locationscreate
+  const data = {
+    session_key,
+    user_id,
+    location,
+  };
+
+  return api
+    .createLocation(data)
     .then(response => {
       if (__DEV__) {
         console.log(response);

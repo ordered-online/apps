@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { AntDesign } from '@expo/vector-icons';
 
-import { Link, Button, Input } from '@ordered.online/components';
+import { Button, Input } from '@ordered.online/components';
 
 import { Login } from '../../store/authentication';
 
@@ -15,22 +16,22 @@ class LoginScreen extends Component {
       password: '',
     };
 
-    this.checkLoggedIn = this.checkLoggedIn.bind(this);
+    this.checkauthenticated = this.checkauthenticated.bind(this);
     this.handleRegistration = this.handleRegistration.bind(this);
   }
 
   componentDidMount() {
-    this.checkLoggedIn();
+    this.checkauthenticated();
   }
 
   componentDidUpdate() {
-    this.checkLoggedIn();
+    this.checkauthenticated();
   }
 
   // Fetch the token from storage then navigate to our appropriate place if we are already logged in
-  checkLoggedIn() {
-    const { loggedIn, navigation } = this.props;
-    if (loggedIn) {
+  checkauthenticated() {
+    const { authenticated, navigation } = this.props;
+    if (authenticated) {
       navigation.navigate('overview');
     }
   }
@@ -56,7 +57,14 @@ class LoginScreen extends Component {
             placeholder="username"
             textContentType="username"
             onChangeText={username => this.setState({ username })}
-            style={{ textAlign: 'center' }}
+            leftIcon={
+              <AntDesign
+                name="user"
+                size={24}
+                color="black"
+                style={{ marginRight: 10 }}
+              />
+            }
           />
 
           <Input
@@ -66,15 +74,24 @@ class LoginScreen extends Component {
             placeholder="password"
             textContentType="password"
             onChangeText={password => this.setState({ password })}
+            leftIcon={
+              <AntDesign
+                name="lock"
+                size={24}
+                color="black"
+                style={{ marginRight: 10 }}
+              />
+            }
           />
 
           <Button
-            color="#57c75e"
+            containerStyle={{ marginVertical: 20 }}
             title="Login"
             onPress={() => this.handleRegistration()}
           />
 
-          <Link
+          <Button
+            type="clear"
             title="Click Here to Register"
             onPress={() => this.props.navigation.navigate('register')}
           />
@@ -98,7 +115,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  loggedIn: state.authentication.loggedIn,
+  authenticated: state.authentication.authenticated,
 });
 
 const mapDispatchToProps = dispatch =>
