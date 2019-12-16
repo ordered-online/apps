@@ -16,7 +16,6 @@ import LocationsScreen from '../screens/LocationsScreen';
 import LocationsDetailScreen from '../screens/LocationDetailScreen';
 import CreateLocationScreen from '../screens/CreateLocationScreen';
 import OdersScreen from '../screens/OrdersScreen';
-import LogoutScreen from '../screens/LogoutScreen';
 
 import ImprintScreen from '../screens/ImprintScreen';
 import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
@@ -90,13 +89,6 @@ class AppNavigator extends Component {
             exact
             path="/orders/"
             component={OdersScreen}
-            navigation={navigationProp}
-          />
-
-          <PrivateRoute
-            exact
-            path="/logout"
-            component={LogoutScreen}
             navigation={navigationProp}
           />
 
