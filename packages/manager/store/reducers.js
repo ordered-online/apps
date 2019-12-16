@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router';
 
 import authentication from './authentication';
 import cart from './cart';
@@ -8,14 +9,16 @@ import locations from './locations';
 import payment from './payment';
 import products from './products';
 
-const rootReducer = combineReducers({
-  authentication,
-  cart,
-  categories,
-  checkout,
-  locations,
-  payment,
-  products,
-});
+const createRootReducer = history =>
+  combineReducers({
+    router: connectRouter(history),
+    authentication,
+    cart,
+    categories,
+    checkout,
+    locations,
+    payment,
+    products,
+  });
 
-export default rootReducer;
+export default createRootReducer;

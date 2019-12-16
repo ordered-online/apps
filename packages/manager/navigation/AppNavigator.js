@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Platform } from 'react-native';
-import { Router, Switch, Route, Redirect, Link } from './routing';
-import { createBrowserHistory, createMemoryHistory } from 'history';
+import { ConnectedRouter } from 'connected-react-router';
+import { Router, Switch, Route } from './routing';
 import PrivateRoute from './PrivateRoute';
 
 import Navbar from './Navbar';
@@ -21,8 +20,7 @@ import ImprintScreen from '../screens/ImprintScreen';
 import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
 import TermsOfUseScreen from '../screens/TermsOfUseScreen';
 
-const isWeb = Platform.OS == 'web';
-export const history = isWeb ? createBrowserHistory() : createMemoryHistory();
+import { history } from '../store';
 
 export const navigationProp = {
   navigate: function(route) {
@@ -33,7 +31,7 @@ export const navigationProp = {
 class AppNavigator extends Component {
   render() {
     return (
-      <Router history={history}>
+      <ConnectedRouter history={history}>
         <Navbar onIconPress={() => history.goBack()} />
         <Switch>
           <Route
@@ -110,7 +108,7 @@ class AppNavigator extends Component {
             render={() => <TermsOfUseScreen navigation={navigationProp} />}
           />
         </Switch>
-      </Router>
+      </ConnectedRouter>
     );
   }
 }

@@ -1,9 +1,14 @@
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Platform } from 'react-native';
+import { createBrowserHistory, createMemoryHistory } from 'history';
+import { routerMiddleware } from 'connected-react-router';
 import { applyMiddleware, compose, createStore } from 'redux'; // redux parts needed for a store
 import { createLogger } from 'redux-logger'; // logger for redux
 import { persistStore, persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk'; // library to handle async with redux
-import rootReducer from './reducers';
+import createRootReducer from './reducers';
+
+const isWeb = Platform.OS == 'web';
+export const history = isWeb ? createBrowserHistory() : createMemoryHistory();
 
 // Middleware: Redux Persist Config
 const persistConfig = {
@@ -12,15 +17,18 @@ const persistConfig = {
   // Storage Method (React Native)
   storage: AsyncStorage,
   // Whitelist (Save Specific Reducers)
-  whitelist: ['authentication'],
+  whitelist: ['authentication', 'router'],
   // Blacklist (Don't Save Specific Reducers)
   blacklist: [],
 };
 
 // Middleware: Redux Persist Persisted Reducer
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(
+  persistConfig,
+  createRootReducer(history)
+);
 
-const middleware = [thunk];
+const middleware = [thunk, routerMiddleware(history)];
 
 const enhancers = [];
 
