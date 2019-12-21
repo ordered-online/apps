@@ -15,8 +15,7 @@ export default class Navbar extends Component {
 
     return (
       <View style={navbarStyles}>
-        <View style={styles.navigationWrapper}></View>
-        <Navigation />
+        <Navigation navigation={this.props.navigation} />
       </View>
     );
   }
@@ -32,11 +31,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 8,
     elevation: 1,
-  },
-  navigationWrapper: {
-    flex: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    flexDirection: 'row',
   },
 });

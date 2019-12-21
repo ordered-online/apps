@@ -17,12 +17,16 @@ class Navigation extends Component {
   static propTypes = {
     authenticated: PropTypes.bool.isRequired,
     logoutUser: PropTypes.func.isRequired,
+    navigation: PropTypes.object.isRequired,
   };
 
   renderPrivateNavigation() {
     return (
       <React.Fragment>
-        <NavItem title="Overview" to="/overview" />
+        <NavItem
+          title="Overview"
+          onPress={() => this.props.navigation.navigate('overview')}
+        />
         <NavItem title="Logout" onPress={() => this.props.logoutUser()} />
       </React.Fragment>
     );
@@ -31,8 +35,14 @@ class Navigation extends Component {
   renderPublicNavigation() {
     return (
       <React.Fragment>
-        <NavItem title="Login" to="/login" />
-        <NavItem title="Register" to="/register" />
+        <NavItem
+          title="Login"
+          onPress={() => this.props.navigation.navigate('login')}
+        />
+        <NavItem
+          title="Register"
+          onPress={() => this.props.navigation.navigate('register')}
+        />
       </React.Fragment>
     );
   }

@@ -165,7 +165,6 @@ const styles = StyleSheet.create({
   },
   container: {
     marginHorizontal: 'auto',
-    maxWidth: 400,
     position: 'relative',
   },
 });

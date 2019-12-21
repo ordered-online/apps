@@ -32,7 +32,7 @@ class AppNavigator extends Component {
   render() {
     return (
       <ConnectedRouter history={history}>
-        <Navbar onIconPress={() => history.goBack()} />
+        <Navbar navigation={navigationProp} />
         <Switch>
           <Route
             exact
@@ -57,7 +57,7 @@ class AppNavigator extends Component {
 
           <PrivateRoute
             exact
-            path="/overview/"
+            path="/overview"
             component={OverviewScreen}
             navigation={navigationProp}
           />
@@ -85,7 +85,7 @@ class AppNavigator extends Component {
 
           <PrivateRoute
             exact
-            path="/orders/"
+            path="/orders"
             component={OdersScreen}
             navigation={navigationProp}
           />

@@ -44,6 +44,9 @@ export class LocationsScreen extends Component {
   render() {
     const { fetching, locations, error } = this.props;
 
+    const data =
+      Object.entries(locations).length === 0 ? null : Object.keys(locations);
+
     if (error !== null) {
       return <Text> An Error occurred: {error} </Text>;
     }
@@ -80,7 +83,7 @@ export class LocationsScreen extends Component {
         <FlatList
           numColumns={2} // set number of columns
           columnWrapperStyle={styles.row} // space them out evenly
-          data={Object.keys(locations)}
+          data={data}
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() =>

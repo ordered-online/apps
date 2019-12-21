@@ -1,4 +1,5 @@
 import api from '@ordered.online/api';
+import { push } from 'connected-react-router';
 
 // Action Types
 export const FETCH_LOCATION_REQUEST = 'LOCATION/FETCH_LOCATION_REQUEST';
@@ -12,36 +13,7 @@ export const CREATE_LOCATION_FAILURE = 'LOCATION/CREATE_LOCATION_FAILURE';
 // Initial State
 const initialState = {
   fetching: false,
-  locations: {
-    1: {
-      id: 1,
-      name: 'Studentencaf\u00e9 Ascii',
-      description:
-        'Gem\u00fctliches Caf\u00e9 in der Fak. Informatik der TU Dresden.',
-      address: 'N\u00f6thnitzer Str. 46, 01187 Dresden',
-      user_id: 1,
-      latitude: '51.02508690',
-      longitude: '13.72100050',
-      website: null,
-      telephone: null,
-      categories: [
-        {
-          name: 'Cafe',
-        },
-      ],
-      tags: [
-        {
-          name: 'calm',
-        },
-        {
-          name: 'inexpensive',
-        },
-        {
-          name: 'insider',
-        },
-      ],
-    },
-  },
+  locations: {},
   error: null,
 };
 
@@ -49,9 +21,11 @@ const initialState = {
 const locations = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_LOCATION_REQUEST:
+    case CREATE_LOCATION_REQUEST:
       return { ...state, fetching: true };
 
     case FETCH_LOCATION_SUCCESS:
+    case CREATE_LOCATION_SUCCESS:
       return {
         ...state,
         fetching: false,
@@ -59,8 +33,10 @@ const locations = (state = initialState, action) => {
       };
 
     case FETCH_LOCATION_FAILURE:
+    case CREATE_LOCATION_FAILURE:
       return {
         ...state,
+        fetching: false,
         error: action.payload,
       };
 
@@ -135,17 +111,7 @@ export const GetLocation = locationId => (dispatch, getState) => {
 export const GreateLocation = location => (dispatch, getState) => {
   dispatch(createLocationRequest());
 
-  if (__DEV__) {
-    console.log(location);
-  }
-
   const { session_key, user_id } = getState().authentication;
-  if (__DEV__) {
-    console.log({
-      session_key,
-      user_id,
-    });
-  }
 
   // see: https://github.com/ordered-online/locations#create-a-location-with-locationscreate
   const data = {
@@ -154,16 +120,24 @@ export const GreateLocation = location => (dispatch, getState) => {
     location,
   };
 
+  if (__DEV__) {
+    console.log(data);
+  }
+
   return api
     .createLocation(data)
     .then(response => {
       if (__DEV__) {
         console.log(response);
       }
+      return response;
     })
     .then(location => reformatLocations(Array.of(location)))
-    .then(location => dispatch(fetchLocationSuccess(location)))
-    .catch(error => dispatch(fetchLocationFailure(error)));
+    .then(location => dispatch(createLocationSuccess(location)))
+    .then(() => dispatch(push('/locations')))
+    .catch(error =>
+      error.resolve().then(error => dispatch(createLocationFailure(error)))
+    );
 };
 
 export default locations;

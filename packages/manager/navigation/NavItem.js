@@ -1,22 +1,15 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Link } from './routing';
 import Colors from '../constants/Colors';
 
 import { Button } from '@ordered.online/components';
 
-export default function NavItem({ title, to, onPress, ...rest }) {
+export default function NavItem({ title, onPress, ...rest }) {
   const { primaryColor } = Colors;
 
   return (
     <View style={styles.navLink} {...rest}>
-      {onPress ? (
-        <Button title={title} color={primaryColor} onPress={onPress} />
-      ) : (
-        <Link to={to} style={{ textDecoration: 'none' }}>
-          <Button title={title} color={primaryColor} />
-        </Link>
-      )}
+      <Button title={title} color={primaryColor} onPress={onPress} />
     </View>
   );
 }
