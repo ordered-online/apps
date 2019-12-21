@@ -4,9 +4,10 @@ export { default as BrowserLink } from './BrowserLink';
 export { default as LocationFinder } from './LocationFinder';
 export { default as QRCodeScanner } from './QRCodeScanner';
 
+export { default as Button } from './Button';
+
 export {
   Badge,
-  Button,
   ButtonGroup,
   Card,
   Input,
