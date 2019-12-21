@@ -1,5 +1,7 @@
 import * as qs from 'qs';
 import { API_URL } from './environment';
+import { status, json } from './responseHandler';
+
 const ENDPOINT_CREATE_LOCATION = '/locations/create/';
 const ENDPOINT_EDIT_LOCATION = '/locations/edit/';
 const ENDPOINT_GET_LOCATION = '/locations/get/';
@@ -13,7 +15,9 @@ export const createLocation = data => {
     mode: 'cors',
     credentials: 'include',
     body: JSON.stringify(data),
-  }).then(response => response.json());
+  })
+    .then(status)
+    .then(json);
 };
 
 export const editLocation = (location_id, data) => {
