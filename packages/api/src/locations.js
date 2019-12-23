@@ -1,23 +1,24 @@
 import * as qs from 'qs';
 import { API_URL } from './environment';
-import { status, json } from './responseHandler';
+import { status, json, resolveError } from './responseHandler';
 
 const ENDPOINT_CREATE_LOCATION = '/locations/create/';
 const ENDPOINT_EDIT_LOCATION = '/locations/edit/';
 const ENDPOINT_GET_LOCATION = '/locations/get/';
 const ENDPOINT_FIND_LOCATION = '/locations/find/';
 const ENDPOINT_NEARBY_LOCATION = '/locations/nearby/';
+const GEOCODE_URL = 'https://nominatim.openstreetmap.org/search';
 
 export const createLocation = data => {
   const url = API_URL + ENDPOINT_CREATE_LOCATION;
   return fetch(url, {
     method: 'post',
     mode: 'cors',
-    credentials: 'include',
     body: JSON.stringify(data),
   })
     .then(status)
-    .then(json);
+    .then(json)
+    .catch(resolveError);
 };
 
 export const editLocation = (location_id, data) => {
@@ -25,9 +26,11 @@ export const editLocation = (location_id, data) => {
   return fetch(url, {
     method: 'post',
     mode: 'cors',
-    credentials: 'include',
     body: JSON.stringify(data),
-  }).then(response => response.json());
+  })
+    .then(status)
+    .then(json)
+    .catch(resolveError);
 };
 
 export const getLocation = location_id => {
@@ -35,8 +38,10 @@ export const getLocation = location_id => {
   return fetch(url, {
     method: 'post',
     mode: 'cors',
-    credentials: 'include',
-  }).then(response => response.json());
+  })
+    .then(status)
+    .then(json)
+    .catch(resolveError);
 };
 
 export const findLocation = query => {
@@ -47,8 +52,10 @@ export const findLocation = query => {
   return fetch(url, {
     method: 'post',
     mode: 'cors',
-    credentials: 'include',
-  }).then(response => response.json());
+  })
+    .then(status)
+    .then(json)
+    .catch(resolveError);
 };
 
 export const getNearbyLocation = query => {
@@ -59,6 +66,26 @@ export const getNearbyLocation = query => {
   return fetch(url, {
     method: 'post',
     mode: 'cors',
-    credentials: 'include',
-  }).then(response => response.json());
+  })
+    .then(status)
+    .then(json)
+    .catch(resolveError);
+};
+
+export const geocodeLocation = ({ address, postalcode, city }) => {
+  const query = {
+    q: address,
+    postalcode,
+    city,
+    format: 'json',
+  };
+
+  const url = GEOCODE_URL + qs.stringify(query, { addQueryPrefix: true });
+
+  return fetch(url, {
+    method: 'post',
+    mode: 'cors',
+  })
+    .then(status)
+    .then(json);
 };

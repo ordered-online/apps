@@ -1,4 +1,5 @@
 import { API_URL } from './environment';
+import { status, json, resolveError } from './responseHandler';
 
 const ENDPOINT_REGISTER = '/verification/register/';
 const ENDPOINT_VERIFICATION = '/verification/verify/';
@@ -10,9 +11,11 @@ export const registerUser = credentials => {
   return fetch(url, {
     method: 'post',
     mode: 'cors',
-    credentials: 'include',
     body: JSON.stringify(credentials),
-  }).then(response => response.json());
+  })
+    .then(status)
+    .then(json)
+    .catch(resolveError);
 };
 
 export const verifyUser = (session_key, user_id) => {
@@ -20,9 +23,11 @@ export const verifyUser = (session_key, user_id) => {
   return fetch(url, {
     method: 'post',
     mode: 'cors',
-    credentials: 'include',
     body: JSON.stringify({ session_key, user_id }),
-  }).then(response => response.json());
+  })
+    .then(status)
+    .then(json)
+    .catch(resolveError);
 };
 
 export const loginUser = (username, password) => {
@@ -30,9 +35,11 @@ export const loginUser = (username, password) => {
   return fetch(url, {
     method: 'post',
     mode: 'cors',
-    credentials: 'include',
     body: JSON.stringify({ username, password }),
-  }).then(response => response.json());
+  })
+    .then(status)
+    .then(json)
+    .catch(resolveError);
 };
 
 export const logoutUser = (session_key, user_id) => {
@@ -40,7 +47,9 @@ export const logoutUser = (session_key, user_id) => {
   return fetch(url, {
     method: 'post',
     mode: 'cors',
-    credentials: 'include',
     body: JSON.stringify({ session_key, user_id }),
-  }).then(response => response.json());
+  })
+    .then(status)
+    .then(json)
+    .catch(resolveError);
 };

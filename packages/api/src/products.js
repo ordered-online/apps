@@ -10,9 +10,11 @@ export const createProduct = data => {
   return fetch(url, {
     method: 'post',
     mode: 'cors',
-    credentials: 'include',
     body: JSON.stringify(data),
-  }).then(response => response.json());
+  })
+    .then(status)
+    .then(json)
+    .catch(resolveError);
 };
 
 export const editProduct = (productId, data) => {
@@ -20,9 +22,11 @@ export const editProduct = (productId, data) => {
   return fetch(url, {
     method: 'post',
     mode: 'cors',
-    credentials: 'include',
     body: JSON.stringify(data),
-  }).then(response => response.json());
+  })
+    .then(status)
+    .then(json)
+    .catch(resolveError);
 };
 
 export const getProduct = productId => {
@@ -30,8 +34,10 @@ export const getProduct = productId => {
   return fetch(url, {
     method: 'post',
     mode: 'cors',
-    credentials: 'include',
-  }).then(response => response.json());
+  })
+    .then(status)
+    .then(json)
+    .catch(resolveError);
 };
 
 export const findProduct = query => {
@@ -39,6 +45,8 @@ export const findProduct = query => {
   return fetch(url, {
     method: 'post',
     mode: 'cors',
-    credentials: 'include',
-  }).then(response => response.json());
+  })
+    .then(status)
+    .then(json)
+    .catch(resolveError);
 };

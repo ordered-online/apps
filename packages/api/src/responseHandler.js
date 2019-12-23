@@ -16,3 +16,8 @@ export function status(response) {
 export function json(response) {
   return response.json();
 }
+
+export async function resolveError(error) {
+  let response = await error.resolve();
+  return Promise.reject(response);
+}
