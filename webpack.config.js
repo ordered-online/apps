@@ -1,5 +1,8 @@
+const webpack = require('webpack');
+const path = require('path');
 const createExpoWebpackConfigAsync = require('@expo/webpack-config');
-var path = require('path');
+
+require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 
 const includePackages = ['@ordered.online/components'];
 
@@ -56,20 +59,22 @@ module.exports = async function(env, argv) {
   });
 
   if (config.mode === 'development') {
-    // config.devServer.proxy = {
-    //   '/**': {
-    //     target: {
-    //       host: 'localhost',
-    //       protocol: 'http:',
-    //       port: 80,
-    //     },
-    //     secure: false,
-    //     changeOrigin: true,
-    //     logLevel: 'info',
-    //   },
-    // };
     config.devServer.historyApiFallback = true;
   }
+
+  config.plugins.forEach(plugin => {
+    if (plugin.constructor.name === 'ExpoInterpolateHtmlPlugin') {
+      plugin.replacements.GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+    }
+  });
+
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      'process.env.GOOGLE_MAPS_API_KEY': JSON.stringify(
+        process.env.GOOGLE_MAPS_API_KEY
+      ),
+    })
+  );
 
   return config;
 };

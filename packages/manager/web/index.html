@@ -2,16 +2,23 @@
 <html lang="%LANG_ISO_CODE%">
   <head>
     <meta charset="utf-8" />
-    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	  <meta name="theme-color" content="#000000">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
     <title>%WEB_TITLE%</title>
     <link rel="shortcut icon" href="%WEB_PUBLIC_URL%favicon.ico" />
-    	<!--
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css"
+    />
+    <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-  	<link rel="manifest" href="%WEB_PUBLIC_URL%manifest.json">
+    <link rel="manifest" href="%WEB_PUBLIC_URL%manifest.json" />
     <title>ordered.online</title>
     <style>
       /**
@@ -55,6 +62,14 @@
         -ms-overflow-style: scrollbar;
       }
     </style>
+
+    <!-- Use your web API Key in place of API_KEY: https://developers.google.com/maps/documentation/javascript/get-api-key -->
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=%GOOGLE_MAPS_API_KEY%"
+      type="text/javascript"
+    ></script>
   </head>
 
   <body>

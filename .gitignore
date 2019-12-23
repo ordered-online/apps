@@ -16,3 +16,6 @@ packages/**/lib
 
 # Coverage
 coverage
+
+# Environment Files
+.env

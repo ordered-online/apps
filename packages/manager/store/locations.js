@@ -77,8 +77,8 @@ const createLocationFailure = error => ({
 /**
  * Take an array of locations from the REST API
  * and transform them into a object where
- * the key is the location id and the
- * value ist the location object
+ * the key's are the location id's and the
+ * value's are the location object's.
  *
  * @param {array} locations
  */
@@ -135,9 +135,7 @@ export const GreateLocation = location => (dispatch, getState) => {
     .then(location => reformatLocations(Array.of(location)))
     .then(location => dispatch(createLocationSuccess(location)))
     .then(() => dispatch(push('/locations')))
-    .catch(error =>
-      error.resolve().then(error => dispatch(createLocationFailure(error)))
-    );
+    .catch(error => dispatch(createLocationFailure(error)));
 };
 
 export default locations;

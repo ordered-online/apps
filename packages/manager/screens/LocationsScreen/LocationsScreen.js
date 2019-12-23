@@ -47,10 +47,6 @@ export class LocationsScreen extends Component {
     const data =
       Object.entries(locations).length === 0 ? null : Object.keys(locations);
 
-    if (error !== null) {
-      return <Text> An Error occurred: {error} </Text>;
-    }
-
     if (fetching) {
       return <ActivityIndicator size="large" color="#0000ff" />;
     }
