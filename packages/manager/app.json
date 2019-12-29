@@ -5,7 +5,7 @@
     "owner": "Philipp Matthes and Felix Kästner",
     "slug": "ordered-online-manager",
     "privacy": "public",
-    "sdkVersion": "35.0.0",
+    "sdkVersion": "36.0.0",
     "packagerOpts": {
       "config": "metro.config.js"
     },

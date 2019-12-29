@@ -38,7 +38,7 @@
     "format": "prettier \"./**/*.{js,jsx,json,md}\" --write"
   },
   "dependencies": {
-    "@expo/vector-icons": "^10.0.6",
+    "@expo/vector-icons": "^10.0.0",
     "@ordered.online/api": "^0.0.2",
     "@ordered.online/components": "^0.0.2",
     "connected-react-router": "^6.6.1",
@@ -47,8 +47,8 @@
     "prop-types": "^15.7.2",
     "react": "16.9.0",
     "react-dom": "16.9.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
-    "react-native-web": "^0.11.7",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.1.tar.gz",
+    "react-native-web": "~0.11.7",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
     "react-router-native": "^5.1.2",
@@ -59,15 +59,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",
-    "@expo/webpack-config": "^0.10.6",
-    "babel-preset-expo": "^8.0.0",
+    "@expo/webpack-config": "^0.10.7",
+    "babel-preset-expo": "~8.0.0",
     "expo-cli": "^3.11.1",
     "expo-yarn-workspaces": "^1.2.1",
     "jest-expo": "^36.0.0",
     "prettier": "^1.19.1",
-    "react-test-renderer": "16.9.0",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "react-test-renderer": "16.9.0"
   },
   "browserslist": {
     "production": [
