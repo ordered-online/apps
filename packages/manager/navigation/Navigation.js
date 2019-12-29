@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Layout from '../constants/Layout';
 
 import { Logout } from '../store/authentication';
 
@@ -50,8 +51,15 @@ class Navigation extends Component {
   render() {
     const { authenticated } = this.props;
 
+    const { isSmallDevice } = Layout;
+
+    const navigationStyles = [styles.navigation];
+    if (!isSmallDevice) {
+      navigationStyles.push({ maxWidth: 375 });
+    }
+
     return (
-      <View style={styles.navigation}>
+      <View style={navigationStyles}>
         {authenticated
           ? this.renderPrivateNavigation()
           : this.renderPublicNavigation()}
@@ -62,7 +70,6 @@ class Navigation extends Component {
 
 const styles = StyleSheet.create({
   navigation: {
-    maxWidth: 375,
     display: 'flex',
     flexDirection: 'row',
     flex: 1,

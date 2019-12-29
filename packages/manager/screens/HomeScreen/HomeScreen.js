@@ -30,7 +30,9 @@ class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text h1>Welcome to the ordered.online manager</Text>
+        <Text h1 style={styles.text}>
+          Welcome to the ordered.online manager
+        </Text>
       </View>
     );
   }
@@ -41,6 +43,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  text: {
+    textAlign: 'center',
   },
 });
 

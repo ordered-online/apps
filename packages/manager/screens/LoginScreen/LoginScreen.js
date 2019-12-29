@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons';
@@ -57,6 +57,8 @@ class LoginScreen extends Component {
             placeholder="username"
             textContentType="username"
             onChangeText={username => this.setState({ username })}
+            value={this.state.username}
+            containerStyle={styles.inputContainer}
             leftIcon={
               <AntDesign
                 name="user"
@@ -73,7 +75,9 @@ class LoginScreen extends Component {
             secureTextEntry={true}
             placeholder="password"
             textContentType="password"
+            value={this.state.password}
             onChangeText={password => this.setState({ password })}
+            containerStyle={styles.inputContainer}
             leftIcon={
               <AntDesign
                 name="lock"
@@ -104,13 +108,15 @@ class LoginScreen extends Component {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   container: {
-    marginHorizontal: 'auto',
     maxWidth: 400,
-    position: 'relative',
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  inputContainer: {
+    width: '100%',
   },
 });
 

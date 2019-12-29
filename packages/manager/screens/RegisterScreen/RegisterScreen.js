@@ -12,11 +12,11 @@ class RegisterScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'fkasy',
-      password: '12345678',
-      email: 'hello@felix-kaestner.com',
-      first_name: 'Felix',
-      last_name: 'Kaestner',
+      username: '',
+      password: '',
+      email: '',
+      first_name: '',
+      last_name: '',
     };
 
     this.checkauthenticated = this.checkauthenticated.bind(this);
@@ -61,6 +61,7 @@ class RegisterScreen extends Component {
             textContentType="username"
             value={this.state.username}
             onChangeText={username => this.setState({ username })}
+            containerStyle={styles.inputContainer}
             leftIcon={
               <AntDesign
                 name="user"
@@ -78,6 +79,7 @@ class RegisterScreen extends Component {
             textContentType="emailAddress"
             value={this.state.email}
             onChangeText={email => this.setState({ email })}
+            containerStyle={styles.inputContainer}
             leftIcon={
               <AntDesign
                 name="mail"
@@ -95,6 +97,7 @@ class RegisterScreen extends Component {
             textContentType="givenName"
             value={this.state.first_name}
             onChangeText={first_name => this.setState({ first_name })}
+            containerStyle={styles.inputContainer}
             leftIcon={
               <AntDesign
                 name="smileo"
@@ -112,6 +115,7 @@ class RegisterScreen extends Component {
             textContentType="familyName"
             value={this.state.last_name}
             onChangeText={last_name => this.setState({ last_name })}
+            containerStyle={styles.inputContainer}
             leftIcon={
               <AntDesign
                 name="smileo"
@@ -130,6 +134,7 @@ class RegisterScreen extends Component {
             textContentType="password"
             value={this.state.password}
             onChangeText={password => this.setState({ password })}
+            containerStyle={styles.inputContainer}
             leftIcon={
               <AntDesign
                 name="lock"
@@ -160,12 +165,15 @@ class RegisterScreen extends Component {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   container: {
-    marginHorizontal: 'auto',
-    position: 'relative',
+    maxWidth: 400,
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  inputContainer: {
+    width: '100%',
   },
 });
 
