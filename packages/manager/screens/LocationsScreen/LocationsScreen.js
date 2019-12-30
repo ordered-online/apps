@@ -8,8 +8,12 @@ import {
   FlatList,
   StyleSheet,
 } from 'react-native';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Card, Button } from '@ordered.online/components';
+import { GetAllLocations } from '../../store/locations';
+
+import { primaryColor } from '../../constants/Colors';
 
 function Item({ location }) {
   return (
@@ -41,15 +45,14 @@ function Item({ location }) {
 }
 
 export class LocationsScreen extends Component {
+  componentDidMount() {
+    this.props.getAllLocations();
+  }
+
   render() {
-    const { fetching, locations, error } = this.props;
+    const { fetching, locations } = this.props;
 
-    const data =
-      Object.entries(locations).length === 0 ? null : Object.keys(locations);
-
-    if (fetching) {
-      return <ActivityIndicator size="large" color="#0000ff" />;
-    }
+    const data = Object.keys(locations) || null;
 
     return (
       <SafeAreaView style={styles.container}>
@@ -76,6 +79,7 @@ export class LocationsScreen extends Component {
             onPress={() => this.props.navigation.navigate('locations/create')}
           />
         </View>
+        {fetching && <ActivityIndicator size="large" color={primaryColor} />}
         <FlatList
           numColumns={2} // set number of columns
           columnWrapperStyle={styles.row} // space them out evenly
@@ -114,7 +118,14 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => ({
   fetching: state.locations.fetching,
   locations: state.locations.locations,
-  error: state.locations.error,
 });
 
-export default connect(mapStateToProps, null)(LocationsScreen);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      getAllLocations: GetAllLocations,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(LocationsScreen);

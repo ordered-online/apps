@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { AntDesign } from '@expo/vector-icons';
-
 import { Button, Input } from '@ordered.online/components';
 
 import { Register } from '../../store/authentication';
@@ -62,14 +60,6 @@ class RegisterScreen extends Component {
             value={this.state.username}
             onChangeText={username => this.setState({ username })}
             containerStyle={styles.inputContainer}
-            leftIcon={
-              <AntDesign
-                name="user"
-                size={24}
-                color="black"
-                style={{ marginRight: 10 }}
-              />
-            }
           />
 
           <Input
@@ -80,14 +70,6 @@ class RegisterScreen extends Component {
             value={this.state.email}
             onChangeText={email => this.setState({ email })}
             containerStyle={styles.inputContainer}
-            leftIcon={
-              <AntDesign
-                name="mail"
-                size={24}
-                color="black"
-                style={{ marginRight: 10 }}
-              />
-            }
           />
 
           <Input
@@ -98,14 +80,6 @@ class RegisterScreen extends Component {
             value={this.state.first_name}
             onChangeText={first_name => this.setState({ first_name })}
             containerStyle={styles.inputContainer}
-            leftIcon={
-              <AntDesign
-                name="smileo"
-                size={24}
-                color="black"
-                style={{ marginRight: 10 }}
-              />
-            }
           />
 
           <Input
@@ -116,14 +90,6 @@ class RegisterScreen extends Component {
             value={this.state.last_name}
             onChangeText={last_name => this.setState({ last_name })}
             containerStyle={styles.inputContainer}
-            leftIcon={
-              <AntDesign
-                name="smileo"
-                size={24}
-                color="black"
-                style={{ marginRight: 10 }}
-              />
-            }
           />
 
           <Input
@@ -135,14 +101,6 @@ class RegisterScreen extends Component {
             value={this.state.password}
             onChangeText={password => this.setState({ password })}
             containerStyle={styles.inputContainer}
-            leftIcon={
-              <AntDesign
-                name="lock"
-                size={24}
-                color="black"
-                style={{ marginRight: 10 }}
-              />
-            }
           />
 
           <Button
@@ -165,6 +123,9 @@ class RegisterScreen extends Component {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   container: {
     maxWidth: 400,

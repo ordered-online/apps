@@ -13,7 +13,7 @@ import RegisterScreen from '../screens/RegisterScreen';
 import OverviewScreen from '../screens/OverviewScreen';
 import LocationsScreen from '../screens/LocationsScreen';
 import LocationsDetailScreen from '../screens/LocationDetailScreen';
-import CreateLocationScreen from '../screens/CreateLocationScreen';
+import EditLocationScreen from '../screens/EditLocationScreen';
 import OdersScreen from '../screens/OrdersScreen';
 
 import ImprintScreen from '../screens/ImprintScreen';
@@ -78,8 +78,18 @@ class AppNavigator extends Component {
 
           <PrivateRoute
             exact
+            path="/location/edit/:id"
+            component={EditLocationScreen}
+            navigation={navigationProp}
+            componentProps={{
+              edit: true,
+            }}
+          />
+
+          <PrivateRoute
+            exact
             path="/locations/create"
-            component={CreateLocationScreen}
+            component={EditLocationScreen}
             navigation={navigationProp}
           />
 

@@ -1,5 +1,7 @@
 import api from '@ordered.online/api';
 
+import { LOGOUT_SUCCESS, LOGOUT_FAILURE } from './authentication';
+
 // Action Types
 export const FETCH_PRODUCTS_REQUEST = 'PRODUCT/FETCH_PRODUCTS_REQUEST';
 export const FETCH_PRODUCTS_SUCCESS = 'PRODUCT/FETCH_PRODUCTS_SUCCESS';
@@ -7,31 +9,7 @@ export const FETCH_PRODUCTS_FAILURE = 'PRODUCT/FETCH_PRODUCTS_FAILURE';
 
 const initialState = {
   fetching: false,
-  products: {
-    1: {
-      id: 1,
-      location_id: 1,
-      name: 'Coffee',
-      description:
-        'The elexir of computer scientists. 1 Euro deposit included for the cup.',
-      price: '1.80',
-      categories: [
-        {
-          name: 'Drink',
-        },
-      ],
-      tags: [
-        {
-          name: 'stimulating',
-        },
-      ],
-      additives: [
-        {
-          name: 'caffeine',
-        },
-      ],
-    },
-  },
+  products: {},
   error: null,
 };
 
@@ -51,6 +29,8 @@ const products = (state = initialState, action) => {
     case FETCH_PRODUCTS_FAILURE:
       return { ...state, error: action.payload };
 
+    case LOGOUT_SUCCESS:
+    case LOGOUT_FAILURE:
     default:
       return { ...state };
   }
@@ -70,6 +50,24 @@ const fetchProductsFailure = error => ({
   type: FETCH_PRODUCTS_FAILURE,
   payload: error,
 });
+
+/**
+ * Take an array of locations from the REST API
+ * and transform them into a object where
+ * the key's are the location id's and the
+ * value's are the location object's.
+ *
+ * @param {array} locations
+ */
+const reformatProducts = products => {
+  const initialValue = {};
+  return products.reduce((obj, item) => {
+    return {
+      ...obj,
+      [item['id']]: item,
+    };
+  }, initialValue);
+};
 
 // Exports
 export const GetProduct = productId => (dispatch, getState) => {

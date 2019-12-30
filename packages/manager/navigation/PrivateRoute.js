@@ -6,6 +6,7 @@ function PrivateRoute({
   component: Component,
   authenticated,
   navigation,
+  componentProps,
   ...rest
 }) {
   return (
@@ -13,7 +14,7 @@ function PrivateRoute({
       {...rest}
       render={props =>
         authenticated ? (
-          <Component {...props} navigation={navigation} />
+          <Component {...props} {...componentProps} navigation={navigation} />
         ) : (
           <Redirect
             to={{

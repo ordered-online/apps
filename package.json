@@ -21,9 +21,9 @@
   "homepage": "https://www.ordered.online",
   "scripts": {
     "bootstrap": "lerna bootstrap --use-workspaces",
+    "debug:android": "adb shell input keyevent 82",
     "clean": "lerna run clean",
     "compile": "lerna run compile",
-    "start": "lerna run start --parallel",
     "start:app": "lerna run --scope={@ordered.online/app,@ordered.online/components,@ordered.online/api} start --parallel",
     "start:manager": "lerna run --scope={@ordered.online/manager,@ordered.online/components,@ordered.online/api} start --parallel",
     "build": "lerna run build --parallel",

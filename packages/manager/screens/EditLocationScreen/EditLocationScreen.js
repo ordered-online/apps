@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { Button, Input, Text, Map } from '@ordered.online/components';
-import { GreateLocation } from '../../store/locations';
+import {
+  GreateLocation,
+  GetLocation,
+  EditLocation,
+} from '../../store/locations';
 import api from '@ordered.online/api';
 
-export class CreateLocationScreen extends Component {
+import { primaryColor } from '../../constants/Colors';
+
+export class EditLocationScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'Test',
-      description: 'Test description',
-      address: 'Teststraße 32',
+      name: '',
+      description: '',
+      address: '',
       latitude: '',
       longitude: '',
-      website: 'www.test.de',
-      telephone: '0123456789',
+      website: '',
+      telephone: '',
       categories: [],
       tags: [],
       typing: false,
@@ -24,38 +30,83 @@ export class CreateLocationScreen extends Component {
       confirmedLocation: false,
       region: null,
       marker: null,
+      fetching: props.edit ? true : false,
     };
 
+    this.updateStateAfterFetch = this.updateStateAfterFetch.bind(this);
+    this.getLocationIdFromProps = this.getLocationIdFromProps.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.changeLocationAddress = this.changeLocationAddress.bind(this);
-    this.createLocation = this.createLocation.bind(this);
     this.geocodeAdress = this.geocodeAdress.bind(this);
   }
 
-  createLocation() {
+  componentDidMount() {
+    if (this.props.edit) {
+      const location_id = this.getLocationIdFromProps();
+      // this.props.getLocation(location_id);
+      this.props
+        .dispatch(GetLocation(location_id))
+        .then(this.updateStateAfterFetch);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.state.typingTimeout) {
+      clearTimeout(this.state.typingTimeout);
+    }
+  }
+
+  getLocationIdFromProps() {
     const {
-      name,
-      description,
-      address,
-      latitude,
-      longitude,
-      website,
-      telephone,
-      categories,
-      tags,
-    } = this.state;
-    const data = {
-      name,
-      description,
-      address,
-      latitude,
-      longitude,
-      website,
-      telephone,
-      categories,
-      tags,
-    };
-    this.props.createLocation(data);
+      match: {
+        params: { id },
+      },
+    } = this.props;
+    return id;
+  }
+
+  updateStateAfterFetch() {
+    const location_id = this.getLocationIdFromProps();
+    const location = this.props.locations[location_id];
+    if (location) {
+      const {
+        name,
+        description,
+        address,
+        latitude,
+        longitude,
+        website,
+        telephone,
+        categories,
+        tags,
+      } = location;
+      this.setState({
+        name,
+        description,
+        address,
+        latitude,
+        longitude,
+        website,
+        telephone,
+        categories,
+        tags,
+        region: {
+          latitude: parseFloat(latitude),
+          longitude: parseFloat(longitude),
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        },
+        marker: {
+          coordinate: {
+            latitude: parseFloat(latitude),
+            longitude: parseFloat(longitude),
+          },
+          title: name,
+          description: description,
+        },
+      });
+    }
   }
 
   handleFormChange(key, value) {
@@ -129,7 +180,45 @@ export class CreateLocationScreen extends Component {
     }
   }
 
+  handleFormSubmit() {
+    const {
+      name,
+      description,
+      address,
+      latitude,
+      longitude,
+      website,
+      telephone,
+      categories,
+      tags,
+    } = this.state;
+    const data = {
+      name,
+      description,
+      address,
+      latitude,
+      longitude,
+      website,
+      telephone,
+      categories,
+      tags,
+    };
+
+    if (this.props.edit) {
+      const location_id = this.getLocationIdFromProps();
+      this.props.editLocation(location_id, data);
+    } else {
+      this.props.createLocation(data);
+    }
+  }
+
   render() {
+    const { edit, fetching } = this.props;
+
+    if (edit && fetching) {
+      return <ActivityIndicator size="large" color={primaryColor} />;
+    }
+
     return (
       <View style={styles.wrapper}>
         <Map region={this.state.region} marker={this.state.marker} />
@@ -141,8 +230,8 @@ export class CreateLocationScreen extends Component {
             maxLength={40}
             placeholder="Name"
             textContentType="organizationName"
-            onChangeText={name => this.handleFormChange('name', name)}
             value={this.state.name}
+            onChangeText={name => this.handleFormChange('name', name)}
           />
           <Input
             editable
@@ -181,10 +270,10 @@ export class CreateLocationScreen extends Component {
             value={this.state.telephone}
           />
           <Button
-            title="Create"
+            title={edit ? 'Edit' : 'Create'}
             style={{ marginTop: 15 }}
             loading={this.props.fetching}
-            onPress={() => this.createLocation()}
+            onPress={this.handleFormSubmit}
           />
         </View>
       </View>
@@ -206,17 +295,18 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   fetching: state.locations.fetching,
+  locations: state.locations.locations,
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
+const mapDispatchToProps = dispatch => ({
+  ...bindActionCreators(
     {
       createLocation: GreateLocation,
+      editLocation: EditLocation,
     },
     dispatch
-  );
+  ),
+  dispatch,
+});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreateLocationScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(EditLocationScreen);

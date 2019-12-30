@@ -1,19 +1,54 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import { connect } from 'react-redux';
-
-import { Card } from '@ordered.online/components';
+import { bindActionCreators } from 'redux';
+import { Card, Text, Icon } from '@ordered.online/components';
+import { GetLocation } from '../../store/locations';
+import { primaryColor } from '../../constants/Colors';
 
 export class LocationDetailScreen extends Component {
+  componentDidMount() {
+    const { match } = this.props;
+    const location_id = match.params.id;
+    this.props.getLocation(location_id);
+  }
+
   render() {
     const { match, locations } = this.props;
-    const locationID = match.params.id;
+    const location_id = match.params.id;
+    const location = locations[location_id];
 
-    const location = locations[locationID];
+    if (!location) {
+      return (
+        <View style={styles.container}>
+          <Text>Uuups, you were never here !</Text>
+        </View>
+      );
+    }
 
     return (
       <View style={styles.container}>
-        <Card title={location.name} containerStyle={styles.containerStyle}>
+        <View style={styles.actionsContainer}>
+          <Icon
+            name={
+              Platform.OS === 'ios'
+                ? 'ios-arrow-round-back'
+                : 'md-arrow-round-back'
+            }
+            type="ionicon"
+            color={primaryColor}
+            onPress={() => this.props.navigation.navigate('locations')}
+          />
+          <Icon
+            name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'}
+            type="ionicon"
+            color={primaryColor}
+            onPress={() =>
+              this.props.navigation.navigate(`location/edit/${location_id}`)
+            }
+          />
+        </View>
+        <Card title={location.name} containerStyle={styles.cardContainer}>
           <Text style={{ marginBottom: 15 }}>
             {' '}
             {'\n'} Description: {'\n'} {location.description}
@@ -92,8 +127,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'stretch',
   },
-  containerStyle: {
+  cardContainer: {
     flex: 1,
+  },
+  actionsContainer: {
+    margin: 25,
+    marginBottom: 0,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 
@@ -101,4 +143,15 @@ const mapStateToProps = state => ({
   locations: state.locations.locations,
 });
 
-export default connect(mapStateToProps, null)(LocationDetailScreen);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      getLocation: GetLocation,
+    },
+    dispatch
+  );
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LocationDetailScreen);
