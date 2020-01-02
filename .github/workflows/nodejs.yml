@@ -1,6 +1,9 @@
 name: Node CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -8,7 +11,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+        node-version: [8.x, 10.x, 12.x, 13.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -25,9 +29,15 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: npm install, build, and test
+      - uses: expo/expo-github-action@v5
+        with:
+          expo-version: 3.x
+          expo-cache: true
+      - name: yarn install, build, and test
         run: |
           yarn install
           yarn test
         env:
           CI: true
+      - name: expo-cli test
+        run: dir=$(pwd) && cd $dir/packages/app && expo doctor && cd $dir/packages/manager && expo doctor
