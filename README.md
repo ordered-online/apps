@@ -13,17 +13,17 @@
 <p align="center">
     <a href="https://github.com/ordered-online/apps/actions"><img alt="Github Actions" src="https://github.com/ordered-online/apps/workflows/Node%20CI/badge.svg"></a>
     <a href="https://travis-ci.org/ordered-online/apps"><img alt="Travis Status" src="https://travis-ci.org/ordered-online/apps.svg?branch=master"></a>
-    <a href="https://github.com/ordered-online/apps"><img alt="Github Issues" src="https://img.shields.io/github/issues/ordered-online/client"></a>
-    <a href="https://github.com/ordered-online/apps"><img alt="Github Forks" src="https://img.shields.io/github/forks/ordered-online/client"></a>
+    <a href="https://github.com/ordered-online/apps"><img alt="Github Issues" src="https://img.shields.io/github/issues/ordered-online/apps"></a>
+    <a href="https://github.com/ordered-online/apps"><img alt="Github Forks" src="https://img.shields.io/github/forks/ordered-online/apps"></a>
     <a href="https://github.com/ordered-online/apps"><img alt="Github Followers" src="https://img.shields.io/github/followers/ordered-online?label=Follow"></a>
-    <a href="https://github.com/ordered-online/apps"><img alt="Github Watchers" src="https://img.shields.io/github/watchers/ordered-online/client"></a>
-    <a href="https://github.com/ordered-online/apps"><img alt="Github Stars" src="https://img.shields.io/github/stars/ordered-online/client"></a>
-    <a href="https://github.com/ordered-online/apps"><img alt="Github Repo Size" src="https://img.shields.io/github/repo-size/ordered-online/client"></a>
-    <a href="https://github.com/ordered-online/apps"><img alt="Github Releases" src="https://img.shields.io/github/v/release/ordered-online/client?sort=semver"></a>
-    <a href="https://github.com/ordered-online/apps"><img alt="Github Tags" src="https://img.shields.io/github/v/tag/ordered-online/client"></a>
+    <a href="https://github.com/ordered-online/apps"><img alt="Github Watchers" src="https://img.shields.io/github/watchers/ordered-online/apps"></a>
+    <a href="https://github.com/ordered-online/apps"><img alt="Github Stars" src="https://img.shields.io/github/stars/ordered-online/apps"></a>
+    <a href="https://github.com/ordered-online/apps"><img alt="Github Repo Size" src="https://img.shields.io/github/repo-size/ordered-online/apps"></a>
+    <a href="https://github.com/ordered-online/apps"><img alt="Github Releases" src="https://img.shields.io/github/v/release/ordered-online/apps?sort=semver"></a>
+    <a href="https://github.com/ordered-online/apps"><img alt="Github Tags" src="https://img.shields.io/github/v/tag/ordered-online/apps"></a>
     <a href="https://ordered.online"><img alt="ordered.online" src="https://img.shields.io/website?down_color=lightgrey&down_message=offline&up_color=blue&up_message=soon&url=https%3A%2F%2Fordered.online"></a>
-    <a href="https://github.com/ordered-online/apps"><img alt="Github Commits" src="https://img.shields.io/github/last-commit/ordered-online/client"></a>
-    <a href="https://github.com/ordered-online/apps"><img alt="Keywoards" src="https://img.shields.io/github/package-json/keywoards/ordered-online/client"></a>
+    <a href="https://github.com/ordered-online/apps"><img alt="Github Commits" src="https://img.shields.io/github/last-commit/ordered-online/apps"></a>
+    <a href="https://github.com/ordered-online/apps"><img alt="Keywoards" src="https://img.shields.io/github/package-json/keywoards/ordered-online/apps"></a>
 </p>
 
 These hybrid mobile and web apps provide a shared interface to use the `ordered.online` application. This repository is organized as a `monorepo` to allow for efficient module sharing and reuse of components between applications. This `State of the Art` approach will enable use to abstract different applications by using modularized reusable components. We utilize the `JAMSTACK` which is a new way of writing modern and secure web and mobile applications. Somehow this will also help with `SEO` (No futher questions). Other `BUZZWORDS` will be added soon...
@@ -82,9 +82,9 @@ To start a local development environment you will have to:
 5. To start the customer app, just execute the respective command with the package manager of choice:
 
    ```bash
-   $ yarn run start:manager
+   $ yarn run start:app
    # OR
-   $ npm run start:manager
+   $ npm run start:app
    ```
 
 6. To run either the customer or manager application on the plattform of your choice, switch in to the directory of the specific app with
