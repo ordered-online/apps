@@ -40,7 +40,6 @@
     "test:updateSnapshots": "jest -u --detectOpenHandles"
   },
   "dependencies": {
-    "dotenv": "^8.2.0",
     "expo": "^36.0.0",
     "expo-yarn-workspaces": "^1.2.1",
     "react": "16.9.0",
