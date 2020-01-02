@@ -10,11 +10,11 @@ class RegisterScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
-      email: '',
-      first_name: '',
-      last_name: '',
+      username: 'testuser',
+      password: '12345678',
+      email: 'test@example.com',
+      first_name: 'test',
+      last_name: 'user',
     };
 
     this.checkauthenticated = this.checkauthenticated.bind(this);
@@ -32,7 +32,7 @@ class RegisterScreen extends Component {
   checkauthenticated() {
     const { authenticated, navigation } = this.props;
     if (authenticated) {
-      navigation.navigate('overview');
+      navigation.navigate('locations');
     }
   }
 
@@ -106,7 +106,8 @@ class RegisterScreen extends Component {
           <Button
             containerStyle={{ marginVertical: 20 }}
             title="Register"
-            onPress={() => this.handleRegistration()}
+            loading={this.props.fetching}
+            onPress={this.handleRegistration}
           />
 
           <Button
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   authenticated: state.authentication.authenticated,
-  error: state.authentication.error,
+  fetching: state.authentication.fetching,
 });
 
 const mapDispatchToProps = dispatch =>

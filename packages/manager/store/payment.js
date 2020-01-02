@@ -21,7 +21,7 @@ const payment = (state = initialState, action) => {
       return { ...state, processing: false, complete: true };
 
     default:
-      return { ...state };
+      return state;
   }
 };
 

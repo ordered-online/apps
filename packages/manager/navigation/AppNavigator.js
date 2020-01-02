@@ -57,33 +57,9 @@ class AppNavigator extends Component {
 
           <PrivateRoute
             exact
-            path="/overview"
-            component={OverviewScreen}
-            navigation={navigationProp}
-          />
-
-          <PrivateRoute
-            exact
             path="/locations"
             component={LocationsScreen}
             navigation={navigationProp}
-          />
-
-          <PrivateRoute
-            exact
-            path="/location/:id"
-            component={LocationsDetailScreen}
-            navigation={navigationProp}
-          />
-
-          <PrivateRoute
-            exact
-            path="/location/edit/:id"
-            component={EditLocationScreen}
-            navigation={navigationProp}
-            componentProps={{
-              edit: true,
-            }}
           />
 
           <PrivateRoute
@@ -95,7 +71,38 @@ class AppNavigator extends Component {
 
           <PrivateRoute
             exact
-            path="/orders"
+            path="/locations/:id"
+            component={LocationsDetailScreen}
+            navigation={navigationProp}
+          />
+
+          <PrivateRoute
+            exact
+            path="/locations/edit/:id"
+            component={EditLocationScreen}
+            navigation={navigationProp}
+            componentProps={{
+              edit: true,
+            }}
+          />
+
+          <PrivateRoute
+            exact
+            path="/locations/:location_id/products"
+            component={OdersScreen}
+            navigation={navigationProp}
+          />
+
+          <PrivateRoute
+            exact
+            path="/locations/:location_id/orders"
+            component={OdersScreen}
+            navigation={navigationProp}
+          />
+
+          <PrivateRoute
+            exact
+            path="/locations/:location_id/orders/:session_code"
             component={OdersScreen}
             navigation={navigationProp}
           />

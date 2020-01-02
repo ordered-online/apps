@@ -52,7 +52,7 @@ const locations = (state = initialState, action) => {
     case LOGOUT_SUCCESS:
     case LOGOUT_FAILURE:
     default:
-      return { ...state };
+      return state;
   }
 };
 
@@ -137,14 +137,10 @@ export const GetLocation = location_id => (dispatch, getState) => {
 export const GetAllLocations = () => (dispatch, getState) => {
   const { user_id } = getState().authentication;
 
-  const query = {
-    user_id,
-  };
-
   dispatch(fetchLocationRequest());
 
   return api
-    .findLocation(query)
+    .findLocation({ user_id })
     .then(response => {
       if (__DEV__) {
         console.log(response);
@@ -195,16 +191,16 @@ export const EditLocation = (location_id, location) => (dispatch, getState) => {
   const data = {
     session_key,
     user_id,
+    location_id,
     location,
   };
 
   if (__DEV__) {
-    console.log('Edit location with id: ' + location_id);
     console.log(data);
   }
 
   return api
-    .editLocation(location_id, data)
+    .editLocation(data)
     .then(response => {
       if (__DEV__) {
         console.log(response);

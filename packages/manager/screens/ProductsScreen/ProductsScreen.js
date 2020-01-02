@@ -3,29 +3,30 @@ import { View, ActivityIndicator, FlatList, StyleSheet } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button, Text, ListItem } from '@ordered.online/components';
-import { GetAllLocations } from '../../store/locations';
+import { GetAllProducts } from '../../store/products';
 
 import { primaryColor } from '../../constants/Colors';
 
-export class LocationsScreen extends Component {
+export class ProductsScreen extends Component {
   constructor(props) {
     super(props);
     this.renderItem = this.renderItem.bind(this);
   }
 
   componentDidMount() {
-    this.props.getAllLocations();
+    const location_id = this.props.match.params.id;
+    this.props.getAllproducts(location_id);
   }
 
   keyExtractor = (item, index) => index.toString();
 
   renderItem({ item }) {
-    const location = this.props.locations[item];
+    const product = this.props.products[item];
     return (
       <ListItem
-        title={location.name}
-        subtitle={location.description}
-        onPress={() => this.props.navigation.navigate(`locations/${item}`)}
+        title={product.name}
+        subtitle={product.description}
+        onPress={() => this.props.navigation.navigate(`product/${item}`)}
         topDivider
         bottomDivider
         chevron
@@ -34,19 +35,21 @@ export class LocationsScreen extends Component {
   }
 
   render() {
-    const { fetching, locations } = this.props;
+    const { fetching, products, locations } = this.props;
+    const location_id = this.props.match.params.id;
+    const location = locations[location_id];
 
-    const data = Object.keys(locations) || null;
+    const data = Object.keys(products) || null;
 
     return (
       <View style={styles.container}>
         <Text h3 h3Style={styles.headline}>
-          Overview over all locations
+          Products for {location.name}
         </Text>
         <View style={styles.createButtonWrapper}>
           <Button
-            title="create new location"
-            onPress={() => this.props.navigation.navigate('locations/create')}
+            title="create new product"
+            onPress={() => this.props.navigation.navigate('products/create')}
           />
         </View>
         {fetching && <ActivityIndicator size="large" color={primaryColor} />}
@@ -79,16 +82,17 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  fetching: state.locations.fetching,
+  fetching: state.products.fetching,
+  products: state.products.products,
   locations: state.locations.locations,
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getAllLocations: GetAllLocations,
+      getAllProducts: GetAllProducts,
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(LocationsScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsScreen);

@@ -34,7 +34,6 @@ export class EditLocationScreen extends Component {
     };
 
     this.updateStateAfterFetch = this.updateStateAfterFetch.bind(this);
-    this.getLocationIdFromProps = this.getLocationIdFromProps.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.changeLocationAddress = this.changeLocationAddress.bind(this);
@@ -43,8 +42,7 @@ export class EditLocationScreen extends Component {
 
   componentDidMount() {
     if (this.props.edit) {
-      const location_id = this.getLocationIdFromProps();
-      // this.props.getLocation(location_id);
+      const location_id = this.props.match.params.id;
       this.props
         .dispatch(GetLocation(location_id))
         .then(this.updateStateAfterFetch);
@@ -57,17 +55,8 @@ export class EditLocationScreen extends Component {
     }
   }
 
-  getLocationIdFromProps() {
-    const {
-      match: {
-        params: { id },
-      },
-    } = this.props;
-    return id;
-  }
-
   updateStateAfterFetch() {
-    const location_id = this.getLocationIdFromProps();
+    const location_id = this.props.match.params.id;
     const location = this.props.locations[location_id];
     if (location) {
       const {
@@ -205,7 +194,7 @@ export class EditLocationScreen extends Component {
     };
 
     if (this.props.edit) {
-      const location_id = this.getLocationIdFromProps();
+      const location_id = this.props.match.params.id;
       this.props.editLocation(location_id, data);
     } else {
       this.props.createLocation(data);

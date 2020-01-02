@@ -25,8 +25,8 @@ class Navigation extends Component {
     return (
       <React.Fragment>
         <NavItem
-          title="Overview"
-          onPress={() => this.props.navigation.navigate('overview')}
+          title="Locations"
+          onPress={() => this.props.navigation.navigate('locations')}
         />
         <NavItem title="Logout" onPress={() => this.props.logoutUser()} />
       </React.Fragment>

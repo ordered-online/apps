@@ -72,7 +72,7 @@ const loginRequest = () => ({
   type: LOGIN_REQUEST,
 });
 
-const loginSuccess = (session_key, user_id) => ({
+const loginSuccess = ({ session_key, user_id }) => ({
   type: LOGIN_SUCCESS,
   payload: { session_key, user_id },
 });
@@ -86,7 +86,7 @@ const registerRequest = () => ({
   type: REGISTER_REQUEST,
 });
 
-const registerSuccess = (session_key, user_id) => ({
+const registerSuccess = ({ session_key, user_id }) => ({
   type: REGISTER_SUCCESS,
   payload: { session_key, user_id },
 });
@@ -119,23 +119,28 @@ export const Login = ({ username, password }) => (dispatch, getState) => {
   }
 
   return api
-    .loginUser(username, password)
+    .loginUser({ username, password })
     .then(response => {
       if (__DEV__) {
         console.log(response);
       }
-      const { session_key, session_data } = response;
-      const { user_id } = session_data;
-      dispatch(loginSuccess(session_key, user_id));
+      const {
+        session_key,
+        session_data: { user_id },
+      } = response;
+      dispatch(loginSuccess({ session_key, user_id }));
     })
     .catch(error => dispatch(loginFailure(error)));
 };
 
-export const Register = credentials => (dispatch, getState) => {
+export const Register = ({
+  username,
+  password,
+  email,
+  first_name,
+  last_name,
+}) => (dispatch, getState) => {
   dispatch(registerRequest());
-
-  // These are the credentials needed for registration
-  const { username, password, email, first_name, last_name } = credentials;
 
   return api
     .registerUser({ username, password, email, first_name, last_name })
@@ -143,9 +148,11 @@ export const Register = credentials => (dispatch, getState) => {
       if (__DEV__) {
         console.log(response);
       }
-      const { session_key, session_data } = response;
-      const { user_id } = session_data;
-      dispatch(registerSuccess(session_key, user_id));
+      const {
+        session_key,
+        session_data: { user_id },
+      } = response;
+      dispatch(registerSuccess({ session_key, user_id }));
     })
     .catch(error => dispatch(registerFailure(error)));
 };
@@ -154,7 +161,7 @@ export const Logout = () => (dispatch, getState) => {
   dispatch(logoutRequest());
   const { session_key, user_id } = getState().authentication;
   return api
-    .logoutUser(session_key, user_id)
+    .logoutUser({ session_key, user_id })
     .then(response => {
       if (__DEV__) {
         console.log(response);

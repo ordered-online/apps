@@ -11,8 +11,8 @@ class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: 'testuser',
+      password: '12345678',
     };
 
     this.checkauthenticated = this.checkauthenticated.bind(this);
@@ -31,7 +31,7 @@ class LoginScreen extends Component {
   checkauthenticated() {
     const { authenticated, navigation } = this.props;
     if (authenticated) {
-      navigation.navigate('overview');
+      navigation.navigate('locations');
     }
   }
 
@@ -74,7 +74,8 @@ class LoginScreen extends Component {
           <Button
             containerStyle={{ marginVertical: 20 }}
             title="Login"
-            onPress={() => this.handleRegistration()}
+            loading={this.props.fetching}
+            onPress={this.handleRegistration}
           />
 
           <Button
@@ -108,6 +109,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   authenticated: state.authentication.authenticated,
+  fetching: state.authentication.fetching,
 });
 
 const mapDispatchToProps = dispatch =>

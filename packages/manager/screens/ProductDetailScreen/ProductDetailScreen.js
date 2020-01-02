@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Card, Text, Icon, Button } from '@ordered.online/components';
-import { GetLocation } from '../../store/locations';
+import { Card, Text, Icon } from '@ordered.online/components';
+import { GetProduct } from '../../store/products';
 import { primaryColor } from '../../constants/Colors';
 
-export class LocationDetailScreen extends Component {
+export class ProductDetailScreen extends Component {
   componentDidMount() {
-    const location_id = this.props.match.params.id;
-    this.props.getLocation(location_id);
+    const product_id = this.props.match.params.id;
+    this.props.getProduct(product_id);
   }
 
   renderBadges(items) {
@@ -25,10 +25,11 @@ export class LocationDetailScreen extends Component {
   }
 
   render() {
-    const location_id = this.props.match.params.id;
-    const location = this.props.locations[location_id];
+    const product_id = this.props.match.params.id;
+    const location_id = this.props.match.params.locationId;
+    const product = this.props.products[product_id];
 
-    if (!location) {
+    if (!product) {
       return (
         <View style={styles.container}>
           <Text>Uuups, you were never here !</Text>
@@ -47,54 +48,40 @@ export class LocationDetailScreen extends Component {
             }
             type="ionicon"
             color={primaryColor}
-            onPress={() => this.props.navigation.navigate('locations')}
+            onPress={() =>
+              this.props.navigation.navigate(`locations/${location_id}`)
+            }
           />
           <Icon
             name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'}
             type="ionicon"
             color={primaryColor}
             onPress={() =>
-              this.props.navigation.navigate(`locations/edit/${location_id}`)
-            }
-          />
-        </View>
-        <Card title={location.name} containerStyle={styles.cardContainer}>
-          <Text style={{ marginBottom: 15 }}>
-            {'\n'} Description: {'\n'} {location.description}
-          </Text>
-          <Text>
-            {'\n'} Address: {'\n'} {location.address}
-          </Text>
-          <Text>
-            {'\n'} Latitude: {'\n'} {location.latitude}
-          </Text>
-          <Text>
-            {'\n'} Longitude: {'\n'} {location.longitude}
-          </Text>
-          <Text>
-            {'\n'} Categories: {'\n'}
-          </Text>
-          {this.renderBadges(location.categories)}
-          <Text>
-            {'\n'} Tags: {'\n'}
-          </Text>
-          {this.renderBadges(location.tags)}
-          <Button
-            type="clear"
-            title="Products"
-            onPress={() =>
               this.props.navigation.navigate(
-                `locations/${location_id}/products`
+                `locations/${location_id}/products/edit/${product_id}`
               )
             }
           />
-          <Button
-            type="clear"
-            title="Orders"
-            onPress={() =>
-              this.props.navigation.navigate(`locations/${location_id}/orders`)
-            }
-          />
+        </View>
+        <Card title={product.name} containerStyle={styles.cardContainer}>
+          <Text style={{ marginBottom: 15 }}>
+            {'\n'} Description: {'\n'} {product.description}
+          </Text>
+          <Text>
+            {'\n'} Price: {'\n'} {product.price}
+          </Text>
+          <Text>
+            {'\n'} Categories: {'\n'}{' '}
+          </Text>
+          {this.renderBadges(product.categories)}
+          <Text>
+            {'\n'} Tags: {'\n'}{' '}
+          </Text>
+          {this.renderBadges(product.tags)}
+          <Text>
+            {'\n'} Additives: {'\n'}{' '}
+          </Text>
+          {this.renderBadges(product.additives)}
         </Card>
       </View>
     );
@@ -131,13 +118,13 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  locations: state.locations.locations,
+  products: state.products.products,
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getLocation: GetLocation,
+      getProduct: GetProduct,
     },
     dispatch
   );
@@ -145,4 +132,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LocationDetailScreen);
+)(ProductDetailScreen);

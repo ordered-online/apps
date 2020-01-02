@@ -16,7 +16,7 @@ const checkout = (state = initialState, action) => {
       return { ...state, form: action.payload };
 
     default:
-      return { ...state };
+      return state;
   }
 };
 

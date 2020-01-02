@@ -23,7 +23,7 @@ class HomeScreen extends Component {
   checkauthenticated() {
     const { authenticated } = this.props;
     if (authenticated) {
-      this.props.navigation.navigate('overview');
+      this.props.navigation.navigate('locations');
     }
   }
 
