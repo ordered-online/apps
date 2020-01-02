@@ -6,19 +6,31 @@ const ENDPOINT_VERIFICATION = '/verification/verify/';
 const ENDPOINT_LOGIN = '/verification/login/';
 const ENDPOINT_LOGOUT = '/verification/logout/';
 
-export const registerUser = credentials => {
+export const registerUser = ({
+  username,
+  password,
+  email,
+  first_name,
+  last_name,
+}) => {
   const url = API_URL + ENDPOINT_REGISTER;
   return fetch(url, {
     method: 'post',
     mode: 'cors',
-    body: JSON.stringify(credentials),
+    body: JSON.stringify({
+      username,
+      password,
+      email,
+      first_name,
+      last_name,
+    }),
   })
     .then(status)
     .then(json)
     .catch(resolveError);
 };
 
-export const verifyUser = (session_key, user_id) => {
+export const verifyUser = ({ session_key, user_id }) => {
   const url = API_URL + ENDPOINT_VERIFICATION;
   return fetch(url, {
     method: 'post',
@@ -30,7 +42,7 @@ export const verifyUser = (session_key, user_id) => {
     .catch(resolveError);
 };
 
-export const loginUser = (username, password) => {
+export const loginUser = ({ username, password }) => {
   const url = API_URL + ENDPOINT_LOGIN;
   return fetch(url, {
     method: 'post',
@@ -42,7 +54,7 @@ export const loginUser = (username, password) => {
     .catch(resolveError);
 };
 
-export const logoutUser = (session_key, user_id) => {
+export const logoutUser = ({ session_key, user_id }) => {
   const url = API_URL + ENDPOINT_LOGOUT;
   return fetch(url, {
     method: 'post',

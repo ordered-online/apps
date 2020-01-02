@@ -9,24 +9,29 @@ const ENDPOINT_FIND_LOCATION = '/locations/find/';
 const ENDPOINT_NEARBY_LOCATION = '/locations/nearby/';
 const GEOCODE_URL = 'https://nominatim.openstreetmap.org/search';
 
-export const createLocation = data => {
+export const createLocation = ({ user_id, session_key, location }) => {
   const url = API_URL + ENDPOINT_CREATE_LOCATION;
   return fetch(url, {
     method: 'post',
     mode: 'cors',
-    body: JSON.stringify(data),
+    body: JSON.stringify({ user_id, session_key, location }),
   })
     .then(status)
     .then(json)
     .catch(resolveError);
 };
 
-export const editLocation = (location_id, data) => {
+export const editLocation = ({
+  user_id,
+  session_key,
+  location_id,
+  location,
+}) => {
   const url = API_URL + ENDPOINT_EDIT_LOCATION(location_id);
   return fetch(url, {
     method: 'post',
     mode: 'cors',
-    body: JSON.stringify(data),
+    body: JSON.stringify({ user_id, session_key, location }),
   })
     .then(status)
     .then(json)
@@ -44,11 +49,11 @@ export const getLocation = location_id => {
     .catch(resolveError);
 };
 
-export const findLocation = query => {
+export const findLocation = ({ user_id, name, category, tag }) => {
   const url =
     API_URL +
     ENDPOINT_FIND_LOCATION +
-    qs.stringify(query, { addQueryPrefix: true });
+    qs.stringify({ user_id, name, category, tag }, { addQueryPrefix: true });
   return fetch(url, {
     method: 'get',
     mode: 'cors',
@@ -58,11 +63,11 @@ export const findLocation = query => {
     .catch(resolveError);
 };
 
-export const getNearbyLocation = query => {
+export const getNearbyLocation = ({ longitude, latitude, radius }) => {
   const url =
     API_URL +
     ENDPOINT_NEARBY_LOCATION +
-    qs.stringify(query, { addQueryPrefix: true });
+    qs.stringify({ longitude, latitude, radius }, { addQueryPrefix: true });
   return fetch(url, {
     method: 'post',
     mode: 'cors',
@@ -79,6 +84,8 @@ export const geocodeLocation = ({ address, postalcode, city }) => {
     city,
     format: 'json',
   };
+
+  console.log(query);
 
   const url = GEOCODE_URL + qs.stringify(query, { addQueryPrefix: true });
 
