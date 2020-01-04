@@ -23,6 +23,7 @@ const persistConfig = {
     'categories',
     'checkout',
     'locations',
+    'orders',
     'payment',
     'products',
     'router',

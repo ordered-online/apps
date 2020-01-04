@@ -2,16 +2,16 @@ import * as qs from 'qs';
 import { API_URL } from './environment';
 import { status, json, resolveError } from './responseHandler';
 
-const ENDPOINT_CREATE_ORDER = '/orders/sessions/create/';
-const ENDPOINT_GET_ORDER = session_code =>
+const ENDPOINT_CREATE_SESSION = '/orders/sessions/create/';
+const ENDPOINT_GET_SESSION = session_code =>
   `/orders/sessions/get/${session_code}/`;
-const ENDPOINT_CLOSE_ORDER = session_code =>
+const ENDPOINT_CLOSE_SESSION = session_code =>
   `/orders/sessions/close/${session_code}/`;
-const ENDPOINT_FIND_ORDER = '/orders/sessions/find/';
-const ENDPOINT_ADD_PRODUCT_TO_ORDER = '/orders/products/add/';
+const ENDPOINT_FIND_SESSION = '/orders/sessions/find/';
+const ENDPOINT_ORDER_PRODUCT = '/orders/products/add/';
 
-export const createOrder = ({ user_id, session_key, location_id, name }) => {
-  const url = API_URL + ENDPOINT_CREATE_ORDER;
+export const createSession = ({ user_id, session_key, location_id, name }) => {
+  const url = API_URL + ENDPOINT_CREATE_SESSION;
   return fetch(url, {
     method: 'post',
     mode: 'cors',
@@ -22,8 +22,8 @@ export const createOrder = ({ user_id, session_key, location_id, name }) => {
     .catch(resolveError);
 };
 
-export const getOrder = session_code => {
-  const url = API_URL + ENDPOINT_GET_ORDER(session_code);
+export const getSession = session_code => {
+  const url = API_URL + ENDPOINT_GET_SESSION(session_code);
   return fetch(url, {
     method: 'get',
     mode: 'cors',
@@ -33,8 +33,8 @@ export const getOrder = session_code => {
     .catch(resolveError);
 };
 
-export const closeOrder = session_code => {
-  const url = API_URL + ENDPOINT_CLOSE_ORDER(session_code);
+export const closeSession = session_code => {
+  const url = API_URL + ENDPOINT_CLOSE_SESSION(session_code);
   return fetch(url, {
     method: 'post',
     mode: 'cors',
@@ -44,10 +44,10 @@ export const closeOrder = session_code => {
     .catch(resolveError);
 };
 
-export const findOrder = ({ location_id, state }) => {
+export const findSession = ({ location_id, state }) => {
   const url =
     API_URL +
-    ENDPOINT_FIND_ORDER +
+    ENDPOINT_FIND_SESSION +
     qs.stringify({ location_id, state }, { addQueryPrefix: true });
   return fetch(url, {
     method: 'get',
@@ -58,8 +58,8 @@ export const findOrder = ({ location_id, state }) => {
     .catch(resolveError);
 };
 
-export const addProductToOrder = ({ product_id, session_code }) => {
-  const url = API_URL + ENDPOINT_ADD_PRODUCT_TO_ORDER;
+export const orderProduct = ({ product_id, session_code }) => {
+  const url = API_URL + ENDPOINT_ORDER_PRODUCT;
   return fetch(url, {
     method: 'post',
     mode: 'cors',

@@ -10,11 +10,16 @@ import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 
-import OverviewScreen from '../screens/OverviewScreen';
 import LocationsScreen from '../screens/LocationsScreen';
 import LocationsDetailScreen from '../screens/LocationDetailScreen';
-import EditLocationScreen from '../screens/EditLocationScreen';
+import LocationEditScreen from '../screens/LocationEditScreen';
+
+import ProductsScreen from '../screens/ProductsScreen';
+import ProductDetailScreen from '../screens/ProductDetailScreen';
+import ProductEditScreen from '../screens/ProductEditScreen';
+
 import OdersScreen from '../screens/OrdersScreen';
+import OrderDetailScreen from '../screens/OrderDetailScreen';
 
 import ImprintScreen from '../screens/ImprintScreen';
 import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
@@ -65,7 +70,7 @@ class AppNavigator extends Component {
           <PrivateRoute
             exact
             path="/locations/create"
-            component={EditLocationScreen}
+            component={LocationEditScreen}
             navigation={navigationProp}
           />
 
@@ -79,7 +84,7 @@ class AppNavigator extends Component {
           <PrivateRoute
             exact
             path="/locations/edit/:id"
-            component={EditLocationScreen}
+            component={LocationEditScreen}
             navigation={navigationProp}
             componentProps={{
               edit: true,
@@ -89,21 +94,45 @@ class AppNavigator extends Component {
           <PrivateRoute
             exact
             path="/locations/:location_id/products"
+            component={ProductsScreen}
+            navigation={navigationProp}
+          />
+
+          <PrivateRoute
+            exact
+            path="/locations/:location_id/products/create"
+            component={ProductEditScreen}
+            navigation={navigationProp}
+          />
+
+          <PrivateRoute
+            exact
+            path="/locations/:location_id/products/:product_id"
+            component={ProductDetailScreen}
+            navigation={navigationProp}
+          />
+
+          <PrivateRoute
+            exact
+            path="/locations/:location_id/products/edit/:product_id"
+            component={ProductEditScreen}
+            navigation={navigationProp}
+            componentProps={{
+              edit: true,
+            }}
+          />
+
+          <PrivateRoute
+            exact
+            path="/locations/:location_id/sessions"
             component={OdersScreen}
             navigation={navigationProp}
           />
 
           <PrivateRoute
             exact
-            path="/locations/:location_id/orders"
-            component={OdersScreen}
-            navigation={navigationProp}
-          />
-
-          <PrivateRoute
-            exact
-            path="/locations/:location_id/orders/:session_code"
-            component={OdersScreen}
+            path="/locations/:location_id/sessions/:session_code"
+            component={OrderDetailScreen}
             navigation={navigationProp}
           />
 

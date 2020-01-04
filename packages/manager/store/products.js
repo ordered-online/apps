@@ -133,7 +133,7 @@ export const FindProducts = ({
   dispatch(fetchProductsRequest());
 
   return api
-    .findProduct({
+    .findProducts({
       location_id,
       name,
       category,
@@ -155,7 +155,7 @@ export const GetAllProducts = location_id => (dispatch, getState) => {
   dispatch(fetchProductsRequest());
 
   return api
-    .findProduct({ location_id })
+    .findProducts({ location_id })
     .then(response => {
       if (__DEV__) {
         console.log(response);
@@ -194,7 +194,7 @@ export const GreateProduct = product => (dispatch, getState) => {
     })
     .then(product => reformatProducts(Array.of(product)))
     .then(product => dispatch(createProductSuccess(product)))
-    .then(() => dispatch(push(`/locations/${location_id}`)))
+    .then(() => dispatch(push(`/locations/${location_id}/products`)))
     .catch(error => dispatch(createProductFailure(error)));
 };
 
@@ -226,7 +226,7 @@ export const EditProduct = (product_id, product) => (dispatch, getState) => {
     })
     .then(location => reformatProducts(Array.of(location)))
     .then(location => dispatch(editProductSuccess(location)))
-    .then(() => dispatch(push(`/locations/${location_id}`)))
+    .then(() => dispatch(push(`/locations/${location_id}/products`)))
     .catch(error => dispatch(editProductFailure(error)));
 };
 

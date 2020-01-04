@@ -20,7 +20,7 @@ export const getQRCodeBase64 = value => {
   return fetch(url, {
     method: 'post',
     mode: 'cors',
-    body: JSON.stringify(value),
+    body: JSON.stringify({ value }),
   })
     .then(status)
     .then(json)

@@ -12,17 +12,18 @@ import api from '@ordered.online/api';
 
 import { primaryColor } from '../../constants/Colors';
 
-export class EditLocationScreen extends Component {
+export class LocationEditScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      description: '',
-      address: '',
-      latitude: '',
-      longitude: '',
-      website: '',
-      telephone: '',
+      name: 'Studentencaf\u00e9 Ascii',
+      description:
+        'Gem\u00fctliches Caf\u00e9 in der Fak. Informatik der TU Dresden.',
+      address: 'N\u00f6thnitzer Str. 46, 01187 Dresden',
+      latitude: '51.02508690',
+      longitude: '13.72100050',
+      website: 'https://ascii-dresden.de/',
+      telephone: '+4935146342221',
       categories: [],
       tags: [],
       typing: false,
@@ -216,6 +217,7 @@ export class EditLocationScreen extends Component {
           <Text>{'\n'}</Text>
           <Input
             editable
+            autoFocus
             maxLength={40}
             placeholder="Name"
             textContentType="organizationName"
@@ -224,6 +226,8 @@ export class EditLocationScreen extends Component {
           />
           <Input
             editable
+            autoFocus
+            multiline
             maxLength={400}
             placeholder="Description"
             textContentType="none"
@@ -234,6 +238,7 @@ export class EditLocationScreen extends Component {
           />
           <Input
             editable
+            autoFocus
             maxLength={40}
             placeholder="Address"
             textContentType="fullStreetAddress"
@@ -242,6 +247,7 @@ export class EditLocationScreen extends Component {
           />
           <Input
             editable
+            autoFocus
             maxLength={40}
             placeholder="Website"
             textContentType="url"
@@ -250,6 +256,7 @@ export class EditLocationScreen extends Component {
           />
           <Input
             editable
+            autoFocus
             maxLength={40}
             placeholder="Telephone"
             textContentType="telephoneNumber"
@@ -298,4 +305,4 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditLocationScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(LocationEditScreen);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet, Platform, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Card, Text, Icon } from '@ordered.online/components';
@@ -8,7 +8,7 @@ import { primaryColor } from '../../constants/Colors';
 
 export class ProductDetailScreen extends Component {
   componentDidMount() {
-    const product_id = this.props.match.params.id;
+    const { product_id } = this.props.match.params;
     this.props.getProduct(product_id);
   }
 
@@ -25,9 +25,14 @@ export class ProductDetailScreen extends Component {
   }
 
   render() {
-    const product_id = this.props.match.params.id;
-    const location_id = this.props.match.params.locationId;
-    const product = this.props.products[product_id];
+    const { fetching, products, locations, match } = this.props;
+    const { product_id, location_id } = match.params;
+    const product = products[product_id];
+    const location = locations[location_id];
+
+    if (fetching) {
+      return <ActivityIndicator size="large" color={primaryColor} />;
+    }
 
     if (!product) {
       return (
@@ -49,7 +54,9 @@ export class ProductDetailScreen extends Component {
             type="ionicon"
             color={primaryColor}
             onPress={() =>
-              this.props.navigation.navigate(`locations/${location_id}`)
+              this.props.navigation.navigate(
+                `locations/${location_id}/products`
+              )
             }
           />
           <Icon
@@ -118,7 +125,9 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
+  fetching: state.products.fetching,
   products: state.products.products,
+  locations: state.locations.locations,
 });
 
 const mapDispatchToProps = dispatch =>

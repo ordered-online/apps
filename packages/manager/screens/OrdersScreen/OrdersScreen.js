@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { GetOrders, CreateOrder } from '../../store/orders';
+import { GetSessions, CreateSession } from '../../store/orders';
 import { Icon, Text, ListItem, Input } from '@ordered.online/components';
 
 import { primaryColor } from '../../constants/Colors';
@@ -20,26 +20,26 @@ export class OrdersScreen extends Component {
       orderName: '',
     };
     this.renderItem = this.renderItem.bind(this);
-    this.createNewOrder = this.createNewOrder.bind(this);
+    this.createNewSession = this.createNewSession.bind(this);
   }
 
   componentDidMount() {
     const { location_id } = this.props.match.params;
-    this.props.getOrders({ location_id });
+    this.props.getSessions({ location_id });
   }
 
   keyExtractor = (item, index) => index.toString();
 
   renderItem({ item }) {
     const { location_id } = this.props.match.params;
-    const order = this.props.orders[item];
+    const session = this.props.sessions[item];
     return (
       <ListItem
-        title={order.name}
-        subtitle={order.state}
+        title={session.name}
+        subtitle={session.state}
         onPress={() =>
           this.props.navigation.navigate(
-            `locations/${location_id}/orders/${item}`
+            `locations/${location_id}/sessions/${item}`
           )
         }
         topDivider
@@ -49,22 +49,27 @@ export class OrdersScreen extends Component {
     );
   }
 
-  createNewOrder() {
+  createNewSession() {
     const { location_id } = this.props.match.params;
     const { orderName } = this.state;
-    this.props.createOrder({
-      location_id,
-      name: orderName,
-    });
-    this.setState({ orderName: '' });
+    this.props
+      .dispatch(
+        CreateSession({
+          location_id,
+          name: orderName,
+        })
+      )
+      .then(
+        this.props.navigation.navigate(`locations/${location_id}/sessions`)
+      );
   }
 
   render() {
-    const { fetching, locations, orders, match } = this.props;
+    const { fetching, locations, sessions, match } = this.props;
     const { location_id } = match.params;
     const location = locations[location_id];
 
-    const data = Object.keys(orders) || null;
+    const data = sessions ? Object.keys(sessions) : null;
 
     if (!location) {
       return (
@@ -93,7 +98,7 @@ export class OrdersScreen extends Component {
             name={Platform.OS === 'ios' ? 'ios-add' : 'md-add'}
             type="ionicon"
             color={primaryColor}
-            onPress={this.createNewOrder}
+            onPress={this.createNewSession}
             containerStyle={styles.icon}
           />
         </View>
@@ -139,16 +144,17 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => ({
   locations: state.locations.locations,
   fetching: state.orders.fetching,
-  orders: state.orders.orders,
+  sessions: state.orders.sessions,
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
+const mapDispatchToProps = dispatch => ({
+  ...bindActionCreators(
     {
-      getOrders: GetOrders,
-      createOrder: CreateOrder,
+      getSessions: GetSessions,
     },
     dispatch
-  );
+  ),
+  dispatch,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrdersScreen);

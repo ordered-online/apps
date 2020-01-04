@@ -7,13 +7,13 @@ import { GreateProduct, GetProduct, EditProduct } from '../../store/products';
 
 import { primaryColor } from '../../constants/Colors';
 
-export class EditProductScreen extends Component {
+export class ProductEditScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      description: '',
-      price: '',
+      name: 'Coffee',
+      description: 'The elexir of computer scientists.',
+      price: '1.80',
       categories: [],
       tags: [],
       additives: [],
@@ -27,7 +27,7 @@ export class EditProductScreen extends Component {
 
   componentDidMount() {
     if (this.props.edit) {
-      const product_id = this.props.match.params.id;
+      const { product_id } = this.props.match.params;
       this.props
         .dispatch(GetProduct(product_id))
         .then(this.updateStateAfterFetch);
@@ -41,7 +41,7 @@ export class EditProductScreen extends Component {
   }
 
   updateStateAfterFetch() {
-    const product_id = this.props.match.params.id;
+    const { product_id } = this.props.match.params;
     const product = this.props.products[product_id];
     if (product) {
       const { name, description, price, categories, tags, additives } = product;
@@ -49,11 +49,10 @@ export class EditProductScreen extends Component {
     }
   }
 
-  handleFormChange(key, value) {
-    this.setState({ [key]: value });
-  }
+  handleFormChange = (key, value) => this.setState({ [key]: value });
 
   handleFormSubmit() {
+    const { location_id } = this.props.match.params;
     const {
       name,
       description,
@@ -63,6 +62,7 @@ export class EditProductScreen extends Component {
       additives,
     } = this.state;
     const data = {
+      location_id,
       name,
       description,
       price,
@@ -72,7 +72,7 @@ export class EditProductScreen extends Component {
     };
 
     if (this.props.edit) {
-      const product_id = this.props.match.params.id;
+      const { product_id } = this.props.match.params;
       this.props.editProduct(product_id, data);
     } else {
       this.props.createProduct(data);
@@ -93,6 +93,7 @@ export class EditProductScreen extends Component {
           <Text>{'\n'}</Text>
           <Input
             editable
+            autoFocus
             maxLength={40}
             placeholder="Name"
             textContentType="givenName"
@@ -101,6 +102,8 @@ export class EditProductScreen extends Component {
           />
           <Input
             editable
+            autoFocus
+            multiline
             maxLength={400}
             placeholder="Description"
             textContentType="none"
@@ -111,11 +114,12 @@ export class EditProductScreen extends Component {
           />
           <Input
             editable
+            autoFocus
             maxLength={40}
             placeholder="Price"
             textContentType="none"
             onChangeText={price => this.handleFormChange('price', price)}
-            value={this.state.address}
+            value={this.state.price}
           />
           <Button
             title={edit ? 'Edit' : 'Create'}
@@ -157,4 +161,4 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditProductScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductEditScreen);

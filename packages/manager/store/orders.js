@@ -1,49 +1,48 @@
 import api from '@ordered.online/api';
 
 // Action Types
-export const CREATE_ORDER_REQUEST = 'ORDERS/CREATE_ORDER_REQUEST';
-export const CREATE_ORDER_SUCCESS = 'ORDERS/CREATE_ORDER_SUCCESS';
-export const CREATE_ORDER_FAILURE = 'ORDERS/CREATE_ORDER_FAILURE';
+export const CREATE_SESSION_REQUEST = 'ORDERS/CREATE_SESSION_REQUEST';
+export const CREATE_SESSION_SUCCESS = 'ORDERS/CREATE_SESSION_SUCCESS';
+export const CREATE_SESSION_FAILURE = 'ORDERS/CREATE_SESSION_FAILURE';
 
-export const CLOSE_ORDER_REQUEST = 'ORDERS/CLOSE_ORDER_REQUEST';
-export const CLOSE_ORDER_SUCCESS = 'ORDERS/CLOSE_ORDER_SUCCESS';
-export const CLOSE_ORDER_FAILURE = 'ORDERS/CLOSE_ORDER_FAILURE';
+export const CLOSE_SESSION_REQUEST = 'ORDERS/CLOSE_SESSION_REQUEST';
+export const CLOSE_SESSION_SUCCESS = 'ORDERS/CLOSE_SESSION_SUCCESS';
+export const CLOSE_SESSION_FAILURE = 'ORDERS/CLOSE_SESSION_FAILURE';
 
-export const FETCH_ORDER_REQUEST = 'ORDERS/FETCH_ORDER_REQUEST';
-export const FETCH_ORDER_SUCCESS = 'ORDERS/FETCH_ORDER_SUCCESS';
-export const FETCH_ORDER_FAILURE = 'ORDERS/FETCH_ORDER_FAILURE';
+export const FETCH_SESSION_REQUEST = 'ORDERS/FETCH_SESSION_REQUEST';
+export const FETCH_SESSION_SUCCESS = 'ORDERS/FETCH_SESSION_SUCCESS';
+export const FETCH_SESSION_FAILURE = 'ORDERS/FETCH_SESSION_FAILURE';
 
 // Initial State
 const initialState = {
   fetching: false,
-  orders: {},
+  sessions: {},
   error: null,
 };
 
 // Reducer (Modifies The State And Returns A New State)
 const orders = (state = initialState, action) => {
   switch (action.type) {
-    case CREATE_ORDER_REQUEST:
-    case CLOSE_ORDER_REQUEST:
-    case FETCH_ORDER_REQUEST:
+    case CREATE_SESSION_REQUEST:
+    case CLOSE_SESSION_REQUEST:
+    case FETCH_SESSION_REQUEST:
       return {
         ...state,
         fetching: true,
       };
 
-    case CREATE_ORDER_SUCCESS:
-    case CLOSE_ORDER_SUCCESS:
-    case FETCH_ORDER_SUCCESS:
-      const { order } = action.payload;
+    case CREATE_SESSION_SUCCESS:
+    case CLOSE_SESSION_SUCCESS:
+    case FETCH_SESSION_SUCCESS:
       return {
         ...state,
         fetching: false,
-        orders: { ...state.orders, ...action.payload },
+        sessions: { ...state.sessions, ...action.payload },
       };
 
-    case CREATE_ORDER_FAILURE:
-    case CLOSE_ORDER_FAILURE:
-    case FETCH_ORDER_FAILURE:
+    case CREATE_SESSION_FAILURE:
+    case CLOSE_SESSION_FAILURE:
+    case FETCH_SESSION_FAILURE:
       return {
         ...state,
         fetching: false,
@@ -57,59 +56,59 @@ const orders = (state = initialState, action) => {
 };
 
 // Actions
-const createOrderRequest = () => ({
-  type: CREATE_ORDER_REQUEST,
+const createSessionRequest = () => ({
+  type: CREATE_SESSION_REQUEST,
 });
 
-const createOrderSuccess = order => ({
-  type: CREATE_ORDER_SUCCESS,
-  payload: order,
+const createSessionSuccess = session => ({
+  type: CREATE_SESSION_SUCCESS,
+  payload: session,
 });
 
-const createOrderFailure = error => ({
-  type: CREATE_ORDER_FAILURE,
-  payload: error,
+const createSessionFailure = session => ({
+  type: CREATE_SESSION_FAILURE,
+  payload: session,
 });
 
-const closeOrderRequest = () => ({
-  type: CLOSE_ORDER_REQUEST,
+const closeSessionRequest = () => ({
+  type: CLOSE_SESSION_REQUEST,
 });
 
-const closeOrderSuccess = order => ({
-  type: CLOSE_ORDER_SUCCESS,
-  payload: order,
+const closeSessionSuccess = session => ({
+  type: CLOSE_SESSION_SUCCESS,
+  payload: session,
 });
 
-const closeOrderFailure = error => ({
-  type: CLOSE_ORDER_FAILURE,
-  payload: error,
+const closeSessionFailure = session => ({
+  type: CLOSE_SESSION_FAILURE,
+  payload: session,
 });
 
-const fetchOrderRequest = () => ({
-  type: FETCH_ORDER_REQUEST,
+const fetchSessionRequest = () => ({
+  type: FETCH_SESSION_REQUEST,
 });
 
-const fetchOrderSuccess = orders => ({
-  type: FETCH_ORDER_SUCCESS,
-  payload: orders,
+const fetchSessionSuccess = sessions => ({
+  type: FETCH_SESSION_SUCCESS,
+  payload: sessions,
 });
 
-const fetchOrderFailure = error => ({
-  type: FETCH_ORDER_FAILURE,
+const fetchSessionFailure = error => ({
+  type: FETCH_SESSION_FAILURE,
   payload: error,
 });
 
 /**
- * Take an array of orders from the REST API
+ * Take an array of order sessions from the REST API
  * and transform them into a object where
- * the key's are the orders session code's and the
- * value's are the order object's.
+ * the key's are the session code's and the
+ * value's are the session object's.
  *
- * @param {array} orders
+ * @param {array} session
  */
-const reformatOrders = orders => {
+const reformatSessions = sessions => {
   const initialValue = {};
-  return orders.reduce((obj, item) => {
+  return sessions.reduce((obj, item) => {
     return {
       ...obj,
       [item['code']]: item,
@@ -118,8 +117,11 @@ const reformatOrders = orders => {
 };
 
 // Exports
-export const CreateOrder = ({ location_id, name }) => (dispatch, getState) => {
-  dispatch(createOrderRequest());
+export const CreateSession = ({ location_id, name }) => (
+  dispatch,
+  getState
+) => {
+  dispatch(createSessionRequest());
 
   const { session_key, user_id } = getState().authentication;
 
@@ -128,45 +130,41 @@ export const CreateOrder = ({ location_id, name }) => (dispatch, getState) => {
   }
 
   return api
-    .createOrder({ user_id, session_key, location_id, name })
+    .createSession({ user_id, session_key, location_id, name })
     .then(order => {
       if (__DEV__) {
         console.log(order);
       }
-      return reformatOrders(Array.of(order));
+      return reformatSessions(Array.of(order));
     })
-    .then(order => dispatch(createOrderSuccess(order)))
-    .catch(error => dispatch(createOrderFailure(error)));
+    .then(order => dispatch(createSessionSuccess(order)))
+    .catch(error => dispatch(createSessionFailure(error)));
 };
 
-export const CloseOrder = ({ location_id, name, session_code }) => (
+export const CloseSession = ({ location_id, name, session_code }) => (
   dispatch,
   getState
 ) => {
-  dispatch(closeOrderRequest());
-
-  const { session_key, user_id } = getState().authentication;
+  dispatch(closeSessionRequest());
 
   if (__DEV__) {
     console.log('session_code: ' + session_code);
   }
 
   return api
-    .closeOrder(session_code)
-    .then(order => {
+    .closeSession(session_code)
+    .then(session => {
       if (__DEV__) {
-        console.log(order);
+        console.log(session);
       }
-      return reformatOrders(Array.of(order));
+      return reformatSessions(Array.of(session));
     })
-    .then(order => dispatch(closeOrderSuccess(order)))
-    .catch(error => dispatch(closeOrderFailure(error)));
+    .then(session => dispatch(closeSessionSuccess(session)))
+    .catch(error => dispatch(closeSessionFailure(error)));
 };
 
-export const GetOrders = ({ location_id, state }) => (dispatch, getState) => {
-  dispatch(fetchOrderRequest());
-
-  const { session_key, user_id } = getState().authentication;
+export const GetSessions = ({ location_id, state }) => (dispatch, getState) => {
+  dispatch(fetchSessionRequest());
 
   if (__DEV__) {
     console.log('location_id: ' + location_id);
@@ -174,15 +172,34 @@ export const GetOrders = ({ location_id, state }) => (dispatch, getState) => {
   }
 
   return api
-    .findOrder({ location_id, state })
-    .then(orders => {
+    .findSession({ location_id, state })
+    .then(sessions => {
       if (__DEV__) {
-        console.log(orders);
+        console.log(sessions);
       }
-      return reformatOrders(orders);
+      return reformatSessions(sessions);
     })
-    .then(orders => dispatch(fetchOrderSuccess(orders)))
-    .catch(error => dispatch(fetchOrderFailure(error)));
+    .then(sessions => dispatch(fetchSessionSuccess(sessions)))
+    .catch(error => dispatch(fetchSessionFailure(error)));
+};
+
+export const GetSession = session_code => (dispatch, getState) => {
+  dispatch(fetchSessionRequest());
+
+  if (__DEV__) {
+    console.log('session_code: ' + session_code);
+  }
+
+  return api
+    .getSession(session_code)
+    .then(order => {
+      if (__DEV__) {
+        console.log(order);
+      }
+      return reformatSessions(Array.of(order));
+    })
+    .then(order => dispatch(fetchSessionSuccess(order)))
+    .catch(error => dispatch(fetchSessionFailure(error)));
 };
 
 export default orders;

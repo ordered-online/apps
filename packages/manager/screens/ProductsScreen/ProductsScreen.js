@@ -14,19 +14,24 @@ export class ProductsScreen extends Component {
   }
 
   componentDidMount() {
-    const location_id = this.props.match.params.id;
-    this.props.getAllproducts(location_id);
+    const { location_id } = this.props.match.params;
+    this.props.getAllProducts(location_id);
   }
 
   keyExtractor = (item, index) => index.toString();
 
   renderItem({ item }) {
+    const { location_id } = this.props.match.params;
     const product = this.props.products[item];
     return (
       <ListItem
         title={product.name}
         subtitle={product.description}
-        onPress={() => this.props.navigation.navigate(`product/${item}`)}
+        onPress={() =>
+          this.props.navigation.navigate(
+            `locations/${location_id}/products/${item}`
+          )
+        }
         topDivider
         bottomDivider
         chevron
@@ -35,9 +40,9 @@ export class ProductsScreen extends Component {
   }
 
   render() {
-    const { fetching, products, locations } = this.props;
-    const location_id = this.props.match.params.id;
-    const location = locations[location_id];
+    const { fetching, products, locations, match } = this.props;
+    const { location_id } = match.params;
+    const location = locations[location_id] || null;
 
     const data = Object.keys(products) || null;
 
@@ -49,7 +54,11 @@ export class ProductsScreen extends Component {
         <View style={styles.createButtonWrapper}>
           <Button
             title="create new product"
-            onPress={() => this.props.navigation.navigate('products/create')}
+            onPress={() =>
+              this.props.navigation.navigate(
+                `locations/${location_id}/products/create`
+              )
+            }
           />
         </View>
         {fetching && <ActivityIndicator size="large" color={primaryColor} />}

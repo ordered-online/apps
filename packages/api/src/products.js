@@ -8,6 +8,7 @@ const ENDPOINT_GET_PRODUCT = product_id => `/products/get/${product_id}/`;
 const ENDPOINT_FIND_PRODUCT = '/products/find/';
 
 export const createProduct = ({ user_id, session_key, product }) => {
+  console.log({ user_id, session_key, product });
   const url = API_URL + ENDPOINT_CREATE_PRODUCT;
   return fetch(url, {
     method: 'post',

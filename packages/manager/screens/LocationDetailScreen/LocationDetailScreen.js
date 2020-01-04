@@ -49,6 +49,24 @@ export class LocationDetailScreen extends Component {
             color={primaryColor}
             onPress={() => this.props.navigation.navigate('locations')}
           />
+          <Button
+            type="clear"
+            title="Products"
+            onPress={() =>
+              this.props.navigation.navigate(
+                `locations/${location_id}/products`
+              )
+            }
+          />
+          <Button
+            type="clear"
+            title="Orders"
+            onPress={() =>
+              this.props.navigation.navigate(
+                `locations/${location_id}/sessions`
+              )
+            }
+          />
           <Icon
             name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'}
             type="ionicon"
@@ -79,22 +97,6 @@ export class LocationDetailScreen extends Component {
             {'\n'} Tags: {'\n'}
           </Text>
           {this.renderBadges(location.tags)}
-          <Button
-            type="clear"
-            title="Products"
-            onPress={() =>
-              this.props.navigation.navigate(
-                `locations/${location_id}/products`
-              )
-            }
-          />
-          <Button
-            type="clear"
-            title="Orders"
-            onPress={() =>
-              this.props.navigation.navigate(`locations/${location_id}/orders`)
-            }
-          />
         </Card>
       </View>
     );
