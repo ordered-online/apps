@@ -1,4 +1,4 @@
-import * as api from '@ordered.online/api';
+import api from '@ordered.online/api';
 
 // Action Types
 export const FETCH_CATEGORIES_REQUEST = 'CATEGORIES/FETCH_CATEGORIES_REQUEST';
@@ -8,7 +8,11 @@ export const FETCH_CATEGORIES_FAILURE = 'CATEGORIES/FETCH_CATEGORIES_FAILURE';
 // Initial State
 const initialState = {
   fetching: false,
-  categories: null,
+  categories: [
+    {
+      name: 'Drink',
+    },
+  ],
   error: null,
 };
 
@@ -32,7 +36,7 @@ const categories = (state = initialState, action) => {
       };
 
     default:
-      return { ...state };
+      return state;
   }
 };
 

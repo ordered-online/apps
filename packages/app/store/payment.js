@@ -1,4 +1,4 @@
-import * as api from '@ordered.online/api';
+import api from '@ordered.online/api';
 
 // Action Types
 export const SUBMIT_PAYMENT = 'PAYMENT/SUBMIT_PAYMENT';
@@ -21,7 +21,7 @@ const payment = (state = initialState, action) => {
       return { ...state, processing: false, complete: true };
 
     default:
-      return { ...state };
+      return state;
   }
 };
 

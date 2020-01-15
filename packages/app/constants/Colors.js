@@ -5,7 +5,7 @@ export default {
   tabIconDefault: '#ccc',
   tabIconSelected: primaryColor,
   selectIconDefault: '#ccc',
-  selectIconSelected: primaryColor,
+  selectIconSelected: '#fff',
   tabBar: '#fefefe',
   errorBackground: 'red',
   errorText: '#fff',

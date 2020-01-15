@@ -1,22 +1,31 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Platform } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
-import { FindLocationNearby } from '../../store/locations';
+import { FindLocations, FindLocationsNearby } from '../../store/locations';
 
-export class FindNearbyLocationsScreen extends Component {
+export class FindLocationsScreen extends Component {
+  static navigationOptions = {
+    title: 'Find a location',
+  };
+
   constructor(props) {
     super(props);
-    state = {
-      location: null,
+    this.state = {
+      coordinates: null,
       errorMessage: null,
+      hasPermissions: false,
     };
 
     this.getLocationPermissions = this.getLocationPermissions.bind(this);
+    this.getLocation = this.getLocation.bind(this);
+
+    this.findLocations = this.findLocations.bind(this);
+    this.findLocationsNearby = this.findLocationsNearby.bind(this);
   }
 
   componentDidMount() {
@@ -25,8 +34,6 @@ export class FindNearbyLocationsScreen extends Component {
         errorMessage:
           'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
       });
-    } else {
-      this.getLocationPermissions();
     }
   }
 
@@ -36,12 +43,26 @@ export class FindNearbyLocationsScreen extends Component {
       this.setState({
         errorMessage: 'Permission to access location was denied',
       });
+    } else {
+      this.setState({ hasPermissions: true });
     }
   }
 
   async getLocation() {
-    let location = await Location.getCurrentPositionAsync();
-    this.setState({ location });
+    if (!this.state.hasPermissions) {
+      await this.getLocationPermissions();
+    }
+    const coordinates = await Location.getCurrentPositionAsync();
+    this.setState({ coordinates });
+    this.findLocationsNearby({ coordinates });
+  }
+
+  findLocations() {
+    // this.props.findLocations();
+  }
+
+  findLocationsNearby({ coordinates }) {
+    this.props.findLocations({ coordinates });
   }
 
   render() {
@@ -56,9 +77,10 @@ export class FindNearbyLocationsScreen extends Component {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      findLocationNearby: FindLocationNearby,
+      findLocations: FindLocations,
+      findLocationsNearby: FindLocationsNearby,
     },
     dispatch
   );
 
-export default connect(null, mapDispatchToProps)(FindNearbyLocationsScreen);
+export default connect(null, mapDispatchToProps)(FindLocationsScreen);

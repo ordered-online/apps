@@ -1,2 +1,1 @@
-import OrderScreen from './OrderScreen';
-export default OrderScreen;
+export { default } from './OrderScreen';

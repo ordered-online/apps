@@ -1,15 +1,20 @@
 import { combineReducers } from 'redux';
 
-import cart from './cart';
+import categories from './categories';
 import checkout from './checkout';
+import locations from './locations';
+import orders from './orders';
 import payment from './payment';
-import authentication from './authentication';
+import products from './products';
 
-const rootReducer = combineReducers({
-  cart,
-  checkout,
-  payment,
-  authentication,
-});
+const createRootReducer = history =>
+  combineReducers({
+    categories,
+    checkout,
+    locations,
+    orders,
+    payment,
+    products,
+  });
 
-export default rootReducer;
+export default createRootReducer;

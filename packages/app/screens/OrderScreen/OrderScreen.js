@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform, Dimensions } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import {
+  Card,
+  Text,
+  Icon,
+  Button,
+  Overlay,
+  Input,
+} from '@ordered.online/components';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 
+const isWeb = Platform.OS === 'web';
+
 export class OrderScreen extends Component {
+  static navigationOptions = {
+    title: 'Start your order',
+  };
+
   constructor(props) {
     super(props);
-    state = {
+    this.state = {
       hasCameraPermission: null,
+      scanning: false,
       scanned: false,
       errorMessage: null,
     };
@@ -23,8 +38,6 @@ export class OrderScreen extends Component {
         errorMessage:
           'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
       });
-    } else {
-      this._getPermissionsAsync();
     }
   }
 
@@ -41,43 +54,54 @@ export class OrderScreen extends Component {
   }
 
   handleBarCodeScanned({ type, data }) {
-    this.setState({ scanned: true });
+    this.setState({ scanned: true, scanning: false });
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    this.props.onBarCodeScanned && this.props.onBarCodeScanned(data);
+  }
+
+  async scanCode() {
+    console.log('Scan');
+    if (isWeb) return;
+    if (!this.state.hasCameraPermission) {
+      await this.getCameraPermissions();
+    }
+    this.setState({ scanning: true });
   }
 
   render() {
-    const { hasCameraPermission, scanned } = this.state;
+    const { hasCameraPermission, scanning } = this.state;
 
-    if (hasCameraPermission === null) {
+    if (hasCameraPermission === null && !isWeb) {
       return (
-        <View>
-          <Text>Requesting for camera permission</Text>
-        </View>
-      );
-    }
-    if (hasCameraPermission === false) {
-      return (
-        <View>
-          <Text>No access to camera</Text>
+        <View style={styles.container}>
+          <Text>Requesting for camera permission ...</Text>
         </View>
       );
     }
 
     return (
       <View style={styles.container}>
+        {/* {hasCameraPermission && scanning && ( */}
         <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : this._handleBarCodeScanned}
-          style={StyleSheet.absoluteFillObject}
+          onBarCodeScanned={this.handleBarCodeScanned}
+          style={StyleSheet.scanner}
         />
+        {/* )} */}
 
-        {scanned && (
-          <Button
-            color="#57c75e"
-            title={'Tap to Scan Again'}
-            onPress={() => this.setState({ scanned: false })}
-          />
-        )}
+        <Input
+          editable
+          autoFocus
+          maxLength={40}
+          placeholder="Type or scan the code our your table"
+          value={this.state.code}
+          onChangeText={code => this.setState({ code })}
+          rightIcon={
+            <Icon
+              name={Platform.OS === 'ios' ? 'ios-qr-scanner' : 'md-qr-scanner'}
+              type="ionicon"
+              onPress={this.scanCode}
+            />
+          }
+        />
       </View>
     );
   }
@@ -89,6 +113,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    marginHorizontal: 'auto',
+  },
+  scanner: {
+    flex: 1,
   },
 });
 
