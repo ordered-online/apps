@@ -44,7 +44,16 @@ export class ProductsScreen extends Component {
     const { location_id } = match.params;
     const location = locations[location_id] || null;
 
-    const data = Object.keys(products) || null;
+    const data = [];
+    if (products) {
+      Object.keys(products).forEach(product_id => {
+        console.log(product_id);
+        console.log(products[product_id].location_id);
+        if (products[product_id].location_id == location_id) {
+          data.push(product_id);
+        }
+      });
+    }
 
     return (
       <View style={styles.container}>
