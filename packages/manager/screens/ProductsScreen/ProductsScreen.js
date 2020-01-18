@@ -47,8 +47,6 @@ export class ProductsScreen extends Component {
     const data = [];
     if (products) {
       Object.keys(products).forEach(product_id => {
-        console.log(product_id);
-        console.log(products[product_id].location_id);
         if (products[product_id].location_id == location_id) {
           data.push(product_id);
         }

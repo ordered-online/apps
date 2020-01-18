@@ -38,7 +38,7 @@
     "format": "prettier \"./**/*.{js,jsx,json,md}\" --write"
   },
   "dependencies": {
-    "@expo/vector-icons": "^10.0.0",
+    "@expo/vector-icons": "^10.0.6",
     "@ordered.online/api": "^0.0.4",
     "@ordered.online/components": "^0.0.4",
     "@react-navigation/core": "^3.5.1",

@@ -111,7 +111,7 @@ class RegisterScreen extends Component {
           />
 
           <Button
-            type="clear"
+            type="outline"
             title="Already have an account ? Click here to login."
             onPress={() => this.props.navigation.navigate('login')}
           />

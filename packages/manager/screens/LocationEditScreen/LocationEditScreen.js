@@ -217,7 +217,6 @@ export class LocationEditScreen extends Component {
           <Text>{'\n'}</Text>
           <Input
             editable
-            autoFocus
             maxLength={40}
             placeholder="Name"
             textContentType="organizationName"

@@ -1,35 +1,9 @@
+export { default as Badge } from './Badge';
 export { default as Button } from './Button';
-export { default as Map } from './Map';
+export { default as Card } from './Card';
+export { default as Icon } from './Icon';
+export { default as Image } from './Image';
 export { default as Input } from './Input';
-
-export {
-  Badge,
-  ButtonGroup,
-  Card,
-  ListItem,
-  PricingCard,
-  Tooltip,
-  SocialIcon,
-  Text,
-  Divider,
-  CheckBox,
-  SearchBar,
-  Icon,
-  colors,
-  getIconType,
-  registerCustomIconType,
-  normalize,
-  Tile,
-  Slider,
-  Avatar,
-  Rating,
-  AirbnbRating,
-  Header,
-  Overlay,
-  ThemeProvider,
-  ThemeConsumer,
-  ThemeContext,
-  withBadge,
-  withTheme,
-  Image,
-} from 'react-native-elements';
+export { default as ListItem } from './ListItem';
+export { default as Map } from './Map';
+export { default as Text } from './Text';

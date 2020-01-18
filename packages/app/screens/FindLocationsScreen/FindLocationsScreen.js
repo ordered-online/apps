@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Platform } from 'react-native';
+import { Card, View, Platform, FlatList } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Constants from 'expo-constants';
@@ -65,10 +65,21 @@ export class FindLocationsScreen extends Component {
     this.props.findLocations({ coordinates });
   }
 
+  keyExtractor = (item, index) => index.toString();
+
+  renderItem({ item }) {
+    return <Card />;
+  }
+
   render() {
     return (
       <View>
-        <Text></Text>
+        <FlatList
+          keyExtractor={this.keyExtractor}
+          data={data}
+          renderItem={this.renderItem}
+          numColumns={2}
+        />
       </View>
     );
   }

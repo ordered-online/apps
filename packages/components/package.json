@@ -42,10 +42,11 @@
     "react-native": ">= 0.51"
   },
   "dependencies": {
+    "@expo/vector-icons": "^10.0.6",
     "leaflet": "^1.6.0",
     "react-leaflet": "^2.6.1",
-    "react-native-elements": "^1.2.7",
-    "react-native-maps": "0.26.1"
+    "react-native-maps": "0.26.1",
+    "react-native-webview": "^8.0.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.0",
