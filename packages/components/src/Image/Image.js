@@ -56,7 +56,7 @@ export default function Image(props) {
       accessibilityIgnoresInvertColors={true}
       style={StyleSheet.flatten([styles.container, containerStyle])}>
       <ImageComponent
-        testID="RNE__Image"
+        testID="imageImage"
         {...attributes}
         onLoad={onLoad}
         style={[
@@ -79,7 +79,7 @@ export default function Image(props) {
           },
         ]}>
         <View
-          testID="RNE__Image__placeholder"
+          testID="imagePlaceholder"
           style={StyleSheet.flatten([
             style,
             styles.placeholder,

@@ -1,4 +1,4 @@
-const primaryColor = '#57c75e';
+export const primaryColor = '#57c75e';
 
 export default {
   primaryColor,

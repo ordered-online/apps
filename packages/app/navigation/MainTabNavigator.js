@@ -11,15 +11,11 @@ import TabBarIcon from './TabBarIcon';
 import OrderScreen from '../screens/OrderScreen';
 
 import FindLocationsScreen from '../screens/FindLocationsScreen';
+import LocationDetailScreen from '../screens/LocationDetailScreen';
 
 import CartScreen from '../screens/CartScreen';
 
 import AboutScreen from '../screens/AboutScreen';
-import ImprintScreen from '../screens/ImprintScreen';
-import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
-import TermsOfUseScreen from '../screens/TermsOfUseScreen';
-
-import Colors from '../constants/Colors';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -48,6 +44,7 @@ OrderStack.path = '';
 const LocationStack = createStackNavigator(
   {
     Locations: FindLocationsScreen,
+    LocationDetails: LocationDetailScreen,
   },
   config
 );
@@ -86,9 +83,6 @@ CartStack.path = '';
 const AboutStack = createStackNavigator(
   {
     About: AboutScreen,
-    Imprint: ImprintScreen,
-    Privacy: PrivacyPolicyScreen,
-    Terms: TermsOfUseScreen,
   },
   {
     ...config,

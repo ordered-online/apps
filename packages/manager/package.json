@@ -31,7 +31,6 @@
     "web": "expo start --clear --web",
     "ios": "expo start --clear --ios",
     "android": "expo start --clear  --android",
-    "build": "expo build:web $PWD",
     "build:web": "expo build:web",
     "build:ios": "expo build:ios",
     "build:android": "expo build:android",

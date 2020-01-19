@@ -24,7 +24,6 @@ export default function Icon(props) {
     containerStyle,
     reverseColor,
     disabled,
-    disabledStyle,
     onPress,
     Component = onPress ? TouchableHighlight : View,
     ...attributes
@@ -58,7 +57,6 @@ export default function Icon(props) {
             justifyContent: 'center',
           },
           disabled && styles.disabled,
-          disabled && disabledStyle,
         ])}
         {...(onPress && { disabled })}
         onPress={onPress}>
@@ -91,7 +89,6 @@ Icon.propTypes = {
   onPress: PropTypes.func,
   reverseColor: PropTypes.string,
   disabled: PropTypes.bool,
-  disabledStyle: ViewPropTypes.styles,
 };
 
 Icon.defaultProps = {

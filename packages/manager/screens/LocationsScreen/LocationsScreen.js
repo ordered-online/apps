@@ -49,12 +49,15 @@ export class LocationsScreen extends Component {
             onPress={() => this.props.navigation.navigate('locations/create')}
           />
         </View>
-        {fetching && <ActivityIndicator size="large" color={primaryColor} />}
-        <FlatList
-          keyExtractor={this.keyExtractor}
-          data={data}
-          renderItem={this.renderItem}
-        />
+        {fetching ? (
+          <ActivityIndicator size="large" color={primaryColor} />
+        ) : (
+          <FlatList
+            keyExtractor={this.keyExtractor}
+            data={data}
+            renderItem={this.renderItem}
+          />
+        )}
       </View>
     );
   }

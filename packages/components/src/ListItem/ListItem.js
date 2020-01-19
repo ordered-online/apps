@@ -118,7 +118,7 @@ export default function ListItem(props) {
             </Text>
             <Text
               style={[styles.subtitle, subtitleStyle]}
-              testID="listItemTitle"
+              testID="listItemSubTitle"
               {...subtitleProps}>
               {subtitle}
             </Text>

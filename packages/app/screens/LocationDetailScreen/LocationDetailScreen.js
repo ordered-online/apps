@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Card, Text, Icon, Button } from '@ordered.online/components';
+import { Card, Text, Icon, Button, Map } from '@ordered.online/components';
 import { GetLocation } from '../../store/locations';
 import { primaryColor } from '../../constants/Colors';
 
 export class LocationDetailScreen extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam('title', 'Location Details'),
+    };
+  };
+
   componentDidMount() {
-    const location_id = this.props.match.params.id;
-    this.props.getLocation(location_id);
+    const location_id = this.props.navigation.getParam('location_id', -1);
+    if (location_id > -1) {
+      this.props.getLocation(location_id);
+    } else {
+      this.props.navigation.navigate('Locations');
+    }
   }
 
   renderBadges(items) {
@@ -25,80 +35,62 @@ export class LocationDetailScreen extends Component {
   }
 
   render() {
-    const location_id = this.props.match.params.id;
+    const location_id = this.props.navigation.getParam('location_id', -1);
+    if (location_id < 0) {
+      this.props.navigation.navigate('Locations');
+    }
+
     const location = this.props.locations[location_id];
 
     if (!location) {
-      return (
-        <View style={styles.container}>
-          <Text>Uuups, you were never here !</Text>
-        </View>
-      );
+      this.props.navigation.navigate('Locations');
     }
 
+    const {
+      name,
+      description,
+      address,
+      latitude,
+      longitude,
+      website,
+      telephone,
+      categories,
+      tags,
+    } = location;
+
+    const region = {
+      latitude: parseFloat(latitude),
+      longitude: parseFloat(longitude),
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0421,
+    };
+
+    const marker = {
+      coordinate: {
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
+      },
+      title: name,
+      description: description,
+    };
+
     return (
-      <View style={styles.container}>
-        <View style={styles.actionsContainer}>
-          <Icon
-            name={
-              Platform.OS === 'ios'
-                ? 'ios-arrow-round-back'
-                : 'md-arrow-round-back'
-            }
-            type="ionicon"
-            color={primaryColor}
-            onPress={() => this.props.navigation.navigate('locations')}
-          />
-          <Button
-            type="clear"
-            title="Products"
-            onPress={() =>
-              this.props.navigation.navigate(
-                `locations/${location_id}/products`
-              )
-            }
-          />
-          <Button
-            type="clear"
-            title="Orders"
-            onPress={() =>
-              this.props.navigation.navigate(
-                `locations/${location_id}/sessions`
-              )
-            }
-          />
-          <Icon
-            name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'}
-            type="ionicon"
-            color={primaryColor}
-            onPress={() =>
-              this.props.navigation.navigate(`locations/edit/${location_id}`)
-            }
-          />
-        </View>
-        <Card title={location.name} containerStyle={styles.cardContainer}>
-          <Text style={{ marginBottom: 15 }}>
-            {'\n'} Description: {'\n'} {location.description}
-          </Text>
-          <Text>
-            {'\n'} Address: {'\n'} {location.address}
-          </Text>
-          <Text>
-            {'\n'} Latitude: {'\n'} {location.latitude}
-          </Text>
-          <Text>
-            {'\n'} Longitude: {'\n'} {location.longitude}
-          </Text>
-          <Text>
-            {'\n'} Categories: {'\n'}
-          </Text>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Map region={region} marker={marker} />
+        <View style={styles.contentContainer}>
+          <Text h2>{location.name}</Text>
+          <Text style={styles.textContent}>{location.description}</Text>
+          <Text>{location.address}</Text>
+          {location.categories.length > 0 && (
+            <Text style={styles.textContent}>Categories: {'\n'}</Text>
+          )}
           {this.renderBadges(location.categories)}
-          <Text>
-            {'\n'} Tags: {'\n'}
-          </Text>
+          {location.categories.tags > 0 && (
+            <Text style={styles.textContent}>Tags: {'\n'}</Text>
+          )}
           {this.renderBadges(location.tags)}
-        </Card>
-      </View>
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -109,15 +101,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'stretch',
   },
-  cardContainer: {
+  contentContainer: {
     flex: 1,
+    marginTop: 30,
+    marginHorizontal: 'auto',
   },
-  actionsContainer: {
-    margin: 25,
-    marginBottom: 0,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  textContent: {
+    marginVertical: 15,
   },
   badgeContainer: {
     flex: 1 / 3,

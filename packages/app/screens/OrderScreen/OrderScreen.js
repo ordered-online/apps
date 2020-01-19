@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Platform, Dimensions } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import {
-  Card,
-  Text,
-  Icon,
-  Button,
-  Overlay,
-  Input,
-} from '@ordered.online/components';
+import { Text, Icon, Input } from '@ordered.online/components';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 
@@ -80,12 +73,12 @@ export class OrderScreen extends Component {
 
     return (
       <View style={styles.container}>
-        {/* {hasCameraPermission && scanning && ( */}
-        <BarCodeScanner
-          onBarCodeScanned={this.handleBarCodeScanned}
-          style={StyleSheet.scanner}
-        />
-        {/* )} */}
+        {hasCameraPermission && scanning && (
+          <BarCodeScanner
+            onBarCodeScanned={this.handleBarCodeScanned}
+            style={StyleSheet.scanner}
+          />
+        )}
 
         <Input
           editable

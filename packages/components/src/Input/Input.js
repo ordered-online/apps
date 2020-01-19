@@ -16,8 +16,8 @@ import {
   ViewPropTypes,
 } from 'react-native';
 
-export default function Input(props, ref) {
-  const inputRef = useRef(null);
+const Input = forwardRef(function(props, ref) {
+  const inputRef = useRef();
 
   const focus = () => inputRef.current.focus();
 
@@ -27,12 +27,10 @@ export default function Input(props, ref) {
 
   const isFocused = () => inputRef.current.isFocused();
 
-  const shakeAnimationValue = useRef(new Animated.Value(0)).current;
+  const shakeAnimationValue = new Animated.Value(0);
 
   const shake = () => {
     shakeAnimationValue.setValue(0);
-    // Animation duration based on Material Design
-    // https://material.io/guidelines/motion/duration-easing.html#duration-easing-common-durations
     Animated.timing(shakeAnimationValue, {
       duration: 375,
       toValue: 3,
@@ -44,6 +42,14 @@ export default function Input(props, ref) {
     inputRange: [0, 0.5, 1, 1.5, 2, 2.5, 3],
     outputRange: [0, -15, 0, 15, 0, -15, 0],
   });
+
+  useImperativeHandle(ref, () => ({
+    focus,
+    blur,
+    clear,
+    isFocused,
+    shake,
+  }));
 
   const {
     multiline,
@@ -118,7 +124,7 @@ export default function Input(props, ref) {
         )}
 
         <InputComponent
-          testID="RNE__Input__text-input"
+          testID="inputTextInput"
           underlineColorAndroid="transparent"
           editable={!disabled}
           {...rest}
@@ -156,7 +162,7 @@ export default function Input(props, ref) {
       )}
     </View>
   );
-}
+});
 
 Input.defaultProps = {
   InputComponent: TextInput,
@@ -199,7 +205,7 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 15,
+    paddingHorizontal: 15,
   },
   input: {
     alignSelf: 'center',
@@ -227,3 +233,5 @@ const styles = StyleSheet.create({
     }),
   },
 });
+
+export default Input;
