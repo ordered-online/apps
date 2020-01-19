@@ -24,12 +24,8 @@ export default class Navbar extends Component {
 const styles = StyleSheet.create({
   navbar: {
     height: 64,
+    marginHorizontal: 18,
     display: 'flex',
     flexDirection: 'row',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
-    elevation: 1,
   },
 });

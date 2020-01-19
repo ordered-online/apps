@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Button, Input } from '@ordered.online/components';
+import { Button, Input, Image } from '@ordered.online/components';
 
 import { Login } from '../../store/authentication';
 
@@ -48,41 +48,52 @@ class LoginScreen extends Component {
 
   render() {
     return (
-      <View style={styles.wrapper}>
-        <View style={styles.container}>
-          <Input
-            editable
-            maxLength={40}
-            placeholder="username"
-            textContentType="username"
-            onChangeText={username => this.setState({ username })}
-            value={this.state.username}
-            containerStyle={styles.inputContainer}
-          />
+      <View style={styles.container}>
+        <Image style={styles.logo} source={require('../../assets/icon.png')} />
 
-          <Input
-            editable
-            maxLength={40}
-            secureTextEntry={true}
-            placeholder="password"
-            textContentType="password"
-            value={this.state.password}
-            onChangeText={password => this.setState({ password })}
-            containerStyle={styles.inputContainer}
-          />
+        <Input
+          editable
+          maxLength={40}
+          placeholder="username"
+          textContentType="username"
+          onChangeText={username => this.setState({ username })}
+          value={this.state.username}
+          containerStyle={styles.inputContainer}
+        />
 
-          <Button
-            containerStyle={{ marginVertical: 20 }}
-            title="Login"
-            loading={this.props.fetching}
-            onPress={this.handleRegistration}
-          />
+        <Input
+          editable
+          maxLength={40}
+          secureTextEntry={true}
+          placeholder="password"
+          textContentType="password"
+          value={this.state.password}
+          onChangeText={password => this.setState({ password })}
+          containerStyle={styles.inputContainer}
+        />
 
-          <Button
-            type="clear"
-            title="Click Here to Register"
-            onPress={() => this.props.navigation.navigate('register')}
-          />
+        <View style={styles.inlineButtonContainer}>
+          <View style={styles.buttonWrapper}>
+            <Button
+              raised
+              color={'#57c75e'}
+              titleStyle={{ color: '#fff', padding: 4 }}
+              title="Login"
+              loading={this.props.fetching}
+              onPress={this.handleRegistration}
+            />
+          </View>
+
+          <View style={styles.buttonWrapper}>
+            <Button
+              raised
+              type="outline"
+              title="or register instead"
+              color={'#57c75e'}
+              titleStyle={{ color: '#fff', padding: 4 }}
+              onPress={() => this.props.navigation.navigate('register')}
+            />
+          </View>
         </View>
       </View>
     );
@@ -90,20 +101,38 @@ class LoginScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
+  container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 6,
+    marginRight: 6,
+    backgroundColor: '#f8f8f8',
+    borderBottomLeftRadius: 24,
+    borderBottomRightRadius: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.3,
+    shadowRadius: 16,
+    elevation: 0.5,
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    borderRadius: 12,
+    margin: 24,
+  },
+  inlineButtonContainer: {
+    height: 64,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
   },
-  container: {
-    maxWidth: 400,
-    flex: 1,
-    display: 'flex',
-    justifyContent: 'center',
+  buttonWrapper: {
+    marginHorizontal: 8,
   },
   inputContainer: {
-    width: '100%',
+    marginBottom: 24,
+    width: '90%',
   },
 });
 

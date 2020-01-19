@@ -87,47 +87,48 @@ export class ProductEditScreen extends Component {
     }
 
     return (
-      <View style={styles.wrapper}>
-        <View style={styles.container}>
-          <Text h4>Please provide details for your product.</Text>
-          <Text>{'\n'}</Text>
-          <Input
-            editable
-            autoFocus
-            maxLength={40}
-            placeholder="Name"
-            textContentType="givenName"
-            value={this.state.name}
-            onChangeText={name => this.handleFormChange('name', name)}
-          />
-          <Input
-            editable
-            autoFocus
-            multiline
-            maxLength={400}
-            placeholder="Description"
-            textContentType="none"
-            onChangeText={description =>
-              this.handleFormChange('description', description)
-            }
-            value={this.state.description}
-          />
-          <Input
-            editable
-            autoFocus
-            maxLength={40}
-            placeholder="Price"
-            textContentType="none"
-            onChangeText={price => this.handleFormChange('price', price)}
-            value={this.state.price}
-          />
-          <Button
-            title={edit ? 'Edit' : 'Create'}
-            style={{ marginTop: 15 }}
-            loading={this.props.fetching}
-            onPress={this.handleFormSubmit}
-          />
-        </View>
+      <View style={styles.container}>
+        <Text h4>Please provide details for your product.</Text>
+        <Text>{'\n'}</Text>
+        <Input
+          editable
+          autoFocus
+          maxLength={40}
+          placeholder="Name"
+          textContentType="givenName"
+          value={this.state.name}
+          onChangeText={name => this.handleFormChange('name', name)}
+        />
+        <Input
+          editable
+          autoFocus
+          multiline
+          maxLength={400}
+          placeholder="Description"
+          textContentType="none"
+          onChangeText={description =>
+            this.handleFormChange('description', description)
+          }
+          value={this.state.description}
+        />
+        <Input
+          editable
+          autoFocus
+          maxLength={40}
+          placeholder="Price"
+          textContentType="none"
+          onChangeText={price => this.handleFormChange('price', price)}
+          value={this.state.price}
+        />
+        <Button
+          raised
+          color={'#57c75e'}
+          titleStyle={{ color: '#fff', padding: 4 }}
+          title={edit ? 'Save Product' : 'Create Product'}
+          style={{ marginTop: 15 }}
+          loading={this.props.fetching}
+          onPress={this.handleFormSubmit}
+        />
       </View>
     );
   }
@@ -138,10 +139,20 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
+    padding: 24,
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: 'auto',
+    alignItems: 'stretch',
+    marginLeft: 6,
+    marginRight: 6,
+    backgroundColor: '#f8f8f8',
+    borderBottomLeftRadius: 24,
+    borderBottomRightRadius: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.3,
+    shadowRadius: 16,
+    elevation: 0.5,
   },
 });
 

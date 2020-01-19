@@ -58,9 +58,19 @@ export class ProductsScreen extends Component {
         <Text h3 h3Style={styles.headline}>
           Products for {location.name}
         </Text>
+        {fetching && <ActivityIndicator size="large" color={primaryColor} />}
+        <FlatList
+          style={styles.listView}
+          keyExtractor={this.keyExtractor}
+          data={data}
+          renderItem={this.renderItem}
+        />
         <View style={styles.createButtonWrapper}>
           <Button
-            title="create new product"
+            raised
+            color={'#57c75e'}
+            titleStyle={{ color: '#fff', padding: 4 }}
+            title="+ Create new Product"
             onPress={() =>
               this.props.navigation.navigate(
                 `locations/${location_id}/products/create`
@@ -68,12 +78,6 @@ export class ProductsScreen extends Component {
             }
           />
         </View>
-        {fetching && <ActivityIndicator size="large" color={primaryColor} />}
-        <FlatList
-          keyExtractor={this.keyExtractor}
-          data={data}
-          renderItem={this.renderItem}
-        />
       </View>
     );
   }
@@ -83,7 +87,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'stretch',
+    alignItems: 'center',
+    marginLeft: 6,
+    marginRight: 6,
+    backgroundColor: '#f8f8f8',
+    borderBottomLeftRadius: 24,
+    borderBottomRightRadius: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.3,
+    shadowRadius: 16,
+    elevation: 0.5,
+  },
+  listView: {
+    marginHorizontal: 12,
+    borderRadius: 24,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.1,
+    shadowRadius: 64,
+    elevation: 0.5,
   },
   headline: {
     textAlign: 'center',

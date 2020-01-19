@@ -38,8 +38,9 @@ export class LocationDetailScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.actionsContainer}>
+        <View style={styles.backButtonContainer}>
           <Icon
+            containerStyle={styles.backButton}
             name={
               Platform.OS === 'ios'
                 ? 'ios-arrow-round-back'
@@ -49,53 +50,45 @@ export class LocationDetailScreen extends Component {
             color={primaryColor}
             onPress={() => this.props.navigation.navigate('locations')}
           />
-          <Button
-            type="clear"
-            title="Products"
-            onPress={() =>
-              this.props.navigation.navigate(
-                `locations/${location_id}/products`
-              )
-            }
-          />
-          <Button
-            type="clear"
-            title="Orders"
-            onPress={() =>
-              this.props.navigation.navigate(
-                `locations/${location_id}/sessions`
-              )
-            }
-          />
-          <Icon
-            name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'}
-            type="ionicon"
-            color={primaryColor}
-            onPress={() =>
-              this.props.navigation.navigate(`locations/edit/${location_id}`)
-            }
-          />
+          <Text h4 style={{ color: '#57c75e' }}>
+            Back
+          </Text>
         </View>
         <Card title={location.name} containerStyle={styles.cardContainer}>
-          <Text style={{ marginBottom: 15 }}>
-            {'\n'} Description: {'\n'} {location.description}
-          </Text>
-          <Text>
-            {'\n'} Address: {'\n'} {location.address}
-          </Text>
-          <Text>
-            {'\n'} Latitude: {'\n'} {location.latitude}
-          </Text>
-          <Text>
-            {'\n'} Longitude: {'\n'} {location.longitude}
-          </Text>
-          <Text>
-            {'\n'} Categories: {'\n'}
-          </Text>
+          <View style={styles.actionsContainer}>
+            <Button
+              type="outline"
+              title="Products"
+              onPress={() =>
+                this.props.navigation.navigate(
+                  `locations/${location_id}/products`
+                )
+              }
+            />
+            <Button
+              type="outline"
+              title="Orders"
+              onPress={() =>
+                this.props.navigation.navigate(
+                  `locations/${location_id}/sessions`
+                )
+              }
+            />
+            <Button
+              type="outline"
+              title="Edit"
+              onPress={() =>
+                this.props.navigation.navigate(`locations/edit/${location_id}`)
+              }
+            />
+          </View>
+          <Text style={styles.attributeHeader}>Description:</Text>
+          <Text>{location.description}</Text>
+          <Text style={styles.attributeHeader}>Address:</Text>
+          <Text>{location.address}</Text>
+          <Text style={styles.attributeHeader}>Categories:</Text>
           {this.renderBadges(location.categories)}
-          <Text>
-            {'\n'} Tags: {'\n'}
-          </Text>
+          <Text style={styles.attributeHeader}>Tags:</Text>
           {this.renderBadges(location.tags)}
         </Card>
       </View>
@@ -108,27 +101,60 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'stretch',
+    marginLeft: 6,
+    marginRight: 6,
+    backgroundColor: '#f8f8f8',
+    borderBottomLeftRadius: 24,
+    borderBottomRightRadius: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.3,
+    shadowRadius: 16,
+    elevation: 0.5,
+  },
+  attributeHeader: {
+    marginTop: 12,
+    fontWeight: '600',
   },
   cardContainer: {
-    flex: 1,
+    marginBottom: 24,
+    borderRadius: 24,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.1,
+    shadowRadius: 64,
+    elevation: 0.5,
   },
   actionsContainer: {
-    margin: 25,
-    marginBottom: 0,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+  },
+  backButtonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
   },
   badgeContainer: {
-    flex: 1 / 3,
+    flex: 1 / 5,
     borderRadius: 20,
     backgroundColor: '#57c75e',
-    margin: 5,
+    marginVertical: 6,
   },
   badgeText: {
     textAlign: 'center',
     paddingVertical: 5,
     color: 'white',
+  },
+  backButton: {
+    marginHorizontal: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.1,
+    shadowRadius: 64,
+    elevation: 0.5,
+    width: 30,
+    height: 30,
+    borderRadius: 12,
   },
 });
 

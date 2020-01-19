@@ -56,9 +56,6 @@ export class OrderDetailScreen extends Component {
 
     const location = locations[location_id] || null;
 
-    const width = Dimensions.get('window').width / 2;
-    const height = Dimensions.get('window').height / 2;
-
     if (fetching) {
       return <ActivityIndicator size="large" color={primaryColor} />;
     }
@@ -84,7 +81,7 @@ export class OrderDetailScreen extends Component {
           source={{
             uri: `data:image/svg+xml;base64,${this.state.base64}`,
           }}
-          style={{ width, height }}
+          style={{ width: 300, height: 300 }}
           PlaceholderContent={
             <ActivityIndicator size="large" color={primaryColor} />
           }
@@ -94,7 +91,7 @@ export class OrderDetailScreen extends Component {
           keyExtractor={this.keyExtractor}
           data={data}
           renderItem={this.renderItem}
-          style={styles.list}
+          style={styles.listView}
         />
       </View>
     );
@@ -106,10 +103,26 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginLeft: 6,
+    marginRight: 6,
+    backgroundColor: '#f8f8f8',
+    borderBottomLeftRadius: 24,
+    borderBottomRightRadius: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.3,
+    shadowRadius: 16,
+    elevation: 0.5,
   },
-  list: {
-    flex: 1,
-    marginTop: 25,
+  listView: {
+    margin: 12,
+    borderRadius: 24,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.1,
+    shadowRadius: 64,
+    elevation: 0.5,
   },
 });
 

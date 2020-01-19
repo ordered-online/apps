@@ -40,24 +40,24 @@ export class LocationsScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <Text h3 h3Style={styles.headline}>
-          Overview over all locations
+        <Text h3 h3style={styles.headline}>
+          Your Locations
         </Text>
+        {fetching && <ActivityIndicator size="large" color={primaryColor} />}
+        <FlatList
+          style={styles.listView}
+          keyExtractor={this.keyExtractor}
+          data={data}
+          renderItem={this.renderItem}
+        />
         <View style={styles.createButtonWrapper}>
           <Button
-            title="create new location"
+            raised
+            titleStyle={{ color: '#fff', width: '100%' }}
+            title="+ Create new Location"
             onPress={() => this.props.navigation.navigate('locations/create')}
           />
         </View>
-        {fetching ? (
-          <ActivityIndicator size="large" color={primaryColor} />
-        ) : (
-          <FlatList
-            keyExtractor={this.keyExtractor}
-            data={data}
-            renderItem={this.renderItem}
-          />
-        )}
       </View>
     );
   }
@@ -67,17 +67,35 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'stretch',
+    alignItems: 'center',
+    marginLeft: 6,
+    marginRight: 6,
+    backgroundColor: '#f8f8f8',
+    borderBottomLeftRadius: 24,
+    borderBottomRightRadius: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.3,
+    shadowRadius: 16,
+    elevation: 0.5,
+  },
+  listView: {
+    marginHorizontal: 12,
+    borderRadius: 24,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.1,
+    shadowRadius: 64,
+    elevation: 0.5,
   },
   headline: {
     textAlign: 'center',
-    marginVertical: 15,
+    marginVertical: 12,
   },
   createButtonWrapper: {
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: 15,
+    flexDirection: 'row',
   },
 });
 

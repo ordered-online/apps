@@ -210,81 +210,96 @@ export class LocationEditScreen extends Component {
     }
 
     return (
-      <View style={styles.wrapper}>
-        <Map region={this.state.region} marker={this.state.marker} />
-        <View style={styles.container}>
-          <Text h4>Please provide details for your location.</Text>
-          <Text>{'\n'}</Text>
-          <Input
-            editable
-            maxLength={40}
-            placeholder="Name"
-            textContentType="organizationName"
-            value={this.state.name}
-            onChangeText={name => this.handleFormChange('name', name)}
-          />
-          <Input
-            editable
-            autoFocus
-            multiline
-            maxLength={400}
-            placeholder="Description"
-            textContentType="none"
-            onChangeText={description =>
-              this.handleFormChange('description', description)
-            }
-            value={this.state.description}
-          />
-          <Input
-            editable
-            autoFocus
-            maxLength={40}
-            placeholder="Address"
-            textContentType="fullStreetAddress"
-            onChangeText={address => this.handleFormChange('address', address)}
-            value={this.state.address}
-          />
-          <Input
-            editable
-            autoFocus
-            maxLength={40}
-            placeholder="Website"
-            textContentType="url"
-            onChangeText={website => this.handleFormChange('website', website)}
-            value={this.state.website}
-          />
-          <Input
-            editable
-            autoFocus
-            maxLength={40}
-            placeholder="Telephone"
-            textContentType="telephoneNumber"
-            onChangeText={telephone =>
-              this.handleFormChange('telephone', telephone)
-            }
-            value={this.state.telephone}
-          />
-          <Button
-            title={edit ? 'Edit' : 'Create'}
-            style={{ marginTop: 15 }}
-            loading={this.props.fetching}
-            onPress={this.handleFormSubmit}
-          />
+      <View style={styles.container}>
+        <Text h4>Please provide details for your location.</Text>
+        <Text>{'\n'}</Text>
+        <View style={styles.mapViewWrapper}>
+          <Map region={this.state.region} marker={this.state.marker} />
         </View>
+        <Input
+          editable
+          maxLength={40}
+          placeholder="Name"
+          textContentType="organizationName"
+          value={this.state.name}
+          onChangeText={name => this.handleFormChange('name', name)}
+        />
+        <Input
+          editable
+          autoFocus
+          multiline
+          maxLength={400}
+          placeholder="Description"
+          textContentType="none"
+          onChangeText={description =>
+            this.handleFormChange('description', description)
+          }
+          value={this.state.description}
+        />
+        <Input
+          editable
+          autoFocus
+          maxLength={40}
+          placeholder="Address"
+          textContentType="fullStreetAddress"
+          onChangeText={address => this.handleFormChange('address', address)}
+          value={this.state.address}
+        />
+        <Input
+          editable
+          autoFocus
+          maxLength={40}
+          placeholder="Website"
+          textContentType="url"
+          onChangeText={website => this.handleFormChange('website', website)}
+          value={this.state.website}
+        />
+        <Input
+          editable
+          autoFocus
+          maxLength={40}
+          placeholder="Telephone"
+          textContentType="telephoneNumber"
+          onChangeText={telephone =>
+            this.handleFormChange('telephone', telephone)
+          }
+          value={this.state.telephone}
+        />
+        <Button
+          raised
+          color={'#57c75e'}
+          titleStyle={{ color: '#fff', padding: 4 }}
+          title={edit ? 'Save Location' : 'Create Location'}
+          style={{ marginTop: 24 }}
+          loading={this.props.fetching}
+          onPress={this.handleFormSubmit}
+        />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-  },
   container: {
     flex: 1,
+    padding: 36,
     justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: 'auto',
+    marginLeft: 6,
+    marginRight: 6,
+    backgroundColor: '#f8f8f8',
+    borderBottomLeftRadius: 24,
+    borderBottomRightRadius: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.3,
+    shadowRadius: 16,
+    elevation: 0.5,
+  },
+  mapViewWrapper: {
+    height: 300,
+    width: '100%',
+    marginVertical: 24,
   },
 });
 

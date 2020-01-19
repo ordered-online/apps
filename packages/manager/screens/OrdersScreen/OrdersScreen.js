@@ -105,10 +105,10 @@ export class OrdersScreen extends Component {
         {fetching && <ActivityIndicator size="large" color={primaryColor} />}
 
         <FlatList
+          style={styles.listView}
           keyExtractor={this.keyExtractor}
           data={data}
           renderItem={this.renderItem}
-          style={styles.list}
         />
       </View>
     );
@@ -118,8 +118,29 @@ export class OrdersScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 12,
     justifyContent: 'center',
     alignItems: 'stretch',
+    marginLeft: 6,
+    marginRight: 6,
+    backgroundColor: '#f8f8f8',
+    borderBottomLeftRadius: 24,
+    borderBottomRightRadius: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.3,
+    shadowRadius: 16,
+    elevation: 0.5,
+  },
+  listView: {
+    margin: 12,
+    borderRadius: 24,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.1,
+    shadowRadius: 64,
+    elevation: 0.5,
   },
   headline: {
     textAlign: 'center',
@@ -134,10 +155,6 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-  },
-  list: {
-    flex: 1,
-    marginTop: 25,
   },
 });
 

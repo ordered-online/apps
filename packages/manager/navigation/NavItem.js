@@ -7,7 +7,7 @@ import { Button } from '@ordered.online/components';
 export default function NavItem({ title, onPress, ...rest }) {
   return (
     <View style={styles.navLink} {...rest}>
-      <Button title={title} color={primaryColor} onPress={onPress} />
+      <Button raised title={title} color={'#f8f8f8'} onPress={onPress} />
     </View>
   );
 }
@@ -15,8 +15,8 @@ export default function NavItem({ title, onPress, ...rest }) {
 const styles = StyleSheet.create({
   navLink: {
     flex: 1,
-    marginHorizontal: 20,
-    marginVertical: 10,
+    marginHorizontal: 4,
+    marginVertical: 4,
     display: 'flex',
     justifyContent: 'center',
   },

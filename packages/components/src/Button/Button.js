@@ -149,14 +149,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 3,
-    padding: 8,
-    marginVertical: 16,
+    borderRadius: 24,
+    padding: 12,
+    marginVertical: 8,
   },
   text: {
     textAlign: 'center',
-    fontSize: 18,
-    color: 'white',
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#222222',
   },
   buttonDisabled: Platform.select({
     ios: {},
@@ -185,18 +186,11 @@ const styles = StyleSheet.create({
     color: '#57c75e',
   },
   raised: {
-    backgroundColor: '#fff',
-    ...Platform.select({
-      android: {
-        elevation: 4,
-      },
-      default: {
-        shadowColor: 'rgba(0,0,0, .4)',
-        shadowOffset: { height: 1, width: 1 },
-        shadowOpacity: 1,
-        shadowRadius: 1,
-      },
-    }),
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.1,
+    shadowRadius: 16,
+    elevation: 0.5,
   },
   loading: {
     marginVertical: 2,

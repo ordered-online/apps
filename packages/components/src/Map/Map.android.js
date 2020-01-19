@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { WebView } from 'react-native-webview';
 
-const mapStyles = `width: 100vw; height: 400px;`;
+const mapStyles = `width: 100%; height: 300;`;
 
 export default function Map({ region, marker }) {
   const initialRegion = {
