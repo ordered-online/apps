@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   Platform,
   StyleSheet,
+  ViewPropTypes,
 } from 'react-native';
 
 export default function Button(props) {
@@ -128,7 +129,7 @@ Button.propTypes = {
   titleStyle: PropTypes.object,
   titleProps: PropTypes.object,
   loading: PropTypes.bool,
-  loadingStyle: View.propTypes.style,
+  loadingStyle: ViewPropTypes.style,
   loadingProps: PropTypes.object,
   testID: PropTypes.string,
 };

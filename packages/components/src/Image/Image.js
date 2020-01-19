@@ -6,6 +6,7 @@ import {
   StyleSheet,
   View,
   Platform,
+  ViewPropTypes,
 } from 'react-native';
 
 export default function Image(props) {
@@ -113,7 +114,7 @@ Image.propTypes = {
   ...ReactNativeImage.propTypes,
   ImageComponent: PropTypes.elementType,
   PlaceholderContent: PropTypes.node,
-  containerStyle: View.propTypes.style,
+  containerStyle: ViewPropTypes.style,
   placeholderStyle: ReactNativeImage.propTypes.style,
   transition: PropTypes.bool,
 };

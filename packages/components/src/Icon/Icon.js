@@ -5,7 +5,8 @@ import {
   TouchableHighlight,
   View,
   StyleSheet,
-  Text as NativeText,
+  ViewPropTypes,
+  Text,
 } from 'react-native';
 
 import getIconType from './IconTypes';
@@ -85,12 +86,12 @@ Icon.propTypes = {
   underlayColor: PropTypes.string,
   reverse: PropTypes.bool,
   raised: PropTypes.bool,
-  containerStyle: View.propTypes.style,
-  iconStyle: NativeText.propTypes.style,
+  containerStyle: ViewPropTypes.style,
+  iconStyle: Text.propTypes.style,
   onPress: PropTypes.func,
   reverseColor: PropTypes.string,
   disabled: PropTypes.bool,
-  disabledStyle: View.propTypes.style,
+  disabledStyle: ViewPropTypes.styles,
 };
 
 Icon.defaultProps = {

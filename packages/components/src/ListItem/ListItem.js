@@ -6,10 +6,10 @@ import {
   Switch,
   TouchableHighlight,
   View,
+  ViewPropTypes,
 } from 'react-native';
 
 import Badge from '../Badge';
-import Icon from '../Icon';
 import Input from '../Input';
 import Text from '../Text';
 
@@ -174,9 +174,9 @@ export default function ListItem(props) {
 }
 
 ListItem.propTypes = {
-  containerStyle: View.propTypes.style,
-  contentContainerStyle: View.propTypes.style,
-  rightContentContainerStyle: View.propTypes.style,
+  containerStyle: ViewPropTypes.style,
+  contentContainerStyle: ViewPropTypes.style,
+  rightContentContainerStyle: ViewPropTypes.style,
   Component: PropTypes.elementType,
   onPress: PropTypes.func,
   onLongPress: PropTypes.func,
@@ -200,7 +200,7 @@ ListItem.propTypes = {
   chevron: PropTypes.bool,
   checkmark: PropTypes.node,
   disabled: PropTypes.bool,
-  disabledStyle: View.propTypes.style,
+  disabledStyle: ViewPropTypes.style,
   topDivider: PropTypes.bool,
   bottomDivider: PropTypes.bool,
   pad: PropTypes.number,

@@ -13,6 +13,7 @@ import {
   Easing,
   Platform,
   StyleSheet,
+  ViewPropTypes,
 } from 'react-native';
 
 export default function Input(props, ref) {
@@ -120,7 +121,7 @@ export default function Input(props, ref) {
           testID="RNE__Input__text-input"
           underlineColorAndroid="transparent"
           editable={!disabled}
-          // {...rest}
+          {...rest}
           caretHidden={true}
           ref={inputRef}
           style={StyleSheet.flatten([
@@ -162,14 +163,14 @@ Input.defaultProps = {
 };
 
 Input.propTypes = {
-  containerStyle: View.propTypes.style,
+  containerStyle: ViewPropTypes.style,
   disabled: PropTypes.bool,
   disabledInputStyle: Text.propTypes.style,
-  inputContainerStyle: View.propTypes.style,
+  inputContainerStyle: ViewPropTypes.style,
   leftIcon: PropTypes.node,
-  leftIconContainerStyle: View.propTypes.style,
+  leftIconContainerStyle: ViewPropTypes.style,
   rightIcon: PropTypes.node,
-  rightIconContainerStyle: View.propTypes.style,
+  rightIconContainerStyle: ViewPropTypes.style,
   inputStyle: Text.propTypes.style,
   InputComponent: PropTypes.elementType,
   errorProps: PropTypes.object,

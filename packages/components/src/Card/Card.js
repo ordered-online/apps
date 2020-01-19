@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Platform, StyleSheet } from 'react-native';
+import { View, Platform, StyleSheet, ViewPropTypes } from 'react-native';
 
 import Text from '../Text';
 import Image from '../Image';
@@ -116,19 +116,19 @@ Card.propTypes = {
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),
   ]),
-  containerStyle: View.propTypes.style,
-  wrapperStyle: View.propTypes.style,
-  overlayStyle: View.propTypes.style,
+  containerStyle: ViewPropTypes.style,
+  wrapperStyle: ViewPropTypes.style,
+  overlayStyle: ViewPropTypes.style,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   titleStyle: Text.propTypes.style,
   featuredTitle: PropTypes.string,
   featuredTitleStyle: Text.propTypes.style,
   featuredSubtitle: PropTypes.string,
   featuredSubtitleStyle: Text.propTypes.style,
-  dividerStyle: View.propTypes.style,
+  dividerStyle: ViewPropTypes.style,
   image: Image.propTypes.source,
-  imageStyle: View.propTypes.style,
-  imageWrapperStyle: View.propTypes.style,
+  imageStyle: ViewPropTypes.style,
+  imageWrapperStyle: ViewPropTypes.style,
   imageProps: PropTypes.object,
   titleNumberOfLines: PropTypes.number,
 };

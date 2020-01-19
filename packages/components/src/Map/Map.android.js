@@ -4,10 +4,6 @@ import { WebView } from 'react-native-webview';
 
 const mapStyles = `width: 100vw; height: 400px;`;
 
-import { MapView } from './MapView';
-import { MapViewTile } from './MapViewTile';
-import { MapViewMarker } from './MapViewMarker';
-
 export default function Map({ region, marker }) {
   const initialRegion = {
     latitude: 51.0250869,
