@@ -1,4 +1,5 @@
 import api from '@ordered.online/api';
+import { sessionConnect, sessionDisconnect } from './websocket';
 
 // Action Types
 export const CLOSE_SESSION_REQUEST = 'ORDERS/CLOSE_SESSION_REQUEST';
@@ -12,7 +13,8 @@ export const FETCH_SESSION_FAILURE = 'ORDERS/FETCH_SESSION_FAILURE';
 // Initial State
 const initialState = {
   fetching: false,
-  sessions: {},
+  connecting: false,
+  session: {},
   error: null,
 };
 
@@ -31,7 +33,7 @@ const orders = (state = initialState, action) => {
       return {
         ...state,
         fetching: false,
-        sessions: { ...state.sessions, ...action.payload },
+        session: { ...state.session, ...action.payload },
       };
 
     case CLOSE_SESSION_FAILURE:
@@ -67,9 +69,9 @@ const fetchSessionRequest = () => ({
   type: FETCH_SESSION_REQUEST,
 });
 
-const fetchSessionSuccess = sessions => ({
+const fetchSessionSuccess = session => ({
   type: FETCH_SESSION_SUCCESS,
-  payload: sessions,
+  payload: session,
 });
 
 const fetchSessionFailure = error => ({
@@ -127,14 +129,23 @@ export const GetSession = session_code => (dispatch, getState) => {
 
   return api
     .getSession(session_code)
-    .then(order => {
+    .then(session => {
       if (__DEV__) {
-        console.log(order);
+        console.log(session);
       }
-      return reformatSessions(Array.of(order));
+      return reformatSessions(Array.of(session));
     })
-    .then(order => dispatch(fetchSessionSuccess(order)))
+    .then(session => dispatch(fetchSessionSuccess(session)))
     .catch(error => dispatch(fetchSessionFailure(error)));
+};
+
+export const ConnectSession = session_code => (dispatch, getState) => {
+  const host = api.getSessionWebsocket(session_code);
+  dispatch(sessionConnect(host));
+};
+
+export const DisconnectSession = () => (dispatch, getState) => {
+  dispatch(sessionDisconnect());
 };
 
 export default orders;

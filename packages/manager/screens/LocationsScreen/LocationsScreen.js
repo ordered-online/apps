@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     elevation: 0.5,
   },
   listView: {
+    flex: 1,
     marginHorizontal: 12,
     borderRadius: 24,
     backgroundColor: '#fff',

@@ -54,7 +54,14 @@ export default function Image(props) {
   return (
     <View
       accessibilityIgnoresInvertColors={true}
-      style={StyleSheet.flatten([styles.container, containerStyle])}>
+      style={StyleSheet.flatten([
+        styles.container,
+        containerStyle,
+        {
+          width: style.width,
+          height: style.height,
+        },
+      ])}>
       <ImageComponent
         testID="imageImage"
         {...attributes}

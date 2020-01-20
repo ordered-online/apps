@@ -5,6 +5,8 @@ import { Text, Icon, Input } from '@ordered.online/components';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 
+import { ConnectSession } from '../../store/orders';
+
 const isWeb = Platform.OS === 'web';
 
 export class OrderScreen extends Component {
@@ -47,8 +49,11 @@ export class OrderScreen extends Component {
   }
 
   handleBarCodeScanned({ type, data }) {
-    this.setState({ scanned: true, scanning: false });
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    this.setState({ scanned: true, scanning: false, code: data });
+    console.log(
+      `Bar code with type ${type} and data ${data} has been scanned!`
+    );
+    this.props.connectSession(data);
   }
 
   async scanCode() {
@@ -58,6 +63,12 @@ export class OrderScreen extends Component {
       await this.getCameraPermissions();
     }
     this.setState({ scanning: true });
+  }
+
+  handleBarCodeInput() {
+    const { code } = this.state;
+    console.log(code);
+    this.props.connectSession(code);
   }
 
   render() {
@@ -113,4 +124,18 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OrderScreen;
+const mapStateToProps = state => ({
+  session: state.orders.session,
+  fetching: state.orders.fetching,
+  connecting: state.orders.connecting,
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      connectSession: ConnectSession,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderScreen);

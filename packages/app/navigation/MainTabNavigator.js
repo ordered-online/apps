@@ -46,7 +46,11 @@ const LocationStack = createStackNavigator(
     Locations: FindLocationsScreen,
     LocationDetails: LocationDetailScreen,
   },
-  config
+  {
+    ...config,
+    mode: 'modal',
+    headerMode: 'none',
+  }
 );
 
 LocationStack.navigationOptions = {

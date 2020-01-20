@@ -129,6 +129,7 @@ const Input = forwardRef(function(props, ref) {
           editable={!disabled}
           {...rest}
           caretHidden={true}
+          clearButtonMode="while-editing"
           ref={inputRef}
           style={StyleSheet.flatten([
             styles.input,
