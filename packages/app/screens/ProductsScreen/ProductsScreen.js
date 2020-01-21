@@ -4,20 +4,33 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button, Text, ListItem } from '@ordered.online/components';
 
-import { GetProduct } from '../../store/products';
+import { GetAllProducts } from '../../store/products';
+import { GetLocation } from '../../store/locations';
 import { OrderProduct } from '../../store/orders';
 
 import { primaryColor } from '../../constants/Colors';
-import { sessionConnect } from '../../store/websocket';
 
-export class CartScreen extends Component {
-  static navigationOptions = {
-    title: 'Orders',
+export class ProductsScreen extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title:
+        'Order Products at' +
+        navigation.getParam('locationName', 'your Location.'),
+    };
   };
 
   constructor(props) {
     super(props);
     this.renderItem = this.renderItem.bind(this);
+  }
+
+  componentDidMount() {
+    const { location_id } = this.props.session;
+    if (!location_id) {
+      this.props.navigation.navigate('StartSession');
+    }
+    this.props.getLocation(location_id);
+    this.props.getAllProducts(location_id);
   }
 
   keyExtractor = (item, index) => index.toString();
@@ -28,6 +41,7 @@ export class CartScreen extends Component {
       <ListItem
         title={product.name}
         subtitle={product.description}
+        onPress={() => this.props.orderProduct({ item })}
         topDivider
         bottomDivider
         chevron
@@ -43,26 +57,20 @@ export class CartScreen extends Component {
   }
 
   render() {
-    const { fetchingProducts, products, fetchingSession, session } = this.props;
+    const { fetching, products, locations, session } = this.props;
+    const { location_id } = session;
+    const location = locations[location_id] || null;
 
     const data = [];
-
-    if (session) {
-      const { orders = [] } = session;
-
-      if (orders && Array.isArray(orders)) {
-        orders.forEach(order => {
-          const { product_id } = order;
-          if (products.hasOwnProperty(product_id)) {
-            data.push(product_id);
-          } else {
-            this.props.getProduct(product_id);
-          }
-        });
-      }
+    if (products) {
+      Object.keys(products).forEach(product_id => {
+        if (products[product_id].location_id == location_id) {
+          data.push(product_id);
+        }
+      });
     }
 
-    if (fetchingProducts || fetchingSession) {
+    if (fetching) {
       return (
         <View style={styles.container}>
           <ActivityIndicator size="large" color={primaryColor} />{' '}
@@ -72,6 +80,11 @@ export class CartScreen extends Component {
 
     return (
       <View style={styles.container}>
+        {location && (
+          <Text h3 h3Style={styles.headline}>
+            Products for {location.name}
+          </Text>
+        )}
         <FlatList
           style={styles.listView}
           keyExtractor={this.keyExtractor}
@@ -116,19 +129,20 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
+  locations: state.locations.locations,
   session: state.orders.session,
-  fetchingSession: state.orders.fetching,
+  fetching: state.products.fetching,
   products: state.products.products,
-  fetchingProducts: state.products.fetching,
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
+      getLocation: GetLocation,
+      getAllProducts: GetAllProducts,
       orderProduct: OrderProduct,
-      getProduct: GetProduct,
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsScreen);

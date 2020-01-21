@@ -36,7 +36,9 @@ const persistedReducer = persistReducer(
   createRootReducer(history)
 );
 
-const middleware = [thunk, websocketMiddleware];
+// websocketMiddleware;
+
+const middleware = [thunk];
 
 const enhancers = [];
 

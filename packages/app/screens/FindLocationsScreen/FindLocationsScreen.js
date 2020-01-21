@@ -14,13 +14,15 @@ import * as Permissions from 'expo-permissions';
 
 import { primaryColor } from '../../constants/Colors';
 
-import { ListItem, Input, Icon, Text } from '@ordered.online/components';
+import { ListItem, Input, Icon, Button } from '@ordered.online/components';
 
 import { FindLocations, FindLocationsNearby } from '../../store/locations';
 
 export class FindLocationsScreen extends Component {
-  static navigationOptions = {
-    title: 'Find a location',
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Find a location',
+    };
   };
 
   constructor(props) {

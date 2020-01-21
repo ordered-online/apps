@@ -10,6 +10,10 @@ export const FETCH_SESSION_REQUEST = 'ORDERS/FETCH_SESSION_REQUEST';
 export const FETCH_SESSION_SUCCESS = 'ORDERS/FETCH_SESSION_SUCCESS';
 export const FETCH_SESSION_FAILURE = 'ORDERS/FETCH_SESSION_FAILURE';
 
+export const ORDER_PRODUCT_REQUEST = 'ORDERS/ORDER_PRODUCT_REQUEST';
+export const ORDER_PRODUCT_SUCCESS = 'ORDERS/ORDER_PRODUCT_SUCCESS';
+export const ORDER_PRODUCT_FAILURE = 'ORDERS/ORDER_PRODUCT_FAILURE';
+
 // Initial State
 const initialState = {
   fetching: false,
@@ -23,6 +27,7 @@ const orders = (state = initialState, action) => {
   switch (action.type) {
     case CLOSE_SESSION_REQUEST:
     case FETCH_SESSION_REQUEST:
+    case ORDER_PRODUCT_REQUEST:
       return {
         ...state,
         fetching: true,
@@ -30,6 +35,7 @@ const orders = (state = initialState, action) => {
 
     case CLOSE_SESSION_SUCCESS:
     case FETCH_SESSION_SUCCESS:
+    case ORDER_PRODUCT_SUCCESS:
       return {
         ...state,
         fetching: false,
@@ -38,6 +44,7 @@ const orders = (state = initialState, action) => {
 
     case CLOSE_SESSION_FAILURE:
     case FETCH_SESSION_FAILURE:
+    case ORDER_PRODUCT_FAILURE:
       return {
         ...state,
         fetching: false,
@@ -76,6 +83,20 @@ const fetchSessionSuccess = session => ({
 
 const fetchSessionFailure = error => ({
   type: FETCH_SESSION_FAILURE,
+  payload: error,
+});
+
+const orderProductRequest = () => ({
+  type: ORDER_PRODUCT_REQUEST,
+});
+
+const orderProductSuccess = session => ({
+  type: ORDER_PRODUCT_SUCCESS,
+  payload: session,
+});
+
+const orderProductFailure = error => ({
+  type: ORDER_PRODUCT_FAILURE,
   payload: error,
 });
 
@@ -137,6 +158,28 @@ export const GetSession = session_code => (dispatch, getState) => {
     })
     .then(session => dispatch(fetchSessionSuccess(session)))
     .catch(error => dispatch(fetchSessionFailure(error)));
+};
+
+export const OrderProduct = ({ product_id }) => (dispatch, getState) => {
+  dispatch(orderProductRequest());
+
+  const session_code = getState().orders.session.code;
+
+  if (__DEV__) {
+    console.log('session_code: ' + session_code);
+    console.log('product_id: ' + product_id);
+  }
+
+  return api
+    .orderProduct({ product_id, session_code })
+    .then(session => {
+      if (__DEV__) {
+        console.log(session);
+      }
+      return reformatSessions(Array.of(session));
+    })
+    .then(session => dispatch(orderProductSuccess(session)))
+    .catch(error => dispatch(orderProductFailure(error)));
 };
 
 export const ConnectSession = session_code => (dispatch, getState) => {

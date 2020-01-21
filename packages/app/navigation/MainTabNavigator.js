@@ -8,7 +8,9 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import TabBarIcon from './TabBarIcon';
 
-import OrderScreen from '../screens/OrderScreen';
+import StartSessionScreen from '../screens/StartSessionScreen';
+import ProductsScreen from '../screens/ProductsScreen';
+import ProductDetailScreen from '../screens/ProductDetailScreen';
 
 import FindLocationsScreen from '../screens/FindLocationsScreen';
 import LocationDetailScreen from '../screens/LocationDetailScreen';
@@ -24,7 +26,9 @@ const config = Platform.select({
 
 const OrderStack = createStackNavigator(
   {
-    Order: OrderScreen,
+    StartSession: StartSessionScreen,
+    Products: ProductsScreen,
+    ProductDetails: ProductDetailScreen,
   },
   config
 );
@@ -49,7 +53,6 @@ const LocationStack = createStackNavigator(
   {
     ...config,
     mode: 'modal',
-    headerMode: 'none',
   }
 );
 
