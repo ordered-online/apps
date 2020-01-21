@@ -6,6 +6,15 @@ import { Button, Text } from '@ordered.online/components';
 export class AboutScreen extends Component {
   static navigationOptions = {
     title: 'Terms, Privacy and Imprint',
+    headerStyle: {
+      backgroundColor: '#f8f8f8',
+      borderBottomLeftRadius: 24,
+      borderBottomRightRadius: 24,
+    },
+    headerTintColor: '#57c75e',
+    headerTitleStyle: {
+      fontWeight: '600',
+    },
   };
 
   render() {

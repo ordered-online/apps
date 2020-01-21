@@ -16,6 +16,15 @@ export class ProductsScreen extends Component {
       title:
         'Order Products at' +
         navigation.getParam('locationName', 'your Location.'),
+      headerStyle: {
+        backgroundColor: '#f8f8f8',
+        borderBottomLeftRadius: 24,
+        borderBottomRightRadius: 24,
+      },
+      headerTintColor: '#57c75e',
+      headerTitleStyle: {
+        fontWeight: '600',
+      },
     };
   };
 

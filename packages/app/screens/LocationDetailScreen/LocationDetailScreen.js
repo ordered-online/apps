@@ -10,6 +10,15 @@ export class LocationDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.getParam('title', 'Location Details'),
+      headerStyle: {
+        backgroundColor: '#f8f8f8',
+        borderBottomLeftRadius: 24,
+        borderBottomRightRadius: 24,
+      },
+      headerTintColor: '#57c75e',
+      headerTitleStyle: {
+        fontWeight: '600',
+      },
     };
   };
 

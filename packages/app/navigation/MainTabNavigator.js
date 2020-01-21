@@ -127,14 +127,19 @@ const tabNavigator = creatTabNavigator(
     AboutStack,
   },
   {
-    tabBarOptions: Platform.select({
-      web: {
-        showLabel: false,
+    tabBarOptions: {
+      showLabel: false,
+      style: {
+        borderWidth: 0,
+        backgroundColor: '#f8f8f8',
+        borderRadius: 24,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: -8 },
+        shadowOpacity: 0.1,
+        shadowRadius: 16,
+        elevation: 0.5,
       },
-      default: {
-        showLabel: false,
-      },
-    }),
+    },
   }
 );
 

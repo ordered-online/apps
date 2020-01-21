@@ -13,6 +13,15 @@ import { sessionConnect } from '../../store/websocket';
 export class CartScreen extends Component {
   static navigationOptions = {
     title: 'Orders',
+    headerStyle: {
+      backgroundColor: '#f8f8f8',
+      borderBottomLeftRadius: 24,
+      borderBottomRightRadius: 24,
+    },
+    headerTintColor: '#57c75e',
+    headerTitleStyle: {
+      fontWeight: '600',
+    },
   };
 
   constructor(props) {
@@ -88,16 +97,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 6,
-    marginRight: 6,
-    backgroundColor: '#f8f8f8',
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 24,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.3,
-    shadowRadius: 16,
-    elevation: 0.5,
   },
   listView: {
     marginHorizontal: 12,

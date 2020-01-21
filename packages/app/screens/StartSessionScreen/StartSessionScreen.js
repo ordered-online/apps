@@ -23,6 +23,15 @@ const isWeb = Platform.OS === 'web';
 export class StartSessionScreen extends Component {
   static navigationOptions = {
     title: 'Start your order',
+    headerStyle: {
+      backgroundColor: '#f8f8f8',
+      borderBottomLeftRadius: 24,
+      borderBottomRightRadius: 24,
+    },
+    headerTintColor: '#57c75e',
+    headerTitleStyle: {
+      fontWeight: '600',
+    },
   };
 
   constructor(props) {

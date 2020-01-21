@@ -22,6 +22,15 @@ export class FindLocationsScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'Find a location',
+      headerStyle: {
+        backgroundColor: '#f8f8f8',
+        borderBottomLeftRadius: 24,
+        borderBottomRightRadius: 24,
+      },
+      headerTintColor: '#57c75e',
+      headerTitleStyle: {
+        fontWeight: '600',
+      },
     };
   };
 

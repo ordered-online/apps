@@ -2,13 +2,20 @@ import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import React, { Component } from 'react';
-import { Platform, StatusBar, StyleSheet, SafeAreaView } from 'react-native';
+import {
+  Platform,
+  StatusBar,
+  StyleSheet,
+  SafeAreaView,
+  View,
+} from 'react-native';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { store, persistor } from './store';
 import { Ionicons } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default class App extends Component {
   state = {
@@ -29,10 +36,16 @@ export default class App extends Component {
       return (
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <SafeAreaView style={styles.container}>
-              {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-              <AppNavigator />
-            </SafeAreaView>
+            <LinearGradient
+              style={{ width: '100%', height: '100%' }}
+              colors={['#57c75e', '#27ae60']}>
+              <SafeAreaView style={styles.container}>
+                {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+                <View style={styles.roundedBackground}>
+                  <AppNavigator />
+                </View>
+              </SafeAreaView>
+            </LinearGradient>
           </PersistGate>
         </Provider>
       );
@@ -62,5 +75,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     flexDirection: 'column',
+  },
+  roundedBackground: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    marginLeft: 8,
+    marginRight: 8,
+    marginBottom: 8,
+    backgroundColor: '#f8f8f8',
+    borderBottomLeftRadius: 24,
+    borderBottomRightRadius: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.3,
+    shadowRadius: 16,
+    elevation: 0.5,
   },
 });
