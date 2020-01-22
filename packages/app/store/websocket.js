@@ -24,10 +24,10 @@ export const sessionDisconnected = () => ({
 
 export const sessionMessage = message => ({
   type: SESSION_MESSAGE,
-  payload: message,
+  payload: message.session ? message.session : message,
 });
 
-export default function websocketMiddleware() {
+export default function createWebsocketMiddleware() {
   let socket = null;
 
   const onOpen = store => event => {
@@ -40,7 +40,8 @@ export default function websocketMiddleware() {
   };
 
   const onMessage = store => event => {
-    store.dispatch(sessionMessage(event.data));
+    console.log(event.data);
+    store.dispatch(sessionMessage(JSON.parse(event.data)));
   };
 
   return store => next => action => {
@@ -51,8 +52,8 @@ export default function websocketMiddleware() {
         }
 
         // connect to the remote host
-        console.log('create new wocksocket on: ' + action.payload.host);
-        socket = new WebSocket(action.payload.host);
+        console.log('create new wocksocket on: ' + action.payload);
+        socket = new WebSocket(action.payload);
 
         // websocket handlers
         socket.onmessage = onMessage(store);
@@ -68,7 +69,6 @@ export default function websocketMiddleware() {
         console.log('websocket closed');
         break;
     }
-    console.log('the next action:', action);
     return next(action);
   };
 }

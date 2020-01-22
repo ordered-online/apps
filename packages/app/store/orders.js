@@ -1,5 +1,9 @@
 import api, { ApiError } from '@ordered.online/api';
-import { sessionConnect, sessionDisconnect } from './websocket';
+import {
+  sessionConnect,
+  sessionDisconnect,
+  SESSION_MESSAGE,
+} from './websocket';
 import { GetLocation } from './locations';
 
 // Action Types
@@ -37,6 +41,7 @@ const orders = (state = initialState, action) => {
     case CLOSE_SESSION_SUCCESS:
     case FETCH_SESSION_SUCCESS:
     case ORDER_PRODUCT_SUCCESS:
+    case SESSION_MESSAGE:
       return {
         ...state,
         fetching: false,

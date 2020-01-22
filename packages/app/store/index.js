@@ -6,7 +6,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk'; // library to handle async with redux
 import createRootReducer from './reducers';
 
-import websocketMiddleware from './websocket';
+import createWebsocketMiddleware from './websocket';
 
 const isWeb = Platform.OS == 'web';
 export const history = isWeb ? createBrowserHistory() : createMemoryHistory();
@@ -19,12 +19,12 @@ const persistConfig = {
   storage: AsyncStorage,
   // Whitelist (Save Specific Reducers)
   whitelist: [
-    'categories',
-    'checkout',
-    'locations',
-    'orders',
-    'payment',
-    'products',
+    // 'categories',
+    // 'checkout',
+    // 'locations',
+    // 'orders',
+    // 'payment',
+    // 'products',
   ],
   // Blacklist (Don't Save Specific Reducers)
   blacklist: [],
@@ -36,9 +36,9 @@ const persistedReducer = persistReducer(
   createRootReducer(history)
 );
 
-// websocketMiddleware;
+const websocketMiddleware = createWebsocketMiddleware();
 
-const middleware = [thunk];
+const middleware = [websocketMiddleware, thunk];
 
 const enhancers = [];
 

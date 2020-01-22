@@ -50,7 +50,7 @@ export class StartSessionScreen extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { session } = nextProps;
-    if (session) {
+    if (session && session.code) {
       if (!session.hasOwnProperty('base64')) {
         setTimeout(() => nextProps.getSessionQR(session.code), 1000);
       }
@@ -109,7 +109,7 @@ export class StartSessionScreen extends Component {
     const { code } = this.state;
     console.log(code);
     this.props.getSession(code);
-    // this.props.connectSession(code);
+    this.props.connectSession(code);
   }
 
   renderSession() {

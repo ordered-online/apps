@@ -71,4 +71,4 @@ export const orderProduct = ({ product_id, session_code }) => {
 };
 
 export const getSessionWebsocketUrl = session_code =>
-  `ws://${process.env.API_URL}/ws/session/${sessionCode}/`;
+  `ws://${process.env.API_URL}/ws/session/${session_code}/`;
