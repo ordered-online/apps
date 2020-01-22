@@ -9,12 +9,11 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { Text, Icon, Input, Button } from '@ordered.online/components';
+import { Text, Icon, Input, Button, Image } from '@ordered.online/components';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 
-import { GetLocation } from '../../store/locations';
-import { ConnectSession, GetSession } from '../../store/orders';
+import { ConnectSession, GetSession, GetSessionQR } from '../../store/orders';
 
 import { primaryColor } from '../../constants/Colors';
 import { sessionConnect } from '../../store/websocket';
@@ -52,6 +51,9 @@ export class StartSessionScreen extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     const { session } = nextProps;
     if (session) {
+      if (!session.hasOwnProperty('base64')) {
+        setTimeout(() => nextProps.getSessionQR(session.code), 1000);
+      }
       const { location_id } = session;
       if (location_id) {
         const location = nextProps.locations[location_id];
@@ -110,9 +112,54 @@ export class StartSessionScreen extends Component {
     // this.props.connectSession(code);
   }
 
+  renderSession() {
+    const { session, locations, navigation } = this.props;
+    const location = locations[session.location_id];
+    return (
+      <View
+        style={StyleSheet.flatten([
+          styles.container,
+          { alignItems: 'center' },
+        ])}>
+        <Text h3 style={{ textAlign: 'center' }}>
+          Share your code to start ordering together !
+        </Text>
+        {session.hasOwnProperty('base64') && (
+          <Image
+            source={{
+              uri: `data:image/svg+xml;base64,${session.base64}`,
+            }}
+            style={{ width: 300, height: 300 }}
+            PlaceholderContent={
+              <ActivityIndicator size="large" color={primaryColor} />
+            }
+          />
+        )}
+        <Text style={{ textAlign: 'center' }}>{session.code}</Text>
+
+        <View style={styles.buttonWrapper}>
+          <Button
+            raised
+            titleStyle={{ color: '#fff', width: '100%' }}
+            title="Go to Products"
+            onPress={() =>
+              navigation.navigate('Products', {
+                locationName: location.name,
+              })
+            }
+          />
+        </View>
+      </View>
+    );
+  }
+
   render() {
     const { hasCameraPermission, scanning } = this.state;
-    const { fetching, connecting } = this.props;
+    const { fetching, connecting, session } = this.props;
+
+    if (session && session.code) {
+      return this.renderSession();
+    }
 
     if (hasCameraPermission === null && !isWeb) {
       return (
@@ -197,6 +244,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     marginHorizontal: 'auto',
+    marginVertical: 25,
   },
   iconContainer: {
     flex: 1,
@@ -219,6 +267,7 @@ const mapDispatchToProps = dispatch => ({
     {
       connectSession: ConnectSession,
       getSession: GetSession,
+      getSessionQR: GetSessionQR,
     },
     dispatch
   ),

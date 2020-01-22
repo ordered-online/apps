@@ -106,7 +106,7 @@ const handleSessionResponse = locations => dispatch => session => {
   if (!location_id) {
     return Promise.reject({ reason: 'Could not find location' });
   }
-  if (!locations.hasOwnProperty(session)) {
+  if (!locations.hasOwnProperty(location_id)) {
     dispatch(GetLocation(location_id));
   }
   return session;
@@ -127,6 +127,21 @@ export const GetSession = session_code => (dispatch, getState) => {
     .getSession(session_code)
     .then(handleSessionResponse(locations)(dispatch))
     .then(session => dispatch(fetchSessionSuccess(session)))
+    .catch(error => dispatch(fetchSessionFailure(error)));
+};
+
+export const GetSessionQR = session_code => (dispatch, getState) => {
+  dispatch(fetchSessionRequest());
+
+  const { session } = getState().orders;
+
+  if (__DEV__) {
+    console.log('session_code: ' + session_code);
+  }
+
+  return api
+    .getQRCodeBase64(session_code)
+    .then(({ base64 }) => dispatch(fetchSessionSuccess({ ...session, base64 })))
     .catch(error => dispatch(fetchSessionFailure(error)));
 };
 
