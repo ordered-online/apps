@@ -10,7 +10,6 @@ import TabBarIcon from './TabBarIcon';
 
 import StartSessionScreen from '../screens/StartSessionScreen';
 import ProductsScreen from '../screens/ProductsScreen';
-import ProductDetailScreen from '../screens/ProductDetailScreen';
 
 import FindLocationsScreen from '../screens/FindLocationsScreen';
 import LocationDetailScreen from '../screens/LocationDetailScreen';
@@ -28,7 +27,6 @@ const OrderStack = createStackNavigator(
   {
     StartSession: StartSessionScreen,
     Products: ProductsScreen,
-    ProductDetails: ProductDetailScreen,
   },
   config
 );

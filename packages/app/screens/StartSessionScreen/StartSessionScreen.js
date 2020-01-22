@@ -17,6 +17,7 @@ import { GetLocation } from '../../store/locations';
 import { ConnectSession, GetSession } from '../../store/orders';
 
 import { primaryColor } from '../../constants/Colors';
+import { sessionConnect } from '../../store/websocket';
 
 const isWeb = Platform.OS === 'web';
 
@@ -41,37 +42,36 @@ export class StartSessionScreen extends Component {
       scanning: false,
       scanned: false,
       errorMessage: null,
+      code: '0000000000000000000000000000000000000000',
     };
 
-    this.bootstrap = this.bootstrap.bind(this);
     this.getCameraPermissions = this.getCameraPermissions.bind(this);
     this.handleBarCodeScanned = this.handleBarCodeScanned.bind(this);
   }
 
-  componentDidMount() {
-    if (this.props.session) {
-      this.bootstrap();
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { session } = nextProps;
+    if (session) {
+      const { location_id } = session;
+      if (location_id) {
+        const location = nextProps.locations[location_id];
+        if (location) {
+          nextProps.navigation.navigate('Products', {
+            locationName: location.name,
+          });
+        }
+      }
     }
+    return null;
+  }
+
+  componentDidMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
       this.setState({
         errorMessage:
           'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
       });
     }
-  }
-
-  bootstrap() {
-    this.props.dispatch(GetSession(this.props.session.code)).then(() => {
-      const { location_id } = this.props.session;
-      if (location_id) {
-        this.props.dispatch(GetLocation(location_id)).then(() => {
-          const location = this.props.locations[location_id];
-          this.props.navigation.navigate('Products', {
-            locationName: location.name,
-          });
-        });
-      }
-    });
   }
 
   async getCameraPermissions() {
@@ -106,12 +106,13 @@ export class StartSessionScreen extends Component {
   handleBarCodeInput() {
     const { code } = this.state;
     console.log(code);
-    this.props.connectSession(code);
+    this.props.getSession(code);
+    // this.props.connectSession(code);
   }
 
   render() {
     const { hasCameraPermission, scanning } = this.state;
-    const { fetchingOrders, fetchingLocation, connecting } = this.props;
+    const { fetching, connecting } = this.props;
 
     if (hasCameraPermission === null && !isWeb) {
       return (
@@ -121,7 +122,7 @@ export class StartSessionScreen extends Component {
       );
     }
 
-    if (fetchingOrders || fetchingLocation || connecting) {
+    if (fetching || connecting) {
       return (
         <View style={styles.container}>
           <ActivityIndicator size="large" color={primaryColor} />
@@ -152,6 +153,7 @@ export class StartSessionScreen extends Component {
           <Input
             editable
             autoFocus
+            multiline
             maxLength={40}
             placeholder="Type or scan the code our your table"
             value={this.state.code}
@@ -207,17 +209,20 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   session: state.orders.session,
-  fetchingOrders: state.orders.fetching,
-  fetchingLocation: state.locations.fetching,
+  fetching: state.orders.fetching,
+  locations: state.locations.locations,
   connecting: state.orders.connecting,
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
+const mapDispatchToProps = dispatch => ({
+  ...bindActionCreators(
     {
       connectSession: ConnectSession,
+      getSession: GetSession,
     },
     dispatch
-  );
+  ),
+  dispatch,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartSessionScreen);

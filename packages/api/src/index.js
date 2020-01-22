@@ -11,3 +11,5 @@ export default {
   ...orders,
   ...products,
 };
+
+export { ApiError } from './error';

@@ -22,18 +22,18 @@ export class AboutScreen extends Component {
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainerStyle}>
-        <Text h3 style={styles.headline}>
+        <Text h2 style={styles.headline}>
           Imprint
         </Text>
         <Text style={styles.content}>
-          The ordered.online© platform was developed by Philipp Matthes and
-          Felix Kästner
+          The ordered.online© platform was developed by {'\n'}Philipp Matthes
+          and Felix Kästner
         </Text>
-        <Text h3 style={styles.headline}>
+        <Text h2 style={styles.headline}>
           Terms of Use
         </Text>
         <Text style={styles.content}>All rights reserved</Text>
-        <Text h3 style={styles.headline}>
+        <Text h2 style={styles.headline}>
           Privacy Policy
         </Text>
         <Text style={styles.content}>
@@ -41,7 +41,9 @@ export class AboutScreen extends Component {
         </Text>
         <Text>
           <Button
+            raised
             title="Contact us"
+            titleStyle={{ color: '#fff', width: '100%' }}
             onPress={() => Linking.openURL('mailto:contact@ordered.online')}
           />
         </Text>
@@ -63,10 +65,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headline: {
-    marginTop: 25,
+    marginTop: 40,
   },
   content: {
     lineHeight: 40,
+    textAlign: 'center',
   },
 });
 

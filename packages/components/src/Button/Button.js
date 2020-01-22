@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 24,
     padding: 12,
-    marginVertical: 8,
+    marginVertical: 12,
   },
   text: {
     textAlign: 'center',
@@ -159,13 +159,16 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#222222',
   },
-  buttonDisabled: Platform.select({
-    ios: {},
-    android: {
-      elevation: 0,
-      backgroundColor: '#dfdfdf',
-    },
-  }),
+  buttonDisabled: {
+    backgroundColor: '#D1D5D8',
+    ...Platform.select({
+      ios: {},
+      android: {
+        elevation: 0,
+        backgroundColor: '#dfdfdf',
+      },
+    }),
+  },
   textDisabled: Platform.select({
     ios: {
       color: '#cdcdcd',

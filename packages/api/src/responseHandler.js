@@ -18,6 +18,6 @@ export function json(response) {
 }
 
 export async function resolveError(error) {
-  let response = await error.resolve();
+  const response = await error.resolve();
   return Promise.reject(response);
 }

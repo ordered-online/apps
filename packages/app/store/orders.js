@@ -1,5 +1,6 @@
-import api from '@ordered.online/api';
+import api, { ApiError } from '@ordered.online/api';
 import { sessionConnect, sessionDisconnect } from './websocket';
+import { GetLocation } from './locations';
 
 // Action Types
 export const CLOSE_SESSION_REQUEST = 'ORDERS/CLOSE_SESSION_REQUEST';
@@ -100,29 +101,36 @@ const orderProductFailure = error => ({
   payload: error,
 });
 
-/**
- * Take an array of order sessions from the REST API
- * and transform them into a object where
- * the key's are the session code's and the
- * value's are the session object's.
- *
- * @param {array} session
- */
-const reformatSessions = sessions => {
-  const initialValue = {};
-  return sessions.reduce((obj, item) => {
-    return {
-      ...obj,
-      [item['code']]: item,
-    };
-  }, initialValue);
+const handleSessionResponse = locations => dispatch => session => {
+  const { location_id } = session;
+  if (!location_id) {
+    return Promise.reject({ reason: 'Could not find location' });
+  }
+  if (!locations.hasOwnProperty(session)) {
+    dispatch(GetLocation(location_id));
+  }
+  return session;
 };
 
 // Exports
-export const CloseSession = ({ location_id, name, session_code }) => (
-  dispatch,
-  getState
-) => {
+
+export const GetSession = session_code => (dispatch, getState) => {
+  dispatch(fetchSessionRequest());
+
+  const { locations } = getState().locations;
+
+  if (__DEV__) {
+    console.log('session_code: ' + session_code);
+  }
+
+  return api
+    .getSession(session_code)
+    .then(handleSessionResponse(locations)(dispatch))
+    .then(session => dispatch(fetchSessionSuccess(session)))
+    .catch(error => dispatch(fetchSessionFailure(error)));
+};
+
+export const CloseSession = session_code => (dispatch, getState) => {
   dispatch(closeSessionRequest());
 
   if (__DEV__) {
@@ -131,33 +139,8 @@ export const CloseSession = ({ location_id, name, session_code }) => (
 
   return api
     .closeSession(session_code)
-    .then(session => {
-      if (__DEV__) {
-        console.log(session);
-      }
-      return reformatSessions(Array.of(session));
-    })
     .then(session => dispatch(closeSessionSuccess(session)))
     .catch(error => dispatch(closeSessionFailure(error)));
-};
-
-export const GetSession = session_code => (dispatch, getState) => {
-  dispatch(fetchSessionRequest());
-
-  if (__DEV__) {
-    console.log('session_code: ' + session_code);
-  }
-
-  return api
-    .getSession(session_code)
-    .then(session => {
-      if (__DEV__) {
-        console.log(session);
-      }
-      return reformatSessions(Array.of(session));
-    })
-    .then(session => dispatch(fetchSessionSuccess(session)))
-    .catch(error => dispatch(fetchSessionFailure(error)));
 };
 
 export const OrderProduct = ({ product_id }) => (dispatch, getState) => {
@@ -172,18 +155,12 @@ export const OrderProduct = ({ product_id }) => (dispatch, getState) => {
 
   return api
     .orderProduct({ product_id, session_code })
-    .then(session => {
-      if (__DEV__) {
-        console.log(session);
-      }
-      return reformatSessions(Array.of(session));
-    })
     .then(session => dispatch(orderProductSuccess(session)))
     .catch(error => dispatch(orderProductFailure(error)));
 };
 
 export const ConnectSession = session_code => (dispatch, getState) => {
-  const host = api.getSessionWebsocket(session_code);
+  const host = api.getSessionWebsocketUrl(session_code);
   dispatch(sessionConnect(host));
 };
 

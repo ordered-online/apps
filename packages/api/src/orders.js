@@ -70,5 +70,5 @@ export const orderProduct = ({ product_id, session_code }) => {
     .catch(resolveError);
 };
 
-export const getSessionWebsocket = session_code =>
-  `ws://${API_URL}/ws/session/${sessionCode}/`;
+export const getSessionWebsocketUrl = session_code =>
+  `ws://${process.env.API_URL}/ws/session/${sessionCode}/`;

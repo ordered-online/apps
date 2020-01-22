@@ -11,6 +11,7 @@ import {
 
 import Badge from '../Badge';
 import Input from '../Input';
+import Icon from '../Icon';
 import Text from '../Text';
 
 const PadView = forwardRef((props, ref) => {
@@ -57,7 +58,9 @@ export default function ListItem(props) {
     onPress,
     onLongPress,
     Component = onPress || onLongPress ? TouchableHighlight : View,
+    leftIcon,
     leftElement,
+    rightIcon,
     rightElement,
     rightTitle,
     rightTitleStyle,
@@ -102,7 +105,8 @@ export default function ListItem(props) {
           disabled && disabledStyle,
         ])}
         pad={pad}>
-        <Text>{leftElement}</Text>
+        {leftIcon && <View>{leftIcon}</View>}
+        {leftElement && <Text style={{ margin: 5 }}>{leftElement}</Text>}
 
         {(typeof title !== 'undefined' || subtitle) && (
           <View
@@ -167,7 +171,8 @@ export default function ListItem(props) {
         )}
         {switchProps && <Switch {...switchProps} />}
         {badge && <Badge {...badge} />}
-        <Text>{rightElement}</Text>
+        {rightElement && <Text style={{ margin: 5 }}>{rightElement}</Text>}
+        {rightIcon && <View>{rightIcon}</View>}
       </PadView>
     </Component>
   );
@@ -186,7 +191,9 @@ ListItem.propTypes = {
   subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   subtitleStyle: Text.propTypes.style,
   subtitleProps: PropTypes.object,
+  leftIcon: PropTypes.node,
   leftElement: PropTypes.node,
+  rightIcon: PropTypes.node,
   rightElement: PropTypes.node,
   rightTitle: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   rightTitleStyle: Text.propTypes.style,

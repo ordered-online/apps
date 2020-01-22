@@ -40,7 +40,7 @@ export default function websocketMiddleware() {
   };
 
   const onMessage = store => event => {
-    cstore.dispatch(sessionMessage(event.data));
+    store.dispatch(sessionMessage(event.data));
   };
 
   return store => next => action => {
@@ -67,9 +67,8 @@ export default function websocketMiddleware() {
         socket = null;
         console.log('websocket closed');
         break;
-      default:
-        console.log('the next action:', action);
-        return next(action);
     }
+    console.log('the next action:', action);
+    return next(action);
   };
 }

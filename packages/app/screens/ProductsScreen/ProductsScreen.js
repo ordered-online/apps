@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-import { View, ActivityIndicator, FlatList, StyleSheet } from 'react-native';
+import {
+  View,
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Platform,
+  ScrollView,
+} from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Button, Text, ListItem } from '@ordered.online/components';
+import { Text, ListItem, Icon } from '@ordered.online/components';
 
 import { GetAllProducts } from '../../store/products';
 import { GetLocation } from '../../store/locations';
@@ -14,7 +21,7 @@ export class ProductsScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title:
-        'Order Products at' +
+        'Order Products at ' +
         navigation.getParam('locationName', 'your Location.'),
       headerStyle: {
         backgroundColor: '#f8f8f8',
@@ -50,15 +57,20 @@ export class ProductsScreen extends Component {
       <ListItem
         title={product.name}
         subtitle={product.description}
-        onPress={() => this.props.orderProduct({ item })}
-        topDivider
         bottomDivider
         chevron
-        rightIcon={
+        rightElement={`${product.price} €`}
+        leftIcon={
           <Icon
+            raised
+            reverse
+            size={15}
+            color={primaryColor}
+            disabled={this.props.session.state === 'CLOSED'}
+            containerStyle={styles.iconContainer}
             name={Platform.OS === 'ios' ? 'ios-add' : 'md-add'}
             type="ionicon"
-            onPress={() => this.props.orderProduct({ item })}
+            onPress={() => this.props.orderProduct({ product_id: item })}
           />
         }
       />
@@ -82,7 +94,7 @@ export class ProductsScreen extends Component {
     if (fetching) {
       return (
         <View style={styles.container}>
-          <ActivityIndicator size="large" color={primaryColor} />{' '}
+          <ActivityIndicator size="large" color={primaryColor} />
         </View>
       );
     }
@@ -90,16 +102,17 @@ export class ProductsScreen extends Component {
     return (
       <View style={styles.container}>
         {location && (
-          <Text h3 h3Style={styles.headline}>
+          <Text h4 h4Style={styles.headline}>
             Products for {location.name}
           </Text>
         )}
-        <FlatList
-          style={styles.listView}
-          keyExtractor={this.keyExtractor}
-          data={data}
-          renderItem={this.renderItem}
-        />
+        <ScrollView style={{ borderRadius: 25 }}>
+          <FlatList
+            keyExtractor={this.keyExtractor}
+            data={data}
+            renderItem={this.renderItem}
+          />
+        </ScrollView>
       </View>
     );
   }
@@ -121,19 +134,18 @@ const styles = StyleSheet.create({
     shadowRadius: 16,
     elevation: 0.5,
   },
-  listView: {
-    marginHorizontal: 12,
-    borderRadius: 24,
-    backgroundColor: '#fff',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.1,
-    shadowRadius: 64,
-    elevation: 0.5,
-  },
   headline: {
     textAlign: 'center',
     marginVertical: 15,
+  },
+  iconContainer: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    marginRight: 5,
+    marginLeft: -10,
   },
 });
 
