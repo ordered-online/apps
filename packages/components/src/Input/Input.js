@@ -211,7 +211,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     flex: 1,
     minHeight: 40,
-    lineHeight: 40,
+    ...Platform.select({
+      ios: {
+        lineHeight: 20,
+      },
+      default: {
+        lineHeight: 40,
+      },
+    }),
     marginVertical: 6,
     paddingHorizontal: 24,
     borderRadius: 24,

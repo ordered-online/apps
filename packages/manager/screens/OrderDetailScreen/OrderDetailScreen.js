@@ -108,10 +108,12 @@ export class OrderDetailScreen extends Component {
           onPress={() =>
             this.props.navigation.navigate(`locations/${location_id}/sessions`)
           }
-          containerStyle={{ alignSelf: 'flex-start', margin: 30 }}
+          containerStyle={{ alignSelf: 'flex-start', marginLeft: 30 }}
         />
         <Text h3>{session.name}</Text>
-        <Text h4>{location.name}</Text>
+        <Text style={{ marginVertical: 4 }} h4>
+          {location.name}
+        </Text>
         <Image
           source={{
             uri: `data:image/svg+xml;base64,${this.state.base64}`,
@@ -141,7 +143,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   listView: {
-    margin: 12,
+    marginTop: 4,
+    width: '100%',
     borderRadius: 24,
     backgroundColor: '#fff',
     shadowColor: '#000',
@@ -151,11 +154,11 @@ const styles = StyleSheet.create({
     elevation: 0.5,
   },
   total: {
+    marginVertical: 4,
     color: '#57c75e',
     textAlign: 'center',
     fontSize: 25,
     fontWeight: '500',
-    marginRight: 30,
   },
 });
 

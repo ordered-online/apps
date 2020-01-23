@@ -138,9 +138,9 @@ const styles = StyleSheet.create({
   form: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'center',
   },
   icon: {
-    marginTop: 18,
     width: 50,
   },
   input: {
