@@ -9,14 +9,7 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import {
-  Text,
-  Icon,
-  Input,
-  Button,
-  Image,
-  QRCode,
-} from '@ordered.online/components';
+import { Text, Icon, Input, Button, QRCode } from '@ordered.online/components';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 
@@ -209,7 +202,6 @@ export class StartSessionScreen extends Component {
             onChangeText={code => this.setState({ code })}
             containerStyle={{ marginBottom: 20, maxWidth: 325 }}
           />
-
           <View style={styles.buttonWrapper}>
             <Button
               raised

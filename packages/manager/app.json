@@ -58,9 +58,6 @@
         "image": "./assets/icon.png",
         "tabletImage": "./assets/icon.png",
         "userInterfaceStyle": "automatic"
-      },
-      "config": {
-        "googleMapsApiKey": ""
       }
     },
     "android": {
@@ -91,11 +88,6 @@
       "splash": {
         "backgroundColor": "#ffffff",
         "resizeMode": "native"
-      },
-      "config": {
-        "googleMaps": {
-          "apiKey": ""
-        }
       }
     }
   }

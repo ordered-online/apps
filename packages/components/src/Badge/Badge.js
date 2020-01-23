@@ -7,8 +7,10 @@ import {
   ViewPropTypes,
 } from 'react-native';
 
+import Text from '../Text';
+
 const statusColors = {
-  primary: '#2089dc',
+  primary: '#57c75e',
   success: '#52c41a',
   error: '#ff190c',
   warning: '#faad14',
@@ -28,12 +30,16 @@ export default function Badge(props) {
   const componentStyles = [styles.badge];
   componentStyles.push({ backgroundColor: statusColors[status] });
 
+  const element = value ? (
+    <Text style={{ color: '#fff', fontWeight: '500' }}>{value}</Text>
+  ) : null;
+
   return (
     <View style={StyleSheet.flatten([containerStyle && containerStyle])}>
       <Component
         {...attributes}
         style={StyleSheet.flatten([
-          styles.badge,
+          componentStyles,
           !element && styles.miniBadge,
           badgeStyle && badgeStyle,
         ])}
@@ -60,9 +66,9 @@ Badge.defaultProps = {
 const styles = StyleSheet.create({
   badge: {
     alignSelf: 'center',
-    minWidth: 18,
-    height: 18,
-    borderRadius: 18 / 2,
+    minWidth: 25,
+    height: 25,
+    borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: StyleSheet.hairlineWidth,

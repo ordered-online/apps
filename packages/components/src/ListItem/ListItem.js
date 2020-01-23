@@ -11,7 +11,6 @@ import {
 
 import Badge from '../Badge';
 import Input from '../Input';
-import Icon from '../Icon';
 import Text from '../Text';
 
 const PadView = forwardRef((props, ref) => {

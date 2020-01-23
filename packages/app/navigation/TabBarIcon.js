@@ -8,7 +8,7 @@ const TabBarIcon = ({ iconName, focused }) => {
     <Ionicons
       name={iconName}
       size={30}
-      style={{ marginBottom: -3 }}
+      style={{ marginBottom: -3, position: 'relative' }}
       color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
     />
   );

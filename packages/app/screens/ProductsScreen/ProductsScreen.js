@@ -101,11 +101,6 @@ export class ProductsScreen extends Component {
 
     return (
       <View style={styles.container}>
-        {location && (
-          <Text h4 h4Style={styles.headline}>
-            Products for {location.name}
-          </Text>
-        )}
         <FlatList
           keyExtractor={this.keyExtractor}
           data={data}
