@@ -7,6 +7,8 @@ import { persistStore, persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk'; // library to handle async with redux
 import createRootReducer from './reducers';
 
+import createWebsocketMiddleware from './websocket';
+
 const isWeb = Platform.OS == 'web';
 export const history = isWeb ? createBrowserHistory() : createMemoryHistory();
 
@@ -38,7 +40,9 @@ const persistedReducer = persistReducer(
   createRootReducer(history)
 );
 
-const middleware = [thunk, routerMiddleware(history)];
+const websocketMiddleware = createWebsocketMiddleware();
+
+const middleware = [websocketMiddleware, thunk, routerMiddleware(history)];
 
 const enhancers = [];
 
