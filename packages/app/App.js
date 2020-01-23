@@ -39,12 +39,12 @@ export default class App extends Component {
             <LinearGradient
               style={{ width: '100%', height: '100%' }}
               colors={['#57c75e', '#27ae60']}>
-              <SafeAreaView style={styles.container}>
+              <View style={styles.container}>
                 {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
                 <View style={styles.roundedBackground}>
                   <AppNavigator />
                 </View>
-              </SafeAreaView>
+              </View>
             </LinearGradient>
           </PersistGate>
         </Provider>
@@ -84,8 +84,8 @@ const styles = StyleSheet.create({
     marginRight: 8,
     marginBottom: 8,
     backgroundColor: '#f8f8f8',
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 24,
+    borderBottomLeftRadius: 32,
+    borderBottomRightRadius: 32,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.3,
