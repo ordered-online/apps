@@ -1,6 +1,6 @@
 {
   "name": "@ordered.online/app",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "keywords": [],
   "repository": {
@@ -38,8 +38,8 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.6",
-    "@ordered.online/api": "^0.0.4",
-    "@ordered.online/components": "^0.0.4",
+    "@ordered.online/api": "^0.0.5",
+    "@ordered.online/components": "^0.0.5",
     "@react-navigation/core": "^3.5.1",
     "@react-navigation/web": "^1.0.0-alpha.9",
     "expo": "^36.0.0",
@@ -47,9 +47,9 @@
     "expo-barcode-scanner": "~8.0.0",
     "expo-constants": "~8.0.0",
     "expo-font": "~8.0.0",
+    "expo-linear-gradient": "^8.0.0",
     "expo-location": "~8.0.0",
     "expo-permissions": "~8.0.0",
-    "expo-linear-gradient": "^8.0.0",
     "prop-types": "^15.7.2",
     "react": "16.9.0",
     "react-dom": "16.9.0",
