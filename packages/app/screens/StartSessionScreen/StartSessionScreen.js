@@ -9,14 +9,20 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { Text, Icon, Input, Button, Image } from '@ordered.online/components';
+import {
+  Text,
+  Icon,
+  Input,
+  Button,
+  Image,
+  QRCode,
+} from '@ordered.online/components';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 
 import {
   ConnectSession,
   GetSession,
-  GetSessionQR,
   validateSessionCode,
 } from '../../store/orders';
 
@@ -55,9 +61,6 @@ export class StartSessionScreen extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     const { session } = nextProps;
     if (session && session.code) {
-      if (!session.hasOwnProperty('base64')) {
-        setTimeout(() => nextProps.getSessionQR(session.code), 1000);
-      }
       const { location_id } = session;
       if (location_id) {
         const location = nextProps.locations[location_id];
@@ -129,17 +132,7 @@ export class StartSessionScreen extends Component {
         <Text h3 style={{ textAlign: 'center' }}>
           Share your code to start ordering together !
         </Text>
-        {session.hasOwnProperty('base64') && (
-          <Image
-            source={{
-              uri: `data:image/svg+xml;base64,${session.base64}`,
-            }}
-            style={{ width: 300, height: 300 }}
-            PlaceholderContent={
-              <ActivityIndicator size="large" color={primaryColor} />
-            }
-          />
-        )}
+        <QRCode value={session.code} size={200} />
         <Text style={{ textAlign: 'center' }}>{session.code}</Text>
 
         <View style={styles.buttonWrapper}>
@@ -276,7 +269,6 @@ const mapDispatchToProps = dispatch => ({
     {
       connectSession: ConnectSession,
       getSession: GetSession,
-      getSessionQR: GetSessionQR,
     },
     dispatch
   ),

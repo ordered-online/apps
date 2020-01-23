@@ -1,5 +1,3 @@
-import { reformatSessions } from './orders';
-
 export const SESSION_CONNECT = 'WEBSOCKET/SESSION_CONNECT';
 export const SESSION_CONNECTED = 'WEBSOCKET/SESSION_CONNECTED';
 export const SESSION_DISCONNECT = 'WEBSOCKET/SESSION_DISCONNECT';
@@ -44,7 +42,7 @@ export default function createWebsocketMiddleware() {
   const onMessage = store => event => {
     const data = JSON.parse(event.data);
     const sessionData = data.session ? data.session : data;
-    const session = reformatSessions(Array.of(sessionData));
+    const session = Object.assign({}, { [sessionData['code']]: sessionData });
     store.dispatch(sessionMessage(session));
   };
 

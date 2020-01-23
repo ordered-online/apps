@@ -7,3 +7,4 @@ export { default as Input } from './Input';
 export { default as ListItem } from './ListItem';
 export { default as Map } from './Map';
 export { default as Text } from './Text';
+export { default as QRCode } from 'react-native-qrcode-svg';

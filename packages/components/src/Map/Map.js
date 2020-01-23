@@ -4,6 +4,8 @@ import { MapView } from './MapView';
 import { MapViewTile } from './MapViewTile';
 import { MapViewMarker } from './MapViewMarker';
 
+import { MAP_TYPES } from 'react-native-maps';
+
 export default function Map({ region, marker }) {
   const initialRegion = {
     latitude: 51.0250869,
@@ -12,7 +14,12 @@ export default function Map({ region, marker }) {
     longitudeDelta: 0.0421,
   };
   return (
-    <MapView region={region || initialRegion} zoom={marker ? 16 : 10}>
+    <MapView
+      region={region || initialRegion}
+      zoom={marker ? 16 : 10}
+      provider={null}
+      mapType={MAP_TYPES.NONE}
+      showsUserLocation>
       <MapViewTile urlTemplate="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {marker && (
         <MapViewMarker

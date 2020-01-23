@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Platform, ActivityIndicator } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Platform,
+  ActivityIndicator,
+  ScrollView,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Card, Text, Icon } from '@ordered.online/components';
@@ -43,54 +49,62 @@ export class ProductDetailScreen extends Component {
     }
 
     return (
-      <View style={styles.container}>
-        <View style={styles.actionsContainer}>
-          <Icon
-            name={
-              Platform.OS === 'ios'
-                ? 'ios-arrow-round-back'
-                : 'md-arrow-round-back'
+      <ScrollView>
+        <View style={styles.container}>
+          <Card
+            title={product.name}
+            containerStyle={styles.cardContainer}
+            titleLeftElement={
+              <Icon
+                name={
+                  Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'
+                }
+                iconStyle={{ fontSize: 30 }}
+                type="ionicon"
+                color={primaryColor}
+                onPress={() =>
+                  this.props.navigation.navigate(
+                    `locations/${location_id}/products`
+                  )
+                }
+              />
             }
-            type="ionicon"
-            color={primaryColor}
-            onPress={() =>
-              this.props.navigation.navigate(
-                `locations/${location_id}/products`
-              )
-            }
-          />
-          <Icon
-            name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'}
-            type="ionicon"
-            color={primaryColor}
-            onPress={() =>
-              this.props.navigation.navigate(
-                `locations/${location_id}/products/edit/${product_id}`
-              )
-            }
-          />
+            titleRightElement={
+              <Icon
+                name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'}
+                type="ionicon"
+                color={primaryColor}
+                iconStyle={{ fontSize: 30 }}
+                onPress={() =>
+                  this.props.navigation.navigate(
+                    `locations/${location_id}/products/edit/${product_id}`
+                  )
+                }
+              />
+            }>
+            <Text style={{ marginBottom: 15, fontSize: 18 }}>
+              {'\n'}Description: {'\n'}
+              {product.description}
+            </Text>
+            <Text style={{ fontSize: 18 }}>
+              {'\n'}Price: {'\n'}
+              {product.price}
+            </Text>
+            <Text style={{ fontSize: 18 }}>
+              {'\n'}Categories: {'\n'}{' '}
+            </Text>
+            {this.renderBadges(product.categories)}
+            <Text style={{ fontSize: 18 }}>
+              {'\n'}Tags: {'\n'}{' '}
+            </Text>
+            {this.renderBadges(product.tags)}
+            <Text style={{ fontSize: 18 }}>
+              {'\n'}Additives: {'\n'}{' '}
+            </Text>
+            {this.renderBadges(product.additives)}
+          </Card>
         </View>
-        <Card title={product.name} containerStyle={styles.cardContainer}>
-          <Text style={{ marginBottom: 15 }}>
-            {'\n'} Description: {'\n'} {product.description}
-          </Text>
-          <Text>
-            {'\n'} Price: {'\n'} {product.price}
-          </Text>
-          <Text>
-            {'\n'} Categories: {'\n'}{' '}
-          </Text>
-          {this.renderBadges(product.categories)}
-          <Text>
-            {'\n'} Tags: {'\n'}{' '}
-          </Text>
-          {this.renderBadges(product.tags)}
-          <Text>
-            {'\n'} Additives: {'\n'}{' '}
-          </Text>
-          {this.renderBadges(product.additives)}
-        </Card>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -110,13 +124,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 64,
     elevation: 0.5,
-  },
-  actionsContainer: {
-    margin: 25,
-    marginBottom: 0,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   badgeContainer: {
     flex: 1 / 3,

@@ -93,12 +93,13 @@ const Input = forwardRef(function(props, ref) {
     // the height increased therefore we also increase the line counter
     if (height < newHeight) {
       setNumberOfLines(numberOfLines + 1);
+      setHeight(newHeight);
     }
     // the height decreased, we subtract a line from the line counter
     if (height > newHeight) {
       setNumberOfLines(numberOfLines - 1);
+      setHeight(newHeight);
     }
-    setHeight(newHeight);
   };
 
   return (
@@ -134,13 +135,16 @@ const Input = forwardRef(function(props, ref) {
           style={StyleSheet.flatten([
             styles.input,
             inputStyle,
+            {
+              height,
+            },
             disabled && styles.disabledInput,
             disabled && disabledInputStyle,
           ])}
           multiline={multiline}
+          numberOfLines={numberOfLines}
           onLayout={_onLayout}
           onContentSizeChange={_onContentSizeChange}
-          numberOfLines={numberOfLines}
         />
 
         {rightIcon && (
@@ -167,6 +171,7 @@ const Input = forwardRef(function(props, ref) {
 
 Input.defaultProps = {
   InputComponent: TextInput,
+  multiline: false,
 };
 
 Input.propTypes = {
@@ -209,7 +214,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     color: 'black',
     fontSize: 18,
-    flex: 1,
+    width: '100%',
     minHeight: 40,
     ...Platform.select({
       ios: {

@@ -38,27 +38,23 @@ export class LocationDetailScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.backButtonContainer}>
-          <Icon
-            containerStyle={styles.backButton}
-            name={
-              Platform.OS === 'ios'
-                ? 'ios-arrow-round-back'
-                : 'md-arrow-round-back'
-            }
-            type="ionicon"
-            color={primaryColor}
-            onPress={() => this.props.navigation.navigate('locations')}
-          />
-          <Text h4 style={{ color: '#57c75e' }}>
-            Back
-          </Text>
-        </View>
-        <Card title={location.name} containerStyle={styles.cardContainer}>
+        <Card
+          title={location.name}
+          containerStyle={styles.cardContainer}
+          titleLeftElement={
+            <Icon
+              name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'}
+              type="ionicon"
+              color={primaryColor}
+              onPress={() => this.props.navigation.navigate(`locations`)}
+              iconStyle={{ fontSize: 30 }}
+            />
+          }>
           <View style={styles.actionsContainer}>
             <Button
               type="outline"
               title="Products"
+              containerStyle={styles.action}
               onPress={() =>
                 this.props.navigation.navigate(
                   `locations/${location_id}/products`
@@ -68,6 +64,7 @@ export class LocationDetailScreen extends Component {
             <Button
               type="outline"
               title="Orders"
+              containerStyle={styles.action}
               onPress={() =>
                 this.props.navigation.navigate(
                   `locations/${location_id}/sessions`
@@ -77,6 +74,7 @@ export class LocationDetailScreen extends Component {
             <Button
               type="outline"
               title="Edit"
+              containerStyle={styles.action}
               onPress={() =>
                 this.props.navigation.navigate(`locations/edit/${location_id}`)
               }
@@ -107,6 +105,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   cardContainer: {
+    flex: 1,
     marginBottom: 24,
     borderRadius: 24,
     backgroundColor: '#fff',
@@ -120,9 +119,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
   },
-  backButtonContainer: {
-    display: 'flex',
-    flexDirection: 'row',
+  action: {
+    flex: 1,
+    marginHorizontal: 5,
   },
   badgeContainer: {
     flex: 1 / 5,
@@ -136,7 +135,8 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   backButton: {
-    marginHorizontal: 16,
+    fontSize: 40,
+    marginHorizontal: 8,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.1,
@@ -145,6 +145,11 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 12,
+  },
+  iconContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
   },
 });
 

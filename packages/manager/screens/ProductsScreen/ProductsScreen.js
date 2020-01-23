@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import { View, ActivityIndicator, FlatList, StyleSheet } from 'react-native';
+import {
+  View,
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Platform,
+} from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Button, Text, ListItem } from '@ordered.online/components';
+import { Button, Text, ListItem, Icon } from '@ordered.online/components';
 import { GetAllProducts } from '../../store/products';
 
 import { primaryColor } from '../../constants/Colors';
@@ -55,9 +61,22 @@ export class ProductsScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <Text h3 h3Style={styles.headline}>
-          Products for {location.name}
-        </Text>
+        <View style={styles.header}>
+          <Icon
+            name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'}
+            type="ionicon"
+            color={primaryColor}
+            onPress={() =>
+              this.props.navigation.navigate(`locations/${location_id}`)
+            }
+            iconStyle={styles.backButton}
+            containerStyle={styles.iconContainer}
+          />
+          <Text h3 h3Style={styles.headline}>
+            Products for {location.name}
+          </Text>
+        </View>
+
         {fetching && <ActivityIndicator size="large" color={primaryColor} />}
         <FlatList
           style={styles.listView}
@@ -100,6 +119,8 @@ const styles = StyleSheet.create({
     elevation: 0.5,
   },
   headline: {
+    flex: 1,
+    paddingRight: 15,
     textAlign: 'center',
     marginVertical: 15,
   },
@@ -108,6 +129,30 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 15,
+  },
+  backButtonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  backButton: {
+    marginTop: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.1,
+    shadowRadius: 64,
+    elevation: 0.5,
+    width: 30,
+    height: 30,
+    borderRadius: 12,
+  },
+  header: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  iconContainer: {
+    width: 30,
   },
 });
 

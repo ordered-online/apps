@@ -28,6 +28,7 @@ export default function Button(props) {
     nextFocusRight,
     nextFocusUp,
     titleStyle,
+    containerStyle,
     titleProps,
     loading,
     loadingStyle,
@@ -91,6 +92,7 @@ export default function Button(props) {
       testID={testID}
       disabled={disabled}
       onPress={onPress}
+      style={containerStyle}
       touchSoundDisabled={touchSoundDisabled}>
       <View style={buttonStyles}>
         {loading && (
@@ -130,6 +132,7 @@ Button.propTypes = {
   titleProps: PropTypes.object,
   loading: PropTypes.bool,
   loadingStyle: ViewPropTypes.style,
+  containerStyle: ViewPropTypes.style,
   loadingProps: PropTypes.object,
   testID: PropTypes.string,
 };

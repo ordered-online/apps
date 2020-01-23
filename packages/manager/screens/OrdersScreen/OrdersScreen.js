@@ -85,6 +85,16 @@ export class OrdersScreen extends Component {
           Orders for {location.name}
         </Text>
         <View style={styles.form}>
+          <Icon
+            name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'}
+            type="ionicon"
+            color={primaryColor}
+            onPress={() =>
+              this.props.navigation.navigate(`locations/${location_id}`)
+            }
+            iconStyle={{ fontSize: 25 }}
+            containerStyle={styles.icon}
+          />
           <Input
             editable
             maxLength={40}
@@ -100,6 +110,7 @@ export class OrdersScreen extends Component {
             color={primaryColor}
             onPress={this.createNewSession}
             containerStyle={styles.icon}
+            iconStyle={{ fontSize: 25 }}
           />
         </View>
         {fetching && <ActivityIndicator size="large" color={primaryColor} />}
@@ -139,8 +150,17 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   icon: {
+    ...Platform.select({
+      web: {
+        marginTop: 0,
+      },
+      default: {
+        marginTop: 25,
+      },
+    }),
     width: 50,
   },
   input: {

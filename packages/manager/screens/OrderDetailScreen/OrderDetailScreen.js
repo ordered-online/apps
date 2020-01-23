@@ -3,14 +3,13 @@ import {
   View,
   StyleSheet,
   ActivityIndicator,
-  Dimensions,
   FlatList,
   Platform,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import api from '@ordered.online/api';
-import { Text, Image, ListItem, Icon } from '@ordered.online/components';
+import { Text, ListItem, Icon, QRCode } from '@ordered.online/components';
 import { GetProduct } from '../../store/products';
 import { GetSession, ConnectSession } from '../../store/orders';
 import { primaryColor } from '../../constants/Colors';
@@ -19,6 +18,7 @@ export class OrderDetailScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      total: 0,
       base64: null,
     };
     this.renderItem = this.renderItem.bind(this);
@@ -59,7 +59,7 @@ export class OrderDetailScreen extends Component {
     this.props.getSession(session_code);
     this.props.connectSession(session_code);
     const response = await api.getQRCodeBase64(session_code);
-    let { base64 } = response;
+    const { base64 } = response;
     if (base64) {
       this.setState({ base64 });
     }
@@ -98,31 +98,20 @@ export class OrderDetailScreen extends Component {
     return (
       <View style={styles.container}>
         <Icon
-          name={
-            Platform.OS === 'ios'
-              ? 'ios-arrow-round-back'
-              : 'md-arrow-round-back'
-          }
+          name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'}
           type="ionicon"
           color={primaryColor}
           onPress={() =>
             this.props.navigation.navigate(`locations/${location_id}/sessions`)
           }
-          containerStyle={{ alignSelf: 'flex-start', marginLeft: 30 }}
+          iconStyle={styles.backButton}
+          containerStyle={styles.iconContainer}
         />
         <Text h3>{session.name}</Text>
         <Text style={{ marginVertical: 4 }} h4>
           {location.name}
         </Text>
-        <Image
-          source={{
-            uri: `data:image/svg+xml;base64,${this.state.base64}`,
-          }}
-          style={{ width: 300, height: 300 }}
-          PlaceholderContent={
-            <ActivityIndicator size="large" color={primaryColor} />
-          }
-        />
+        <QRCode value={session_code} size={200} />
         <Text style={styles.total}>{`€ ${total}`}</Text>
         <Text>{session_code}</Text>
         <FlatList
@@ -138,6 +127,7 @@ export class OrderDetailScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 30,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -159,6 +149,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 25,
     fontWeight: '500',
+  },
+  backButton: {
+    fontSize: 30,
+    marginHorizontal: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.1,
+    shadowRadius: 64,
+    elevation: 0.5,
+    width: 30,
+    height: 30,
+    borderRadius: 12,
+  },
+  iconContainer: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
   },
 });
 

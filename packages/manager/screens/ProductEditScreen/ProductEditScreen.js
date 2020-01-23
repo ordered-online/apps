@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { View, StyleSheet, ActivityIndicator } from 'react-native';
-import { Button, Input, Text } from '@ordered.online/components';
+import { View, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
+import { Button, Input, Text, Icon } from '@ordered.online/components';
 import { GreateProduct, GetProduct, EditProduct } from '../../store/products';
 
 import { primaryColor } from '../../constants/Colors';
@@ -80,6 +80,7 @@ export class ProductEditScreen extends Component {
   }
 
   render() {
+    const { location_id, product_id } = this.props.match.params;
     const { edit, fetching } = this.props;
 
     if (edit && fetching) {
@@ -87,49 +88,68 @@ export class ProductEditScreen extends Component {
     }
 
     return (
-      <View style={styles.container}>
-        <Text h4>Please provide details for your product.</Text>
-        <Text>{'\n'}</Text>
-        <Input
-          editable
-          autoFocus
-          maxLength={40}
-          placeholder="Name"
-          textContentType="givenName"
-          value={this.state.name}
-          onChangeText={name => this.handleFormChange('name', name)}
-        />
-        <Input
-          editable
-          autoFocus
-          multiline
-          maxLength={400}
-          placeholder="Description"
-          textContentType="none"
-          onChangeText={description =>
-            this.handleFormChange('description', description)
-          }
-          value={this.state.description}
-        />
-        <Input
-          editable
-          autoFocus
-          maxLength={40}
-          placeholder="Price"
-          textContentType="none"
-          onChangeText={price => this.handleFormChange('price', price)}
-          value={this.state.price}
-        />
-        <Button
-          raised
-          color={'#57c75e'}
-          titleStyle={{ color: '#fff', padding: 4 }}
-          title={edit ? 'Save Product' : 'Create Product'}
-          style={{ marginTop: 15 }}
-          loading={this.props.fetching}
-          onPress={this.handleFormSubmit}
-        />
-      </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.backButtonContainer}>
+            <Icon
+              containerStyle={styles.backButton}
+              name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'}
+              type="ionicon"
+              color={primaryColor}
+              onPress={() =>
+                this.props.navigation.navigate(
+                  `locations/${location_id}/products/${product_id}`
+                )
+              }
+            />
+            <Text h4 style={{ color: '#57c75e' }}>
+              Back
+            </Text>
+          </View>
+          <Text style={{ fontSize: 18 }}>
+            Please provide details for your product.
+          </Text>
+          <Input
+            editable
+            autoFocus
+            maxLength={40}
+            placeholder="Name"
+            textContentType="givenName"
+            value={this.state.name}
+            onChangeText={name => this.handleFormChange('name', name)}
+          />
+          <Input
+            editable
+            autoFocus
+            multiline
+            maxLength={400}
+            placeholder="Description"
+            textContentType="none"
+            onChangeText={description =>
+              this.handleFormChange('description', description)
+            }
+            value={this.state.description}
+          />
+          <Input
+            editable
+            autoFocus
+            maxLength={40}
+            placeholder="Price"
+            textContentType="none"
+            onChangeText={price => this.handleFormChange('price', price)}
+            value={this.state.price}
+          />
+          <Button
+            raised
+            color={'#57c75e'}
+            titleStyle={{ color: '#fff', padding: 4 }}
+            title={edit ? 'Save Product' : 'Create Product'}
+            style={styles.button}
+            loading={this.props.fetching}
+            onPress={this.handleFormSubmit}
+          />
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -143,6 +163,22 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'stretch',
+  },
+  backButtonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginBottom: 12,
+  },
+  backButton: {
+    marginRight: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.1,
+    shadowRadius: 64,
+    elevation: 0.5,
+    width: 30,
+    height: 30,
+    borderRadius: 12,
   },
 });
 

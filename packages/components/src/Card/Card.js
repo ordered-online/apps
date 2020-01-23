@@ -12,6 +12,8 @@ export default function Card(props) {
     wrapperStyle,
     imageWrapperStyle,
     title,
+    titleRightElement,
+    titleLeftElement,
     titleStyle,
     titleNumberOfLines,
     featuredTitle,
@@ -43,17 +45,27 @@ export default function Card(props) {
           : title &&
             title.length && (
               <View>
-                <Text
-                  testID="cardTitle"
-                  style={StyleSheet.flatten([
-                    styles.cardTitle,
-                    image && styles.imageCardTitle,
-                    titleStyle && titleStyle,
-                  ])}
-                  numberOfLines={titleNumberOfLines}>
-                  {title}
-                </Text>
-
+                <View
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    alignContent: 'center',
+                  }}>
+                  {titleLeftElement}
+                  <Text
+                    testID="cardTitle"
+                    style={StyleSheet.flatten([
+                      styles.cardTitle,
+                      image && styles.imageCardTitle,
+                      titleStyle && titleStyle,
+                    ])}
+                    numberOfLines={titleNumberOfLines}>
+                    {title}
+                  </Text>
+                  {titleRightElement}
+                </View>
                 {!image && (
                   <View
                     style={StyleSheet.flatten([
@@ -120,6 +132,8 @@ Card.propTypes = {
   wrapperStyle: ViewPropTypes.style,
   overlayStyle: ViewPropTypes.style,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  titleRightElement: PropTypes.node,
+  titleLeftElement: PropTypes.node,
   titleStyle: Text.propTypes.style,
   featuredTitle: PropTypes.string,
   featuredTitleStyle: Text.propTypes.style,
@@ -154,7 +168,7 @@ const styles = StyleSheet.create({
     }),
   },
   featuredTitle: {
-    fontSize: 18,
+    fontSize: 22,
     marginBottom: 8,
     color: 'white',
     ...Platform.select({
@@ -167,7 +181,7 @@ const styles = StyleSheet.create({
     }),
   },
   featuredSubtitle: {
-    fontSize: 13,
+    fontSize: 18,
     marginBottom: 8,
     color: 'white',
     ...Platform.select({
@@ -189,7 +203,10 @@ const styles = StyleSheet.create({
       StyleSheet.hairlineWidth < 1 ? '#bcbbc1' : 'rgba(0, 0, 0, 0.12)',
   },
   cardTitle: {
-    fontSize: 14,
+    marginTop: 10,
+    paddingHorizontal: 10,
+    textAlignVertical: 'center',
+    fontSize: 18,
     color: '#43484d',
     ...Platform.select({
       android: {

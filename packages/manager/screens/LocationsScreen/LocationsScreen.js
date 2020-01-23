@@ -40,9 +40,9 @@ export class LocationsScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <Text h3 h3style={styles.headline}>
-          Your Locations
-        </Text>
+        <View style={styles.headline}>
+          <Text h3>Your Locations</Text>
+        </View>
         {fetching && <ActivityIndicator size="large" color={primaryColor} />}
         <FlatList
           style={styles.listView}
@@ -84,6 +84,9 @@ const styles = StyleSheet.create({
   createButtonWrapper: {
     display: 'flex',
     flexDirection: 'row',
+  },
+  headline: {
+    marginVertical: 10,
   },
 });
 
