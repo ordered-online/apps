@@ -9,35 +9,63 @@ exports[`Manager manager renders the loading screen 1`] = `
 `;
 
 exports[`Manager manager renders the root without loading screen 1`] = `
-<RCTSafeAreaView
-  emulateUnlessSupported={true}
+<ViewManagerAdapter_ExpoLinearGradient
+  proxiedProperties={
+    Object {
+      "colors": Array [
+        4283942750,
+        4280790624,
+      ],
+      "endPoint": undefined,
+      "locations": undefined,
+      "startPoint": undefined,
+    }
+  }
   style={
     Object {
-      "alignContent": "center",
-      "display": "flex",
-      "flex": 1,
-      "flexDirection": "column",
-      "justifyContent": "center",
+      "height": "100%",
+      "width": "100%",
     }
   }
 >
-  <RCTScrollView
-    contentContainerStyle={
-      Object {
-        "flexGrow": 1,
-      }
-    }
-    onContentSizeChange={[Function]}
-    scrollEnabled={false}
+  <View
     style={
       Object {
+        "alignItems": "stretch",
+        "backgroundColor": "#f8f8f8",
+        "borderBottomLeftRadius": 32,
+        "borderBottomRightRadius": 32,
+        "elevation": 0.5,
         "flex": 1,
+        "justifyContent": "center",
+        "marginBottom": 6,
+        "marginLeft": 6,
+        "marginRight": 6,
+        "paddingHorizontal": 12,
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 0,
+          "width": 0,
+        },
+        "shadowOpacity": 0.3,
+        "shadowRadius": 16,
       }
     }
   >
-    <View>
+    <RCTSafeAreaView
+      emulateUnlessSupported={true}
+      style={
+        Object {
+          "alignContent": "center",
+          "display": "flex",
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "center",
+        }
+      }
+    >
       <AppNavigator />
-    </View>
-  </RCTScrollView>
-</RCTSafeAreaView>
+    </RCTSafeAreaView>
+  </View>
+</ViewManagerAdapter_ExpoLinearGradient>
 `;
