@@ -1,5 +1,11 @@
 import api from '@ordered.online/api';
 
+import {
+  sessionConnect,
+  sessionDisconnect,
+  SESSION_MESSAGE,
+} from './websocket';
+
 // Action Types
 export const CREATE_SESSION_REQUEST = 'ORDERS/CREATE_SESSION_REQUEST';
 export const CREATE_SESSION_SUCCESS = 'ORDERS/CREATE_SESSION_SUCCESS';
@@ -34,6 +40,7 @@ const orders = (state = initialState, action) => {
     case CREATE_SESSION_SUCCESS:
     case CLOSE_SESSION_SUCCESS:
     case FETCH_SESSION_SUCCESS:
+    case SESSION_MESSAGE:
       return {
         ...state,
         fetching: false,
@@ -106,7 +113,7 @@ const fetchSessionFailure = error => ({
  *
  * @param {array} session
  */
-const reformatSessions = sessions => {
+export const reformatSessions = sessions => {
   const initialValue = {};
   return sessions.reduce((obj, item) => {
     return {
@@ -115,6 +122,11 @@ const reformatSessions = sessions => {
     };
   }, initialValue);
 };
+
+export function validateSessionCode(code) {
+  const regex = /^[a-z0-9]{40}$/i;
+  return regex.test(code);
+}
 
 // Exports
 export const CreateSession = ({ location_id, name }) => (
@@ -131,20 +143,20 @@ export const CreateSession = ({ location_id, name }) => (
 
   return api
     .createSession({ user_id, session_key, location_id, name })
-    .then(order => {
+    .then(session => {
       if (__DEV__) {
-        console.log(order);
+        console.log(session);
       }
-      return reformatSessions(Array.of(order));
+      return reformatSessions(Array.of(session));
     })
-    .then(order => dispatch(createSessionSuccess(order)))
+    .then(session => dispatch(createSessionSuccess(session)))
     .catch(error => dispatch(createSessionFailure(error)));
 };
 
-export const CloseSession = ({ location_id, name, session_code }) => (
-  dispatch,
-  getState
-) => {
+export const CloseSession = ({ session_code }) => (dispatch, getState) => {
+  if (!validateSessionCode(session_code)) {
+    return;
+  }
   dispatch(closeSessionRequest());
 
   if (__DEV__) {
@@ -184,6 +196,9 @@ export const GetSessions = ({ location_id, state }) => (dispatch, getState) => {
 };
 
 export const GetSession = session_code => (dispatch, getState) => {
+  if (!validateSessionCode(session_code)) {
+    return;
+  }
   dispatch(fetchSessionRequest());
 
   if (__DEV__) {
@@ -200,6 +215,18 @@ export const GetSession = session_code => (dispatch, getState) => {
     })
     .then(order => dispatch(fetchSessionSuccess(order)))
     .catch(error => dispatch(fetchSessionFailure(error)));
+};
+
+export const ConnectSession = session_code => (dispatch, getState) => {
+  if (!validateSessionCode(session_code)) {
+    return;
+  }
+  const host = api.getSessionWebsocketUrl(session_code);
+  dispatch(sessionConnect(host));
+};
+
+export const DisconnectSession = () => (dispatch, getState) => {
+  dispatch(sessionDisconnect());
 };
 
 export default orders;

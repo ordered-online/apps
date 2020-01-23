@@ -11,7 +11,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import api from '@ordered.online/api';
 import { Text, Image, ListItem, Icon } from '@ordered.online/components';
-import { GetSession } from '../../store/orders';
+import { GetProduct } from '../../store/products';
+import { GetSession, ConnectSession } from '../../store/orders';
 import { primaryColor } from '../../constants/Colors';
 
 export class OrderDetailScreen extends Component {
@@ -20,11 +21,43 @@ export class OrderDetailScreen extends Component {
     this.state = {
       base64: null,
     };
+    this.renderItem = this.renderItem.bind(this);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { fetching, products, sessions } = nextProps;
+    const { session_code } = nextProps.match.params;
+    if (!fetching && session_code) {
+      let data = {},
+        total = 0;
+      const session = sessions[session_code];
+      const { orders = [] } = session;
+      if (orders && Array.isArray(orders)) {
+        orders.forEach(order => {
+          const { product_id } = order;
+          if (products.hasOwnProperty(product_id)) {
+            if (data.hasOwnProperty(product_id)) {
+              data[product_id]++;
+            } else {
+              data[product_id] = 1;
+            }
+            total += parseFloat(products[product_id].price);
+          } else {
+            nextProps.getProduct(product_id);
+          }
+        });
+      }
+      if (data != prevState.data || total != prevState.total) {
+        return { ...prevState, data, total, session };
+      }
+    }
+    return null;
   }
 
   async componentDidMount() {
     const { session_code } = this.props.match.params;
     this.props.getSession(session_code);
+    this.props.connectSession(session_code);
     const response = await api.getQRCodeBase64(session_code);
     let { base64 } = response;
     if (base64) {
@@ -35,13 +68,16 @@ export class OrderDetailScreen extends Component {
   keyExtractor = (item, index) => index.toString();
 
   renderItem({ item }) {
+    const product = this.props.products[item];
+    const amount = this.state.data[item];
     return (
       <ListItem
-        title={item.name}
-        subtitle={item.price}
-        topDivider
+        title={product.name}
+        subtitle={product.description}
         bottomDivider
         chevron
+        rightElement={`${amount} x ${product.price} €`}
+        disabled={this.state.session.state === 'CLOSED'}
       />
     );
   }
@@ -51,10 +87,9 @@ export class OrderDetailScreen extends Component {
     const { session_code, location_id } = match.params;
 
     const session = sessions[session_code] || null;
-    const orders = session.orders ? session.orders : null;
-    const data = orders.length ? orders : null;
-
     const location = locations[location_id] || null;
+
+    const total = this.state.total.toFixed(2);
 
     if (fetching) {
       return <ActivityIndicator size="large" color={primaryColor} />;
@@ -86,10 +121,11 @@ export class OrderDetailScreen extends Component {
             <ActivityIndicator size="large" color={primaryColor} />
           }
         />
+        <Text style={styles.total}>{`€ ${total}`}</Text>
         <Text>{session_code}</Text>
         <FlatList
           keyExtractor={this.keyExtractor}
-          data={data}
+          data={Object.keys(this.state.data)}
           renderItem={this.renderItem}
           style={styles.listView}
         />
@@ -124,18 +160,28 @@ const styles = StyleSheet.create({
     shadowRadius: 64,
     elevation: 0.5,
   },
+  total: {
+    color: '#57c75e',
+    textAlign: 'center',
+    fontSize: 25,
+    fontWeight: '500',
+    marginRight: 30,
+  },
 });
 
 const mapStateToProps = state => ({
   fetching: state.orders.fetching,
   sessions: state.orders.sessions,
   locations: state.locations.locations,
+  products: state.products.products,
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getSession: GetSession,
+      connectSession: ConnectSession,
+      getProduct: GetProduct,
     },
     dispatch
   );

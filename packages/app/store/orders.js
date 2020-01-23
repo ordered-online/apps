@@ -145,6 +145,10 @@ export const GetSession = session_code => (dispatch, getState) => {
 };
 
 export const GetSessionQR = session_code => (dispatch, getState) => {
+  if (!validateSessionCode(session_code)) {
+    return;
+  }
+
   dispatch(fetchSessionRequest());
 
   const { session } = getState().orders;
@@ -177,10 +181,6 @@ export const CloseSession = session_code => (dispatch, getState) => {
 };
 
 export const OrderProduct = ({ product_id }) => (dispatch, getState) => {
-  if (!validateSessionCode(session_code)) {
-    return;
-  }
-
   dispatch(orderProductRequest());
 
   const session_code = getState().orders.session.code;
@@ -197,6 +197,9 @@ export const OrderProduct = ({ product_id }) => (dispatch, getState) => {
 };
 
 export const ConnectSession = session_code => (dispatch, getState) => {
+  if (!validateSessionCode(session_code)) {
+    return;
+  }
   const host = api.getSessionWebsocketUrl(session_code);
   dispatch(sessionConnect(host));
 };
