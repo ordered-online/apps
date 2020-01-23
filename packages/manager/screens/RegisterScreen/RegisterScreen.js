@@ -159,7 +159,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
   },
   inlineButtonContainer: {
-    height: 64,
     display: 'flex',
     flexDirection: 'row',
   },

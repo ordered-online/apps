@@ -81,7 +81,7 @@ class LoginScreen extends Component {
             <Button
               raised
               color={'#57c75e'}
-              titleStyle={{ color: '#fff', padding: 4 }}
+              titleStyle={{ color: '#fff' }}
               title="Login"
               loading={this.props.fetching}
               onPress={this.handleRegistration}
@@ -94,7 +94,7 @@ class LoginScreen extends Component {
               type="outline"
               title="or register instead"
               color={'#57c75e'}
-              titleStyle={{ color: '#fff', padding: 4 }}
+              titleStyle={{ color: '#fff' }}
               onPress={() => this.props.navigation.navigate('register')}
             />
           </View>
@@ -124,7 +124,6 @@ const styles = StyleSheet.create({
     margin: 24,
   },
   inlineButtonContainer: {
-    height: 64,
     display: 'flex',
     flexDirection: 'row',
   },
