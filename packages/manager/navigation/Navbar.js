@@ -23,8 +23,6 @@ export default class Navbar extends Component {
 
 const styles = StyleSheet.create({
   navbar: {
-    height: 64,
-    marginHorizontal: 18,
     display: 'flex',
     flexDirection: 'row',
   },

@@ -30,7 +30,11 @@ class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.logo} source={require('../../assets/icon.png')} />
+        <Image
+          style={styles.logo}
+          containerStyle={styles.logoContainer}
+          source={require('../../assets/icon.png')}
+        />
         <Text h1 style={styles.heading}>
           ordered.online
           {'\n'}
@@ -49,21 +53,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 6,
-    marginRight: 6,
-    backgroundColor: '#f8f8f8',
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 24,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.3,
-    shadowRadius: 16,
-    elevation: 0.5,
   },
   logo: {
     width: 200,
     height: 200,
+  },
+  logoContainer: {
     borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.1,
+    shadowRadius: 16,
+    elevation: 0.5,
     margin: 24,
   },
   heading: {

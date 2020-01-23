@@ -51,7 +51,11 @@ class RegisterScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.logo} source={require('../../assets/icon.png')} />
+        <Image
+          style={styles.logo}
+          containerStyle={styles.logoContainer}
+          source={require('../../assets/icon.png')}
+        />
 
         <Input
           editable
@@ -137,21 +141,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 12,
-    marginRight: 12,
-    backgroundColor: '#f8f8f8',
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 24,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.3,
-    shadowRadius: 16,
-    elevation: 0.5,
   },
   logo: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
+  },
+  logoContainer: {
     borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.1,
+    shadowRadius: 16,
+    elevation: 0.5,
     margin: 24,
   },
   buttonWrapper: {
@@ -163,8 +164,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   inputContainer: {
-    marginBottom: 24,
-    width: '90%',
+    width: '70%',
   },
 });
 

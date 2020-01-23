@@ -17,7 +17,7 @@ export default function Map({ region, marker }) {
 
   const zoom = marker ? 16 : 10;
 
-  const { description, title, coordinate } = marker;
+  const { description = {}, title, coordinate } = marker;
   const markerPosition = [coordinate.latitude, coordinate.longitude];
 
   const html = `
@@ -58,7 +58,6 @@ export default function Map({ region, marker }) {
       originWhitelist={['*']}
       source={{ html }}
       style={{ marginTop: 20 }}
-      injectedJavaScript={javaScript}
       mixedContentMode={true}
       allowUniversalAccessFromFileURLs={true}
     />

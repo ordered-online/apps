@@ -37,129 +37,125 @@ export const navigationProp = {
 class AppNavigator extends Component {
   render() {
     return (
-      <LinearGradient
-        style={{ width: '100%', height: '100%' }}
-        colors={['#57c75e', '#27ae60']}>
-        <ConnectedRouter history={history}>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => <HomeScreen navigation={navigationProp} />}
-            />
+      <ConnectedRouter history={history}>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => <HomeScreen navigation={navigationProp} />}
+          />
 
-            {/** Login / Registration Pages */}
+          {/** Login / Registration Pages */}
 
-            <Route
-              exact
-              path="/login"
-              render={() => <LoginScreen navigation={navigationProp} />}
-            />
-            <Route
-              exact
-              path="/register"
-              render={() => <RegisterScreen navigation={navigationProp} />}
-            />
+          <Route
+            exact
+            path="/login"
+            render={() => <LoginScreen navigation={navigationProp} />}
+          />
+          <Route
+            exact
+            path="/register"
+            render={() => <RegisterScreen navigation={navigationProp} />}
+          />
 
-            {/** Protected Pages */}
+          {/** Protected Pages */}
 
-            <PrivateRoute
-              exact
-              path="/locations"
-              component={LocationsScreen}
-              navigation={navigationProp}
-            />
+          <PrivateRoute
+            exact
+            path="/locations"
+            component={LocationsScreen}
+            navigation={navigationProp}
+          />
 
-            <PrivateRoute
-              exact
-              path="/locations/create"
-              component={LocationEditScreen}
-              navigation={navigationProp}
-            />
+          <PrivateRoute
+            exact
+            path="/locations/create"
+            component={LocationEditScreen}
+            navigation={navigationProp}
+          />
 
-            <PrivateRoute
-              exact
-              path="/locations/:id"
-              component={LocationsDetailScreen}
-              navigation={navigationProp}
-            />
+          <PrivateRoute
+            exact
+            path="/locations/:id"
+            component={LocationsDetailScreen}
+            navigation={navigationProp}
+          />
 
-            <PrivateRoute
-              exact
-              path="/locations/edit/:id"
-              component={LocationEditScreen}
-              navigation={navigationProp}
-              componentProps={{
-                edit: true,
-              }}
-            />
+          <PrivateRoute
+            exact
+            path="/locations/edit/:id"
+            component={LocationEditScreen}
+            navigation={navigationProp}
+            componentProps={{
+              edit: true,
+            }}
+          />
 
-            <PrivateRoute
-              exact
-              path="/locations/:location_id/products"
-              component={ProductsScreen}
-              navigation={navigationProp}
-            />
+          <PrivateRoute
+            exact
+            path="/locations/:location_id/products"
+            component={ProductsScreen}
+            navigation={navigationProp}
+          />
 
-            <PrivateRoute
-              exact
-              path="/locations/:location_id/products/create"
-              component={ProductEditScreen}
-              navigation={navigationProp}
-            />
+          <PrivateRoute
+            exact
+            path="/locations/:location_id/products/create"
+            component={ProductEditScreen}
+            navigation={navigationProp}
+          />
 
-            <PrivateRoute
-              exact
-              path="/locations/:location_id/products/:product_id"
-              component={ProductDetailScreen}
-              navigation={navigationProp}
-            />
+          <PrivateRoute
+            exact
+            path="/locations/:location_id/products/:product_id"
+            component={ProductDetailScreen}
+            navigation={navigationProp}
+          />
 
-            <PrivateRoute
-              exact
-              path="/locations/:location_id/products/edit/:product_id"
-              component={ProductEditScreen}
-              navigation={navigationProp}
-              componentProps={{
-                edit: true,
-              }}
-            />
+          <PrivateRoute
+            exact
+            path="/locations/:location_id/products/edit/:product_id"
+            component={ProductEditScreen}
+            navigation={navigationProp}
+            componentProps={{
+              edit: true,
+            }}
+          />
 
-            <PrivateRoute
-              exact
-              path="/locations/:location_id/sessions"
-              component={OdersScreen}
-              navigation={navigationProp}
-            />
+          <PrivateRoute
+            exact
+            path="/locations/:location_id/sessions"
+            component={OdersScreen}
+            navigation={navigationProp}
+          />
 
-            <PrivateRoute
-              exact
-              path="/locations/:location_id/sessions/:session_code"
-              component={OrderDetailScreen}
-              navigation={navigationProp}
-            />
+          <PrivateRoute
+            exact
+            path="/locations/:location_id/sessions/:session_code"
+            component={OrderDetailScreen}
+            navigation={navigationProp}
+          />
 
-            {/** Static Pages */}
+          {/** Static Pages */}
 
-            <Route
-              exact
-              path="/imprint"
-              render={() => <ImprintScreen navigation={navigationProp} />}
-            />
-            <Route
-              exact
-              path="/privacy"
-              render={() => <PrivacyPolicyScreen navigation={navigationProp} />}
-            />
-            <Route
-              exact
-              path="/terms"
-              render={() => <TermsOfUseScreen navigation={navigationProp} />}
-            />
-          </Switch>
-          <Navbar navigation={navigationProp} />
-        </ConnectedRouter>
-      </LinearGradient>
+          <Route
+            exact
+            path="/imprint"
+            render={() => <ImprintScreen navigation={navigationProp} />}
+          />
+          <Route
+            exact
+            path="/privacy"
+            render={() => <PrivacyPolicyScreen navigation={navigationProp} />}
+          />
+          <Route
+            exact
+            path="/terms"
+            render={() => <TermsOfUseScreen navigation={navigationProp} />}
+          />
+        </Switch>
+        <Navbar navigation={navigationProp} />
+      </ConnectedRouter>
     );
   }
 }

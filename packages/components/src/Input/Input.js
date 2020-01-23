@@ -191,16 +191,13 @@ Input.propTypes = {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    paddingHorizontal: 10,
   },
   disabledInput: {
     opacity: 0.5,
   },
   inputContainer: {
     flexDirection: 'row',
-    borderBottomWidth: 1,
     alignItems: 'center',
-    borderColor: '#86939e',
   },
   iconContainer: {
     height: 40,
@@ -215,6 +212,16 @@ const styles = StyleSheet.create({
     flex: 1,
     minHeight: 40,
     lineHeight: 40,
+    marginVertical: 6,
+    paddingHorizontal: 24,
+    borderRadius: 24,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.1,
+    shadowRadius: 16,
+    elevation: 0.5,
+    padding: 4,
   },
   error: {
     margin: 5,

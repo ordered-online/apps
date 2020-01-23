@@ -88,7 +88,7 @@ export class OrdersScreen extends Component {
           <Input
             editable
             maxLength={40}
-            placeholder="Enter a name for the order to get started"
+            placeholder="Enter a name for a new session"
             textContentType="none"
             onChangeText={orderName => this.setState({ orderName })}
             value={this.state.orderName}
@@ -121,19 +121,8 @@ const styles = StyleSheet.create({
     padding: 12,
     justifyContent: 'center',
     alignItems: 'stretch',
-    marginLeft: 6,
-    marginRight: 6,
-    backgroundColor: '#f8f8f8',
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 24,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.3,
-    shadowRadius: 16,
-    elevation: 0.5,
   },
   listView: {
-    margin: 12,
     borderRadius: 24,
     backgroundColor: '#fff',
     shadowColor: '#000',
@@ -151,6 +140,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   icon: {
+    marginTop: 18,
     width: 50,
   },
   input: {
