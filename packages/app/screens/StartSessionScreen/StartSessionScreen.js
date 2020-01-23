@@ -13,10 +13,14 @@ import { Text, Icon, Input, Button, Image } from '@ordered.online/components';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 
-import { ConnectSession, GetSession, GetSessionQR } from '../../store/orders';
+import {
+  ConnectSession,
+  GetSession,
+  GetSessionQR,
+  validateSessionCode,
+} from '../../store/orders';
 
 import { primaryColor } from '../../constants/Colors';
-import { sessionConnect } from '../../store/websocket';
 
 const isWeb = Platform.OS === 'web';
 
@@ -37,7 +41,7 @@ export class StartSessionScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hasCameraPermission: null,
+      hasCameraPermission: false,
       scanning: false,
       scanned: false,
       errorMessage: null,
@@ -74,6 +78,9 @@ export class StartSessionScreen extends Component {
           'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
       });
     }
+    if (!isWeb) {
+      this.getCameraPermissions();
+    }
   }
 
   async getCameraPermissions() {
@@ -89,25 +96,23 @@ export class StartSessionScreen extends Component {
   }
 
   handleBarCodeScanned({ type, data }) {
-    this.setState({ scanned: true, scanning: false, code: data });
-    console.log(
-      `Bar code with type ${type} and data ${data} has been scanned!`
-    );
-    this.props.connectSession(data);
+    if (validateSessionCode(data)) {
+      this.setState({ scanned: true, scanning: false, code: data });
+      this.props.getSession(data);
+      this.props.connectSession(data);
+    }
   }
 
-  async scanCode() {
-    console.log('Scan');
-    if (isWeb) return;
+  scanCode() {
     if (!this.state.hasCameraPermission) {
-      await this.getCameraPermissions();
+      this.getCameraPermissions();
+    } else {
+      this.setState({ scanning: true });
     }
-    this.setState({ scanning: true });
   }
 
   handleBarCodeInput() {
     const { code } = this.state;
-    console.log(code);
     this.props.getSession(code);
     this.props.connectSession(code);
   }
@@ -155,13 +160,23 @@ export class StartSessionScreen extends Component {
 
   render() {
     const { hasCameraPermission, scanning } = this.state;
+
+    if (hasCameraPermission && scanning) {
+      return (
+        <BarCodeScanner
+          onBarCodeScanned={this.handleBarCodeScanned}
+          style={StyleSheet.absoluteFill}
+        />
+      );
+    }
+
     const { fetching, connecting, session } = this.props;
 
     if (session && session.code) {
       return this.renderSession();
     }
 
-    if (hasCameraPermission === null && !isWeb) {
+    if (!hasCameraPermission && !isWeb) {
       return (
         <View style={styles.container}>
           <Text>Requesting for camera permission ...</Text>
@@ -179,19 +194,13 @@ export class StartSessionScreen extends Component {
 
     return (
       <View style={styles.container}>
-        {hasCameraPermission && scanning && (
-          <BarCodeScanner
-            onBarCodeScanned={this.handleBarCodeScanned}
-            style={StyleSheet.scanner}
-          />
-        )}
         <Icon
           name={Platform.OS === 'ios' ? 'ios-qr-scanner' : 'md-qr-scanner'}
           type="ionicon"
           raised
           reverse
           size={60}
-          onPress={this.scanCode}
+          onPress={this.scanCode()}
           containerStyle={styles.iconContainer}
           color={primaryColor}
         />

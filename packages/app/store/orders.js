@@ -106,6 +106,11 @@ const orderProductFailure = error => ({
   payload: error,
 });
 
+export function validateSessionCode(code) {
+  const regex = /^[a-z0-9]{40}$/i;
+  return regex.test(code);
+}
+
 const handleSessionResponse = locations => dispatch => session => {
   const { location_id } = session;
   if (!location_id) {
@@ -120,6 +125,10 @@ const handleSessionResponse = locations => dispatch => session => {
 // Exports
 
 export const GetSession = session_code => (dispatch, getState) => {
+  if (!validateSessionCode(session_code)) {
+    return;
+  }
+
   dispatch(fetchSessionRequest());
 
   const { locations } = getState().locations;
@@ -151,6 +160,10 @@ export const GetSessionQR = session_code => (dispatch, getState) => {
 };
 
 export const CloseSession = session_code => (dispatch, getState) => {
+  if (!validateSessionCode(session_code)) {
+    return;
+  }
+
   dispatch(closeSessionRequest());
 
   if (__DEV__) {
@@ -164,6 +177,10 @@ export const CloseSession = session_code => (dispatch, getState) => {
 };
 
 export const OrderProduct = ({ product_id }) => (dispatch, getState) => {
+  if (!validateSessionCode(session_code)) {
+    return;
+  }
+
   dispatch(orderProductRequest());
 
   const session_code = getState().orders.session.code;
