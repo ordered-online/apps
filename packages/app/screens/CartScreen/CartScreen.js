@@ -166,13 +166,12 @@ export class CartScreen extends Component {
         ) : (
           <View style={{ height: 50 }} />
         )}
-        <ScrollView style={{ borderRadius: 25 }}>
-          <FlatList
-            keyExtractor={this.keyExtractor}
-            data={Object.keys(this.state.data)}
-            renderItem={this.renderItem}
-          />
-        </ScrollView>
+        <FlatList
+          style={{ borderRadius: 24 }}
+          keyExtractor={this.keyExtractor}
+          data={Object.keys(this.state.data)}
+          renderItem={this.renderItem}
+        />
         <View style={styles.buttonWrapper}>
           <Button
             raised

@@ -106,13 +106,11 @@ export class ProductsScreen extends Component {
             Products for {location.name}
           </Text>
         )}
-        <ScrollView style={{ borderRadius: 25 }}>
-          <FlatList
-            keyExtractor={this.keyExtractor}
-            data={data}
-            renderItem={this.renderItem}
-          />
-        </ScrollView>
+        <FlatList
+          keyExtractor={this.keyExtractor}
+          data={data}
+          renderItem={this.renderItem}
+        />
       </View>
     );
   }
@@ -123,16 +121,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'stretch',
-    marginLeft: 6,
-    marginRight: 6,
-    backgroundColor: '#f8f8f8',
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 24,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.3,
-    shadowRadius: 16,
-    elevation: 0.5,
   },
   headline: {
     textAlign: 'center',
