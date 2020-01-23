@@ -21,6 +21,23 @@ exports[`Manager manager renders the root without loading screen 1`] = `
     }
   }
 >
-  <AppNavigator />
+  <RCTScrollView
+    contentContainerStyle={
+      Object {
+        "flexGrow": 1,
+      }
+    }
+    onContentSizeChange={[Function]}
+    scrollEnabled={false}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View>
+      <AppNavigator />
+    </View>
+  </RCTScrollView>
 </RCTSafeAreaView>
 `;

@@ -9,18 +9,61 @@ exports[`App renders the loading screen 1`] = `
 `;
 
 exports[`App renders the root without loading screen 1`] = `
-<RCTSafeAreaView
-  emulateUnlessSupported={true}
+<ViewManagerAdapter_ExpoLinearGradient
+  proxiedProperties={
+    Object {
+      "colors": Array [
+        4283942750,
+        4280790624,
+      ],
+      "endPoint": undefined,
+      "locations": undefined,
+      "startPoint": undefined,
+    }
+  }
   style={
     Object {
-      "alignContent": "center",
-      "display": "flex",
-      "flex": 1,
-      "flexDirection": "column",
-      "justifyContent": "center",
+      "height": "100%",
+      "width": "100%",
     }
   }
 >
-  <AppNavigator />
-</RCTSafeAreaView>
+  <View
+    style={
+      Object {
+        "alignContent": "center",
+        "display": "flex",
+        "flex": 1,
+        "flexDirection": "column",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "stretch",
+          "backgroundColor": "#f8f8f8",
+          "borderBottomLeftRadius": 32,
+          "borderBottomRightRadius": 32,
+          "elevation": 0.5,
+          "flex": 1,
+          "justifyContent": "center",
+          "marginBottom": 8,
+          "marginLeft": 8,
+          "marginRight": 8,
+          "shadowColor": "#000",
+          "shadowOffset": Object {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.3,
+          "shadowRadius": 16,
+        }
+      }
+    >
+      <AppNavigator />
+    </View>
+  </View>
+</ViewManagerAdapter_ExpoLinearGradient>
 `;
