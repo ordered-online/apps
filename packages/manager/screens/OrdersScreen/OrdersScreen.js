@@ -44,7 +44,15 @@ export class OrdersScreen extends Component {
         }
         topDivider
         bottomDivider
-        chevron
+        rightElement={
+          <View
+            style={{
+              borderRadius: 50,
+              height: 15,
+              width: 15,
+              backgroundColor: session.state === 'OPEN' ? '#57c75e' : '#f44336',
+            }}></View>
+        }
       />
     );
   }
@@ -129,7 +137,7 @@ export class OrdersScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 12,
+    padding: 8,
     justifyContent: 'center',
     alignItems: 'stretch',
   },

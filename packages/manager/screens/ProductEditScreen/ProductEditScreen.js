@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { View, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ActivityIndicator,
+  ScrollView,
+  Platform,
+} from 'react-native';
 import { Button, Input, Text, Icon } from '@ordered.online/components';
 import { GreateProduct, GetProduct, EditProduct } from '../../store/products';
 
@@ -90,9 +96,8 @@ export class ProductEditScreen extends Component {
     return (
       <ScrollView>
         <View style={styles.container}>
-          <View style={styles.backButtonContainer}>
+          <View style={styles.header}>
             <Icon
-              containerStyle={styles.backButton}
               name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'}
               type="ionicon"
               color={primaryColor}
@@ -101,14 +106,13 @@ export class ProductEditScreen extends Component {
                   `locations/${location_id}/products/${product_id}`
                 )
               }
+              iconStyle={styles.backButton}
+              containerStyle={styles.iconContainer}
             />
-            <Text h4 style={{ color: '#57c75e' }}>
-              Back
+            <Text style={{ fontSize: 18, textAlign: 'center', marginTop: 20 }}>
+              Please provide details for your product. {'\n\n'}
             </Text>
           </View>
-          <Text style={{ fontSize: 18 }}>
-            Please provide details for your product.
-          </Text>
           <Input
             editable
             autoFocus
@@ -159,18 +163,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    padding: 24,
+    padding: 8,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'stretch',
   },
-  backButtonContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    marginBottom: 12,
-  },
   backButton: {
-    marginRight: 16,
+    marginLeft: 15,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.1,
@@ -179,6 +178,13 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 12,
+  },
+  header: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'space-between',
   },
 });
 

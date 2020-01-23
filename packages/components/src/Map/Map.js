@@ -1,12 +1,11 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import { MapView } from './MapView';
 import { MapViewTile } from './MapViewTile';
 import { MapViewMarker } from './MapViewMarker';
 
-import { MAP_TYPES } from 'react-native-maps';
-
-export default function Map({ region, marker }) {
+export default function Map({ region, marker, mapStyle }) {
   const initialRegion = {
     latitude: 51.0250869,
     longitude: 13.7210005,
@@ -17,10 +16,10 @@ export default function Map({ region, marker }) {
     <MapView
       region={region || initialRegion}
       zoom={marker ? 16 : 10}
-      provider={null}
-      mapType={MAP_TYPES.NONE}
-      showsUserLocation>
-      <MapViewTile urlTemplate="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      style={mapStyle}>
+      {Platform.OS === 'web' && (
+        <MapViewTile urlTemplate="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      )}
       {marker && (
         <MapViewMarker
           coordinate={marker.coordinate}
@@ -70,4 +69,5 @@ Map.propTypes = {
       longitude: PropTypes.number.isRequired,
     }).isRequired,
   }),
+  mapStyle: PropTypes.object,
 };

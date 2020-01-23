@@ -21,12 +21,7 @@ import ProductEditScreen from '../screens/ProductEditScreen';
 import OdersScreen from '../screens/OrdersScreen';
 import OrderDetailScreen from '../screens/OrderDetailScreen';
 
-import ImprintScreen from '../screens/ImprintScreen';
-import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
-import TermsOfUseScreen from '../screens/TermsOfUseScreen';
-
 import { history } from '../store';
-import { LinearGradient } from 'expo-linear-gradient';
 
 export const navigationProp = {
   navigate: function(route) {
@@ -134,24 +129,6 @@ class AppNavigator extends Component {
             path="/locations/:location_id/sessions/:session_code"
             component={OrderDetailScreen}
             navigation={navigationProp}
-          />
-
-          {/** Static Pages */}
-
-          <Route
-            exact
-            path="/imprint"
-            render={() => <ImprintScreen navigation={navigationProp} />}
-          />
-          <Route
-            exact
-            path="/privacy"
-            render={() => <PrivacyPolicyScreen navigation={navigationProp} />}
-          />
-          <Route
-            exact
-            path="/terms"
-            render={() => <TermsOfUseScreen navigation={navigationProp} />}
           />
         </Switch>
         <Navbar navigation={navigationProp} />

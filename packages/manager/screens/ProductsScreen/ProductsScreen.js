@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     marginTop: 10,
+    marginLeft: 15,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.1,

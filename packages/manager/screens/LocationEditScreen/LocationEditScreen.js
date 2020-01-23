@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { View, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
-import { Button, Input, Text, Map } from '@ordered.online/components';
+import {
+  View,
+  StyleSheet,
+  ActivityIndicator,
+  ScrollView,
+  Platform,
+} from 'react-native';
+import { Button, Input, Text, Map, Icon } from '@ordered.online/components';
 import {
   GreateLocation,
   GetLocation,
@@ -203,6 +209,7 @@ export class LocationEditScreen extends Component {
   }
 
   render() {
+    const location_id = this.props.match.params.id;
     const { edit, fetching } = this.props;
 
     if (edit && fetching) {
@@ -212,11 +219,25 @@ export class LocationEditScreen extends Component {
     return (
       <ScrollView>
         <View style={styles.container}>
-          <Text h4>Please provide details for your location.</Text>
-          <Text>{'\n'}</Text>
-          <View style={styles.mapViewWrapper}>
-            <Map region={this.state.region} marker={this.state.marker} />
+          <View style={styles.backButtonContainer}>
+            <Icon
+              containerStyle={styles.backButton}
+              name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'}
+              type="ionicon"
+              color={primaryColor}
+              onPress={() =>
+                this.props.navigation.navigate(`locations/${location_id}`)
+              }
+            />
           </View>
+          <Map
+            mapStyle={styles.mapViewWrapper}
+            region={this.state.region}
+            marker={this.state.marker}
+          />
+          <Text h4 style={{ textAlign: 'center' }}>
+            Please provide details for your location.{'\n\n'}
+          </Text>
           <Input
             editable
             maxLength={40}
@@ -251,7 +272,7 @@ export class LocationEditScreen extends Component {
             autoFocus
             maxLength={40}
             placeholder="Website"
-            textContentType="url"
+            textContentType="URL"
             onChangeText={website => this.handleFormChange('website', website)}
             value={this.state.website}
           />
@@ -284,7 +305,7 @@ export class LocationEditScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 36,
+    padding: 8,
     justifyContent: 'center',
     alignItems: 'stretch',
   },
@@ -292,6 +313,21 @@ const styles = StyleSheet.create({
     height: 300,
     width: '100%',
     marginVertical: 24,
+  },
+  backButtonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  backButton: {
+    marginRight: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.1,
+    shadowRadius: 64,
+    elevation: 0.5,
+    width: 30,
+    height: 30,
+    borderRadius: 12,
   },
 });
 
