@@ -2,7 +2,7 @@
   "expo": {
     "name": "ordered.online-manager",
     "description": "A modern platform for ordering online.",
-    "owner": "Philipp Matthes and Felix Kästner",
+    "owner": "philippmatthes",
     "slug": "ordered-online-manager",
     "privacy": "public",
     "sdkVersion": "36.0.0",
@@ -49,7 +49,6 @@
       "requireFullScreen": true,
       "isTabletOnly": false,
       "infoPlist": {},
-      "associatedDomains": ["ordered.online"],
       "usesIcloudStorage": false,
       "usesAppleSignIn": false,
       "splash": {

@@ -2,7 +2,7 @@
   "expo": {
     "name": "ordered.online",
     "description": "A modern platform for ordering online.",
-    "owner": "Philipp Matthes and Felix Kästner",
+    "owner": "philippmatthes",
     "slug": "ordered-online",
     "privacy": "public",
     "sdkVersion": "36.0.0",
@@ -42,14 +42,13 @@
       "fallbackToCacheTimeout": 0
     },
     "ios": {
-      "bundleIdentifier": "ordered.online",
+      "bundleIdentifier": "ordered.online-app",
       "buildNumber": "0.0.1",
       "icon": "./assets/icon.png",
       "supportsTablet": true,
       "requireFullScreen": true,
       "isTabletOnly": false,
       "infoPlist": {},
-      "associatedDomains": ["ordered.online"],
       "usesIcloudStorage": false,
       "usesAppleSignIn": false,
       "splash": {
