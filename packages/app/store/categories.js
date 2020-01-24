@@ -8,11 +8,7 @@ export const FETCH_CATEGORIES_FAILURE = 'CATEGORIES/FETCH_CATEGORIES_FAILURE';
 // Initial State
 const initialState = {
   fetching: false,
-  categories: [
-    {
-      name: 'Drink',
-    },
-  ],
+  categories: [],
   error: null,
 };
 

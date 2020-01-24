@@ -22,14 +22,13 @@ export class LocationEditScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'Studentencaf\u00e9 Ascii',
-      description:
-        'Gem\u00fctliches Caf\u00e9 in der Fak. Informatik der TU Dresden.',
-      address: 'N\u00f6thnitzer Str. 46, 01187 Dresden',
-      latitude: '51.02508690',
-      longitude: '13.72100050',
-      website: 'https://ascii-dresden.de/',
-      telephone: '+4935146342221',
+      name: '',
+      description: '',
+      address: '',
+      latitude: '',
+      longitude: '',
+      website: '',
+      telephone: '',
       categories: [],
       tags: [],
       typing: false,

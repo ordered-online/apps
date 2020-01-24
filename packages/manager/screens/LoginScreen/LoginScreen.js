@@ -11,8 +11,8 @@ class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'admin',
-      password: 'secret',
+      username: '',
+      password: '',
     };
 
     this.checkauthenticated = this.checkauthenticated.bind(this);

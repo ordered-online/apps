@@ -10,11 +10,11 @@ class RegisterScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'testuser',
-      password: '12345678',
-      email: 'test@example.com',
-      first_name: 'test',
-      last_name: 'user',
+      username: '',
+      password: '',
+      email: '',
+      first_name: '',
+      last_name: '',
     };
 
     this.checkauthenticated = this.checkauthenticated.bind(this);

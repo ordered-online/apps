@@ -17,9 +17,9 @@ export class ProductEditScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'Coffee',
-      description: 'The elexir of computer scientists.',
-      price: '1.80',
+      name: '',
+      description: '',
+      price: '0.00',
       categories: [],
       tags: [],
       additives: [],

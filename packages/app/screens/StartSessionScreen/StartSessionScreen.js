@@ -44,7 +44,7 @@ export class StartSessionScreen extends Component {
       scanning: false,
       scanned: false,
       errorMessage: null,
-      code: '0000000000000000000000000000000000000000',
+      code: '',
     };
 
     this.getCameraPermissions = this.getCameraPermissions.bind(this);
