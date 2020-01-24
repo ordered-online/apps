@@ -160,7 +160,7 @@ const tabNavigator = creatTabNavigator(
       style: {
         borderWidth: 0,
         backgroundColor: '#f8f8f8',
-        borderRadius: 24,
+        borderRadius: 32,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: -8 },
         shadowOpacity: 0.1,
