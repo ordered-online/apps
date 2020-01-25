@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.6",
-    "@ordered.online/api": "^0.0.5",
+    "@ordered.online/api": "^1.0.0-alpha.4",
     "@ordered.online/components": "^1.0.0-alpha.4",
     "@react-navigation/core": "^3.5.1",
     "@react-navigation/web": "^1.0.0-alpha.9",

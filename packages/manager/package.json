@@ -37,7 +37,7 @@
     "format": "prettier \"./**/*.{js,jsx,json,md}\" --write"
   },
   "dependencies": {
-    "@ordered.online/api": "^0.0.5",
+    "@ordered.online/api": "^1.0.0-alpha.4",
     "@ordered.online/components": "^1.0.0-alpha.4",
     "connected-react-router": "^6.6.1",
     "expo": "^36.0.0",
