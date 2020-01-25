@@ -48,7 +48,9 @@
       "supportsTablet": true,
       "requireFullScreen": true,
       "isTabletOnly": false,
-      "infoPlist": {},
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to scan qr codes for ordering"
+      },
       "usesIcloudStorage": false,
       "usesAppleSignIn": false,
       "splash": {
