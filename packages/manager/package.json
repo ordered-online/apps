@@ -1,6 +1,6 @@
 {
   "name": "@ordered.online/manager",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.4",
   "description": "",
   "keywords": [],
   "repository": {
@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@ordered.online/api": "^0.0.5",
-    "@ordered.online/components": "^1.0.0-alpha.0",
+    "@ordered.online/components": "^1.0.0-alpha.4",
     "connected-react-router": "^6.6.1",
     "expo": "^36.0.0",
     "expo-font": "~8.0.0",
