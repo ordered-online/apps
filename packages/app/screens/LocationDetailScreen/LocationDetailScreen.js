@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Card, Text, Icon, Button, Map } from '@ordered.online/components';
+import { Text, Map } from '@ordered.online/components';
 import { GetLocation } from '../../store/locations';
-import { primaryColor } from '../../constants/Colors';
 
 export class LocationDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => {

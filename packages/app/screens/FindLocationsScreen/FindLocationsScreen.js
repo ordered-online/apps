@@ -12,9 +12,9 @@ import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
-import { primaryColor } from '../../constants/Colors';
+import Colors from '../../constants/Colors';
 
-import { ListItem, Input, Icon, Button } from '@ordered.online/components';
+import { ListItem, Input, Icon } from '@ordered.online/components';
 
 import { FindLocations, FindLocationsNearby } from '../../store/locations';
 
@@ -161,7 +161,7 @@ export class FindLocationsScreen extends Component {
           }
         />
         {fetching ? (
-          <ActivityIndicator size="large" color={primaryColor} />
+          <ActivityIndicator size="large" color={Colors.primaryColor} />
         ) : (
           <FlatList
             keyExtractor={this.keyExtractor}

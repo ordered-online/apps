@@ -1,14 +1,9 @@
 import React from 'react';
-import { Platform, View } from 'react-native';
-import {
-  createBottomTabNavigator,
-  createMaterialTopTabNavigator,
-} from 'react-navigation-tabs';
+import { Platform } from 'react-native';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import { Badge } from '@ordered.online/components';
-import { connect } from 'react-redux';
-
+import CartIcon from './CartIcon';
 import TabBarIcon from './TabBarIcon';
 
 import StartSessionScreen from '../screens/StartSessionScreen';
@@ -76,41 +71,9 @@ const CartStack = createStackNavigator(
   config
 );
 
-const CartIcon = ({ session, focused }) => (
-  <View
-    style={{
-      alignItems: 'center',
-      justifyContent: 'center',
-      position: 'relative',
-    }}>
-    <TabBarIcon
-      focused={focused}
-      iconName={Platform.OS === 'ios' ? 'ios-cart' : 'md-cart'}
-    />
-    <Badge
-      value={
-        session && session.orders
-          ? session.orders.length.toString()
-          : (0).toString()
-      }
-      containerStyle={{
-        position: 'absolute',
-        top: -15,
-        right: -18,
-      }}
-    />
-  </View>
-);
-
-const mapStateToProps = state => ({
-  session: state.orders.session,
-});
-
-const ConnectedCartIcon = connect(mapStateToProps, null)(CartIcon);
-
 CartStack.navigationOptions = {
   tabBarLabel: 'Cart',
-  tabBarIcon: ({ focused }) => <ConnectedCartIcon focused={focused} />,
+  tabBarIcon: ({ focused }) => <CartIcon focused={focused} />,
 };
 
 CartStack.path = '';

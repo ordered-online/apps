@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Button, Text, ListItem } from '@ordered.online/components';
 import { GetAllLocations } from '../../store/locations';
 
-import { primaryColor } from '../../constants/Colors';
+import Colors from '../../constants/Colors';
 
 export class LocationsScreen extends Component {
   constructor(props) {
@@ -43,7 +43,9 @@ export class LocationsScreen extends Component {
         <View style={styles.headline}>
           <Text h3>Your Locations</Text>
         </View>
-        {fetching && <ActivityIndicator size="large" color={primaryColor} />}
+        {fetching && (
+          <ActivityIndicator size="large" color={Colors.primaryColor} />
+        )}
         <FlatList
           style={styles.listView}
           keyExtractor={this.keyExtractor}

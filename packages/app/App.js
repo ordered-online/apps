@@ -2,13 +2,7 @@ import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import React, { Component } from 'react';
-import {
-  Platform,
-  StatusBar,
-  StyleSheet,
-  SafeAreaView,
-  View,
-} from 'react-native';
+import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { store, persistor } from './store';

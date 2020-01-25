@@ -11,7 +11,7 @@ import { bindActionCreators } from 'redux';
 import { GetSessions, CreateSession } from '../../store/orders';
 import { Icon, Text, ListItem, Input } from '@ordered.online/components';
 
-import { primaryColor } from '../../constants/Colors';
+import Colors from '../../constants/Colors';
 
 export class OrdersScreen extends Component {
   constructor(props) {
@@ -96,7 +96,7 @@ export class OrdersScreen extends Component {
           <Icon
             name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'}
             type="ionicon"
-            color={primaryColor}
+            color={Colors.primaryColor}
             onPress={() =>
               this.props.navigation.navigate(`locations/${location_id}`)
             }
@@ -115,13 +115,15 @@ export class OrdersScreen extends Component {
           <Icon
             name={Platform.OS === 'ios' ? 'ios-add' : 'md-add'}
             type="ionicon"
-            color={primaryColor}
+            color={Colors.primaryColor}
             onPress={this.createNewSession}
             containerStyle={styles.icon}
             iconStyle={{ fontSize: 25 }}
           />
         </View>
-        {fetching && <ActivityIndicator size="large" color={primaryColor} />}
+        {fetching && (
+          <ActivityIndicator size="large" color={Colors.primaryColor} />
+        )}
 
         <FlatList
           style={styles.listView}

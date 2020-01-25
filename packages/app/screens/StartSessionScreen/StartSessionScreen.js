@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import {
-  View,
-  StyleSheet,
-  Platform,
-  Dimensions,
-  ActivityIndicator,
-} from 'react-native';
+import { View, StyleSheet, Platform, ActivityIndicator } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -19,7 +13,7 @@ import {
   validateSessionCode,
 } from '../../store/orders';
 
-import { primaryColor } from '../../constants/Colors';
+import Colors from '../../constants/Colors';
 
 const isWeb = Platform.OS === 'web';
 
@@ -173,7 +167,7 @@ export class StartSessionScreen extends Component {
     if (fetching || connecting) {
       return (
         <View style={styles.container}>
-          <ActivityIndicator size="large" color={primaryColor} />
+          <ActivityIndicator size="large" color={Colors.primaryColor} />
         </View>
       );
     }
@@ -188,7 +182,7 @@ export class StartSessionScreen extends Component {
           size={60}
           onPress={this.scanCode()}
           containerStyle={styles.iconContainer}
-          color={primaryColor}
+          color={Colors.primaryColor}
         />
 
         <View style={styles.inputWrapper}>

@@ -11,7 +11,7 @@ import {
 import { Button, Input, Text, Icon } from '@ordered.online/components';
 import { GreateProduct, GetProduct, EditProduct } from '../../store/products';
 
-import { primaryColor } from '../../constants/Colors';
+import Colors from '../../constants/Colors';
 
 export class ProductEditScreen extends Component {
   constructor(props) {
@@ -90,7 +90,7 @@ export class ProductEditScreen extends Component {
     const { edit, fetching } = this.props;
 
     if (edit && fetching) {
-      return <ActivityIndicator size="large" color={primaryColor} />;
+      return <ActivityIndicator size="large" color={Colors.primaryColor} />;
     }
 
     return (
@@ -100,7 +100,7 @@ export class ProductEditScreen extends Component {
             <Icon
               name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'}
               type="ionicon"
-              color={primaryColor}
+              color={Colors.primaryColor}
               onPress={() =>
                 this.props.navigation.navigate(
                   `locations/${location_id}/products/${product_id}`

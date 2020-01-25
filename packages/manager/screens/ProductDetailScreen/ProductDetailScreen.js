@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Card, Text, Icon } from '@ordered.online/components';
 import { GetProduct } from '../../store/products';
-import { primaryColor } from '../../constants/Colors';
+import Colors from '../../constants/Colors';
 
 export class ProductDetailScreen extends Component {
   componentDidMount() {
@@ -37,7 +37,7 @@ export class ProductDetailScreen extends Component {
     const location = locations[location_id];
 
     if (fetching) {
-      return <ActivityIndicator size="large" color={primaryColor} />;
+      return <ActivityIndicator size="large" color={Colors.primaryColor} />;
     }
 
     if (!product) {
@@ -61,7 +61,7 @@ export class ProductDetailScreen extends Component {
                 }
                 iconStyle={{ fontSize: 30 }}
                 type="ionicon"
-                color={primaryColor}
+                color={Colors.primaryColor}
                 onPress={() =>
                   this.props.navigation.navigate(
                     `locations/${location_id}/products`
@@ -73,7 +73,7 @@ export class ProductDetailScreen extends Component {
               <Icon
                 name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'}
                 type="ionicon"
-                color={primaryColor}
+                color={Colors.primaryColor}
                 iconStyle={{ fontSize: 30 }}
                 onPress={() =>
                   this.props.navigation.navigate(

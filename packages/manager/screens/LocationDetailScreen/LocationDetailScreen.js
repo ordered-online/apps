@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Card, Text, Icon, Button } from '@ordered.online/components';
 import { GetLocation } from '../../store/locations';
-import { primaryColor } from '../../constants/Colors';
+import Colors from '../../constants/Colors';
 
 export class LocationDetailScreen extends Component {
   componentDidMount() {
@@ -45,7 +45,7 @@ export class LocationDetailScreen extends Component {
             <Icon
               name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'}
               type="ionicon"
-              color={primaryColor}
+              color={Colors.primaryColor}
               onPress={() => this.props.navigation.navigate(`locations`)}
               iconStyle={{ fontSize: 30 }}
             />
