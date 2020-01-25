@@ -17,21 +17,21 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#57c75e"
     },
     "assetBundlePatterns": ["**/*"],
     "androidStatusBar": {
       "barStyle": "dark-content",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#57c75e"
     },
     "androidNavigationBar": {
       "visible": false,
       "barStyle": "dark-content",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#57c75e"
     },
     "notification": {
       "icon": "./assets/icon.png",
-      "color": "#ffffff",
+      "color": "#57c75e",
       "iosDisplayInForeground": true,
       "androidMode": "collapse",
       "androidCollapsedTitle": "ordered.online"
@@ -65,7 +65,7 @@
       "icon": "./assets/icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#57c75e"
       },
       "permissions": [
         "ACCESS_COARSE_LOCATION",
@@ -85,8 +85,8 @@
         "com.sonyericsson.home.permission.BROADCAST_BADGE"
       ],
       "splash": {
-        "backgroundColor": "#ffffff",
-        "resizeMode": "native"
+        "backgroundColor": "#57c75e",
+        "resizeMode": "contain"
       }
     }
   }

@@ -5,17 +5,16 @@ import {
   FlatList,
   StyleSheet,
   Platform,
-  ScrollView,
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Text, ListItem, Icon } from '@ordered.online/components';
+import { ListItem, Icon } from '@ordered.online/components';
 
 import { GetAllProducts } from '../../store/products';
 import { GetLocation } from '../../store/locations';
 import { OrderProduct } from '../../store/orders';
 
-import { primaryColor } from '../../constants/Colors';
+import Colors from '../../constants/Colors';
 
 export class ProductsScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -38,6 +37,17 @@ export class ProductsScreen extends Component {
   constructor(props) {
     super(props);
     this.renderItem = this.renderItem.bind(this);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { locations, session, navigation } = nextProps;
+    const { location_id } = session;
+    const location = locations[location_id] || null;
+    const locationName = navigation.getParam('locationName', '');
+    if (location.name !== locationName) {
+      navigation.setParams({ locationName: location.name });
+    }
+    return null;
   }
 
   componentDidMount() {
@@ -65,7 +75,7 @@ export class ProductsScreen extends Component {
             raised
             reverse
             size={15}
-            color={primaryColor}
+            color={Colors.primaryColor}
             disabled={this.props.session.state === 'CLOSED'}
             containerStyle={styles.iconContainer}
             name={Platform.OS === 'ios' ? 'ios-add' : 'md-add'}
@@ -78,9 +88,8 @@ export class ProductsScreen extends Component {
   }
 
   render() {
-    const { fetching, products, locations, session } = this.props;
+    const { fetching, products, session } = this.props;
     const { location_id } = session;
-    const location = locations[location_id] || null;
 
     const data = [];
     if (products) {
@@ -94,7 +103,7 @@ export class ProductsScreen extends Component {
     if (fetching) {
       return (
         <View style={styles.container}>
-          <ActivityIndicator size="large" color={primaryColor} />
+          <ActivityIndicator size="large" color={Colors.primaryColor} />
         </View>
       );
     }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { primaryColor } from '../constants/Colors';
 
 import { Button } from '@ordered.online/components';
 

@@ -51,6 +51,8 @@ const locations = (state = initialState, action) => {
 
     case LOGOUT_SUCCESS:
     case LOGOUT_FAILURE:
+      return initialState;
+
     default:
       return state;
   }

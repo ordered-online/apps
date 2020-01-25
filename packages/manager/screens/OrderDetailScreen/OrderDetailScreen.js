@@ -12,7 +12,7 @@ import api from '@ordered.online/api';
 import { Text, ListItem, Icon, QRCode } from '@ordered.online/components';
 import { GetProduct } from '../../store/products';
 import { GetSession, ConnectSession } from '../../store/orders';
-import { primaryColor } from '../../constants/Colors';
+import Colors from '../../constants/Colors';
 
 export class OrderDetailScreen extends Component {
   constructor(props) {
@@ -58,11 +58,6 @@ export class OrderDetailScreen extends Component {
     const { session_code } = this.props.match.params;
     this.props.getSession(session_code);
     this.props.connectSession(session_code);
-    const response = await api.getQRCodeBase64(session_code);
-    const { base64 } = response;
-    if (base64) {
-      this.setState({ base64 });
-    }
   }
 
   keyExtractor = (item, index) => index.toString();
@@ -92,7 +87,7 @@ export class OrderDetailScreen extends Component {
     const total = this.state.total.toFixed(2);
 
     if (fetching) {
-      return <ActivityIndicator size="large" color={primaryColor} />;
+      return <ActivityIndicator size="large" color={Colors.primaryColor} />;
     }
 
     return (
@@ -100,7 +95,7 @@ export class OrderDetailScreen extends Component {
         <Icon
           name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'}
           type="ionicon"
-          color={primaryColor}
+          color={Colors.primaryColor}
           onPress={() =>
             this.props.navigation.navigate(`locations/${location_id}/sessions`)
           }

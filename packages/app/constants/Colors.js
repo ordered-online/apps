@@ -1,16 +1,7 @@
-export const primaryColor = '#57c75e';
-
 export default {
-  primaryColor,
+  primaryColor: '#57c75e',
   tabIconDefault: '#ccc',
-  tabIconSelected: primaryColor,
-  selectIconDefault: '#ccc',
-  selectIconSelected: '#fff',
-  tabBar: '#fefefe',
+  tabIconSelected: '#57c75e',
   errorBackground: 'red',
   errorText: '#fff',
-  warningBackground: '#EAEB5E',
-  warningText: '#666804',
-  noticeBackground: primaryColor,
-  noticeText: '#fff',
 };

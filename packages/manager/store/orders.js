@@ -6,6 +6,8 @@ import {
   SESSION_MESSAGE,
 } from './websocket';
 
+import { LOGOUT_SUCCESS, LOGOUT_FAILURE } from './authentication';
+
 // Action Types
 export const CREATE_SESSION_REQUEST = 'ORDERS/CREATE_SESSION_REQUEST';
 export const CREATE_SESSION_SUCCESS = 'ORDERS/CREATE_SESSION_SUCCESS';
@@ -56,7 +58,10 @@ const orders = (state = initialState, action) => {
         error: action.payload,
       };
 
-    // Default
+    case LOGOUT_SUCCESS:
+    case LOGOUT_FAILURE:
+      return initialState;
+
     default:
       return state;
   }

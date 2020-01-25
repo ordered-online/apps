@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { Button, Text, ListItem, Icon } from '@ordered.online/components';
 import { GetAllProducts } from '../../store/products';
 
-import { primaryColor } from '../../constants/Colors';
+import Colors from '../../constants/Colors';
 
 export class ProductsScreen extends Component {
   constructor(props) {
@@ -65,7 +65,7 @@ export class ProductsScreen extends Component {
           <Icon
             name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'}
             type="ionicon"
-            color={primaryColor}
+            color={Colors.primaryColor}
             onPress={() =>
               this.props.navigation.navigate(`locations/${location_id}`)
             }
@@ -77,7 +77,9 @@ export class ProductsScreen extends Component {
           </Text>
         </View>
 
-        {fetching && <ActivityIndicator size="large" color={primaryColor} />}
+        {fetching && (
+          <ActivityIndicator size="large" color={Colors.primaryColor} />
+        )}
         <FlatList
           style={styles.listView}
           keyExtractor={this.keyExtractor}

@@ -5,7 +5,6 @@ import {
   FlatList,
   StyleSheet,
   Platform,
-  ScrollView,
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -14,7 +13,7 @@ import { Text, ListItem, Icon, Button } from '@ordered.online/components';
 import { GetProduct } from '../../store/products';
 import { OrderProduct, GetSession, CloseSession } from '../../store/orders';
 
-import { primaryColor } from '../../constants/Colors';
+import Colors from '../../constants/Colors';
 
 export class CartScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -119,7 +118,7 @@ export class CartScreen extends Component {
             raised
             reverse
             size={15}
-            color={primaryColor}
+            color={Colors.primaryColor}
             disabled={this.props.session.state === 'CLOSED'}
             containerStyle={styles.iconContainer}
             name={Platform.OS === 'ios' ? 'ios-add' : 'md-add'}
@@ -160,7 +159,7 @@ export class CartScreen extends Component {
         {fetching ? (
           <ActivityIndicator
             size="large"
-            color={primaryColor}
+            color={Colors.primaryColor}
             style={{ marginTop: 14 }}
           />
         ) : (

@@ -16,7 +16,7 @@ import {
 } from '../../store/locations';
 import api from '@ordered.online/api';
 
-import { primaryColor } from '../../constants/Colors';
+import Colors from '../../constants/Colors';
 
 export class LocationEditScreen extends Component {
   constructor(props) {
@@ -212,7 +212,7 @@ export class LocationEditScreen extends Component {
     const { edit, fetching } = this.props;
 
     if (edit && fetching) {
-      return <ActivityIndicator size="large" color={primaryColor} />;
+      return <ActivityIndicator size="large" color={Colors.primaryColor} />;
     }
 
     return (
@@ -223,7 +223,7 @@ export class LocationEditScreen extends Component {
               containerStyle={styles.backButton}
               name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'}
               type="ionicon"
-              color={primaryColor}
+              color={Colors.primaryColor}
               onPress={() =>
                 this.props.navigation.navigate(`locations/${location_id}`)
               }
