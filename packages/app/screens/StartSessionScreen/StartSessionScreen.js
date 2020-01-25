@@ -5,6 +5,7 @@ import {
   Platform,
   ActivityIndicator,
   Alert,
+  Modal,
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -40,10 +41,8 @@ export class StartSessionScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      permissionState: 'pending',
+      permissionState: Permissions.PermissionStatus.UNDETERMINED,
       scanning: false,
-      scanned: false,
-      errorMessage: null,
       code: '',
     };
 
@@ -51,6 +50,7 @@ export class StartSessionScreen extends Component {
       this
     );
     this.handleBarCodeScanned = this.handleBarCodeScanned.bind(this);
+    this.renderBarcodeScanner = this.renderBarcodeScanner.bind(this);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -71,49 +71,51 @@ export class StartSessionScreen extends Component {
 
   componentDidMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
-      this.setState({
-        errorMessage:
-          'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
-      });
+      Alert.alert(
+        'Oops, this will not work on Sketch in an Android emulator. Try it on your device!'
+      );
     }
   }
 
   async getCameraPermissionsAndScan() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    if (status !== 'granted') {
+    if (status !== Permissions.PermissionStatus.GRANTED) {
       this.setState({
         errorMessage: 'Permission to access location was denied',
-        permissionState: 'denied',
+        permissionState: Permissions.PermissionStatus.DENIED,
       });
     } else {
-      this.setState({ permissionState: 'granted' });
+      this.setState({
+        permissionState: Permissions.PermissionStatus.GRANTED,
+      });
     }
     this.scanCode();
   }
 
   handleBarCodeScanned({ type, data }) {
     if (validateSessionCode(data)) {
-      this.setState({ scanned: true, scanning: false, code: data });
+      this.setState({ scanning: false, code: data });
       this.props.getSession(data);
       this.props.connectSession(data);
     }
   }
 
   scanCode() {
-    if (isWeb) {
-      Alert.alert(
-        'Scanning is not possible.',
-        'Scanning is not supported on the web.'
-      );
-    } else if (this.state.permissionState === 'pending') {
-      this.getCameraPermissionsAndScan();
-    } else if (this.state.permissionState === 'granted') {
-      this.setState({ scanning: true });
-    } else {
-      Alert.alert(
-        'Scanning is not possible.',
-        'The app has no access to the camera.'
-      );
+    const { permissionState } = this.state;
+    switch (permissionState) {
+      case Permissions.PermissionStatus.UNDETERMINED:
+        this.getCameraPermissionsAndScan();
+        break;
+      case Permissions.PermissionStatus.GRANTED:
+        this.setState({ scanning: true });
+        break;
+      case Permissions.PermissionStatus.DENIED:
+      default:
+        Alert.alert(
+          'Scanning is not possible.',
+          'The app has no access to the camera.'
+        );
+        break;
     }
   }
 
@@ -154,30 +156,57 @@ export class StartSessionScreen extends Component {
     );
   }
 
-  render() {
-    const { permissionState, scanning } = this.state;
-
-    if (permissionState === 'granted' && scanning && !isWeb) {
-      return (
+  renderBarcodeScanner() {
+    return (
+      <Modal
+        animationType="slide"
+        transparent={false}
+        visible
+        onRequestClose={() => this.setState({ scanning: false })}>
         <BarCodeScanner
           onBarCodeScanned={this.handleBarCodeScanned}
           style={StyleSheet.absoluteFill}
         />
-      );
-    }
+        <Icon
+          name={Platform.OS === 'ios' ? 'ios-close' : 'md-close'}
+          type="ionicon"
+          raised
+          reverse
+          size={30}
+          onPress={() => this.setState({ scanning: false })}
+          containerStyle={{ position: 'absolute', top: -15, left: -15 }}
+          color={Colors.primaryColor}
+        />
+      </Modal>
+    );
+  }
 
+  renderLoading() {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color={Colors.primaryColor} />
+      </View>
+    );
+  }
+
+  render() {
+    const { permissionState, scanning } = this.state;
     const { fetching, connecting, session } = this.props;
+
+    if (
+      permissionState === Permissions.PermissionStatus.GRANTED &&
+      scanning &&
+      !isWeb
+    ) {
+      return this.renderBarcodeScanner();
+    }
 
     if (session && session.code) {
       return this.renderSession();
     }
 
     if (fetching || connecting) {
-      return (
-        <View style={styles.container}>
-          <ActivityIndicator size="large" color={Colors.primaryColor} />
-        </View>
-      );
+      return this.renderLoading();
     }
 
     return (
@@ -200,16 +229,18 @@ export class StartSessionScreen extends Component {
             onPress={() => this.handleBarCodeInput()}
           />
         </View>
-        <Icon
-          name={Platform.OS === 'ios' ? 'ios-qr-scanner' : 'md-qr-scanner'}
-          type="ionicon"
-          raised
-          reverse
-          size={60}
-          onPress={() => this.scanCode()}
-          containerStyle={styles.iconContainer}
-          color={Colors.primaryColor}
-        />
+        {!isWeb && (
+          <Icon
+            name={Platform.OS === 'ios' ? 'ios-qr-scanner' : 'md-qr-scanner'}
+            type="ionicon"
+            raised
+            reverse
+            size={60}
+            onPress={() => this.scanCode()}
+            containerStyle={styles.iconContainer}
+            color={Colors.primaryColor}
+          />
+        )}
       </View>
     );
   }
