@@ -5,6 +5,7 @@ import {
   Platform,
   Dimensions,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -40,14 +41,16 @@ export class StartSessionScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hasCameraPermission: false,
+      permissionState: 'pending',
       scanning: false,
       scanned: false,
       errorMessage: null,
       code: '',
     };
 
-    this.getCameraPermissions = this.getCameraPermissions.bind(this);
+    this.getCameraPermissionsAndScan = this.getCameraPermissionsAndScan.bind(
+      this
+    );
     this.handleBarCodeScanned = this.handleBarCodeScanned.bind(this);
   }
 
@@ -74,20 +77,18 @@ export class StartSessionScreen extends Component {
           'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
       });
     }
-    if (!isWeb) {
-      this.getCameraPermissions();
-    }
   }
 
-  async getCameraPermissions() {
+  async getCameraPermissionsAndScan() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     if (status !== 'granted') {
       this.setState({
         errorMessage: 'Permission to access location was denied',
-        hasCameraPermission: status === 'granted',
+        permissionState: 'denied',
       });
     } else {
-      this.setState({ hasCameraPermission: status === 'granted' });
+      this.setState({ permissionState: 'granted' });
+      this.scanCode();
     }
   }
 
@@ -100,10 +101,20 @@ export class StartSessionScreen extends Component {
   }
 
   scanCode() {
-    if (!this.state.hasCameraPermission) {
-      this.getCameraPermissions();
-    } else {
+    if (isWeb) {
+      Alert.alert(
+        'Scanning is not possible.',
+        'Scanning is not supported on the web.'
+      );
+    } else if (this.state.permissionState === 'pending') {
+      this.getCameraPermissionsAndScan();
+    } else if (this.state.permissionState === 'granted') {
       this.setState({ scanning: true });
+    } else {
+      Alert.alert(
+        'Scanning is not possible.',
+        'The app has no access to the camera.'
+      );
     }
   }
 
@@ -145,9 +156,9 @@ export class StartSessionScreen extends Component {
   }
 
   render() {
-    const { hasCameraPermission, scanning } = this.state;
+    const { permissionState, scanning } = this.state;
 
-    if (hasCameraPermission && scanning) {
+    if (permissionState === 'granted' && scanning && !isWeb) {
       return (
         <BarCodeScanner
           onBarCodeScanned={this.handleBarCodeScanned}
@@ -162,14 +173,6 @@ export class StartSessionScreen extends Component {
       return this.renderSession();
     }
 
-    if (!hasCameraPermission && !isWeb) {
-      return (
-        <View style={styles.container}>
-          <Text>Requesting for camera permission ...</Text>
-        </View>
-      );
-    }
-
     if (fetching || connecting) {
       return (
         <View style={styles.container}>
@@ -180,37 +183,34 @@ export class StartSessionScreen extends Component {
 
     return (
       <View style={styles.container}>
+        <View style={styles.inputWrapper}>
+          <Input
+            editable
+            autoFocus
+            maxLength={40}
+            placeholder="Type the code at your table"
+            value={this.state.code}
+            onChangeText={code => this.setState({ code })}
+            containerStyle={{ maxWidth: 325 }}
+          />
+          <Button
+            raised
+            containerStyle={{ maxWidth: 325 }}
+            titleStyle={{ color: '#fff', width: '100%' }}
+            title="Start Your Order"
+            onPress={() => this.handleBarCodeInput()}
+          />
+        </View>
         <Icon
           name={Platform.OS === 'ios' ? 'ios-qr-scanner' : 'md-qr-scanner'}
           type="ionicon"
           raised
           reverse
           size={60}
-          onPress={this.scanCode()}
+          onPress={() => this.scanCode()}
           containerStyle={styles.iconContainer}
           color={primaryColor}
         />
-
-        <View style={styles.inputWrapper}>
-          <Input
-            editable
-            autoFocus
-            multiline
-            maxLength={40}
-            placeholder="Type or scan the code our your table"
-            value={this.state.code}
-            onChangeText={code => this.setState({ code })}
-            containerStyle={{ marginBottom: 20, maxWidth: 325 }}
-          />
-          <View style={styles.buttonWrapper}>
-            <Button
-              raised
-              titleStyle={{ color: '#fff', width: '100%' }}
-              title="Start Your Order"
-              onPress={() => this.handleBarCodeInput()}
-            />
-          </View>
-        </View>
       </View>
     );
   }
