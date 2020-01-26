@@ -30,9 +30,7 @@ export default class App extends Component {
       return (
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <LinearGradient
-              style={{ width: '100%', height: '100%' }}
-              colors={['#57c75e', '#27ae60']}>
+            <LinearGradient style={{ flex: 1 }} colors={['#57c75e', '#27ae60']}>
               <View style={styles.container}>
                 {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
                 <View style={styles.roundedBackground}>

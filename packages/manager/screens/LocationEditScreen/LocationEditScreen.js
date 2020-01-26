@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
   },
   mapViewWrapper: {
     height: 300,
-    width: '100%',
+    flex: 1,
     marginVertical: 24,
   },
   backButtonContainer: {

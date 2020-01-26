@@ -201,6 +201,7 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   inputContainer: {
+    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -214,7 +215,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     color: 'black',
     fontSize: 18,
-    width: '100%',
+    flex: 1,
     minHeight: 40,
     ...Platform.select({
       ios: {

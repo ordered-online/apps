@@ -55,7 +55,7 @@ export class LocationsScreen extends Component {
         <View style={styles.createButtonWrapper}>
           <Button
             raised
-            titleStyle={{ color: '#fff', width: '100%' }}
+            titleStyle={{ color: '#fff' }}
             title="+ Create new Location"
             onPress={() => this.props.navigation.navigate('locations/create')}
           />
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
   createButtonWrapper: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'center',
   },
   headline: {
     marginVertical: 10,

@@ -143,7 +143,7 @@ export class StartSessionScreen extends Component {
         <View style={styles.buttonWrapper}>
           <Button
             raised
-            titleStyle={{ color: '#fff', width: '100%' }}
+            titleStyle={{ color: '#fff' }}
             title="Go to Products"
             onPress={() =>
               navigation.navigate('Products', {
@@ -223,8 +223,7 @@ export class StartSessionScreen extends Component {
           />
           <Button
             raised
-            containerStyle={{ maxWidth: 325 }}
-            titleStyle={{ color: '#fff', width: '100%' }}
+            titleStyle={{ color: '#fff' }}
             title="Start Your Order"
             onPress={() => this.handleBarCodeInput()}
           />
@@ -261,7 +260,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'stretch',
+    paddingHorizontal: 15,
   },
   buttonWrapper: {
     display: 'flex',

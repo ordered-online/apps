@@ -145,7 +145,7 @@ export class CartScreen extends Component {
           <View style={styles.buttonWrapper}>
             <Button
               raised
-              titleStyle={{ color: '#fff', width: '100%' }}
+              titleStyle={{ color: '#fff' }}
               title="Start Your Order"
               onPress={() => this.props.navigation.navigate('StartSession')}
             />
@@ -175,7 +175,7 @@ export class CartScreen extends Component {
           <Button
             raised
             disabled={session.state === 'CLOSED'}
-            titleStyle={{ color: '#fff', width: '100%' }}
+            titleStyle={{ color: '#fff' }}
             title="Close your Order"
             onPress={() => this.closeSession()}
           />
@@ -220,6 +220,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginRight: 5,
     marginLeft: -10,
+  },
+  buttonWrapper: {
+    paddingHorizontal: 15,
   },
 });
 

@@ -102,13 +102,22 @@ export class OrderDetailScreen extends Component {
           iconStyle={styles.backButton}
           containerStyle={styles.iconContainer}
         />
-        <Text h3>{session.name}</Text>
-        <Text style={{ marginVertical: 4 }} h4>
+        <Text h3 style={{ textAlign: 'center' }}>
+          {session.name}
+        </Text>
+        <Text style={{ marginVertical: 4, textAlign: 'center' }} h4>
           {location.name}
         </Text>
-        <QRCode value={session_code} size={200} />
+        <View
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'row',
+          }}>
+          <QRCode value={session_code} size={200} />
+        </View>
         <Text style={styles.total}>{`€ ${total}`}</Text>
-        <Text>{session_code}</Text>
+        <Text style={{ textAlign: 'center' }}>{session_code}</Text>
         <FlatList
           keyExtractor={this.keyExtractor}
           data={Object.keys(this.state.data)}
@@ -125,11 +134,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'stretch',
   },
   listView: {
     marginTop: 4,
-    width: '100%',
+    flex: 1,
     borderRadius: 24,
     backgroundColor: '#fff',
     shadowColor: '#000',

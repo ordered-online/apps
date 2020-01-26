@@ -8,7 +8,7 @@ export default function NavItem({ title, onPress, ...rest }) {
     <View style={styles.navLink} {...rest}>
       <Button
         raised
-        titleStyle={{ color: '#fff', width: '100%' }}
+        titleStyle={{ color: '#fff' }}
         title={title}
         onPress={onPress}
       />
@@ -18,6 +18,7 @@ export default function NavItem({ title, onPress, ...rest }) {
 
 const styles = StyleSheet.create({
   navLink: {
+    paddingHorizontal: 5,
     flex: 1,
     display: 'flex',
     justifyContent: 'center',
