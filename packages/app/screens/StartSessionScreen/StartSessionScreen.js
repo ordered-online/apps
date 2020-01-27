@@ -17,6 +17,7 @@ import * as Permissions from 'expo-permissions';
 import {
   ConnectSession,
   GetSession,
+  ResetSession,
   validateSessionCode,
 } from '../../store/orders';
 
@@ -151,6 +152,12 @@ export class StartSessionScreen extends Component {
               })
             }
           />
+          <Button
+            raised
+            titleStyle={{ color: '#fff' }}
+            title="Quit Session"
+            onPress={() => this.props.resetSession()}
+          />
         </View>
       </View>
     );
@@ -218,7 +225,6 @@ export class StartSessionScreen extends Component {
             placeholder="Type the code at your table"
             value={this.state.code}
             onChangeText={code => this.setState({ code })}
-            containerStyle={{ maxWidth: 325 }}
           />
           <Button
             raised
@@ -290,6 +296,7 @@ const mapDispatchToProps = dispatch => ({
     {
       connectSession: ConnectSession,
       getSession: GetSession,
+      resetSession: ResetSession,
     },
     dispatch
   ),

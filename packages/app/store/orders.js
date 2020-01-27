@@ -19,6 +19,8 @@ export const ORDER_PRODUCT_REQUEST = 'ORDERS/ORDER_PRODUCT_REQUEST';
 export const ORDER_PRODUCT_SUCCESS = 'ORDERS/ORDER_PRODUCT_SUCCESS';
 export const ORDER_PRODUCT_FAILURE = 'ORDERS/ORDER_PRODUCT_FAILURE';
 
+export const SESSION_RESET = 'ORDERS/SESSION_RESET';
+
 // Initial State
 const initialState = {
   fetching: false,
@@ -56,6 +58,9 @@ const orders = (state = initialState, action) => {
         fetching: false,
         error: action.payload,
       };
+
+    case SESSION_RESET:
+      return initialState;
 
     // Default
     default:
@@ -104,6 +109,10 @@ const orderProductSuccess = session => ({
 const orderProductFailure = error => ({
   type: ORDER_PRODUCT_FAILURE,
   payload: error,
+});
+
+export const ResetSession = () => ({
+  type: SESSION_RESET,
 });
 
 export function validateSessionCode(code) {
