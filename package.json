@@ -24,7 +24,7 @@
     "debug:android": "adb shell input keyevent 82",
     "clean": "lerna run clean",
     "compile": "lerna run compile",
-    "version": "lerna version --create-release --conventional-prerelease",
+    "release": "lerna version --conventional-commits --create-release github",
     "ios:app": "yarn start:api & yarn start:components & lerna run --scope=@ordered.online/app ios --stream",
     "ios:app:remote": "API_URL=ordered.online yarn start:api & yarn start:components & lerna run --scope=@ordered.online/app ios --stream",
     "ios:manager": "yarn start:api & yarn start:components & lerna run --scope=@ordered.online/manager ios --stream",
