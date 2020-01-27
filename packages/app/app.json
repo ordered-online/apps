@@ -43,7 +43,7 @@
     },
     "ios": {
       "bundleIdentifier": "com.ordered.online.app",
-      "buildNumber": "5",
+      "buildNumber": "7",
       "icon": "./assets/icon.png",
       "supportsTablet": true,
       "requireFullScreen": true,
@@ -63,7 +63,7 @@
     },
     "android": {
       "package": "com.ordered.online.android",
-      "versionCode": 5,
+      "versionCode": 7,
       "icon": "./assets/icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
