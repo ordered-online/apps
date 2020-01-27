@@ -70,7 +70,6 @@ export class ProductsScreen extends Component {
               this.props.navigation.navigate(`locations/${location_id}`)
             }
             iconStyle={styles.backButton}
-            containerStyle={styles.iconContainer}
           />
           <Text h3 h3Style={styles.headline}>
             Products for {location.name}
@@ -90,7 +89,7 @@ export class ProductsScreen extends Component {
           <Button
             raised
             color={'#57c75e'}
-            titleStyle={{ color: '#fff', padding: 4 }}
+            titleStyle={{ color: '#fff' }}
             title="+ Create new Product"
             onPress={() =>
               this.props.navigation.navigate(
@@ -130,7 +129,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 15,
   },
   backButtonContainer: {
     display: 'flex',
@@ -144,18 +142,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 64,
     elevation: 0.5,
-    width: 30,
-    height: 30,
-    borderRadius: 12,
+    fontSize: 40,
   },
   header: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  iconContainer: {
-    width: 30,
   },
 });
 

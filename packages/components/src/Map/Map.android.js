@@ -1,24 +1,26 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { WebView } from 'react-native-webview';
 
 const mapStyles = `width: 100%; height: 300;`;
 
+const initialRegion = {
+  latitude: 51.0250869,
+  longitude: 13.7210005,
+  latitudeDelta: 0.0922,
+  longitudeDelta: 0.0421,
+};
+
 export default function Map({ region, marker }) {
-  const initialRegion = {
-    latitude: 51.0250869,
-    longitude: 13.7210005,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  };
+  const webview = useRef();
 
-  const _region = region || initialRegion;
-  const position = [_region.latitude, _region.longitude];
+  //   const _region = region || initialRegion;
+  //   const position = [_region.latitude, _region.longitude];
 
-  const zoom = marker ? 16 : 10;
+  //   const zoom = marker ? 16 : 10;
 
-  const { description = {}, title, coordinate } = marker;
-  const markerPosition = [coordinate.latitude, coordinate.longitude];
+  // const { description = {}, title, coordinate } = marker;
+  // const markerPosition = [coordinate.latitude, coordinate.longitude];
 
   const html = `
   <html lang="%LANG_ISO_CODE%">
@@ -28,9 +30,7 @@ export default function Map({ region, marker }) {
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
       />
-      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-        crossorigin=""/>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
       <style> #map { ${mapStyles} } </style>
     </head>
 
@@ -38,31 +38,40 @@ export default function Map({ region, marker }) {
 
       <div id="map"></div>
 
-      <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-      crossorigin=""></script>
+      <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 
     </body>
   </html>
   `;
 
   const javaScript = `
-    var osm_map = L.map('map').setView([${position[0]}, ${position[1]}], ${zoom});
-    var marker = L.marker([${markerPosition[0]}, ${markerPosition[1]}]).addTo(osm_map);
-    marker.bindPopup("<p style="font-size:18px">${title}</b><br><br>${description}").openPopup();
   `;
+  // var osm_map = L.map('map').setView([${position[0]}, ${position[1]}], ${zoom});
+  // var marker = L.marker([${markerPosition[0]}, ${markerPosition[1]}]).addTo(osm_map);
+  // marker.bindPopup("<p style="font-size:18px">${title}</b><br><br>${description}").openPopup();
 
   return (
     <WebView
-      ref={ref => (this.webview = ref)}
+      // ref={webview}
       originWhitelist={['*']}
       source={{ html }}
       style={{ marginTop: 20 }}
-      mixedContentMode={true}
       allowUniversalAccessFromFileURLs={true}
     />
   );
 }
+
+Map.defaultProps = {
+  region: initialRegion,
+  marker: {
+    title: '',
+    description: '',
+    coordinate: {
+      latitude: 51.0250869,
+      longitude: 13.7210005,
+    },
+  },
+};
 
 Map.propTypes = {
   region: PropTypes.shape({

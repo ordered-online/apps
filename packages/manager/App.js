@@ -6,7 +6,6 @@ import {
   Platform,
   StatusBar,
   StyleSheet,
-  SafeAreaView,
   Dimensions,
   View,
 } from 'react-native';
@@ -25,18 +24,10 @@ export default class App extends Component {
     super(props);
     this.state = {
       isLoadingComplete: false,
-      screenHeight: height,
     };
-
-    this.onContentSizeChange = this.onContentSizeChange.bind(this);
-  }
-
-  onContentSizeChange(contentWidth, contentHeight) {
-    this.setState({ screenHeight: contentHeight });
   }
 
   render() {
-    const scrollEnabled = this.state.screenHeight > height;
     const { isLoadingComplete } = this.state;
     if (!isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
@@ -52,10 +43,8 @@ export default class App extends Component {
           <PersistGate loading={null} persistor={persistor}>
             <LinearGradient style={{ flex: 1 }} colors={['#57c75e', '#27ae60']}>
               <View style={styles.backDropView}>
-                <SafeAreaView style={styles.container}>
-                  {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-                  <AppNavigator />
-                </SafeAreaView>
+                {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+                <AppNavigator />
               </View>
             </LinearGradient>
           </PersistGate>

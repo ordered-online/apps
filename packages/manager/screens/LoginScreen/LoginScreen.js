@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -49,56 +49,66 @@ class LoginScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image
-          style={styles.logo}
-          containerStyle={styles.logoContainer}
-          source={require('../../assets/icon.png')}
-        />
-
-        <Input
-          editable
-          maxLength={40}
-          placeholder="username"
-          textContentType="username"
-          onChangeText={username => this.setState({ username })}
-          value={this.state.username}
-          containerStyle={styles.inputContainer}
-        />
-
-        <Input
-          editable
-          maxLength={40}
-          secureTextEntry={true}
-          placeholder="password"
-          textContentType="password"
-          value={this.state.password}
-          onChangeText={password => this.setState({ password })}
-          containerStyle={styles.inputContainer}
-        />
-
-        <View style={styles.inlineButtonContainer}>
-          <View style={styles.buttonWrapper}>
-            <Button
-              raised
-              color={'#57c75e'}
-              titleStyle={{ color: '#fff' }}
-              title="Login"
-              loading={this.props.fetching}
-              onPress={this.handleRegistration}
+        <ScrollView
+          style={{ flex: 1 }}
+          contentContainerStyle={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'stretch',
+          }}>
+          <View style={styles.container}>
+            <Image
+              style={styles.logo}
+              containerStyle={styles.logoContainer}
+              source={require('../../assets/icon.png')}
             />
           </View>
+          <Input
+            editable
+            maxLength={40}
+            placeholder="username"
+            textContentType="username"
+            onChangeText={username => this.setState({ username })}
+            value={this.state.username}
+            containerStyle={styles.inputContainer}
+          />
 
-          <View style={styles.buttonWrapper}>
-            <Button
-              raised
-              type="outline"
-              title="or register instead"
-              color={'#57c75e'}
-              titleStyle={{ color: '#fff' }}
-              onPress={() => this.props.navigation.navigate('register')}
-            />
+          <Input
+            editable
+            maxLength={40}
+            secureTextEntry
+            placeholder="password"
+            textContentType="password"
+            value={this.state.password}
+            onChangeText={password => this.setState({ password })}
+            containerStyle={styles.inputContainer}
+          />
+
+          <View style={styles.inlineButtonContainer}>
+            <View style={styles.buttonWrapper}>
+              <Button
+                raised
+                color={'#57c75e'}
+                titleStyle={{ color: '#fff' }}
+                title="Login"
+                loading={this.props.fetching}
+                onPress={this.handleRegistration}
+              />
+            </View>
+
+            <View style={styles.buttonWrapper}>
+              <Button
+                raised
+                type="outline"
+                title="or register instead"
+                color={'#57c75e'}
+                titleStyle={{ color: '#fff' }}
+                onPress={() => this.props.navigation.navigate('register')}
+              />
+            </View>
           </View>
-        </View>
+        </ScrollView>
       </View>
     );
   }
@@ -131,7 +141,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
   },
   inputContainer: {
-    width: '70%',
+    flex: 0.9,
   },
 });
 

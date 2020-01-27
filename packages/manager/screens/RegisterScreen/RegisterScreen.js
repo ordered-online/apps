@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button, Input, Image } from '@ordered.online/components';
@@ -51,86 +51,90 @@ class RegisterScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image
-          style={styles.logo}
-          containerStyle={styles.logoContainer}
-          source={require('../../assets/icon.png')}
-        />
-
-        <Input
-          editable
-          maxLength={40}
-          placeholder="username"
-          textContentType="username"
-          value={this.state.username}
-          onChangeText={username => this.setState({ username })}
-          containerStyle={styles.inputContainer}
-        />
-
-        <Input
-          editable
-          maxLength={40}
-          placeholder="email"
-          textContentType="emailAddress"
-          value={this.state.email}
-          onChangeText={email => this.setState({ email })}
-          containerStyle={styles.inputContainer}
-        />
-
-        <Input
-          editable
-          maxLength={40}
-          placeholder="firstname"
-          textContentType="givenName"
-          value={this.state.first_name}
-          onChangeText={first_name => this.setState({ first_name })}
-          containerStyle={styles.inputContainer}
-        />
-
-        <Input
-          editable
-          maxLength={40}
-          placeholder="lastname"
-          textContentType="familyName"
-          value={this.state.last_name}
-          onChangeText={last_name => this.setState({ last_name })}
-          containerStyle={styles.inputContainer}
-        />
-
-        <Input
-          editable
-          maxLength={40}
-          secureTextEntry={true}
-          placeholder="password"
-          textContentType="password"
-          value={this.state.password}
-          onChangeText={password => this.setState({ password })}
-          containerStyle={styles.inputContainer}
-        />
-
-        <View style={styles.inlineButtonContainer}>
-          <View style={styles.buttonWrapper}>
-            <Button
-              raised
-              color={'#57c75e'}
-              titleStyle={{ color: '#fff', padding: 4 }}
-              title="Register"
-              loading={this.props.fetching}
-              onPress={this.handleRegistration}
+        <ScrollView
+          style={{ flex: 1 }}
+          contentContainerStyle={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'stretch',
+          }}>
+          <View style={styles.container}>
+            <Image
+              style={styles.logo}
+              containerStyle={styles.logoContainer}
+              source={require('../../assets/icon.png')}
             />
           </View>
+          <Input
+            editable
+            maxLength={40}
+            placeholder="username"
+            textContentType="username"
+            value={this.state.username}
+            onChangeText={username => this.setState({ username })}
+            containerStyle={styles.inputContainer}
+          />
+          <Input
+            editable
+            maxLength={40}
+            placeholder="email"
+            textContentType="emailAddress"
+            value={this.state.email}
+            onChangeText={email => this.setState({ email })}
+            containerStyle={styles.inputContainer}
+          />
+          <Input
+            editable
+            maxLength={40}
+            placeholder="firstname"
+            textContentType="givenName"
+            value={this.state.first_name}
+            onChangeText={first_name => this.setState({ first_name })}
+            containerStyle={styles.inputContainer}
+          />
+          <Input
+            editable
+            maxLength={40}
+            placeholder="lastname"
+            textContentType="familyName"
+            value={this.state.last_name}
+            onChangeText={last_name => this.setState({ last_name })}
+            containerStyle={styles.inputContainer}
+          />
+          <Input
+            editable
+            maxLength={40}
+            secureTextEntry={true}
+            placeholder="password"
+            textContentType="password"
+            value={this.state.password}
+            onChangeText={password => this.setState({ password })}
+            containerStyle={styles.inputContainer}
+          />
+          <View style={styles.inlineButtonContainer}>
+            <View style={styles.buttonWrapper}>
+              <Button
+                raised
+                color={'#57c75e'}
+                titleStyle={{ color: '#fff', padding: 4 }}
+                title="Register"
+                loading={this.props.fetching}
+                onPress={this.handleRegistration}
+              />
+            </View>
 
-          <View style={styles.buttonWrapper}>
-            <Button
-              raised
-              color={'#57c75e'}
-              titleStyle={{ color: '#fff', padding: 4 }}
-              type="outline"
-              title="or login instead"
-              onPress={() => this.props.navigation.navigate('login')}
-            />
+            <View style={styles.buttonWrapper}>
+              <Button
+                raised
+                color={'#57c75e'}
+                titleStyle={{ color: '#fff', padding: 4 }}
+                type="outline"
+                title="or login instead"
+                onPress={() => this.props.navigation.navigate('login')}
+              />
+            </View>
           </View>
-        </View>
+        </ScrollView>
       </View>
     );
   }
@@ -163,7 +167,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   inputContainer: {
-    width: '70%',
+    flex: 0.9,
   },
 });
 

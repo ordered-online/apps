@@ -47,7 +47,7 @@ export class LocationDetailScreen extends Component {
               type="ionicon"
               color={Colors.primaryColor}
               onPress={() => this.props.navigation.navigate(`locations`)}
-              iconStyle={{ fontSize: 30 }}
+              iconStyle={{ fontSize: 35 }}
             />
           }>
           <View style={styles.actionsContainer}>
@@ -84,9 +84,13 @@ export class LocationDetailScreen extends Component {
           <Text>{location.description}</Text>
           <Text style={styles.attributeHeader}>Address:</Text>
           <Text>{location.address}</Text>
-          <Text style={styles.attributeHeader}>Categories:</Text>
+          {location.categories.length > 0 && (
+            <Text style={styles.attributeHeader}>Categories:</Text>
+          )}
           {this.renderBadges(location.categories)}
-          <Text style={styles.attributeHeader}>Tags:</Text>
+          {location.tags.length > 0 && (
+            <Text style={styles.attributeHeader}>Tags:</Text>
+          )}
           {this.renderBadges(location.tags)}
         </Card>
       </View>
