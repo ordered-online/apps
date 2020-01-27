@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Dimensions,
   View,
+  SafeAreaView,
 } from 'react-native';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
@@ -43,8 +44,10 @@ export default class App extends Component {
           <PersistGate loading={null} persistor={persistor}>
             <LinearGradient style={{ flex: 1 }} colors={['#57c75e', '#27ae60']}>
               <View style={styles.backDropView}>
-                {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-                <AppNavigator />
+                <SafeAreaView style={styles.container}>
+                  {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+                  <AppNavigator />
+                </SafeAreaView>
               </View>
             </LinearGradient>
           </PersistGate>
