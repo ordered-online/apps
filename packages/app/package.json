@@ -1,6 +1,6 @@
 {
   "name": "@ordered.online/app",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-beta.1",
   "description": "",
   "keywords": [],
   "repository": {
@@ -38,8 +38,8 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.6",
-    "@ordered.online/api": "^1.0.0-alpha.5",
-    "@ordered.online/components": "^1.0.0-alpha.5",
+    "@ordered.online/api": "^1.0.0-beta.1",
+    "@ordered.online/components": "^1.0.0-beta.1",
     "@react-navigation/core": "^3.5.1",
     "@react-navigation/web": "^1.0.0-alpha.9",
     "expo": "^36.0.0",
