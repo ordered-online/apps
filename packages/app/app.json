@@ -25,7 +25,7 @@
       "backgroundColor": "#57c75e"
     },
     "androidNavigationBar": {
-      "visible": false,
+      "visible": true,
       "barStyle": "dark-content",
       "backgroundColor": "#57c75e"
     },
