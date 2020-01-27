@@ -51,7 +51,20 @@ exports[`Manager manager renders the root without loading screen 1`] = `
       }
     }
   >
-    <AppNavigator />
+    <RCTSafeAreaView
+      emulateUnlessSupported={true}
+      style={
+        Object {
+          "alignContent": "center",
+          "display": "flex",
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <AppNavigator />
+    </RCTSafeAreaView>
   </View>
 </ViewManagerAdapter_ExpoLinearGradient>
 `;
