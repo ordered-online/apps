@@ -172,9 +172,9 @@ export class StartSessionScreen extends Component {
           type="ionicon"
           raised
           reverse
-          size={30}
+          size={24}
           onPress={() => this.setState({ scanning: false })}
-          containerStyle={{ position: 'absolute', top: -15, left: -15 }}
+          containerStyle={{ position: 'absolute', top: 24, left: 24 }}
           color={Colors.primaryColor}
         />
       </Modal>
