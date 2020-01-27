@@ -23,8 +23,7 @@ exports[`Manager manager renders the root without loading screen 1`] = `
   }
   style={
     Object {
-      "height": "100%",
-      "width": "100%",
+      "flex": 1,
     }
   }
 >
