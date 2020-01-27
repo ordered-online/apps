@@ -129,7 +129,7 @@ export const reformatSessions = sessions => {
 };
 
 export function validateSessionCode(code) {
-  const regex = /^[a-z0-9]{40}$/i;
+  const regex = /^(?:[a-z0-9]{6}|[a-z0-9]{40})$/i;
   return regex.test(code);
 }
 
