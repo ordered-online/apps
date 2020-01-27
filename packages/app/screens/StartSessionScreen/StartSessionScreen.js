@@ -214,7 +214,6 @@ export class StartSessionScreen extends Component {
         <View style={styles.inputWrapper}>
           <Input
             editable
-            autoFocus
             maxLength={40}
             placeholder="Type the code at your table"
             value={this.state.code}
