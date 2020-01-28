@@ -22,7 +22,7 @@
     <a href="https://github.com/ordered-online/apps"><img alt="Github Repo Size" src="https://img.shields.io/github/repo-size/ordered-online/apps"></a>
     <a href="https://github.com/ordered-online/apps"><img alt="Github Releases" src="https://img.shields.io/github/v/release/ordered-online/apps?sort=semver"></a>
     <a href="https://github.com/ordered-online/apps"><img alt="Github Tags" src="https://img.shields.io/github/v/tag/ordered-online/apps"></a>
-    <a href="https://ordered.online"><img alt="ordered.online" src="https://img.shields.io/website?down_color=lightgrey&down_message=offline&up_color=blue&up_message=soon&url=https%3A%2F%2Fordered.online"></a>
+    <a href="https://ordered.online"><img alt="ordered.online" src="https://img.shields.io/website?down_color=lightgrey&down_message=online&up_color=blue&up_message=soon&url=http%3A%2F%2Fordered.online/"></a>
     <a href="https://github.com/ordered-online/apps"><img alt="Github Commits" src="https://img.shields.io/github/last-commit/ordered-online/apps"></a>
     <a href="https://github.com/ordered-online/apps"><img alt="Keywoards" src="https://img.shields.io/github/package-json/keywoards/ordered-online/apps"></a>
 </p>
