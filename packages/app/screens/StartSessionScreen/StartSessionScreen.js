@@ -4,13 +4,19 @@ import {
   StyleSheet,
   Platform,
   ActivityIndicator,
-  Alert,
   Modal,
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { Text, Icon, Input, Button, QRCode } from '@ordered.online/components';
+import {
+  Text,
+  Icon,
+  Input,
+  Button,
+  QRCode,
+  Alert,
+} from '@ordered.online/components';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 
