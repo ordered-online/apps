@@ -54,7 +54,8 @@
     "test": "jest --detectOpenHandles",
     "test:coverage": "jest --coverage --detectOpenHandles",
     "test:develop": "jest -o --watch --changedSince=origin/master --detectOpenHandles",
-    "test:updateSnapshots": "jest -u --detectOpenHandles"
+    "test:updateSnapshots": "jest -u --detectOpenHandles",
+    "test:clear": "jest --clearCache"
   },
   "dependencies": {
     "expo": "^36.0.0",
