@@ -43,6 +43,8 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.6",
+    "@react-native-community/netinfo": "^5.3.3",
+    "expo-battery": "~2.0.0",
     "leaflet": "^1.6.0",
     "react-leaflet": "^2.6.1",
     "react-native-maps": "0.26.1",

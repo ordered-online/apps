@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Platform,
-  StatusBar,
-  StyleSheet,
-  View,
-  NetInfo,
-  DeviceInfo,
-} from 'react-native';
+import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
@@ -20,30 +13,29 @@ import AppNavigator from './navigation/AppNavigator';
 
 import { LinearGradient } from 'expo-linear-gradient';
 
-import { Alert } from '@ordered.online/components';
+import { Alert, NetInfo, Battery } from '@ordered.online/components';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoadingComplete: false,
-      connectionType: null,
-      isConnected: null,
+      connectionInfo: null,
+      batteryLevel: 'unknown',
     };
 
     this.subscribe = this.subscribe.bind(this);
     this.unsubscribe = this.unsubscribe.bind(this);
+
+    this.handleBatteryLevelChange = this.handleBatteryLevelChange.bind(this);
     this.handleNetworkChange = this.handleNetworkChange.bind(this);
   }
 
   async componentDidMount() {
-    const state = (await NetInfo.fetch()) || {};
-    const connectionType = state.type || 'unknown';
-    const isConnected = state.isConnected || 'unknown';
-    this.setState({
-      connectionType,
-      isConnected,
-    });
+    const batteryLevel = (await Battery.getBatteryLevelAsync()) || 'unknown';
+    this.handleBatteryLevelChange(batteryLevel);
+    const connectionInfo = (await NetInfo.getConnectionInfo()) || {};
+    this.handleNetworkChange(connectionInfo);
     this.subscribe();
   }
 
@@ -52,24 +44,55 @@ export default class App extends Component {
   }
 
   subscribe() {
+    this.unsubscribeBattery = Battery.addBatteryLevelListener(
+      this.handleBatteryLevelChange
+    );
     this.unsubscribeNetinfo = NetInfo.addEventListener(
       this.handleNetworkChange
     );
   }
 
   unsubscribe() {
+    this.unsubscribeBattery && this.unsubscribeBattery.remove();
+    this.unsubscribeBattery = null;
     this.unsubscribeNetinfo && this.unsubscribeNetinfo();
     this.unsubscribeNetinfo = null;
   }
 
-  handleNetworkChange(state) {
-    this.setState({
-      connectionType: state.type,
-      isConnected: state.isConnected,
-    });
-    Alert.alert(state.type, state.isConnected);
-    console.log('Connection type', state.type);
-    console.log('Is connected?', state.isConnected);
+  handleBatteryLevelChange(batteryLevel) {
+    this.setState({ batteryLevel });
+    if (__DEV__) {
+      console.log(batteryLevel);
+    }
+    if (
+      batteryLevel !== 'unknown' &&
+      batteryLevel < 0.2 &&
+      this.state.batteryLevel <= 0.2
+    ) {
+      Alert.alert(
+        'Low Battery',
+        'Your battery appears to be low,, please charge your phone. ${batteryLevel}'
+      );
+    }
+  }
+
+  handleNetworkChange(connectionInfo) {
+    this.setState({ connectionInfo });
+    const { effectiveType, rtt, downlink } = connectionInfo;
+    if (__DEV__) {
+      console.log(connectionInfo);
+    }
+    if (rtt === 0 || downlink === 0) {
+      Alert.alert(
+        'Your are offline :(',
+        'Please ensure a stable internet connection to use this app.'
+      );
+    } else if (effectiveType === '2g') {
+      Alert.alert(
+        'Your connection appears to be slow',
+        `Please make sure your connection is stable enough. `
+      );
+    }
   }
 
   render() {

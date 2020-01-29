@@ -2721,6 +2721,11 @@
     wcwidth "^1.0.1"
     ws "^1.1.0"
 
+"@react-native-community/netinfo@^5.3.3":
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-5.3.3.tgz#2e627456d83c1d75d4c43ab6cef70fe125b9691d"
+  integrity sha512-L4BsdIEEuG5rKkVNzjESdJ1wvusn0kflj/FrwctaW+xkLxiFs1+mdBg/mvqqfXvVFuBEphbyXJTFT4aG4Okkow==
+
 "@react-navigation/core@^3.5.1":
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-3.5.1.tgz#7a2339fca3496979305fb3a8ab88c2ca8d8c214d"
@@ -6586,6 +6591,11 @@ expo-barcode-scanner@~8.0.0:
   dependencies:
     lodash "^4.6.0"
     prop-types "^15.6.0"
+
+expo-battery@~2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/expo-battery/-/expo-battery-2.0.0.tgz#7ce4d50693d811c5b0d5d756f83a582ed8add0db"
+  integrity sha512-lTkFWMt61bQ+rTdvykw0SSFGdFM3PIw/PIBvtaw+8F91AssBs6ZyUbMqzLq9kDPVtuVW/aV+20ixtb4Gz0Bddg==
 
 expo-cli@^3.11.1, expo-cli@^3.11.7:
   version "3.11.7"

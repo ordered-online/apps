@@ -10,7 +10,7 @@ import {
 import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
-import { Ionicons, AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
@@ -18,12 +18,9 @@ import { store, persistor } from './store';
 
 import AppNavigator from './navigation/AppNavigator';
 
-import * as Battery from 'expo-battery';
-import NetInfo from '@react-native-community/netinfo';
-
 import { LinearGradient } from 'expo-linear-gradient';
 
-import { Alert } from '@ordered.online/components';
+import { Alert, NetInfo, Battery } from '@ordered.online/components';
 
 const { height } = Dimensions.get('window');
 
@@ -32,7 +29,79 @@ export default class App extends Component {
     super(props);
     this.state = {
       isLoadingComplete: false,
+      connectionInfo: null,
+      batteryLevel: 'unknown',
     };
+
+    this.subscribe = this.subscribe.bind(this);
+    this.unsubscribe = this.unsubscribe.bind(this);
+
+    this.handleBatteryLevelChange = this.handleBatteryLevelChange.bind(this);
+    this.handleNetworkChange = this.handleNetworkChange.bind(this);
+  }
+
+  async componentDidMount() {
+    const batteryLevel = (await Battery.getBatteryLevelAsync()) || 'unknown';
+    this.handleBatteryLevelChange(batteryLevel);
+    const connectionInfo = (await NetInfo.getConnectionInfo()) || {};
+    this.handleNetworkChange(connectionInfo);
+    this.subscribe();
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  subscribe() {
+    this.unsubscribeBattery = Battery.addBatteryLevelListener(
+      this.handleBatteryLevelChange
+    );
+    this.unsubscribeNetinfo = NetInfo.addEventListener(
+      this.handleNetworkChange
+    );
+  }
+
+  unsubscribe() {
+    this.unsubscribeBattery && this.unsubscribeBattery.remove();
+    this.unsubscribeBattery = null;
+    this.unsubscribeNetinfo && this.unsubscribeNetinfo();
+    this.unsubscribeNetinfo = null;
+  }
+
+  handleBatteryLevelChange(batteryLevel) {
+    this.setState({ batteryLevel });
+    if (__DEV__) {
+      console.log(batteryLevel);
+    }
+    if (
+      batteryLevel !== 'unknown' &&
+      batteryLevel < 0.2 &&
+      this.state.batteryLevel <= 0.2
+    ) {
+      Alert.alert(
+        'Low Battery',
+        'Your battery appears to be low,, please charge your phone. ${batteryLevel}'
+      );
+    }
+  }
+
+  handleNetworkChange(connectionInfo) {
+    this.setState({ connectionInfo });
+    const { effectiveType, rtt, downlink } = connectionInfo;
+    if (__DEV__) {
+      console.log(connectionInfo);
+    }
+    if (rtt === 0 || downlink === 0) {
+      Alert.alert(
+        'Your are offline :(',
+        'Please ensure a stable internet connection to use this app.'
+      );
+    } else if (effectiveType === '2g') {
+      Alert.alert(
+        'Your connection appears to be slow',
+        `Please make sure your connection is stable enough. `
+      );
+    }
   }
 
   render() {
@@ -69,7 +138,6 @@ async function loadResourcesAsync() {
     Asset.loadAsync([require('./assets/icon.png')]),
     Font.loadAsync({
       ...Ionicons.font,
-      ...AntDesign.font,
     }),
   ]);
 }
