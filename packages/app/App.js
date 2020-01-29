@@ -1,20 +1,76 @@
+import React, { Component } from 'react';
+import {
+  Platform,
+  StatusBar,
+  StyleSheet,
+  View,
+  NetInfo,
+  DeviceInfo,
+} from 'react-native';
 import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
-import React, { Component } from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { store, persistor } from './store';
-import { Ionicons } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
+
 import { LinearGradient } from 'expo-linear-gradient';
 
+import { Alert } from '@ordered.online/components';
+
 export default class App extends Component {
-  state = {
-    isLoadingComplete: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoadingComplete: false,
+      connectionType: null,
+      isConnected: null,
+    };
+
+    this.subscribe = this.subscribe.bind(this);
+    this.unsubscribe = this.unsubscribe.bind(this);
+    this.handleNetworkChange = this.handleNetworkChange.bind(this);
+  }
+
+  async componentDidMount() {
+    const state = (await NetInfo.fetch()) || {};
+    const connectionType = state.type || 'unknown';
+    const isConnected = state.isConnected || 'unknown';
+    this.setState({
+      connectionType,
+      isConnected,
+    });
+    this.subscribe();
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  subscribe() {
+    this.unsubscribeNetinfo = NetInfo.addEventListener(
+      this.handleNetworkChange
+    );
+  }
+
+  unsubscribe() {
+    this.unsubscribeNetinfo && this.unsubscribeNetinfo();
+    this.unsubscribeNetinfo = null;
+  }
+
+  handleNetworkChange(state) {
+    this.setState({
+      connectionType: state.type,
+      isConnected: state.isConnected,
+    });
+    Alert.alert(state.type, state.isConnected);
+    console.log('Connection type', state.type);
+    console.log('Is connected?', state.isConnected);
+  }
 
   render() {
     const { isLoadingComplete } = this.state;

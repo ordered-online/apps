@@ -1,6 +1,3 @@
-import { AppLoading } from 'expo';
-import { Asset } from 'expo-asset';
-import * as Font from 'expo-font';
 import React, { Component } from 'react';
 import {
   Platform,
@@ -10,13 +7,23 @@ import {
   View,
   SafeAreaView,
 } from 'react-native';
+import { AppLoading } from 'expo';
+import { Asset } from 'expo-asset';
+import * as Font from 'expo-font';
+import { Ionicons, AntDesign } from '@expo/vector-icons';
+
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { store, persistor } from './store';
-import { Ionicons, AntDesign } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
+
+import * as Battery from 'expo-battery';
+import NetInfo from '@react-native-community/netinfo';
+
 import { LinearGradient } from 'expo-linear-gradient';
+
+import { Alert } from '@ordered.online/components';
 
 const { height } = Dimensions.get('window');
 
