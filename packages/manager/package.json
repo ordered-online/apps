@@ -1,6 +1,6 @@
 {
   "name": "@ordered.online/manager",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "",
   "keywords": [],
   "repository": {
@@ -37,8 +37,8 @@
     "format": "prettier \"./**/*.{js,jsx,json,md}\" --write"
   },
   "dependencies": {
-    "@ordered.online/api": "^1.0.0-beta.1",
-    "@ordered.online/components": "^1.0.0-beta.1",
+    "@ordered.online/api": "^1.0.0-beta.2",
+    "@ordered.online/components": "^1.0.0-beta.2",
     "connected-react-router": "^6.6.1",
     "expo": "^36.0.0",
     "expo-font": "~8.0.0",
